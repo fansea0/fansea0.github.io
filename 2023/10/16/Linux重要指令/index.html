@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="FANSEA">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2023/10/16/linux重要指令/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="linux常用指令ls展示当前目录的所有内容（子目录） ls -a 展现所有目录包括隐藏目录 ls -l 展示不包括隐藏目录的所有目录的权限信息 pwd展示当前目录的名称 clear清除全屏小杂碎 ll查看权限信息 cd选择进入的目录 mkdir创建目录  mkdir -p test1&#x2F;test2   生成多层目录  rmkdir test1  删除当前空目录  rmkdir -p te">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux常用指令">
+<meta property="og:url" content="http://example.com/2023/10/16/Linux%E9%87%8D%E8%A6%81%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="linux常用指令ls展示当前目录的所有内容（子目录） ls -a 展现所有目录包括隐藏目录 ls -l 展示不包括隐藏目录的所有目录的权限信息 pwd展示当前目录的名称 clear清除全屏小杂碎 ll查看权限信息 cd选择进入的目录 mkdir创建目录  mkdir -p test1&#x2F;test2   生成多层目录  rmkdir test1  删除当前空目录  rmkdir -p te">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="c:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20230301214020834.png">
+<meta property="og:image" content="http://example.com/image/image-20230303081017653.png">
+<meta property="og:image" content="http://example.com/image/image-20230303092823506.png">
+<meta property="og:image" content="http://example.com/image/image-20230303093454927.png">
+<meta property="article:published_time" content="2023-10-16T03:08:54.003Z">
+<meta property="article:modified_time" content="2023-10-16T03:25:08.670Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20230301214020834.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            linux常用指令 -
+        
+        DOVIS
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":"ture","family":null,"url":"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap"},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"Theme Redefine","subtitle":{"text":[],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.4.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"}},"search":{"enable":false,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/8/17 11:45:14"};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="http://example.com/">
+                
+                DOVIS
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
+        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                <h1 class="article-title-regular">linux常用指令</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/redefine-avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">FANSEA</span>
+                        
+                            <span class="author-label">Lv.1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-10-16 11:08:54</span>
+        <span class="mobile">2023-10-16 11:08:54</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-10-16 11:25:08</span>
+            <span class="mobile">2023-10-16 11:25:08</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <h2 id="linux常用指令"><a href="#linux常用指令" class="headerlink" title="linux常用指令"></a>linux常用指令</h2><h3 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h3><p><em>展示当前目录的所有内容（子目录）</em></p>
+<p>ls -a 展现所有目录包括隐藏目录</p>
+<p>ls -l 展示不包括隐藏目录的所有目录的权限信息</p>
+<h3 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h3><p><em>展示当前目录的名称</em></p>
+<h3 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h3><p><em>清除全屏小杂碎</em></p>
+<h3 id="ll"><a href="#ll" class="headerlink" title="ll"></a>ll</h3><p><em>查看权限信息</em></p>
+<h3 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h3><p><em>选择进入的目录</em></p>
+<h3 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h3><p><em>创建目录</em></p>
+<blockquote>
+<p>mkdir -p test1&#x2F;test2 </p>
+</blockquote>
+<p>生成多层目录</p>
+<blockquote>
+<p>rmkdir test1</p>
+</blockquote>
+<p>删除当前空目录</p>
+<blockquote>
+<p>rmkdir -p test1&#x2F;test2</p>
+</blockquote>
+<p>这样可以将不为空的test1删除</p>
+<h3 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h3><p><em>拷贝文件</em></p>
+<p><em>cp 拷贝的文件 拷贝位置</em></p>
+<h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><p><em>删除文件</em></p>
+<p>-f 不会出现警告，实现强制删除</p>
+<p>-r 递归删除目录</p>
+<p>-i 互动，询问是否删除</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf 文件名 <span class="comment">#删除文件</span></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h3><p>1.<em>移动文件</em></p>
+<p>2.<em>重命名文件</em></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> install.sh kuangstudy/ <span class="comment">#将install.sh移动到kuangstudy目录</span></span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> kuangstudy kuangstudy1 <span class="comment">#将kuangstudy重命名为kuangstudy1</span></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h3><p><em>设置用户权限</em></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20230301214020834.png"
+                      alt="image-20230301214020834"
+                ></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r:4    w:2    x:1</span><br><span class="line">o/w/x 777 <span class="comment">#每个字母对应每个数字，数字代表权限</span></span><br><span class="line">权限（rwx=4+2+1=7 rw=6 rx=5 wx=3）</span><br><span class="line"><span class="built_in">chmod</span> 777 文件或者目录 </span><br></pre></td></tr></table></figure></div>
+
+<h2 id="文件查看"><a href="#文件查看" class="headerlink" title="文件查看"></a>文件查看</h2><h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><p><em>正向读取当前文件</em></p>
+<h3 id="tac"><a href="#tac" class="headerlink" title="tac"></a>tac</h3><p><em>反向读取当前文件</em></p>
+<h3 id="nl"><a href="#nl" class="headerlink" title="nl"></a>nl</h3><p><em>正向读取当前文件并标明行数</em></p>
+<h3 id="more"><a href="#more" class="headerlink" title="more"></a>more</h3><p><em>可翻页读取文件但不能向上翻页</em></p>
+<h3 id="less"><a href="#less" class="headerlink" title="less"></a>less</h3><p><em>与more功能类似但可以向上翻页（数字旁方向键控制）</em></p>
+<blockquote>
+<p>q可以使退出文件，&#x2F;可以向下查询，？可以向上查询。n和N分别表示向上和下跳转关键字</p>
+</blockquote>
+<h3 id="head"><a href="#head" class="headerlink" title="head"></a>head</h3><p><em>从前面读取几行</em></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">head</span> -n 20 [文件名]</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h3><p><em>从后面读取几行</em></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> -n 20 [文件名]</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>硬链接和软链接</p>
+</blockquote>
+<p><strong>硬链接</strong></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> f1 <span class="comment">#生成f1文件</span></span><br><span class="line"><span class="built_in">ln</span> f1 f2 <span class="comment">#给f1文件生成链接文件f2，f2和f1指向同一个文件，此操作可以防止文件误删</span></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>软链接</strong></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s f1 f3 <span class="comment">#给f1文件生成f3软链接，指向同一文件，党源文件被删除之后，快捷方式失效</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> f1 <span class="string">&quot;i love fanfan&quot;</span> <span class="comment">#实现在文件中输入字符串</span></span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230303081017653.png"
+                      alt="image-20230303081017653"
+                ></p>
+<h2 id="vim使用"><a href="#vim使用" class="headerlink" title="vim使用"></a>vim使用</h2><p><strong>突然无法使用</strong></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# export PATH=/bin:/usr/bin:$PATH #执行该命令</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim [文件名] <span class="comment">#进入当文件的编辑模式，或者创建这个文件并进入编辑模式</span></span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230303092823506.png"
+                      alt="image-20230303092823506"
+                ></p>
+<p>1.<strong>进入首先是命令模式</strong></p>
+<ul>
+<li><p><strong>i</strong> 切换到输入模式，以输入字符。</p>
+</li>
+<li><p><strong>x</strong> 删除当前光标所在处的字符。</p>
+</li>
+<li><p><strong>:</strong> 切换到底线命令模式，以在最底一行输入命令。</p>
+<blockquote>
+<p>yy复制本行</p>
+<p>p粘贴复制内容于下一行</p>
+<p>&#x2F;“word”可查询word所在位置</p>
+</blockquote>
+</li>
+</ul>
+<p>2.<strong>输入模式</strong></p>
+<p>可以输入文字，点击esc退出</p>
+<p>3.<strong>底线命令模式</strong></p>
+<p>输入冒号：之后选择wq保存并退出文件</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">：wq</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230303093454927.png"
+                      alt="image-20230303093454927"
+                ></p>
+<p><strong>vim快捷命令</strong></p>
+<table>
+<thead>
+<tr>
+<th>&#x2F;word ( ?word )</th>
+<th>在文章中查询关键词</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>u</td>
+<td>复原前一个动作</td>
+</tr>
+<tr>
+<td>ctrl+r</td>
+<td>重复上一个动作</td>
+</tr>
+<tr>
+<td>:w</td>
+<td>保存</td>
+</tr>
+<tr>
+<td>:q</td>
+<td>退出</td>
+</tr>
+<tr>
+<td>:wq</td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td>:wq！</td>
+<td>强制该动作</td>
+</tr>
+<tr>
+<td>:set nu</td>
+<td>显示行号</td>
+</tr>
+<tr>
+<td>:set nonu</td>
+<td>撤销行号</td>
+</tr>
+</tbody></table>
+<h2 id="管理用户"><a href="#管理用户" class="headerlink" title="管理用户"></a>管理用户</h2><h3 id="useradd"><a href="#useradd" class="headerlink" title="useradd"></a>useradd</h3><p><em>创建新的普通用户</em></p>
+<p><em>参数说明：</em></p>
+<ul>
+<li><p>选项 :</p>
+</li>
+<li><ul>
+<li>-c comment 指定一段注释性描述。</li>
+<li>-d 目录 指定用户主目录，如果此目录不存在，则同时使用-m选项，可以创建主目录。</li>
+<li>-g 用户组 指定用户所属的用户组。</li>
+<li>-G 用户组，用户组 指定用户所属的附加组。</li>
+<li>-m　使用者目录如不存在则自动建立。</li>
+<li>-s Shell文件 指定用户的登录Shell。</li>
+<li>-u 用户号 指定用户的用户号，如果同时有-o选项，则可以重复使用其他用户的标识号。</li>
+</ul>
+</li>
+<li><p>用户名 :</p>
+</li>
+<li><ul>
+<li>指定新账号的登录名</li>
+</ul>
+</li>
+</ul>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd [选项] [新建用户名]</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="userdel"><a href="#userdel" class="headerlink" title="userdel"></a>userdel</h3><p><em>删除用户</em></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userdel -r [用户名] <span class="comment">#常用这种，表示并且删除目录</span></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="usermod"><a href="#usermod" class="headerlink" title="usermod"></a>usermod</h3><p><em>修改用户</em></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">usermod 选项 [用户名] <span class="comment">#选项同useradd</span></span><br><span class="line">eg：usermod -d /home/fanlover fansea <span class="comment">#将fansea用户移动到fanlover文件夹下</span></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="su-sudo-su"><a href="#su-sudo-su" class="headerlink" title="su&#x2F;sudo su"></a>su&#x2F;sudo su</h3><p><em>切换用户</em></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su fansea <span class="comment">#root用户使用该指令切换成fansea用户</span></span><br><span class="line"><span class="built_in">exit</span> <span class="comment">#可退出当前普通用户回到root用户</span></span><br><span class="line">sudo su <span class="comment">#从普通用户切换到root用户</span></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="passwd"><a href="#passwd" class="headerlink" title="passwd"></a>passwd</h3><blockquote>
+<p>普通用户</p>
+</blockquote>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd <span class="comment">#可以修改当前密码</span></span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>超级用户root</p>
+</blockquote>
+<p>可使用的选项：</p>
+<ul>
+<li>-l 锁定口令，即禁用账号。</li>
+<li>-u 口令解锁。</li>
+<li>-d 使账号无口令。</li>
+<li>-f 强迫用户下次登录时修改口令。</li>
+</ul>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">passwd 选项 用户名</span><br><span class="line">eg：passwd -l fanlover <span class="comment">#锁定用户</span></span><br><span class="line">passwd 用户名 <span class="comment">#更改普通用户的密码</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="管理用户组"><a href="#管理用户组" class="headerlink" title="管理用户组"></a>管理用户组</h2><h3 id="groupadd"><a href="#groupadd" class="headerlink" title="groupadd"></a>groupadd</h3><p><em>添加用户组</em></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">groupadd [用户组名]</span><br><span class="line">groupadd -g [设置组标识号] [组名]</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="groupdel"><a href="#groupdel" class="headerlink" title="groupdel"></a>groupdel</h3><p><em>删除组</em></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupdel [用户组名]</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="groupmod"><a href="#groupmod" class="headerlink" title="groupmod"></a>groupmod</h3><p>修改组</p>
+<ul>
+<li>-g GID 为用户组指定新的组标识号。</li>
+<li>-o 与-g选项同时使用，用户组的新GID可以与系统已有用户组的GID相同。</li>
+<li>-n新用户组 将用户组的名字改为新名字</li>
+</ul>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupmod -g [组标识号] -n [改动的名称] [被修改的用户组]</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="usermod-g"><a href="#usermod-g" class="headerlink" title="usermod -g"></a>usermod -g</h3><p><em>修改用户组</em></p>
+<h3 id="newgrp"><a href="#newgrp" class="headerlink" title="newgrp"></a>newgrp</h3><p><em>切换组</em></p>
+<p>&#x3D;&#x3D;如果一个用户同时属于多个用户组，那么用户可以在用户组之间切换，以便具有其他用户组的权限。&#x3D;&#x3D;</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newgrp root</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>&#x2F;etc&#x2F;passwd</p>
+</blockquote>
+<p><em>查看用户对应的组信息</em></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">＃ <span class="built_in">cat</span> /etc/passwd</span><br><span class="line"></span><br><span class="line">root:x:0:0:Superuser:/:</span><br><span class="line">daemon:x:1:1:System daemons:/etc:</span><br><span class="line">bin:x:2:2:Owner of system commands:/bin:</span><br><span class="line">sys:x:3:3:Owner of system files:/usr/sys:</span><br><span class="line">adm:x:4:4:System accounting:/usr/adm:</span><br><span class="line">uucp:x:5:5:UUCP administrator:/usr/lib/uucp:</span><br><span class="line">auth:x:7:21:Authentication administrator:/tcb/files/auth:</span><br><span class="line">cron:x:9:16:Cron daemon:/usr/spool/cron:</span><br><span class="line">listen:x:37:4:Network daemon:/usr/net/nls:</span><br><span class="line">lp:x:71:18:Printer administrator:/usr/spool/lp:</span><br></pre></td></tr></table></figure></div>
+
+<p>&#x3D;&#x3D;用户名:口令:用户标识号:组标识号:注释性描述:主目录:登录Shell&#x3D;&#x3D;</p>
+<blockquote>
+<p>&#x2F;etc&#x2F;group</p>
+</blockquote>
+<p><em>查看组以及他的组标识号</em></p>
+<h2 id="查看磁盘"><a href="#查看磁盘" class="headerlink" title="查看磁盘"></a>查看磁盘</h2><h3 id="df"><a href="#df" class="headerlink" title="df"></a>df</h3><p><em>查看磁盘整体使用量</em></p>
+<ul>
+<li>-a ：列出所有的文件系统，包括系统特有的 &#x2F;proc 等文件系统；</li>
+<li>-k ：以 KBytes 的容量显示各文件系统；</li>
+<li>-m ：以 MBytes 的容量显示各文件系统；</li>
+<li>-h ：以人们较易阅读的 GBytes, MBytes, KBytes 等格式自行显示；</li>
+<li>-H ：以 M&#x3D;1000K 取代 M&#x3D;1024K 的进位方式；</li>
+<li>-T ：显示文件系统类型, 连同该 partition 的 filesystem 名称 (例如 ext3) 也列出；</li>
+<li>-i ：不用硬盘容量，而以 inode 的数量来显示</li>
+</ul>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">df -h #常用</span><br><span class="line"># 将容量结果以易读的容量格式显示出来</span><br><span class="line">[root@kuangshen /]# df -h</span><br><span class="line">Filesystem     Size Used Avail Use% Mounted on</span><br><span class="line">devtmpfs       869M     0 869M   0% /dev</span><br><span class="line">tmpfs           879M 708K 878M   1% /dev/shm</span><br><span class="line">tmpfs           879M 496K 878M   1% /run</span><br><span class="line">tmpfs           879M     0 879M   0% /sys/fs/cgroup</span><br><span class="line">/dev/vda1       40G  6.3G   32G  17% /</span><br><span class="line">tmpfs           176M     0 176M   0% /run/user/0</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="du"><a href="#du" class="headerlink" title="du"></a>du</h3><p><em>查看文件或者目录占用空间</em></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">du [-选项] 文件或目录名称</span><br><span class="line"></span><br><span class="line">[root@kuangshen home]# du </span><br><span class="line">16./redis (表示使用了16k)</span><br><span class="line">8./www/.oracle_jre_usage  # 包括隐藏文件的目录</span><br><span class="line">24./www</span><br><span class="line">48.                        # 这个目录(.)所占用的总量</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h2><h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h3><p><em>查看进程</em></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ps -aux|grep [进程名] #常用</span><br><span class="line">ps -ef|grep [进程名] #常用</span><br><span class="line">pstree -au #查看当前父进程的树状结构</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="kill"><a href="#kill" class="headerlink" title="kill"></a>kill</h3><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -id #停止进程</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="解压文件"><a href="#解压文件" class="headerlink" title="解压文件"></a>解压文件</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf [jar包]</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="springboot项目启动指令"><a href="#springboot项目启动指令" class="headerlink" title="springboot项目启动指令"></a>springboot项目启动指令</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar xxx.jar  &gt; ./demo.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="nginx启动指令"><a href="#nginx启动指令" class="headerlink" title="nginx启动指令"></a>nginx启动指令</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/nginx/sbin/nginx</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="查看当前端口的pid"><a href="#查看当前端口的pid" class="headerlink" title="查看当前端口的pid"></a>查看当前端口的pid</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -i:[端口号]</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="停止ping"><a href="#停止ping" class="headerlink" title="停止ping"></a>停止ping</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ctrl+c[z]</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="已加载插件：fastestmirror-langpacks-您需要-root-权限执行此命令"><a href="#已加载插件：fastestmirror-langpacks-您需要-root-权限执行此命令" class="headerlink" title="已加载插件：fastestmirror, langpacks 您需要 root 权限执行此命令"></a>已加载插件：fastestmirror, langpacks 您需要 root 权限执行此命令</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su root</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld.service #关闭防火墙</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="java环境安装"><a href="#java环境安装" class="headerlink" title="java环境安装"></a>java环境安装</h2><ol>
+<li>下载jdk17压缩包</li>
+</ol>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li>解压压缩包</li>
+</ol>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf  jdk-17.0.1_linux-x64_bin.tar.gz</span><br></pre></td></tr></table></figure></div>
+
+<ol start="3">
+<li>配置环境变量</li>
+</ol>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim/etc/profile </span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  #jdk17</span><br><span class="line">export JAVA_HOME=/usr/lib/jdk17/jdk-17.0.1</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/</span><br><span class="line">export PATH=.:$JAVA_HOME/bin:$PATH</span><br></pre></td></tr></table></figure></div>
+
+<ol start="4">
+<li>重新加载配置</li>
+</ol>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source  /etc/profile     重启环境变量</span><br><span class="line">java -version   查看版本号 </span><br></pre></td></tr></table></figure></div>
+
+<h2 id="后台运行程序"><a href="#后台运行程序" class="headerlink" title="后台运行程序"></a>后台运行程序</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./go-cqhttp &amp;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="查找并杀死程序"><a href="#查找并杀死程序" class="headerlink" title="查找并杀死程序"></a>查找并杀死程序</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef |grep java |grep -v grep |awk &#x27;&#123; print $2 &#125;&#x27; |xargs kill -9</span><br></pre></td></tr></table></figure></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> linux常用指令</li>
+        <li><strong>Author:</strong> FANSEA</li>
+        <li><strong>Created at
+                :</strong> 2023-10-16 11:08:54</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2023-10-16 11:25:08
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://redefine.ohevan.com/2023/10/16/Linux重要指令/
+        </li>
+        <li style="word-wrap: break-word; white-space: normal;">
+            <strong>
+                License:
+            </strong>
+            
+            This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+            
+
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/10/16/Mybatis-Plus%E8%AF%AD%E6%B3%95%E5%AE%9E%E7%8E%B0/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">Mybatis—Plus重要知识点</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/10/16/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">java学习路线</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container">
+                <div class="comments-container pjax">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;Comments
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-swup-reload-script>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://example.example.com',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">linux常用指令</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-text">linux常用指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ls"><span class="nav-text">ls</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwd"><span class="nav-text">pwd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clear"><span class="nav-text">clear</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ll"><span class="nav-text">ll</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cd"><span class="nav-text">cd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mkdir"><span class="nav-text">mkdir</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cp"><span class="nav-text">cp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rm"><span class="nav-text">rm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mv"><span class="nav-text">mv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chmod"><span class="nav-text">chmod</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%9F%A5%E7%9C%8B"><span class="nav-text">文件查看</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cat"><span class="nav-text">cat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tac"><span class="nav-text">tac</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nl"><span class="nav-text">nl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#more"><span class="nav-text">more</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less"><span class="nav-text">less</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#head"><span class="nav-text">head</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tail"><span class="nav-text">tail</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim%E4%BD%BF%E7%94%A8"><span class="nav-text">vim使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7"><span class="nav-text">管理用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#useradd"><span class="nav-text">useradd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#userdel"><span class="nav-text">userdel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usermod"><span class="nav-text">usermod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#su-sudo-su"><span class="nav-text">su&#x2F;sudo su</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#passwd"><span class="nav-text">passwd</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E7%BB%84"><span class="nav-text">管理用户组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#groupadd"><span class="nav-text">groupadd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#groupdel"><span class="nav-text">groupdel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#groupmod"><span class="nav-text">groupmod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usermod-g"><span class="nav-text">usermod -g</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#newgrp"><span class="nav-text">newgrp</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98"><span class="nav-text">查看磁盘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#df"><span class="nav-text">df</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#du"><span class="nav-text">du</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B"><span class="nav-text">查看进程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ps"><span class="nav-text">ps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kill"><span class="nav-text">kill</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B%E6%96%87%E4%BB%B6"><span class="nav-text">解压文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#springboot%E9%A1%B9%E7%9B%AE%E5%90%AF%E5%8A%A8%E6%8C%87%E4%BB%A4"><span class="nav-text">springboot项目启动指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx%E5%90%AF%E5%8A%A8%E6%8C%87%E4%BB%A4"><span class="nav-text">nginx启动指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%AB%AF%E5%8F%A3%E7%9A%84pid"><span class="nav-text">查看当前端口的pid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2ping"><span class="nav-text">停止ping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%B2%E5%8A%A0%E8%BD%BD%E6%8F%92%E4%BB%B6%EF%BC%9Afastestmirror-langpacks-%E6%82%A8%E9%9C%80%E8%A6%81-root-%E6%9D%83%E9%99%90%E6%89%A7%E8%A1%8C%E6%AD%A4%E5%91%BD%E4%BB%A4"><span class="nav-text">已加载插件：fastestmirror, langpacks 您需要 root 权限执行此命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-text">关闭防火墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="nav-text">java环境安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F"><span class="nav-text">后台运行程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E5%B9%B6%E6%9D%80%E6%AD%BB%E7%A8%8B%E5%BA%8F"><span class="nav-text">查找并杀死程序</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">FANSEA</a>
+        </div>
+        
+            <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.4.4</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex justify-center items-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+        ],
+        containers: ["#swup"],
+    });
+
+    swup.hooks.on("page:view", () => {
+        Global.refresh();
+    });
+
+    // if (document.readyState === "complete") {
+    //
+    // } else {
+    //     document.addEventListener("DOMContentLoaded", () => init());
+    // }
+</script>
+
+
+
+
+
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/libs/anime.min.js"></script>
+
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>

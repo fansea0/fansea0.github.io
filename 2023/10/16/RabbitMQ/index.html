@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="FANSEA">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2023/10/16/rabbitmq/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="RabbitMQ消息队列rabbit教程  RabbitMq的应用架构 RabbitMq使用场景  应用解藕    异步提速     削峰填谷    快速开始  注意：这里的routingkey有三种情况  生产者to消费者模式，中间没有交换机，routingKey为队列名称 Work Queue工作队列模式，存在交换机并且指定消息分发模式（fanout），则routingKey不起作用，为空字符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RabbitMQ消息队列">
+<meta property="og:url" content="http://example.com/2023/10/16/RabbitMQ/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="RabbitMQ消息队列rabbit教程  RabbitMq的应用架构 RabbitMq使用场景  应用解藕    异步提速     削峰填谷    快速开始  注意：这里的routingkey有三种情况  生产者to消费者模式，中间没有交换机，routingKey为队列名称 Work Queue工作队列模式，存在交换机并且指定消息分发模式（fanout），则routingKey不起作用，为空字符">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image/image-20230928153924426.png">
+<meta property="og:image" content="http://example.com/image/image-20230925182010047.png">
+<meta property="og:image" content="http://example.com/image/image-20230925182143263.png">
+<meta property="og:image" content="http://example.com/2023/10/16/image/image-20230925182300098.png">
+<meta property="og:image" content="http://example.com/2023/10/16/image/image-20230925182347965.png">
+<meta property="og:image" content="http://example.com/image/image-20230926150604350.png">
+<meta property="og:image" content="http://example.com/image/image-20230926151430172.png">
+<meta property="og:image" content="http://example.com/image/image-20230926153049867.png">
+<meta property="og:image" content="http://example.com/image/image-20230928154039058.png">
+<meta property="og:image" content="http://example.com/2023/10/16/image/image-20230928154101895.png">
+<meta property="og:image" content="http://example.com/2023/10/16/image/image-20230928154015561.png">
+<meta property="og:image" content="http://example.com/2023/10/16/image/image-20230928154153002.png">
+<meta property="og:image" content="http://example.com/2023/10/16/image/image-20230926214529971.png">
+<meta property="og:image" content="http://example.com/image/image-20231010152336777.png">
+<meta property="og:image" content="http://example.com/image/image-20231010152417650.png">
+<meta property="og:image" content="http://example.com/image/image-20231009213745543.png">
+<meta property="og:image" content="http://example.com/image/image-20231010150849615.png">
+<meta property="og:image" content="http://example.com/image/image-20231010153647692.png">
+<meta property="og:image" content="http://example.com/image/image-20231010165718486.png">
+<meta property="og:image" content="http://example.com/image/image-20231010170441496.png">
+<meta property="og:image" content="http://example.com/image/image-20231010191719520.png">
+<meta property="og:image" content="http://example.com/image/image-20231010192012231.png">
+<meta property="og:image" content="http://example.com/image/image-20231010205253200.png">
+<meta property="og:image" content="http://example.com/image/image-20231010211156807.png">
+<meta property="article:published_time" content="2023-10-16T03:08:53.995Z">
+<meta property="article:modified_time" content="2023-10-16T03:27:03.366Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/image-20230928153924426.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            RabbitMQ消息队列 -
+        
+        DOVIS
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":"ture","family":null,"url":"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap"},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"Theme Redefine","subtitle":{"text":[],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.4.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"}},"search":{"enable":false,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/8/17 11:45:14"};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="http://example.com/">
+                
+                DOVIS
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
+        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                <h1 class="article-title-regular">RabbitMQ消息队列</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/redefine-avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">FANSEA</span>
+                        
+                            <span class="author-label">Lv.1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-10-16 11:08:53</span>
+        <span class="mobile">2023-10-16 11:08:53</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-10-16 11:27:03</span>
+            <span class="mobile">2023-10-16 11:27:03</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <h1 id="RabbitMQ消息队列"><a href="#RabbitMQ消息队列" class="headerlink" title="RabbitMQ消息队列"></a>RabbitMQ消息队列</h1><p><a class="link"   target="_blank" rel="noopener" href="https://www.yuque.com/yuxuandmbjz/rabbitmq" >rabbit教程 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2 id="RabbitMq的应用架构"><a href="#RabbitMq的应用架构" class="headerlink" title="RabbitMq的应用架构"></a>RabbitMq的应用架构</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230928153924426.png"
+                      alt="image-20230928153924426"
+                ></p>
+<h2 id="RabbitMq使用场景"><a href="#RabbitMq使用场景" class="headerlink" title="RabbitMq使用场景"></a>RabbitMq使用场景</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230925182010047.png"
+                      alt="image-20230925182010047"
+                ></p>
+<ol>
+<li>应用解藕</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230925182143263.png"
+                      alt="image-20230925182143263"
+                ></p>
+<ol start="2">
+<li>异步提速</li>
+</ol>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230925182300098.png"
+                      alt="image-20230925182300098" style="zoom:50%;" 
+                >
+
+<ol start="3">
+<li>削峰填谷</li>
+</ol>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230925182347965.png"
+                      alt="image-20230925182347965" style="zoom:50%;" 
+                >
+
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230926150604350.png"
+                      alt="image-20230926150604350"
+                ></p>
+<blockquote>
+<p>注意：这里的<strong>routingkey</strong>有三种情况</p>
+<ol>
+<li>生产者to消费者模式，中间没有交换机，routingKey为队列名称</li>
+<li>Work Queue工作队列模式，存在交换机并且指定消息分发模式（fanout），则routingKey不起作用，为空字符串，</li>
+<li>Routing路由工作模式（direct），存在交换机，交换机按照路由routingkey将消息分发到不同队列</li>
+</ol>
+</blockquote>
+<p><strong>1.发送消息</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230926151430172.png"
+                      alt="image-20230926151430172"
+                ></p>
+<p><strong>2.接收消息</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230926153049867.png"
+                      alt="image-20230926153049867"
+                ></p>
+<h2 id="RabbitMq消费模式"><a href="#RabbitMq消费模式" class="headerlink" title="RabbitMq消费模式"></a>RabbitMq消费模式</h2><ol>
+<li><h4 id="生产者to消费者模式"><a href="#生产者to消费者模式" class="headerlink" title="生产者to消费者模式"></a>生产者to消费者模式</h4></li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230928154039058.png"
+                      alt="image-20230928154039058"
+                ></p>
+<ol start="2">
+<li><h4 id="Work-Queue工作队列模式"><a href="#Work-Queue工作队列模式" class="headerlink" title="Work Queue工作队列模式"></a>Work Queue工作队列模式</h4></li>
+</ol>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230928154101895.png"
+                      alt="image-20230928154101895" style="zoom:67%;" 
+                >
+
+<ol start="3">
+<li><h4 id="Pub-Sub工作模式（fanout）"><a href="#Pub-Sub工作模式（fanout）" class="headerlink" title="Pub&#x2F;Sub工作模式（fanout）"></a>Pub&#x2F;Sub工作模式（fanout）</h4></li>
+</ol>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230928154015561.png"
+                      alt="image-20230928154015561" style="zoom:67%;" 
+                >
+
+<ol start="4">
+<li><h4 id="Routing路由工作模式（direct）"><a href="#Routing路由工作模式（direct）" class="headerlink" title="Routing路由工作模式（direct）"></a>Routing路由工作模式（direct）</h4></li>
+</ol>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230928154153002.png"
+                      alt="image-20230928154153002" style="zoom:67%;" 
+                >
+
+<ol start="5">
+<li><h4 id="Topic通配符模式（topic）"><a href="#Topic通配符模式（topic）" class="headerlink" title="Topic通配符模式（topic）"></a>Topic通配符模式（topic）</h4></li>
+</ol>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230926214529971.png"
+                      alt="image-20230926214529971" style="zoom:67%;" 
+                >
+
+<blockquote>
+<p>**#**：代表0个或者多个字符串；     *****：代表1个字符串；</p>
+</blockquote>
+<h2 id="Springboot整合RabbitMq"><a href="#Springboot整合RabbitMq" class="headerlink" title="Springboot整合RabbitMq"></a>Springboot整合RabbitMq</h2><ol>
+<li>引入依赖</li>
+</ol>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-amqp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li>配置基础信息（账号，密码）</li>
+</ol>
+<div class="highlight-container" data-rel="Yml"><figure class="iseeu highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">rabbitmq:</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">5672</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">guest</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">guest</span></span><br><span class="line">    <span class="attr">virtual-host:</span> <span class="string">/</span></span><br></pre></td></tr></table></figure></div>
+
+<ol start="3">
+<li>配置交换机，队列和他们的绑定关系</li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RabbitMqConfig</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">EXCHANGE_NAME</span> <span class="operator">=</span> <span class="string">&quot;boot_topic_exchange&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">QUEUE_NAME</span> <span class="operator">=</span> <span class="string">&quot;boot_queue&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean(&quot;bootExchange&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Exchange <span class="title function_">bootExchange</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;bootExchange加载成功&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> ExchangeBuilder.topicExchange(EXCHANGE_NAME).durable(<span class="literal">true</span>).build();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean(&quot;bootQueue&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">bootQueue</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;bootQueue加载成功&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> QueueBuilder.durable(QUEUE_NAME).build();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">bootBinding</span><span class="params">(<span class="meta">@Qualifier(&quot;bootExchange&quot;)</span> Exchange exchange,<span class="meta">@Qualifier(&quot;bootQueue&quot;)</span> Queue queue)</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;绑定成功&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(queue).to(exchange).with(<span class="string">&quot;boot.#&quot;</span>).noargs();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="4">
+<li>向队列发送消息</li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">producer</span><span class="params">()</span> &#123;</span><br><span class="line">        rabbitTemplate.convertAndSend(RabbitMqConfig.EXCHANGE_NAME,<span class="string">&quot;boot.fansea&quot;</span>,<span class="string">&quot;Hello,springboot!&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="5">
+<li>在队列读取消息</li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RabbitMqListener</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitListener(queues = &quot;boot_queue&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">ListenQueue</span><span class="params">(Message message)</span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">new</span> <span class="title class_">String</span>(message.getBody()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="生产方Confirm"><a href="#生产方Confirm" class="headerlink" title="生产方Confirm"></a>生产方Confirm</h2><ol>
+<li>Confirm</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231010152336777.png"
+                      alt="image-20231010152336777"
+                ></p>
+<ol start="2">
+<li>return</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231010152417650.png"
+                      alt="image-20231010152417650"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231009213745543.png"
+                      alt="image-20231009213745543"
+                ></p>
+<p><strong>springBoot配置</strong></p>
+<div class="highlight-container" data-rel="Yml"><figure class="iseeu highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">rabbitmq:</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">5672</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">guest</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">guest</span></span><br><span class="line">    <span class="attr">virtual-host:</span> <span class="string">/</span></span><br><span class="line">    <span class="attr">publisher-confirms:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">publisher-returns:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="消费方ACK"><a href="#消费方ACK" class="headerlink" title="消费方ACK"></a>消费方ACK</h2><ol>
+<li>继承<strong>channelAwareMessageListener</strong>实现方法，获取channel参数</li>
+<li><strong>利用channel.basicAck()手动签收，channel.basicNack()在失败之后重新接受</strong></li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231010150849615.png"
+                      alt="image-20231010150849615"
+                ></p>
+<h2 id="消费端限流"><a href="#消费端限流" class="headerlink" title="消费端限流"></a>消费端限流</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231010153647692.png"
+                      alt="image-20231010153647692"
+                ></p>
+<div class="highlight-container" data-rel="Yml"><figure class="iseeu highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">listener:</span></span><br><span class="line">      <span class="attr">direct:</span></span><br><span class="line">        <span class="attr">acknowledge-mode:</span> <span class="string">manual</span></span><br><span class="line">        <span class="attr">prefetch:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="设置过期时间"><a href="#设置过期时间" class="headerlink" title="设置过期时间"></a>设置过期时间</h2><blockquote>
+<p>这里可以用于创建订单，订单设置过期时间</p>
+<p>TTL：Time to live</p>
+</blockquote>
+<ol>
+<li><strong>设置整体队列消息的TTL</strong></li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean(&quot;bootQueue&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">bootQueue</span><span class="params">()</span> &#123;</span><br><span class="line">        log.info(<span class="string">&quot;bootQueue加载成功&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> QueueBuilder.durable(QUEUE_NAME).ttl(<span class="number">100000</span>).build();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li><strong>设置单条消息的ttl</strong></li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rabbitTemplate.convertAndSend(RabbitMqConfig.EXCHANGE_NAME, <span class="string">&quot;boot.fansea&quot;</span>, <span class="string">&quot;Hello,springboot!&quot;</span>, <span class="keyword">new</span> <span class="title class_">MessagePostProcessor</span>() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> Message <span class="title function_">postProcessMessage</span><span class="params">(Message message)</span> <span class="keyword">throws</span> AmqpException &#123;</span><br><span class="line">                message.getMessageProperties().setExpiration(<span class="string">&quot;5000&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span> message;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>这里消息比队列还提前过期了，不会立即移除，只会在他要被消费时，才会判断他是否过期，以提高效率</p>
+</blockquote>
+<h2 id="死信消息"><a href="#死信消息" class="headerlink" title="死信消息"></a>死信消息</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231010165718486.png"
+                      alt="image-20231010165718486"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231010170441496.png"
+                      alt="image-20231010170441496"
+                ></p>
+<h2 id="延迟队列（TTL-死信队列）"><a href="#延迟队列（TTL-死信队列）" class="headerlink" title="延迟队列（TTL+死信队列）"></a>延迟队列（TTL+死信队列）</h2><blockquote>
+<p>延迟队列用于订单系统中，不需要轮询数据库，只需要对数据库进行一次操作，极大提高效率</p>
+</blockquote>
+<p><strong>高效率解决订单处理问题</strong></p>
+<ol>
+<li>创建普通队列和死信队列，相互绑定</li>
+<li>生产者向普通队列发送订单消息</li>
+<li>消费者读取死信队列的消息</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231010191719520.png"
+                      alt="image-20231010191719520"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231010192012231.png"
+                      alt="image-20231010192012231"
+                ></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* RabbitMQ的交换机、队列配置文件 */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ExchangeQueueConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">X_EXCHANGE</span> <span class="operator">=</span> <span class="string">&quot;X&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">QUEUE_A</span> <span class="operator">=</span> <span class="string">&quot;QA&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">QUEUE_B</span> <span class="operator">=</span> <span class="string">&quot;QB&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">Y_DEAD_LETTER_EXCHANGE</span> <span class="operator">=</span> <span class="string">&quot;Y&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">DEAD_LETTER_QUEUE</span> <span class="operator">=</span> <span class="string">&quot;QD&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*创建X交换机*/</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> DirectExchange <span class="title function_">xExchange</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(X_EXCHANGE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*创建死信交换机*/</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> DirectExchange <span class="title function_">yExchange</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(Y_DEAD_LETTER_EXCHANGE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//声明队列 A ttl 为 10s 并绑定到对应的死信交换机</span></span><br><span class="line">    <span class="meta">@Bean(&quot;queueA&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">queueA</span><span class="params">()</span>&#123;</span><br><span class="line">        Map&lt;String, Object&gt; args = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;(<span class="number">3</span>);</span><br><span class="line">        args.put(<span class="string">&quot;x-dead-letter-exchange&quot;</span>, Y_DEAD_LETTER_EXCHANGE);      <span class="comment">//声明当前队列绑定的死信交换机</span></span><br><span class="line">        args.put(<span class="string">&quot;x-dead-letter-routing-key&quot;</span>, <span class="string">&quot;YD&quot;</span>);                     <span class="comment">//声明当前队列的死信路由 key</span></span><br><span class="line">        args.put(<span class="string">&quot;x-message-ttl&quot;</span>, <span class="number">10000</span>);                                <span class="comment">//声明队列的 TTL</span></span><br><span class="line">        <span class="keyword">return</span> QueueBuilder.durable(QUEUE_A).withArguments(args).build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 声明队列 A 绑定 X 交换机</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">queueaBindingX</span><span class="params">(<span class="meta">@Qualifier(&quot;queueA&quot;)</span> Queue queueA,</span></span><br><span class="line"><span class="params">                                  <span class="meta">@Qualifier(&quot;xExchange&quot;)</span> DirectExchange xExchange)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(queueA).to(xExchange).with(<span class="string">&quot;XA&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//声明队列 B ttl 为 40s 并绑定到对应的死信交换机</span></span><br><span class="line">    <span class="meta">@Bean(&quot;queueB&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">queueB</span><span class="params">()</span>&#123;</span><br><span class="line">        Map&lt;String, Object&gt; args = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;(<span class="number">3</span>);</span><br><span class="line">        args.put(<span class="string">&quot;x-dead-letter-exchange&quot;</span>, Y_DEAD_LETTER_EXCHANGE);         <span class="comment">//声明当前队列绑定的死信交换机</span></span><br><span class="line">        args.put(<span class="string">&quot;x-dead-letter-routing-key&quot;</span>, <span class="string">&quot;YD&quot;</span>);                        <span class="comment">//声明当前队列的死信路由 key</span></span><br><span class="line">        args.put(<span class="string">&quot;x-message-ttl&quot;</span>, <span class="number">40000</span>);                                   <span class="comment">//声明队列的 TTL</span></span><br><span class="line">        <span class="keyword">return</span> QueueBuilder.durable(QUEUE_B).withArguments(args).build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//声明队列 B 绑定 X 交换机</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">queuebBindingX</span><span class="params">(<span class="meta">@Qualifier(&quot;queueB&quot;)</span> Queue queue1B,</span></span><br><span class="line"><span class="params">                                  <span class="meta">@Qualifier(&quot;xExchange&quot;)</span> DirectExchange xExchange)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(queue1B).to(xExchange).with(<span class="string">&quot;XB&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//声明死信队列 QD</span></span><br><span class="line">    <span class="meta">@Bean(&quot;queueD&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">queueD</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(DEAD_LETTER_QUEUE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//声明死信队列 QD 绑定关系</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">deadLetterBindingQAD</span><span class="params">(<span class="meta">@Qualifier(&quot;queueD&quot;)</span> Queue queueD,</span></span><br><span class="line"><span class="params">                                        <span class="meta">@Qualifier(&quot;yExchange&quot;)</span> DirectExchange yExchange)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(queueD).to(yExchange).with(<span class="string">&quot;YD&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="消息的可靠性保障——消息补偿"><a href="#消息的可靠性保障——消息补偿" class="headerlink" title="消息的可靠性保障——消息补偿"></a>消息的可靠性保障——消息补偿</h2><blockquote>
+<p>无非就是发送两次消息，进行比对，如果对应MDB中存在有数据并且比对成功延时消息，则说明百分百发送成功，其中延时发送消息不做业务操作，它里面最重要的参数就是消息ID。</p>
+<p>如果延时发送消息和业务消息同时失败，第9步定时检查任务会比对Producer数据库与MDB数据库数量是否相等，如果不相等则重新调用producer发送未被消费的消息，直至消费成功为止。</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231010205253200.png"
+                      alt="image-20231010205253200"
+                ></p>
+<h2 id="消息的幂等性——乐观锁机制"><a href="#消息的幂等性——乐观锁机制" class="headerlink" title="消息的幂等性——乐观锁机制"></a>消息的幂等性——乐观锁机制</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231010211156807.png"
+                      alt="image-20231010211156807"
+                ></p>
+<blockquote>
+<p>发送消息带上版本号，操作数据库判断是否为对应版本以解决幂等性问题</p>
+</blockquote>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> RabbitMQ消息队列</li>
+        <li><strong>Author:</strong> FANSEA</li>
+        <li><strong>Created at
+                :</strong> 2023-10-16 11:08:53</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2023-10-16 11:27:03
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://redefine.ohevan.com/2023/10/16/RabbitMQ/
+        </li>
+        <li style="word-wrap: break-word; white-space: normal;">
+            <strong>
+                License:
+            </strong>
+            
+            This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+            
+
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/10/16/java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">java学习路线</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/10/16/python%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85%E6%96%B9%E6%B3%95/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">python项目打包方法</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container">
+                <div class="comments-container pjax">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;Comments
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-swup-reload-script>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://example.example.com',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">RabbitMQ消息队列</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RabbitMQ%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-text">RabbitMQ消息队列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RabbitMq%E7%9A%84%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84"><span class="nav-text">RabbitMq的应用架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RabbitMq%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">RabbitMq使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B"><span class="nav-text">快速开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RabbitMq%E6%B6%88%E8%B4%B9%E6%A8%A1%E5%BC%8F"><span class="nav-text">RabbitMq消费模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Springboot%E6%95%B4%E5%90%88RabbitMq"><span class="nav-text">Springboot整合RabbitMq</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E6%96%B9Confirm"><span class="nav-text">生产方Confirm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E6%96%B9ACK"><span class="nav-text">消费方ACK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E7%AB%AF%E9%99%90%E6%B5%81"><span class="nav-text">消费端限流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4"><span class="nav-text">设置过期时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%BB%E4%BF%A1%E6%B6%88%E6%81%AF"><span class="nav-text">死信消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%B6%E8%BF%9F%E9%98%9F%E5%88%97%EF%BC%88TTL-%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97%EF%BC%89"><span class="nav-text">延迟队列（TTL+死信队列）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E7%9A%84%E5%8F%AF%E9%9D%A0%E6%80%A7%E4%BF%9D%E9%9A%9C%E2%80%94%E2%80%94%E6%B6%88%E6%81%AF%E8%A1%A5%E5%81%BF"><span class="nav-text">消息的可靠性保障——消息补偿</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E7%9A%84%E5%B9%82%E7%AD%89%E6%80%A7%E2%80%94%E2%80%94%E4%B9%90%E8%A7%82%E9%94%81%E6%9C%BA%E5%88%B6"><span class="nav-text">消息的幂等性——乐观锁机制</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">FANSEA</a>
+        </div>
+        
+            <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.4.4</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex justify-center items-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+        ],
+        containers: ["#swup"],
+    });
+
+    swup.hooks.on("page:view", () => {
+        Global.refresh();
+    });
+
+    // if (document.readyState === "complete") {
+    //
+    // } else {
+    //     document.addEventListener("DOMContentLoaded", () => init());
+    // }
+</script>
+
+
+
+
+
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/libs/anime.min.js"></script>
+
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>
