@@ -13,24 +13,36 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="http://example.com/2023/10/16/mybatis-plus语法实现/"/>
+    <link rel="canonical" href="http://example.com/2023/10/16/微服务笔记/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="Mybatis—Plus重要知识点删除数据1，根据id删除一个数据 1mapper.deleteByid(id)  2，Map多条件删除 12345&#x2F;&#x2F;map.put(&quot;删除列&quot;，&quot;删除列对应的值&quot;)&#x2F;&#x2F;条件之间是and关系map.put(&quot;id&quot;,6)map.put(&quot;user_name&quot;,&quot;小明&amp;quot">
+        <meta name="description" content="微服务笔记 微服务概念本质是一个分布式架构方案  拆分为更小的模块 对外暴露接口，实现服务治理，远程调用（注册中心：Eureka） 团队独立，数据库独立，部署独立 有很高容错，并有服务降级避免出现联结问题   SpringCloud整合的技术栈 springCloud版本兼容性  不同服务之间相互调用1.需要在配置类注入bean  2.调用其方法，发送http请求调用其他微服务最后封装结果   搭">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mybatis—Plus重要知识点">
-<meta property="og:url" content="http://example.com/2023/10/16/Mybatis-Plus%E8%AF%AD%E6%B3%95%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:title" content="微服务笔记">
+<meta property="og:url" content="http://example.com/2023/10/16/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Mybatis—Plus重要知识点删除数据1，根据id删除一个数据 1mapper.deleteByid(id)  2，Map多条件删除 12345&#x2F;&#x2F;map.put(&quot;删除列&quot;，&quot;删除列对应的值&quot;)&#x2F;&#x2F;条件之间是and关系map.put(&quot;id&quot;,6)map.put(&quot;user_name&quot;,&quot;小明&amp;quot">
+<meta property="og:description" content="微服务笔记 微服务概念本质是一个分布式架构方案  拆分为更小的模块 对外暴露接口，实现服务治理，远程调用（注册中心：Eureka） 团队独立，数据库独立，部署独立 有很高容错，并有服务降级避免出现联结问题   SpringCloud整合的技术栈 springCloud版本兼容性  不同服务之间相互调用1.需要在配置类注入bean  2.调用其方法，发送http请求调用其他微服务最后封装结果   搭">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/image/8728cbabaaf04df29ae1bdf1bd3c9374.png">
-<meta property="article:published_time" content="2023-10-16T03:08:54.006Z">
-<meta property="article:modified_time" content="2023-10-16T03:25:57.844Z">
+<meta property="og:image" content="http://example.com/image/image-20230817163441180.png">
+<meta property="og:image" content="http://example.com/image/image-20231015095135309.png">
+<meta property="og:image" content="http://example.com/image/image-20231015095120174.png">
+<meta property="og:image" content="http://example.com/image/image-20231015095629330.png">
+<meta property="og:image" content="http://example.com/image/image-20230418172041456.png">
+<meta property="og:image" content="http://example.com/2023/10/16/image/image-20230418172212344.png">
+<meta property="og:image" content="http://example.com/image/image-20231015102840993.png">
+<meta property="og:image" content="http://example.com/image/image-20231015103822630.png">
+<meta property="og:image" content="http://example.com/2023/10/16/image/image-20230418193046113.png">
+<meta property="og:image" content="http://example.com/2023/10/16/image/image-20230418193241325.png">
+<meta property="og:image" content="http://example.com/image/image-20231015104211881.png">
+<meta property="og:image" content="http://example.com/2023/10/16/image/image-20230418193355054.png">
+<meta property="og:image" content="http://example.com/image/image-20231015105827091.png">
+<meta property="article:published_time" content="2023-10-16T04:13:09.160Z">
+<meta property="article:modified_time" content="2023-10-16T04:14:23.645Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/image/8728cbabaaf04df29ae1bdf1bd3c9374.png">
+<meta name="twitter:image" content="http://example.com/image/image-20230817163441180.png">
     
     
     <!--- Icon Part-->
@@ -42,7 +54,7 @@
     
     <title>
         
-            Mybatis—Plus重要知识点 -
+            微服务笔记 -
         
         DOVIS
     </title>
@@ -212,7 +224,7 @@
 
         <div class="article-title">
             
-                <h1 class="article-title-regular">Mybatis—Plus重要知识点</h1>
+                <h1 class="article-title-regular">微服务笔记</h1>
             
             </div>
             
@@ -234,15 +246,15 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2023-10-16 11:08:54</span>
-        <span class="mobile">2023-10-16 11:08:54</span>
+        <span class="desktop">2023-10-16 12:13:09</span>
+        <span class="mobile">2023-10-16 12:13:09</span>
         <span class="hover-info">Created</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-10-16 11:25:57</span>
-            <span class="mobile">2023-10-16 11:25:57</span>
+            <span class="desktop">2023-10-16 12:14:23</span>
+            <span class="mobile">2023-10-16 12:14:23</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -269,82 +281,108 @@
 
 
         <div class="article-content markdown-body">
-            <h1 id="Mybatis—Plus重要知识点"><a href="#Mybatis—Plus重要知识点" class="headerlink" title="Mybatis—Plus重要知识点"></a>Mybatis—Plus重要知识点</h1><h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><p><strong>1，根据id删除一个数据</strong></p>
-<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mapper.deleteByid(id)</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>2，Map多条件删除</strong></p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//map.put(&quot;删除列&quot;，&quot;删除列对应的值&quot;)</span><br><span class="line">//条件之间是and关系</span><br><span class="line">map.put(&quot;id&quot;,6)</span><br><span class="line">map.put(&quot;user_name&quot;,&quot;小明&quot;)</span><br><span class="line">mapper.deleByMap(map)</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>3，QueryWrapper多条件删除</strong></p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//根据QueryWrapper多条件删除 ，条件之间是and关系</span><br><span class="line">User user=new User();</span><br><span class="line">user.setUserName(&quot;哈哈&quot;);</span><br><span class="line">user.setUserEmail(&quot;12433&quot;);</span><br><span class="line">//在new时将user设置进去</span><br><span class="line">QueryWrapper&lt;User&gt; wrapper=new QueryWrapper&lt;&gt;(user);</span><br><span class="line">//执行删除</span><br><span class="line">int result = this.userMapper.delete(wrapper);</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Tag tag=new Tag(&quot;9&quot;,&quot;美食&quot;)</span><br><span class="line">getBaseMapper().updateByid(tag)</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="增加数据"><a href="#增加数据" class="headerlink" title="增加数据"></a>增加数据</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tagService.save(tag)</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="自动填充"><a href="#自动填充" class="headerlink" title="自动填充"></a>自动填充</h2><p><strong>1,设置字段填充字段</strong></p>
-<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TableField(fill =Fill.INSERT)</span><span class="comment">//插入时自动填充</span></span><br><span class="line"><span class="meta">@TableField(fill =Fill.INSERT_UPDATE)</span><span class="comment">//插入或者更新时填充</span></span><br><span class="line"><span class="keyword">private</span> Date updateTime;</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>2,添加填充配置</strong></p>
-<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyMetaObjectHandler</span> <span class="keyword">implements</span> <span class="title class_">MetaObjectHandler</span> &#123;</span><br><span class="line">    <span class="comment">//表示从token里面获取用户id以及其他信息</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">insertFill</span><span class="params">(MetaObject metaObject)</span> &#123;</span><br><span class="line">        <span class="type">Long</span> <span class="variable">userId</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            userId = SecurityUtils.getUserId();</span><br><span class="line">            System.out.println(<span class="string">&quot;这里的userid为&quot;</span>+userId);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            userId = -<span class="number">1L</span>;<span class="comment">//表示是自己创建</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">this</span>.setFieldValByName(<span class="string">&quot;createTime&quot;</span>, <span class="keyword">new</span> <span class="title class_">Date</span>(), metaObject);</span><br><span class="line">        <span class="built_in">this</span>.setFieldValByName(<span class="string">&quot;createBy&quot;</span>,userId , metaObject);</span><br><span class="line">        <span class="built_in">this</span>.setFieldValByName(<span class="string">&quot;updateTime&quot;</span>, <span class="keyword">new</span> <span class="title class_">Date</span>(), metaObject);</span><br><span class="line">        <span class="built_in">this</span>.setFieldValByName(<span class="string">&quot;updateBy&quot;</span>, userId, metaObject);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateFill</span><span class="params">(MetaObject metaObject)</span> &#123;</span><br><span class="line">        <span class="type">Long</span> <span class="variable">userId</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            userId = SecurityUtils.getUserId();</span><br><span class="line">            System.out.println(<span class="string">&quot;这里的userid为&quot;</span>+userId);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            userId = -<span class="number">1L</span>;<span class="comment">//表示是自己创建</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">this</span>.setFieldValByName(<span class="string">&quot;updateTime&quot;</span>, <span class="keyword">new</span> <span class="title class_">Date</span>(), metaObject);</span><br><span class="line">        <span class="built_in">this</span>.setFieldValByName(<span class="string">&quot;updateBy&quot;</span>, userId, metaObject);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="数量比较"><a href="#数量比较" class="headerlink" title="数量比较"></a>数量比较</h2><ul>
-<li>eq 就是 equal等于</li>
-<li>ne 就是 not equal不等于</li>
-<li>gt 就是 greater than大于</li>
-<li>lt 就是 less than小于</li>
-<li>ge 就是 greater than or equal 大于等于</li>
-<li>le 就是 less than or equal 小于等于</li>
-</ul>
-<h2 id="设置乐观锁"><a href="#设置乐观锁" class="headerlink" title="设置乐观锁"></a>设置乐观锁</h2><p><strong>1.设置@Version的注解</strong></p>
-<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Version</span></span><br><span class="line"><span class="keyword">private</span> Integer counts;</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>2.config文件中注入乐观锁插件</strong></p>
-<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> OptimisticLockerInnerInterceptor <span class="title function_">optimisticLockerInnerInterceptor</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">OptimisticLockerInnerInterceptor</span>();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
-
-<p><em>新版注入方式</em></p>
+            <h1 id="微服务笔记"><a href="#微服务笔记" class="headerlink" title="微服务笔记"></a>微服务笔记</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230817163441180.png"
+                      alt="image-20230817163441180"
+                ></p>
+<h2 id="微服务概念"><a href="#微服务概念" class="headerlink" title="微服务概念"></a>微服务概念</h2><p>本质是一个分布式架构方案</p>
+<ol>
+<li>拆分为更小的模块</li>
+<li>对外暴露接口，实现服务治理，远程调用（注册中心：Eureka）</li>
+<li>团队独立，数据库独立，部署独立</li>
+<li>有很高容错，并有服务降级避免出现联结问题</li>
+</ol>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/../image/8728cbabaaf04df29ae1bdf1bd3c9374.png"
-                      alt="在这里插入图片描述"
+                     data-src="/../image/image-20231015095135309.png"
+                      alt="image-20231015095135309"
                 ></p>
-<h2 id="分页使用"><a href="#分页使用" class="headerlink" title="分页使用"></a>分页使用</h2><ol>
-<li><strong>分页配置</strong></li>
+<h2 id="SpringCloud整合的技术栈"><a href="#SpringCloud整合的技术栈" class="headerlink" title="SpringCloud整合的技术栈"></a>SpringCloud整合的技术栈</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231015095120174.png"
+                      alt="image-20231015095120174"
+                ></p>
+<p><strong>springCloud版本兼容性</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231015095629330.png"
+                      alt="image-20231015095629330"
+                ></p>
+<h2 id="不同服务之间相互调用"><a href="#不同服务之间相互调用" class="headerlink" title="不同服务之间相互调用"></a>不同服务之间相互调用</h2><p><em>1.需要在配置类注入bean</em></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230418172041456.png"
+                      alt="image-20230418172041456"
+                ></p>
+<p>2.调用其方法，发送http<em>请求调用其他微服务最后封装结果</em></p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230418172212344.png"
+                      alt="image-20230418172212344" style="zoom: 67%;" 
+                >
+
+<h2 id="搭建Eureka注册中心"><a href="#搭建Eureka注册中心" class="headerlink" title="搭建Eureka注册中心"></a>搭建Eureka注册中心</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231015102840993.png"
+                      alt="image-20231015102840993"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231015103822630.png"
+                      alt="image-20231015103822630"
+                ></p>
+<p><strong>1.搭建eurekaServer</strong></p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230418193046113.png"
+                      alt="image-20230418193046113" style="zoom: 67%;" 
+                >
+
+<p><strong>2.服务注册</strong></p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230418193241325.png"
+                      alt="image-20230418193241325" style="zoom: 50%;" 
+                >
+
+<p><strong>IDEA服务集群启动测试</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231015104211881.png"
+                      alt="image-20231015104211881"
+                ></p>
+<p><strong>3.拉取服务</strong></p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230418193355054.png"
+                      alt="image-20230418193355054" style="zoom:67%;" 
+                >
+
+<h2 id="Ribbon负载均衡原理"><a href="#Ribbon负载均衡原理" class="headerlink" title="Ribbon负载均衡原理"></a>Ribbon负载均衡原理</h2><ol>
+<li>拦截请求获取服务id</li>
+<li>拉取eureka注册中心返回服务地址列表</li>
+<li>在IRule对地址列表选择策略，进行服务地址选择</li>
+<li>调用服务实现负载均衡</li>
 </ol>
-<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> MybatisPlusInterceptor <span class="title function_">mybatisPlusInterceptor</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">MybatisPlusInterceptor</span> <span class="variable">interceptor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MybatisPlusInterceptor</span>();</span><br><span class="line">        interceptor.addInnerInterceptor(<span class="keyword">new</span> <span class="title class_">PaginationInnerInterceptor</span>(DbType.MYSQL));</span><br><span class="line">        <span class="keyword">return</span> interceptor;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
-
-<ol start="2">
-<li><strong>分页应用</strong></li>
-</ol>
-<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> ResponseResult&lt;PageVo&gt; <span class="title function_">pageTagList</span><span class="params">(Integer pageNum, Integer pageSize, TagListDto tagListDto)</span> &#123;</span><br><span class="line">        LambdaQueryWrapper&lt;Tag&gt; queryWrapper=<span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;&gt;();</span><br><span class="line">        queryWrapper.eq(StringUtils.hasText(tagListDto.getName()),Tag::getName,tagListDto.getName());</span><br><span class="line">        queryWrapper.eq(StringUtils.hasText(tagListDto.getRemark()),Tag::getRemark,tagListDto.getRemark());</span><br><span class="line">        Page&lt;Tag&gt; page=<span class="keyword">new</span> <span class="title class_">Page</span>&lt;&gt;();</span><br><span class="line">        page.setCurrent(pageNum);</span><br><span class="line">        page.setSize(pageSize);</span><br><span class="line">        page(page,queryWrapper);</span><br><span class="line">        <span class="type">PageVo</span> <span class="variable">pageVo</span> <span class="operator">=</span><span class="keyword">new</span> <span class="title class_">PageVo</span>(page.getRecords(),page.getTotal());</span><br><span class="line">        <span class="keyword">return</span> ResponseResult.okResult(pageVo);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
-
-<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Page&lt;Blog&gt; blogPage = blogService.query().eq(<span class="string">&quot;user_id&quot;</span>, id).page(<span class="keyword">new</span> <span class="title class_">Page</span>&lt;&gt;(current, SystemConstants.MAX_PAGE_SIZE));</span><br><span class="line">List&lt;Blog&gt; records = blogPage.getRecords();</span><br></pre></td></tr></table></figure></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231015105827091.png"
+                      alt="image-20231015105827091"
+                ></p>
 
         </div>
 
@@ -352,18 +390,18 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li><strong>Title:</strong> Mybatis—Plus重要知识点</li>
+        <li><strong>Title:</strong> 微服务笔记</li>
         <li><strong>Author:</strong> FANSEA</li>
         <li><strong>Created at
-                :</strong> 2023-10-16 11:08:54</li>
+                :</strong> 2023-10-16 12:13:09</li>
         
             <li>
                 <strong>Updated at
-                    :</strong> 2023-10-16 11:25:57
+                    :</strong> 2023-10-16 12:14:23
             </li>
         
         <li>
-            <strong>Link:</strong> https://redefine.ohevan.com/2023/10/16/Mybatis-Plus语法实现/
+            <strong>Link:</strong> https://redefine.ohevan.com/2023/10/16/微服务笔记/
         </li>
         <li style="word-wrap: break-word; white-space: normal;">
             <strong>
@@ -387,29 +425,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                        rel="prev"
-                        href="/2023/10/16/%E6%B9%96%E7%A7%91%E5%A4%A7%E5%B0%8F%E7%AA%9D%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/"
-                        >
-                            <span class="left arrow-icon flex justify-center items-center">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">湖科大校园美食项目笔记</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                         rel="next"
-                        href="/2023/10/16/Linux%E9%87%8D%E8%A6%81%E6%8C%87%E4%BB%A4/"
+                        href="/2023/10/16/%E6%B9%96%E7%A7%91%E5%A4%A7%E5%B0%8F%E7%AA%9D%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/"
                         >
                             <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">linux常用指令</span>
+                                <span class="post-nav-title-item">湖科大校园美食项目笔记</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex justify-center items-center">
@@ -474,8 +497,8 @@
             <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">On this page</div>
-        <div class="page-title">Mybatis—Plus重要知识点</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis%E2%80%94Plus%E9%87%8D%E8%A6%81%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-text">Mybatis—Plus重要知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-text">删除数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="nav-text">修改数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="nav-text">增加数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%A1%AB%E5%85%85"><span class="nav-text">自动填充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E9%87%8F%E6%AF%94%E8%BE%83"><span class="nav-text">数量比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%B9%90%E8%A7%82%E9%94%81"><span class="nav-text">设置乐观锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%A1%B5%E4%BD%BF%E7%94%A8"><span class="nav-text">分页使用</span></a></li></ol></li></ol>
+        <div class="page-title">微服务笔记</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%AC%94%E8%AE%B0"><span class="nav-text">微服务笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A6%82%E5%BF%B5"><span class="nav-text">微服务概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringCloud%E6%95%B4%E5%90%88%E7%9A%84%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="nav-text">SpringCloud整合的技术栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E6%9C%8D%E5%8A%A1%E4%B9%8B%E9%97%B4%E7%9B%B8%E4%BA%92%E8%B0%83%E7%94%A8"><span class="nav-text">不同服务之间相互调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BAEureka%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-text">搭建Eureka注册中心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%8E%9F%E7%90%86"><span class="nav-text">Ribbon负载均衡原理</span></a></li></ol></li></ol>
 
     </div>
 </div>
