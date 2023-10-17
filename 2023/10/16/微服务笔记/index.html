@@ -18,12 +18,12 @@
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="微服务笔记 微服务概念本质是一个分布式架构方案  拆分为更小的模块 对外暴露接口，实现服务治理，远程调用（注册中心：Eureka） 团队独立，数据库独立，部署独立 有很高容错，并有服务降级避免出现联结问题   SpringCloud整合的技术栈 springCloud版本兼容性  不同服务之间相互调用1.需要在配置类注入bean  2.调用其方法，发送http请求调用其他微服务最后封装结果   搭">
+        <meta name="description" content="微服务概念本质是一个分布式架构方案  拆分为更小的模块 对外暴露接口，实现服务治理，远程调用（注册中心：Eureka） 团队独立，数据库独立，部署独立 有很高容错，并有服务降级避免出现联结问题   SpringCloud整合的技术栈 springCloud版本兼容性  不同服务之间相互调用1.需要在配置类注入bean  2.调用其方法，发送http请求调用其他微服务最后封装结果   Eureka">
 <meta property="og:type" content="article">
 <meta property="og:title" content="微服务笔记">
 <meta property="og:url" content="http://example.com/2023/10/16/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="微服务笔记 微服务概念本质是一个分布式架构方案  拆分为更小的模块 对外暴露接口，实现服务治理，远程调用（注册中心：Eureka） 团队独立，数据库独立，部署独立 有很高容错，并有服务降级避免出现联结问题   SpringCloud整合的技术栈 springCloud版本兼容性  不同服务之间相互调用1.需要在配置类注入bean  2.调用其方法，发送http请求调用其他微服务最后封装结果   搭">
+<meta property="og:description" content="微服务概念本质是一个分布式架构方案  拆分为更小的模块 对外暴露接口，实现服务治理，远程调用（注册中心：Eureka） 团队独立，数据库独立，部署独立 有很高容错，并有服务降级避免出现联结问题   SpringCloud整合的技术栈 springCloud版本兼容性  不同服务之间相互调用1.需要在配置类注入bean  2.调用其方法，发送http请求调用其他微服务最后封装结果   Eureka">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/image/image-20230817163441180.png">
 <meta property="og:image" content="http://example.com/image/image-20231015095135309.png">
@@ -38,8 +38,24 @@
 <meta property="og:image" content="http://example.com/image/image-20231015104211881.png">
 <meta property="og:image" content="http://example.com/2023/10/16/image/image-20230418193355054.png">
 <meta property="og:image" content="http://example.com/image/image-20231015105827091.png">
+<meta property="og:image" content="http://example.com/image/image-20231016163731194.png">
+<meta property="og:image" content="http://example.com/image/image-20231016165441076.png">
+<meta property="og:image" content="http://example.com/image/image-20231016173041656.png">
+<meta property="og:image" content="http://example.com/image/image-20231016224338728.png">
+<meta property="og:image" content="http://example.com/image/image-20231016230946407.png">
+<meta property="og:image" content="http://example.com/image/image-20231016232932597.png">
+<meta property="og:image" content="http://example.com/image/image-20231017092849760.png">
+<meta property="og:image" content="http://example.com/image/image-20231017144943251.png">
+<meta property="og:image" content="http://example.com/image/image-20231017144933371.png">
+<meta property="og:image" content="http://example.com/image/image-20231017181334847.png">
+<meta property="og:image" content="http://example.com/2023/10/16/image/image-20231017182043340.png">
+<meta property="og:image" content="http://example.com/image/image-20231017182223033.png">
+<meta property="og:image" content="http://example.com/image/image-20231017150818743.png">
+<meta property="og:image" content="http://example.com/image/image-20231017150704847.png">
+<meta property="og:image" content="http://example.com/image/image-20231017165209097.png">
+<meta property="og:image" content="http://example.com/2023/10/16/image/image-20231017171459993.png">
 <meta property="article:published_time" content="2023-10-16T04:13:09.160Z">
-<meta property="article:modified_time" content="2023-10-16T04:14:23.645Z">
+<meta property="article:modified_time" content="2023-10-17T10:26:41.735Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/image/image-20230817163441180.png">
@@ -253,8 +269,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-10-16 12:14:23</span>
-            <span class="mobile">2023-10-16 12:14:23</span>
+            <span class="desktop">2023-10-17 18:26:41</span>
+            <span class="mobile">2023-10-17 18:26:41</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -281,13 +297,13 @@
 
 
         <div class="article-content markdown-body">
-            <h1 id="微服务笔记"><a href="#微服务笔记" class="headerlink" title="微服务笔记"></a>微服务笔记</h1><p><img  
+            <p><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="/../image/image-20230817163441180.png"
                       alt="image-20230817163441180"
                 ></p>
-<h2 id="微服务概念"><a href="#微服务概念" class="headerlink" title="微服务概念"></a>微服务概念</h2><p>本质是一个分布式架构方案</p>
+<h1 id="微服务概念"><a href="#微服务概念" class="headerlink" title="微服务概念"></a>微服务概念</h1><p>本质是一个分布式架构方案</p>
 <ol>
 <li>拆分为更小的模块</li>
 <li>对外暴露接口，实现服务治理，远程调用（注册中心：Eureka）</li>
@@ -300,7 +316,7 @@
                      data-src="/../image/image-20231015095135309.png"
                       alt="image-20231015095135309"
                 ></p>
-<h2 id="SpringCloud整合的技术栈"><a href="#SpringCloud整合的技术栈" class="headerlink" title="SpringCloud整合的技术栈"></a>SpringCloud整合的技术栈</h2><p><img  
+<h1 id="SpringCloud整合的技术栈"><a href="#SpringCloud整合的技术栈" class="headerlink" title="SpringCloud整合的技术栈"></a>SpringCloud整合的技术栈</h1><p><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="/../image/image-20231015095120174.png"
@@ -313,7 +329,7 @@
                      data-src="/../image/image-20231015095629330.png"
                       alt="image-20231015095629330"
                 ></p>
-<h2 id="不同服务之间相互调用"><a href="#不同服务之间相互调用" class="headerlink" title="不同服务之间相互调用"></a>不同服务之间相互调用</h2><p><em>1.需要在配置类注入bean</em></p>
+<h1 id="不同服务之间相互调用"><a href="#不同服务之间相互调用" class="headerlink" title="不同服务之间相互调用"></a>不同服务之间相互调用</h1><p><em>1.需要在配置类注入bean</em></p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
@@ -328,7 +344,7 @@
                       alt="image-20230418172212344" style="zoom: 67%;" 
                 >
 
-<h2 id="搭建Eureka注册中心"><a href="#搭建Eureka注册中心" class="headerlink" title="搭建Eureka注册中心"></a>搭建Eureka注册中心</h2><p><img  
+<h1 id="Eureka注册中心"><a href="#Eureka注册中心" class="headerlink" title="Eureka注册中心"></a>Eureka注册中心</h1><p><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="/../image/image-20231015102840993.png"
@@ -340,16 +356,14 @@
                      data-src="/../image/image-20231015103822630.png"
                       alt="image-20231015103822630"
                 ></p>
-<p><strong>1.搭建eurekaServer</strong></p>
-<img  
+<h2 id="搭建eurekaServer"><a href="#搭建eurekaServer" class="headerlink" title="搭建eurekaServer"></a>搭建eurekaServer</h2><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="../image/image-20230418193046113.png"
                       alt="image-20230418193046113" style="zoom: 67%;" 
                 >
 
-<p><strong>2.服务注册</strong></p>
-<img  
+<h2 id="服务注册"><a href="#服务注册" class="headerlink" title="服务注册"></a>服务注册</h2><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="../image/image-20230418193241325.png"
@@ -371,7 +385,7 @@
                       alt="image-20230418193355054" style="zoom:67%;" 
                 >
 
-<h2 id="Ribbon负载均衡原理"><a href="#Ribbon负载均衡原理" class="headerlink" title="Ribbon负载均衡原理"></a>Ribbon负载均衡原理</h2><ol>
+<h1 id="Ribbon"><a href="#Ribbon" class="headerlink" title="Ribbon"></a>Ribbon</h1><h2 id="Ribbon负载均衡原理"><a href="#Ribbon负载均衡原理" class="headerlink" title="Ribbon负载均衡原理"></a>Ribbon负载均衡原理</h2><ol>
 <li>拦截请求获取服务id</li>
 <li>拉取eureka注册中心返回服务地址列表</li>
 <li>在IRule对地址列表选择策略，进行服务地址选择</li>
@@ -383,6 +397,303 @@
                      data-src="/../image/image-20231015105827091.png"
                       alt="image-20231015105827091"
                 ></p>
+<h2 id="负载均衡策略配置"><a href="#负载均衡策略配置" class="headerlink" title="负载均衡策略配置"></a>负载均衡策略配置</h2><blockquote>
+<p>zoneavoidanceRlue为默认负载均衡策略，默认是轮询规则</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231016163731194.png"
+                      alt="image-20231016163731194"
+                ></p>
+<h2 id="饥饿加载"><a href="#饥饿加载" class="headerlink" title="饥饿加载"></a>饥饿加载</h2><blockquote>
+<p>ribbon总是在第一次获取请求才加载服务，耗时很长，启用项目启动时加载服务,提升网站速率</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231016165441076.png"
+                      alt="image-20231016165441076"
+                ></p>
+<h1 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos"></a>Nacos</h1><h2 id="安装与启动"><a href="#安装与启动" class="headerlink" title="安装与启动"></a>安装与启动</h2><p><a class="link"   target="_blank" rel="noopener" href="https://github.com/alibaba/nacos/releases/tag/2.2.1" >nacos安装地址 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231016173041656.png"
+                      alt="image-20231016173041656"
+                ></p>
+<p>启动Nacos：</p>
+<div class="highlight-container" data-rel="Cmd"><figure class="iseeu highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.\startup.<span class="built_in">cmd</span> -m standalone #单机模式</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Nacos注册"><a href="#Nacos注册" class="headerlink" title="Nacos注册"></a>Nacos注册</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231016224338728.png"
+                      alt="image-20231016224338728"
+                ></p>
+<p><strong>配置Nacos注册地址：</strong></p>
+<div class="highlight-container" data-rel="Yml"><figure class="iseeu highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cloud:</span> </span><br><span class="line">	<span class="attr">nacos:</span> </span><br><span class="line">		<span class="attr">server-addr:</span> <span class="string">loaclhost:8848</span> </span><br><span class="line">		<span class="attr">discovery:</span> </span><br><span class="line">			<span class="attr">cluster-name:</span> <span class="string">HZ</span> <span class="comment">#配置集群组</span></span><br><span class="line"><span class="attr">userservice:</span> </span><br><span class="line">  <span class="attr">ribbon:</span> </span><br><span class="line">    <span class="attr">NFLoadBalancerRuleClassName:</span> <span class="string">com.alibaba.cloud.nacos.ribbon.NacosRule</span>  <span class="comment"># 同时地域分组随机负载均衡规则</span></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>服务分级（分组）模型：</strong></p>
+<blockquote>
+<p>在同一个局域网的多个实例调用服务较快，配置集群组有助于调用服务时优先选择本地集群，如果都挂了，访问其他集群</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231016230946407.png"
+                      alt="image-20231016230946407"
+                ></p>
+<h2 id="Nacos设置服务权重"><a href="#Nacos设置服务权重" class="headerlink" title="Nacos设置服务权重"></a>Nacos设置服务权重</h2><blockquote>
+<p>此方法用于控制服务访问频率，一般设置在0~1</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231016232932597.png"
+                      alt="image-20231016232932597"
+                ></p>
+<h2 id="NameSpace环境隔离"><a href="#NameSpace环境隔离" class="headerlink" title="NameSpace环境隔离"></a>NameSpace环境隔离</h2><blockquote>
+<p>作用于隔离环境，不同环境下的服务无法访问，同一台机器可以用此来设置多个隔离空间用于开发环境，上线环境。</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231017092849760.png"
+                      alt="image-20231017092849760"
+                ></p>
+<div class="highlight-container" data-rel="Yml"><figure class="iseeu highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cloud:</span> </span><br><span class="line">	<span class="attr">nacos:</span> </span><br><span class="line">		<span class="attr">discovery:</span> </span><br><span class="line">			<span class="attr">namespace:</span> <span class="string">c82bd449-3c13-487c-8468-da716efdedee</span> <span class="comment">#命名空间id</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="临时实例和非临时实例"><a href="#临时实例和非临时实例" class="headerlink" title="临时实例和非临时实例"></a>临时实例和非临时实例</h2><blockquote>
+<p>默认为临时实例，服务发现拉取与eureka相同，Nacos引入非临时实例，主动询问服务提供者服务状态，如果服务出问题将会快速反映给消费者，主动通知push改变服务地址，但是损耗服务器性能。</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231017144943251.png"
+                      alt="image-20231017144943251"
+                ></p>
+<p><strong>非临时实例配置：</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231017144933371.png"
+                      alt="image-20231017144933371"
+                ></p>
+<h2 id="Nacos集群搭建"><a href="#Nacos集群搭建" class="headerlink" title="Nacos集群搭建"></a>Nacos集群搭建</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231017181334847.png"
+                      alt="image-20231017181334847"
+                ></p>
+<p><strong>修改集群配置（在cluster.conf文件中加入）：</strong></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:8845</span><br><span class="line">127.0.0.1:8846</span><br><span class="line">127.0.0.1:8847</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>nignx反向代理：</strong></p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20231017182043340.png"
+                      alt="image-20231017182043340" style="zoom:67%;" 
+                >
+
+<p><strong>更改服务提供者的Nacos地址：</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231017182223033.png"
+                      alt="image-20231017182223033"
+                ></p>
+<h1 id="Nacos统一配置管理"><a href="#Nacos统一配置管理" class="headerlink" title="Nacos统一配置管理"></a>Nacos统一配置管理</h1><p><strong>项目启动读取配置流程：</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231017150818743.png"
+                      alt="image-20231017150818743"
+                ></p>
+<blockquote>
+<p>这里需要引入bootstrap.yml文件，提前将<strong>Nacos地址读取</strong>出来，才能进行下一步“读取Nacos配置文件”！它的优先级优于application.yml</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231017150704847.png"
+                      alt="image-20231017150704847"
+                ></p>
+<h2 id="配置热更新"><a href="#配置热更新" class="headerlink" title="配置热更新"></a>配置热更新</h2><ol>
+<li>通过@RefreshScope更新</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231017165209097.png"
+                      alt="image-20231017165209097"
+                ></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RefreshScope</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserController</span> &#123;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;pattern.dateformat&#125;&quot;)</span></span><br><span class="line">	<span class="keyword">private</span> String dateformat;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li>通过@ConfigurationProperties注入，自动刷新</li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;pattern&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PatternProperties</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String dateformat;</span><br><span class="line">    <span class="keyword">private</span> String envSharedValue;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> PatternProperties properties;</span><br><span class="line"></span><br><span class="line"><span class="meta">@GetMapping(&quot;now&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">now</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> LocalDateTime.now().format(DateTimeFormatter.ofPattern(properties.getDateformat()));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="多环境配置共享"><a href="#多环境配置共享" class="headerlink" title="多环境配置共享"></a>多环境配置共享</h2><blockquote>
+<p>环境包括：dev（开发环境），test（测试环境），pro（开发环境）</p>
+</blockquote>
+<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span></span><br><span class="line">    <span class="attr">active:</span> <span class="string">dev</span> <span class="comment"># 环境</span></span><br></pre></td></tr></table></figure></div>
+
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20231017171459993.png"
+                      alt="image-20231017171459993" style="zoom: 80%;" 
+                >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         </div>
 
@@ -397,7 +708,7 @@
         
             <li>
                 <strong>Updated at
-                    :</strong> 2023-10-16 12:14:23
+                    :</strong> 2023-10-17 18:26:41
             </li>
         
         <li>
@@ -424,6 +735,21 @@
 
         
             <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/10/16/typora%E5%BF%AB%E6%8D%B7%E9%94%AE/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">typora快捷键大全</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
                 
                 
                     <div class="article-next">
@@ -498,7 +824,7 @@
     <div class="post-toc">
         <div class="toc-title">On this page</div>
         <div class="page-title">微服务笔记</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%AC%94%E8%AE%B0"><span class="nav-text">微服务笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A6%82%E5%BF%B5"><span class="nav-text">微服务概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringCloud%E6%95%B4%E5%90%88%E7%9A%84%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="nav-text">SpringCloud整合的技术栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E6%9C%8D%E5%8A%A1%E4%B9%8B%E9%97%B4%E7%9B%B8%E4%BA%92%E8%B0%83%E7%94%A8"><span class="nav-text">不同服务之间相互调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BAEureka%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-text">搭建Eureka注册中心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%8E%9F%E7%90%86"><span class="nav-text">Ribbon负载均衡原理</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A6%82%E5%BF%B5"><span class="nav-text">微服务概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCloud%E6%95%B4%E5%90%88%E7%9A%84%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="nav-text">SpringCloud整合的技术栈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E6%9C%8D%E5%8A%A1%E4%B9%8B%E9%97%B4%E7%9B%B8%E4%BA%92%E8%B0%83%E7%94%A8"><span class="nav-text">不同服务之间相互调用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Eureka%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-text">Eureka注册中心</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BAeurekaServer"><span class="nav-text">搭建eurekaServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C"><span class="nav-text">服务注册</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ribbon"><span class="nav-text">Ribbon</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%8E%9F%E7%90%86"><span class="nav-text">Ribbon负载均衡原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE"><span class="nav-text">负载均衡策略配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A5%A5%E9%A5%BF%E5%8A%A0%E8%BD%BD"><span class="nav-text">饥饿加载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nacos"><span class="nav-text">Nacos</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%8A%A8"><span class="nav-text">安装与启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E6%B3%A8%E5%86%8C"><span class="nav-text">Nacos注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E8%AE%BE%E7%BD%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%87%8D"><span class="nav-text">Nacos设置服务权重</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NameSpace%E7%8E%AF%E5%A2%83%E9%9A%94%E7%A6%BB"><span class="nav-text">NameSpace环境隔离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E5%AE%9E%E4%BE%8B%E5%92%8C%E9%9D%9E%E4%B8%B4%E6%97%B6%E5%AE%9E%E4%BE%8B"><span class="nav-text">临时实例和非临时实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA"><span class="nav-text">Nacos集群搭建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nacos%E7%BB%9F%E4%B8%80%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86"><span class="nav-text">Nacos统一配置管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%83%AD%E6%9B%B4%E6%96%B0"><span class="nav-text">配置热更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%85%B1%E4%BA%AB"><span class="nav-text">多环境配置共享</span></a></li></ol></li></ol>
 
     </div>
 </div>
