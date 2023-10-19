@@ -54,8 +54,16 @@
 <meta property="og:image" content="http://example.com/image/image-20231017150704847.png">
 <meta property="og:image" content="http://example.com/image/image-20231017165209097.png">
 <meta property="og:image" content="http://example.com/2023/10/16/image/image-20231017171459993.png">
+<meta property="og:image" content="http://example.com/image/image-20231018223151149.png">
+<meta property="og:image" content="http://example.com/image/image-20231018224439895.png">
+<meta property="og:image" content="http://example.com/image/image-20231018224212617.png">
+<meta property="og:image" content="http://example.com/image/image-20231019111234348.png">
+<meta property="og:image" content="http://example.com/image/image-20231019111416920.png">
+<meta property="og:image" content="http://example.com/image/image-20231019111500583.png">
+<meta property="og:image" content="http://example.com/image/image-20231019112756854.png">
+<meta property="og:image" content="http://example.com/2023/10/16/image/image-20231019130142980.png">
 <meta property="article:published_time" content="2023-10-16T04:13:09.160Z">
-<meta property="article:modified_time" content="2023-10-17T10:26:41.735Z">
+<meta property="article:modified_time" content="2023-10-19T05:01:49.581Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/image/image-20230817163441180.png">
@@ -269,8 +277,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-10-17 18:26:41</span>
-            <span class="mobile">2023-10-17 18:26:41</span>
+            <span class="desktop">2023-10-19 13:01:49</span>
+            <span class="mobile">2023-10-19 13:01:49</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -550,33 +558,80 @@
                       alt="image-20231017171459993" style="zoom: 80%;" 
                 >
 
+<h1 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h1><h2 id="Feign的使用"><a href="#Feign的使用" class="headerlink" title="Feign的使用"></a>Feign的使用</h2><ol>
+<li>引入依赖</li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br></pre></td></tr></table></figure></div>
 
+<ol start="2">
+<li>添加**@EnableFeignClients<strong>注解在</strong>SpringbootApplication**类上</li>
+<li>编写FeignClient接口</li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient(value = &quot;userservice&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserClient</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/user/&#123;id&#125;&quot;)</span></span><br><span class="line">    User <span class="title function_">findById</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
+<ol start="4">
+<li>直接@Autowied，非常优雅</li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> UserService userService;</span><br></pre></td></tr></table></figure></div>
 
+<h2 id="Feign的日志配置"><a href="#Feign的日志配置" class="headerlink" title="Feign的日志配置"></a>Feign的日志配置</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231018223151149.png"
+                      alt="image-20231018223151149"
+                ></p>
+<p><strong>方式二：</strong></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DefaultFeignConfiguration</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Logger.Level <span class="title function_">logLevel</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Logger.Level.BASIC;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableFeignClients(defaultConfiguration = DefaultFeignConfiguration.class)</span></span><br><span class="line"><span class="meta">@FeignClient(value = &quot;userservice&quot;,configuration = DefaultFeignConfiguration.class)</span></span><br></pre></td></tr></table></figure></div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<h2 id="性能优化：增加连接池"><a href="#性能优化：增加连接池" class="headerlink" title="性能优化：增加连接池"></a>性能优化：增加连接池</h2><blockquote>
+<p>Feign底层使用URLConnection,没有配备连接池，效率很低，这里采用HttpClient来代替</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231018224439895.png"
+                      alt="image-20231018224439895"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231018224212617.png"
+                      alt="image-20231018224212617"
+                ></p>
+<h2 id="Feign常用实现方式"><a href="#Feign常用实现方式" class="headerlink" title="Feign常用实现方式"></a>Feign常用实现方式</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231019111234348.png"
+                      alt="image-20231019111234348"
+                ></p>
+<p><strong>方式一：</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231019111416920.png"
+                      alt="image-20231019111416920"
+                ></p>
+<p><strong>方式二：</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231019111500583.png"
+                      alt="image-20231019111500583"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231019112756854.png"
+                      alt="image-20231019112756854"
+                ></p>
+<h1 id="GateWay"><a href="#GateWay" class="headerlink" title="GateWay"></a>GateWay</h1><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20231019130142980.png"
+                      alt="image-20231019130142980" style="zoom:80%;" 
+                >
 
 
 
@@ -708,7 +763,7 @@
         
             <li>
                 <strong>Updated at
-                    :</strong> 2023-10-17 18:26:41
+                    :</strong> 2023-10-19 13:01:49
             </li>
         
         <li>
@@ -824,7 +879,7 @@
     <div class="post-toc">
         <div class="toc-title">On this page</div>
         <div class="page-title">微服务笔记</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A6%82%E5%BF%B5"><span class="nav-text">微服务概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCloud%E6%95%B4%E5%90%88%E7%9A%84%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="nav-text">SpringCloud整合的技术栈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E6%9C%8D%E5%8A%A1%E4%B9%8B%E9%97%B4%E7%9B%B8%E4%BA%92%E8%B0%83%E7%94%A8"><span class="nav-text">不同服务之间相互调用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Eureka%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-text">Eureka注册中心</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BAeurekaServer"><span class="nav-text">搭建eurekaServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C"><span class="nav-text">服务注册</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ribbon"><span class="nav-text">Ribbon</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%8E%9F%E7%90%86"><span class="nav-text">Ribbon负载均衡原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE"><span class="nav-text">负载均衡策略配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A5%A5%E9%A5%BF%E5%8A%A0%E8%BD%BD"><span class="nav-text">饥饿加载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nacos"><span class="nav-text">Nacos</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%8A%A8"><span class="nav-text">安装与启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E6%B3%A8%E5%86%8C"><span class="nav-text">Nacos注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E8%AE%BE%E7%BD%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%87%8D"><span class="nav-text">Nacos设置服务权重</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NameSpace%E7%8E%AF%E5%A2%83%E9%9A%94%E7%A6%BB"><span class="nav-text">NameSpace环境隔离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E5%AE%9E%E4%BE%8B%E5%92%8C%E9%9D%9E%E4%B8%B4%E6%97%B6%E5%AE%9E%E4%BE%8B"><span class="nav-text">临时实例和非临时实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA"><span class="nav-text">Nacos集群搭建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nacos%E7%BB%9F%E4%B8%80%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86"><span class="nav-text">Nacos统一配置管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%83%AD%E6%9B%B4%E6%96%B0"><span class="nav-text">配置热更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%85%B1%E4%BA%AB"><span class="nav-text">多环境配置共享</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A6%82%E5%BF%B5"><span class="nav-text">微服务概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCloud%E6%95%B4%E5%90%88%E7%9A%84%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="nav-text">SpringCloud整合的技术栈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E6%9C%8D%E5%8A%A1%E4%B9%8B%E9%97%B4%E7%9B%B8%E4%BA%92%E8%B0%83%E7%94%A8"><span class="nav-text">不同服务之间相互调用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Eureka%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-text">Eureka注册中心</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BAeurekaServer"><span class="nav-text">搭建eurekaServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C"><span class="nav-text">服务注册</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ribbon"><span class="nav-text">Ribbon</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%8E%9F%E7%90%86"><span class="nav-text">Ribbon负载均衡原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE"><span class="nav-text">负载均衡策略配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A5%A5%E9%A5%BF%E5%8A%A0%E8%BD%BD"><span class="nav-text">饥饿加载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nacos"><span class="nav-text">Nacos</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%8A%A8"><span class="nav-text">安装与启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E6%B3%A8%E5%86%8C"><span class="nav-text">Nacos注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E8%AE%BE%E7%BD%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%87%8D"><span class="nav-text">Nacos设置服务权重</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NameSpace%E7%8E%AF%E5%A2%83%E9%9A%94%E7%A6%BB"><span class="nav-text">NameSpace环境隔离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E5%AE%9E%E4%BE%8B%E5%92%8C%E9%9D%9E%E4%B8%B4%E6%97%B6%E5%AE%9E%E4%BE%8B"><span class="nav-text">临时实例和非临时实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA"><span class="nav-text">Nacos集群搭建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nacos%E7%BB%9F%E4%B8%80%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86"><span class="nav-text">Nacos统一配置管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%83%AD%E6%9B%B4%E6%96%B0"><span class="nav-text">配置热更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%85%B1%E4%BA%AB"><span class="nav-text">多环境配置共享</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Feign"><span class="nav-text">Feign</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Feign%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-text">Feign的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feign%E7%9A%84%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE"><span class="nav-text">Feign的日志配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="nav-text">性能优化：增加连接池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feign%E5%B8%B8%E7%94%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-text">Feign常用实现方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GateWay"><span class="nav-text">GateWay</span></a></li></ol>
 
     </div>
 </div>
