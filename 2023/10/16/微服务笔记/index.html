@@ -20,7 +20,7 @@
     
         <meta name="description" content="微服务概念本质是一个分布式架构方案  拆分为更小的模块 对外暴露接口，实现服务治理，远程调用（注册中心：Eureka） 团队独立，数据库独立，部署独立 有很高容错，并有服务降级避免出现联结问题   SpringCloud整合的技术栈 springCloud版本兼容性  不同服务之间相互调用1.需要在配置类注入bean  2.调用其方法，发送http请求调用其他微服务最后封装结果  Eureka注">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微服务笔记">
+<meta property="og:title" content="微服务笔记（一）">
 <meta property="og:url" content="http://example.com/2023/10/16/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="微服务概念本质是一个分布式架构方案  拆分为更小的模块 对外暴露接口，实现服务治理，远程调用（注册中心：Eureka） 团队独立，数据库独立，部署独立 有很高容错，并有服务降级避免出现联结问题   SpringCloud整合的技术栈 springCloud版本兼容性  不同服务之间相互调用1.需要在配置类注入bean  2.调用其方法，发送http请求调用其他微服务最后封装结果  Eureka注">
@@ -67,8 +67,13 @@
 <meta property="og:image" content="http://example.com/image/image-20231020231125059.png">
 <meta property="og:image" content="http://example.com/image/image-20231020234754745.png">
 <meta property="og:image" content="http://example.com/image/image-20231020235620962.png">
+<meta property="og:image" content="http://example.com/image/image-20231021112419062.png">
+<meta property="og:image" content="http://example.com/image/image-20231021125809902.png">
+<meta property="og:image" content="http://example.com/image/image-20231021132203962.png">
+<meta property="og:image" content="http://example.com/image/image-20231021143314540.png">
+<meta property="og:image" content="http://example.com/image/image-20231021191119306.png">
 <meta property="article:published_time" content="2023-10-16T04:13:09.160Z">
-<meta property="article:modified_time" content="2023-10-20T15:56:25.810Z">
+<meta property="article:modified_time" content="2023-10-22T03:09:24.812Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/image/image-20230817163441180.png">
@@ -83,7 +88,7 @@
     
     <title>
         
-            微服务笔记 -
+            微服务笔记（一） -
         
         DOVIS
     </title>
@@ -253,7 +258,7 @@
 
         <div class="article-title">
             
-                <h1 class="article-title-regular">微服务笔记</h1>
+                <h1 class="article-title-regular">微服务笔记（一）</h1>
             
             </div>
             
@@ -282,8 +287,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-10-20 23:56:25</span>
-            <span class="mobile">2023-10-20 23:56:25</span>
+            <span class="desktop">2023-10-22 11:09:24</span>
+            <span class="mobile">2023-10-22 11:09:24</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -678,27 +683,94 @@
                      data-src="/../image/image-20231020234754745.png"
                       alt="image-20231020234754745"
                 ></p>
-<h2 id="跨域问题处理"><a href="#跨域问题处理" class="headerlink" title="跨域问题处理"></a>跨域问题处理</h2><p><img  
+<h2 id="跨域问题处理"><a href="#跨域问题处理" class="headerlink" title="跨域问题处理"></a>跨域问题处理</h2><blockquote>
+<p>跨域问题是浏览器拦截Ajax请求，需要配置才能实现前后端分离</p>
+</blockquote>
+<p><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="/../image/image-20231020235620962.png"
                       alt="image-20231020235620962"
                 ></p>
+<h1 id="Docker部署微服务"><a href="#Docker部署微服务" class="headerlink" title="Docker部署微服务"></a>Docker部署微服务</h1><h2 id="Docker的安装"><a href="#Docker的安装" class="headerlink" title="Docker的安装"></a>Docker的安装</h2><p><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/qq_26400011/article/details/113856681?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169785275716800211519877%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=169785275716800211519877&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-113856681-null-null.142%5Ev96%5Epc_search_result_base8&utm_term=docker%E5%AE%89%E8%A3%85&spm=1018.2226.3001.4187" >Docker在Centos7安装教程 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭防火墙</span></span><br><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure></div>
 
+<p><strong>配置镜像加速器：</strong></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> -p /etc/docker</span><br><span class="line">sudo <span class="built_in">tee</span> /etc/docker/daemon.json &lt;&lt;-<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;registry-mirrors&quot;</span>: [<span class="string">&quot;https://rf7o1yzs.mirror.aliyuncs.com&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure></div>
+
+<p><a class="link"   target="_blank" rel="noopener" href="https://hub.docker.com/" >DockerHub网址 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2 id="Docker命令查看"><a href="#Docker命令查看" class="headerlink" title="Docker命令查看"></a>Docker命令查看</h2><blockquote>
+<p>Docker容器包含操作linux内核的文件和镜像文件，打开容器其实就相当于一个阉割版的并且只安装了这个一个镜像的linux系统</p>
+</blockquote>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker -<span class="built_in">help</span></span><br><span class="line">docker save --<span class="built_in">help</span></span><br><span class="line">docker run --name mn -p 80:80 -d nginx</span><br><span class="line">docker logs mn</span><br><span class="line">docker <span class="built_in">exec</span> -it mn bash <span class="comment">#进入容器修改</span></span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231021112419062.png"
+                      alt="image-20231021112419062"
+                ></p>
+<h2 id="操作数据卷（volume）"><a href="#操作数据卷（volume）" class="headerlink" title="操作数据卷（volume）"></a>操作数据卷（volume）</h2><blockquote>
+<p>将容器与数据分离，解耦合，方便操作容器内数据，保障数据安全</p>
+<p>挂载volume修改文件内容更加方便</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231021125809902.png"
+                      alt="image-20231021125809902"
+                ></p>
+<p><strong>挂载数据卷：</strong></p>
+<ol>
+<li><strong>volume挂载目录</strong></li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231021132203962.png"
+                      alt="image-20231021132203962"
+                ></p>
+<ol start="2">
+<li>自定义文件夹，文件挂载目录</li>
+</ol>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">--name mysql \</span><br><span class="line">-p 3306:3306 \</span><br><span class="line">-v /mount/mysql/conf/hmy.cnf:/etc/mysql/conf.d/hmy.cnf \</span><br><span class="line">-v /mount/mysql/data:/var/lib/mysql \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=123 \</span><br><span class="line">-d mysql:5.7.5 \</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Dockerfile自定义镜像"><a href="#Dockerfile自定义镜像" class="headerlink" title="Dockerfile自定义镜像"></a>Dockerfile自定义镜像</h2><p><a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/compose/compose-file/build/" >Dockerfile文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231021143314540.png"
+                      alt="image-20231021143314540"
+                ></p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">指定基础镜像 FROM centos:7</span></span><br><span class="line">FROM java:8-alpine</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置环境变量</span></span><br><span class="line">ENV JAVA_HOME=$JAVA_DIR/java8</span><br><span class="line">ENV PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line"></span><br><span class="line">COPY ./docker-demo.jar /tmp/app.jar</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">暴露端口</span></span><br><span class="line">EXPOSE 8090</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">指定入口，java项目的启动命令</span></span><br><span class="line">ENTRYPOINT java -jar /tmp/app.jar</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="DockerCompose集群部署"><a href="#DockerCompose集群部署" class="headerlink" title="DockerCompose集群部署"></a>DockerCompose集群部署</h2><p><strong>微服务项目结构：</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231021191119306.png"
+                      alt="image-20231021191119306"
+                ></p>
+<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3.2&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">nacos:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nacos/nacos-server</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MODE:</span> <span class="string">standalone</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8848:8848&quot;</span></span><br><span class="line">  <span class="attr">mysql:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mysql:5.7.5</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MYSQL_ROOT_PASSWORD:</span> <span class="number">123</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;$PWD/mysql/data:/var/lib/mysql&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;$PWD/mysql/conf:/etc/mysql/conf.d/&quot;</span></span><br><span class="line">  <span class="attr">userservice:</span></span><br><span class="line">    <span class="attr">build:</span> <span class="string">./user-service</span></span><br><span class="line">  <span class="attr">orderservice:</span></span><br><span class="line">    <span class="attr">build:</span> <span class="string">./order-service</span></span><br><span class="line">  <span class="attr">gateway:</span></span><br><span class="line">    <span class="attr">build:</span> <span class="string">./gateway</span></span><br><span class="line">    <span class="attr">ports:</span></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>docker-compose指令：</strong></p>
+<div class="highlight-container" data-rel="Sh"><figure class="iseeu highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br><span class="line">docker-compose stop gateway userservice orderservice mysql nacos</span><br><span class="line">docker-compose restart gateway userservice orderservice mysql</span><br><span class="line">docker-compose logs -f userservice</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Docker私有镜像仓库搭建"><a href="#Docker私有镜像仓库搭建" class="headerlink" title="Docker私有镜像仓库搭建"></a>Docker私有镜像仓库搭建</h2>
         </div>
 
         
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li><strong>Title:</strong> 微服务笔记</li>
+        <li><strong>Title:</strong> 微服务笔记（一）</li>
         <li><strong>Author:</strong> FANSEA</li>
         <li><strong>Created at
                 :</strong> 2023-10-16 12:13:09</li>
         
             <li>
                 <strong>Updated at
-                    :</strong> 2023-10-20 23:56:25
+                    :</strong> 2023-10-22 11:09:24
             </li>
         
         <li>
@@ -813,8 +885,8 @@
             <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">On this page</div>
-        <div class="page-title">微服务笔记</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A6%82%E5%BF%B5"><span class="nav-text">微服务概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCloud%E6%95%B4%E5%90%88%E7%9A%84%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="nav-text">SpringCloud整合的技术栈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E6%9C%8D%E5%8A%A1%E4%B9%8B%E9%97%B4%E7%9B%B8%E4%BA%92%E8%B0%83%E7%94%A8"><span class="nav-text">不同服务之间相互调用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Eureka%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-text">Eureka注册中心</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BAeurekaServer"><span class="nav-text">搭建eurekaServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C"><span class="nav-text">服务注册</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ribbon"><span class="nav-text">Ribbon</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%8E%9F%E7%90%86"><span class="nav-text">Ribbon负载均衡原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE"><span class="nav-text">负载均衡策略配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A5%A5%E9%A5%BF%E5%8A%A0%E8%BD%BD"><span class="nav-text">饥饿加载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nacos"><span class="nav-text">Nacos</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%8A%A8"><span class="nav-text">安装与启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E6%B3%A8%E5%86%8C"><span class="nav-text">Nacos注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E8%AE%BE%E7%BD%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%87%8D"><span class="nav-text">Nacos设置服务权重</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NameSpace%E7%8E%AF%E5%A2%83%E9%9A%94%E7%A6%BB"><span class="nav-text">NameSpace环境隔离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E5%AE%9E%E4%BE%8B%E5%92%8C%E9%9D%9E%E4%B8%B4%E6%97%B6%E5%AE%9E%E4%BE%8B"><span class="nav-text">临时实例和非临时实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA"><span class="nav-text">Nacos集群搭建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nacos%E7%BB%9F%E4%B8%80%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86"><span class="nav-text">Nacos统一配置管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%83%AD%E6%9B%B4%E6%96%B0"><span class="nav-text">配置热更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%85%B1%E4%BA%AB"><span class="nav-text">多环境配置共享</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Feign"><span class="nav-text">Feign</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Feign%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-text">Feign的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feign%E7%9A%84%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE"><span class="nav-text">Feign的日志配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="nav-text">性能优化：增加连接池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feign%E5%B8%B8%E7%94%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-text">Feign常用实现方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GateWay"><span class="nav-text">GateWay</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E7%BD%91%E5%85%B3%E6%9C%8D%E5%8A%A1"><span class="nav-text">搭建网关服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1%E5%8F%82%E6%95%B0%EF%BC%88predicates%EF%BC%89"><span class="nav-text">配置路由参数（predicates）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-text">路由过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%88GlobalFilter%EF%BC%89"><span class="nav-text">全局过滤器（GlobalFilter）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-text">过滤器执行顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86"><span class="nav-text">跨域问题处理</span></a></li></ol></li></ol>
+        <div class="page-title">微服务笔记（一）</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A6%82%E5%BF%B5"><span class="nav-text">微服务概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCloud%E6%95%B4%E5%90%88%E7%9A%84%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="nav-text">SpringCloud整合的技术栈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E6%9C%8D%E5%8A%A1%E4%B9%8B%E9%97%B4%E7%9B%B8%E4%BA%92%E8%B0%83%E7%94%A8"><span class="nav-text">不同服务之间相互调用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Eureka%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-text">Eureka注册中心</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BAeurekaServer"><span class="nav-text">搭建eurekaServer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C"><span class="nav-text">服务注册</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ribbon"><span class="nav-text">Ribbon</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ribbon%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%8E%9F%E7%90%86"><span class="nav-text">Ribbon负载均衡原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE"><span class="nav-text">负载均衡策略配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A5%A5%E9%A5%BF%E5%8A%A0%E8%BD%BD"><span class="nav-text">饥饿加载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nacos"><span class="nav-text">Nacos</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%8A%A8"><span class="nav-text">安装与启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E6%B3%A8%E5%86%8C"><span class="nav-text">Nacos注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E8%AE%BE%E7%BD%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%87%8D"><span class="nav-text">Nacos设置服务权重</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NameSpace%E7%8E%AF%E5%A2%83%E9%9A%94%E7%A6%BB"><span class="nav-text">NameSpace环境隔离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E5%AE%9E%E4%BE%8B%E5%92%8C%E9%9D%9E%E4%B8%B4%E6%97%B6%E5%AE%9E%E4%BE%8B"><span class="nav-text">临时实例和非临时实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA"><span class="nav-text">Nacos集群搭建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nacos%E7%BB%9F%E4%B8%80%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86"><span class="nav-text">Nacos统一配置管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%83%AD%E6%9B%B4%E6%96%B0"><span class="nav-text">配置热更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%85%B1%E4%BA%AB"><span class="nav-text">多环境配置共享</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Feign"><span class="nav-text">Feign</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Feign%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-text">Feign的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feign%E7%9A%84%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE"><span class="nav-text">Feign的日志配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="nav-text">性能优化：增加连接池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feign%E5%B8%B8%E7%94%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-text">Feign常用实现方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GateWay"><span class="nav-text">GateWay</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E7%BD%91%E5%85%B3%E6%9C%8D%E5%8A%A1"><span class="nav-text">搭建网关服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1%E5%8F%82%E6%95%B0%EF%BC%88predicates%EF%BC%89"><span class="nav-text">配置路由参数（predicates）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-text">路由过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%88GlobalFilter%EF%BC%89"><span class="nav-text">全局过滤器（GlobalFilter）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-text">过滤器执行顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86"><span class="nav-text">跨域问题处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker%E9%83%A8%E7%BD%B2%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="nav-text">Docker部署微服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-text">Docker的安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker%E5%91%BD%E4%BB%A4%E6%9F%A5%E7%9C%8B"><span class="nav-text">Docker命令查看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%8D%B7%EF%BC%88volume%EF%BC%89"><span class="nav-text">操作数据卷（volume）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dockerfile%E8%87%AA%E5%AE%9A%E4%B9%89%E9%95%9C%E5%83%8F"><span class="nav-text">Dockerfile自定义镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DockerCompose%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2"><span class="nav-text">DockerCompose集群部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker%E7%A7%81%E6%9C%89%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA"><span class="nav-text">Docker私有镜像仓库搭建</span></a></li></ol></li></ol>
 
     </div>
 </div>
