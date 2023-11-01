@@ -13,23 +13,29 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="http://example.com/2023/10/17/读书思考（一）/"/>
+    <link rel="canonical" href="http://example.com/2023/11/01/jvm虚拟机/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="管理者应有的品质 《可复制的领导力》  管理的理解：通过别人来完成任务！  给与员工足够的信任，这样才能培养起来一个能独当一面的得力员工！  ​		没有给员工足够的信任，他们必然不会经过磨炼，不能独立承担重要任务，一直在等待老板的指令，而老板却疲于奔命，到头来，双方都得不到成长。分工合作，如果船长一直在驾驶室内开船，没有培养相关的人才，船员们就会顾此失彼，整个船队如一团乱麻，这无疑是团队管理中的一">
+        <meta name="description" content="JVM虚拟机JVM特性 即时编译 自动对热点代码进行优化，转化成机器码之后保存在内存中，再次执行可以直接调用   电商领域高性能虚拟机 JVM运行流程 字节码类字节码对比1234567891011121314151617181920package org.example;public class test &amp;#123;    public static final String abc &#x3D; &amp;qu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读书思考（一）">
-<meta property="og:url" content="http://example.com/2023/10/17/%E8%AF%BB%E4%B9%A6%E6%80%9D%E8%80%83%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:title" content="JVM虚拟机">
+<meta property="og:url" content="http://example.com/2023/11/01/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="管理者应有的品质 《可复制的领导力》  管理的理解：通过别人来完成任务！  给与员工足够的信任，这样才能培养起来一个能独当一面的得力员工！  ​		没有给员工足够的信任，他们必然不会经过磨炼，不能独立承担重要任务，一直在等待老板的指令，而老板却疲于奔命，到头来，双方都得不到成长。分工合作，如果船长一直在驾驶室内开船，没有培养相关的人才，船员们就会顾此失彼，整个船队如一团乱麻，这无疑是团队管理中的一">
+<meta property="og:description" content="JVM虚拟机JVM特性 即时编译 自动对热点代码进行优化，转化成机器码之后保存在内存中，再次执行可以直接调用   电商领域高性能虚拟机 JVM运行流程 字节码类字节码对比1234567891011121314151617181920package org.example;public class test &amp;#123;    public static final String abc &#x3D; &amp;qu">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-10-17T13:06:14.000Z">
-<meta property="article:modified_time" content="2023-10-29T02:05:31.181Z">
+<meta property="og:image" content="http://example.com/image/image-20231101130644796.png">
+<meta property="og:image" content="http://example.com/image/image-20231101130859530.png">
+<meta property="og:image" content="http://example.com/image/image-20231101131615185.png">
+<meta property="og:image" content="http://example.com/image/image-20231101132837958.png">
+<meta property="og:image" content="http://example.com/image/image-20231101224631426.png">
+<meta property="og:image" content="http://example.com/image/image-20231101223604797.png">
+<meta property="article:published_time" content="2023-11-01T05:00:59.000Z">
+<meta property="article:modified_time" content="2023-11-01T14:46:57.448Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="读书">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/image-20231101130644796.png">
     
     
     <!--- Icon Part-->
@@ -41,7 +47,7 @@
     
     <title>
         
-            读书思考（一） -
+            JVM虚拟机 -
         
         DOVIS
     </title>
@@ -211,7 +217,7 @@
 
         <div class="article-title">
             
-                <h1 class="article-title-regular">读书思考（一）</h1>
+                <h1 class="article-title-regular">JVM虚拟机</h1>
             
             </div>
             
@@ -233,31 +239,20 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2023-10-17 21:06:14</span>
-        <span class="mobile">2023-10-17 21:06:14</span>
+        <span class="desktop">2023-11-01 13:59</span>
+        <span class="mobile">2023-11-01 13:59</span>
         <span class="hover-info">Created</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-10-29 10:05:31</span>
-            <span class="mobile">2023-10-29 10:05:31</span>
+            <span class="desktop">2023-11-01 22:46:57</span>
+            <span class="mobile">2023-11-01 22:46:57</span>
             <span class="hover-info">Updated</span>
         </span>
     
 
     
-    
-        <span class="article-tags article-meta-item">
-            <i class="fa-regular fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/%E8%AF%BB%E4%B9%A6/">读书</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
     
 
     
@@ -279,97 +274,65 @@
 
 
         <div class="article-content markdown-body">
-            <h1 id="管理者应有的品质"><a href="#管理者应有的品质" class="headerlink" title="管理者应有的品质"></a>管理者应有的品质</h1><blockquote>
-<p>《可复制的领导力》</p>
+            <h1 id="JVM虚拟机"><a href="#JVM虚拟机" class="headerlink" title="JVM虚拟机"></a>JVM虚拟机</h1><h2 id="JVM特性"><a href="#JVM特性" class="headerlink" title="JVM特性"></a>JVM特性</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231101130644796.png"
+                      alt="image-20231101130644796"
+                ></p>
+<h3 id="即时编译"><a href="#即时编译" class="headerlink" title="即时编译"></a>即时编译</h3><blockquote>
+<p>自动对热点代码进行优化，转化成机器码之后保存在内存中，再次执行可以直接调用</p>
 </blockquote>
-<p><em>管理的理解：通过别人来完成任务！</em></p>
-<ol>
-<li><strong>给与员工足够的信任，这样才能培养起来一个能独当一面的得力员工！</strong></li>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231101130859530.png"
+                      alt="image-20231101130859530"
+                ></p>
+<h3 id="电商领域高性能虚拟机"><a href="#电商领域高性能虚拟机" class="headerlink" title="电商领域高性能虚拟机"></a>电商领域高性能虚拟机</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231101131615185.png"
+                      alt="image-20231101131615185"
+                ></p>
+<h2 id="JVM运行流程"><a href="#JVM运行流程" class="headerlink" title="JVM运行流程"></a>JVM运行流程</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231101132837958.png"
+                      alt="image-20231101132837958"
+                ></p>
+<h2 id="字节码"><a href="#字节码" class="headerlink" title="字节码"></a>字节码</h2><h3 id="类字节码对比"><a href="#类字节码对比" class="headerlink" title="类字节码对比"></a>类字节码对比</h3><div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">abc</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">a1</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">a2</span> <span class="operator">=</span> <span class="string">&quot;haha&quot;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> i=<span class="number">0</span>,j=<span class="number">0</span>,k=<span class="number">0</span>;</span><br><span class="line">        i++;</span><br><span class="line">        j=j+<span class="number">1</span>;</span><br><span class="line">        k+=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testIt</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;我爱猪猪帆&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231101224631426.png"
+                      alt="image-20231101224631426"
+                ></p>
+<h3 id="文件内容"><a href="#文件内容" class="headerlink" title="文件内容"></a>文件内容</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231101223604797.png"
+                      alt="image-20231101223604797"
+                ></p>
+<h3 id="字节码阅读方法"><a href="#字节码阅读方法" class="headerlink" title="字节码阅读方法"></a>字节码阅读方法</h3><ol>
+<li>使用<strong>jclasslib</strong></li>
 </ol>
-<p>​		没有给员工足够的信任，他们必然不会经过磨炼，不能独立承担重要任务，一直在等待老板的指令，而老板却疲于奔命，到头来，双方都得不到成长。分工合作，如果船长一直在驾驶室内开船，没有培养相关的人才，船员们就会顾此失彼，整个船队如一团乱麻，这无疑是团队管理中的一大败笔。</p>
-<h1 id="抛弃你的优柔寡断"><a href="#抛弃你的优柔寡断" class="headerlink" title="抛弃你的优柔寡断"></a>抛弃你的优柔寡断</h1><blockquote>
-<p>知乎文摘</p>
-</blockquote>
-<p>​		所有的人都不喜欢含糊其辞、捉摸不定的人，因为这会浪费宝贵的时间，影响前进的道路。直率的人能够集中精力、迅速做出决断、毫不含糊地做出决定。直率、寡言而又果断的人说起话来非常有分量，通常会给人留下好印象。空谈、说起话来不经过大脑的人总会引起别人对他的素质和思维能力的怀疑。你在初次与人交流时，可以通过他使用词汇的多少和表达自己思想的语言是否直接，来判断这个人是否是一个优秀的商人。不管你的能力、教育程度或聪明程度如何，如果你不能一语中的，不能归纳自己的思想，你就永远也不会成为领导者。</p>
-<p>​		如果我们充分信任内心之中的神圣力量，如果我们学着充满活力地做出决定，并且依据自己的决定行事，那么，我们的判断力就会提高。但是，如果我们发现自己在做出决定之后反反复复地修改，我们的判断力就会受到影响。</p>
-<h1 id="获取好运的方法"><a href="#获取好运的方法" class="headerlink" title="获取好运的方法"></a>获取好运的方法</h1><blockquote>
-<p>吸引力法则</p>
-</blockquote>
-<p>如何通过<strong>吸引力法则</strong>实现心想事成,强调了内心所想才是真正的核心,外在不过是掩盖真正欲望的外在表现。一件事情没有成功之前,不能过多的去过多想成功后的画面,需要保持漫不经心的外在,聚焦于事情本身,将欲望藏于内心。从心底里面去认定这件事情能够做好。</p>
-<p>总结：<strong>关注事情本身，藏愿景于内心，相信自己能办好这件事能获取好运！</strong></p>
-<h1 id="如何面对人生各种不同处境"><a href="#如何面对人生各种不同处境" class="headerlink" title="如何面对人生各种不同处境"></a>如何面对人生各种不同处境</h1><blockquote>
-<p>道家知识</p>
-</blockquote>
-<p>命运发展规律,即<strong>受苦的时候长本事,享福的时候添毛病</strong>。只有真正经历过低谷期的人,才会切身体会到这个道理。逆境之时就多读书,绝境时可以多养生。命运层面的规律来说,一个大运管10年,人生不过几步大运,总有那么一两年是处于艰难状态的命运。</p>
-<ol>
-<li><p><strong>顺境</strong>时多做事,但要注意不要得意忘形;</p>
-</li>
-<li><p><strong>逆境</strong>时多读书,精进自己长本事;</p>
-</li>
-<li><p><strong>绝境</strong>时可以多养生或者躺平。</p>
-</li>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/ingokegel/jclasslib/releases/tag/6.0.4" >安装jclasslib <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<ol start="2">
+<li><strong>javap -v</strong> <strong>命令</strong>远程查看字节码文件（企业调试常用）</li>
 </ol>
-<h1 id="如何保持自身高能量"><a href="#如何保持自身高能量" class="headerlink" title="如何保持自身高能量"></a>如何保持自身高能量</h1><blockquote>
-<p>道家知识</p>
-</blockquote>
-<p>这是一套长期保持高能量状态的方法论。<strong>开源</strong>和<strong>节流</strong>两个方面来讲解如何保持高能量状态。</p>
 <blockquote>
-<p>言未出，结局预演千万遍<br>身未动，心中已过万重山<br>情未过，遐想灾难愁不断<br>事以避，过往仍在脑中演</p>
+<p>将对应class的字节码信息保存到txt文件</p>
 </blockquote>
-<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p><strong>在节流方面,要减少自身能量的流失,避免受到负能量的影响。</strong></p>
-<ul>
-<li>远离不舒服的事物和人</li>
-<li>把能量用在你要做的事上,少刷视频，少玩游戏</li>
-<li>不内耗，不过度思考过去与未来</li>
-<li>被别人塞负能量时，当场还回去</li>
-<li>不要去干扰别人的因果，那只会祸及自身</li>
-</ul>
-<h2 id="开源"><a href="#开源" class="headerlink" title="开源"></a>开源</h2><p><strong>在开源方面,要寻找自己的能量来源,如和正能量的人相处、做自己喜欢的事情等。</strong></p>
-<ul>
-<li>多跟能给自己提供能量的人事环境接触</li>
-<li>打坐晒太阳阅读爬山大扫除洗澡睡觉美食音乐等</li>
-</ul>
-<p><strong>只有同时进行开源和节流,才能保持充盈的能量状态。</strong></p>
-<h1 id="沟通三要素"><a href="#沟通三要素" class="headerlink" title="沟通三要素"></a>沟通三要素</h1><h2 id="搞定情绪"><a href="#搞定情绪" class="headerlink" title="搞定情绪"></a>搞定情绪</h2><p><strong>充分表达尊重</strong></p>
-<ol>
-<li>◀不吝赞美</li>
-</ol>
-<p>重视细节和对比</p>
-<p>先局部肯定再否定</p>
-<ol start="2">
-<li>◀肢体语言同步</li>
-</ol>
-<p>手机静音</p>
-<p>晚点给你回过去，现在有一个重要的事</p>
-<p>肢体语言同步，产生共情感觉</p>
-<p>思考一两秒再反馈</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javap -v test.class &gt; test.txt</span><br></pre></td></tr></table></figure></div>
+
 <ol start="3">
-<li>◀理解对方</li>
+<li><strong>arthas工具</strong></li>
 </ol>
-<p>先接纳对方的负面情绪，把双方的情绪拉到安全范围内再引导</p>
-<p>（我能理解你，我要是你我也生气╰_╯）</p>
-<h2 id="回归事实"><a href="#回归事实" class="headerlink" title="回归事实"></a>回归事实</h2><p><strong>保持客观和开放</strong></p>
-<ol>
-<li><strong>◀只陈述不评论</strong></li>
-</ol>
-<p>规避一些评论词（笨懒坏没用，负面形容词）（总是永远每次经常天天频繁，模糊的频率副词）</p>
-<p>翻旧账（过去式引导到将来式）</p>
-<ol start="2">
-<li><strong>◀保持开放性</strong></li>
-</ol>
-<p>开放式沟通</p>
-<p>问题开放</p>
-<p>（愿闻其详，展开说说，欢迎补充）</p>
-<p>（多几个选项）</p>
-<p>避免自嗨</p>
-<p>（在沟通中让对方觉得自己很牛）</p>
-<p>（先说几句模糊的评价，再把问题抛给对方，在顺着对方的看法衍生自己的观点）</p>
-<h2 id="达成目的"><a href="#达成目的" class="headerlink" title="达成目的"></a>达成目的</h2><p><strong>共建解决方案</strong></p>
-<p>拒绝要求或命令的语气</p>
-<p>统一立场（把你换成我们）</p>
-<p>只有目标没有方案</p>
-<p>明确方案</p>
-<p>（结果，怎么做，时效）</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/" >arthas帮助文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 
         </div>
 
@@ -377,18 +340,18 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li><strong>Title:</strong> 读书思考（一）</li>
+        <li><strong>Title:</strong> JVM虚拟机</li>
         <li><strong>Author:</strong> FANSEA</li>
         <li><strong>Created at
-                :</strong> 2023-10-17 21:06:14</li>
+                :</strong> 2023-11-01 13:00:59</li>
         
             <li>
                 <strong>Updated at
-                    :</strong> 2023-10-29 10:05:31
+                    :</strong> 2023-11-01 22:46:57
             </li>
         
         <li>
-            <strong>Link:</strong> https://redefine.ohevan.com/2023/10/17/读书思考（一）/
+            <strong>Link:</strong> https://redefine.ohevan.com/2023/11/01/JVM虚拟机/
         </li>
         <li style="word-wrap: break-word; white-space: normal;">
             <strong>
@@ -406,43 +369,20 @@
         
 
         
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/%E8%AF%BB%E4%B9%A6/">#读书</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
 
         
 
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                        rel="prev"
-                        href="/2023/10/17/%E6%88%91%E7%9A%84%E8%BD%A6%E5%BA%93/"
-                        >
-                            <span class="left arrow-icon flex justify-center items-center">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">My Garage</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                         rel="next"
-                        href="/2023/10/16/typora%E5%BF%AB%E6%8D%B7%E9%94%AE/"
+                        href="/2023/10/24/%E5%AD%B5%E5%8C%96%E5%95%86%E4%B8%9AIP/"
                         >
                             <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">typora快捷键大全</span>
+                                <span class="post-nav-title-item">孵化商业IP</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex justify-center items-center">
@@ -507,8 +447,8 @@
             <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">On this page</div>
-        <div class="page-title">读书思考（一）</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E8%80%85%E5%BA%94%E6%9C%89%E7%9A%84%E5%93%81%E8%B4%A8"><span class="nav-text">管理者应有的品质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%9B%E5%BC%83%E4%BD%A0%E7%9A%84%E4%BC%98%E6%9F%94%E5%AF%A1%E6%96%AD"><span class="nav-text">抛弃你的优柔寡断</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%A5%BD%E8%BF%90%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-text">获取好运的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%9D%A2%E5%AF%B9%E4%BA%BA%E7%94%9F%E5%90%84%E7%A7%8D%E4%B8%8D%E5%90%8C%E5%A4%84%E5%A2%83"><span class="nav-text">如何面对人生各种不同处境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BF%9D%E6%8C%81%E8%87%AA%E8%BA%AB%E9%AB%98%E8%83%BD%E9%87%8F"><span class="nav-text">如何保持自身高能量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8A%82%E6%B5%81"><span class="nav-text">节流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E6%BA%90"><span class="nav-text">开源</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B2%9F%E9%80%9A%E4%B8%89%E8%A6%81%E7%B4%A0"><span class="nav-text">沟通三要素</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9E%E5%AE%9A%E6%83%85%E7%BB%AA"><span class="nav-text">搞定情绪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E5%BD%92%E4%BA%8B%E5%AE%9E"><span class="nav-text">回归事实</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%BE%E6%88%90%E7%9B%AE%E7%9A%84"><span class="nav-text">达成目的</span></a></li></ol></li></ol>
+        <div class="page-title">JVM虚拟机</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-text">JVM虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM%E7%89%B9%E6%80%A7"><span class="nav-text">JVM特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91"><span class="nav-text">即时编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E5%95%86%E9%A2%86%E5%9F%9F%E9%AB%98%E6%80%A7%E8%83%BD%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-text">电商领域高性能虚拟机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-text">JVM运行流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81"><span class="nav-text">字节码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%AD%97%E8%8A%82%E7%A0%81%E5%AF%B9%E6%AF%94"><span class="nav-text">类字节码对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="nav-text">文件内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E9%98%85%E8%AF%BB%E6%96%B9%E6%B3%95"><span class="nav-text">字节码阅读方法</span></a></li></ol></li></ol></li></ol>
 
     </div>
 </div>
