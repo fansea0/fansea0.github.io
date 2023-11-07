@@ -31,8 +31,22 @@
 <meta property="og:image" content="http://example.com/image/image-20231101132837958.png">
 <meta property="og:image" content="http://example.com/image/image-20231101224631426.png">
 <meta property="og:image" content="http://example.com/image/image-20231101223604797.png">
+<meta property="og:image" content="http://example.com/image/image-20231102111120165.png">
+<meta property="og:image" content="http://example.com/image/image-20231105214714242.png">
+<meta property="og:image" content="http://example.com/image/image-20231105214128771.png">
+<meta property="og:image" content="http://example.com/image/image-20231105220612039.png">
+<meta property="og:image" content="http://example.com/image/image-20231102112533221.png">
+<meta property="og:image" content="http://example.com/image/image-20231105205152644.png">
+<meta property="og:image" content="http://example.com/image/image-20231107133906380.png">
+<meta property="og:image" content="http://example.com/image/image-20231102124323549.png">
+<meta property="og:image" content="http://example.com/image/image-20231105202016449.png">
+<meta property="og:image" content="http://example.com/image/image-20231106172745572.png">
+<meta property="og:image" content="http://example.com/image/image-20231107111148938.png">
+<meta property="og:image" content="http://example.com/image/image-20231107112410112.png">
+<meta property="og:image" content="http://example.com/image/image-20231107134835111.png">
+<meta property="og:image" content="http://example.com/image/image-20231107145725445.png">
 <meta property="article:published_time" content="2023-11-01T05:00:59.000Z">
-<meta property="article:modified_time" content="2023-11-01T14:46:57.448Z">
+<meta property="article:modified_time" content="2023-11-07T08:25:02.278Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/image/image-20231101130644796.png">
@@ -246,8 +260,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-11-01 22:46:57</span>
-            <span class="mobile">2023-11-01 22:46:57</span>
+            <span class="desktop">2023-11-07 16:25:02</span>
+            <span class="mobile">2023-11-07 16:25:02</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -333,6 +347,154 @@
 <li><strong>arthas工具</strong></li>
 </ol>
 <p><a class="link"   target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/" >arthas帮助文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><strong>运行arthas工具：</strong></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar arthas-boot.jar</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>生成字节码文件并保存指定文件夹：</strong></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dump -d D:/app/arthas-packaging-3.7.1-bin/log org.example.test</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>查看运行面板：</strong></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dashboard -i <span class="number">2000</span> -n <span class="number">1</span> <span class="comment">//2000为刷新时间，1为刷新次数</span></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>将对应字节码文件转化成java代码：</strong></p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jad org.example.test</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><p><strong>查看类加载器的的加载内容</strong>：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> C:\\Users\\ASUS\\.jdks\\corretto-1.8.0_352\\lib</span><br><span class="line">java -<span class="built_in">cp</span> sa-jdi.jar sun.jvm.hotspot.HSDB</span><br><span class="line">jsp //查找运行类的<span class="built_in">id</span></span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231102111120165.png"
+                      alt="image-20231102111120165"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231105214714242.png"
+                      alt="image-20231105214714242"
+                ></p>
+<blockquote>
+<p>Bootstrap启动类是由hotspot虚拟机提供的，他是底层的类加载器，用于加载每个java项目常用的核心类，比如String类</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231105214128771.png"
+                      alt="image-20231105214128771"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231105220612039.png"
+                      alt="image-20231105220612039"
+                ></p>
+<blockquote>
+<p>Maven的jar包加载都依赖于Application加载器</p>
+</blockquote>
+<h2 id="类的生命周期"><a href="#类的生命周期" class="headerlink" title="类的生命周期"></a>类的生命周期</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231102112533221.png"
+                      alt="image-20231102112533221"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231105205152644.png"
+                      alt="image-20231105205152644"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231107133906380.png"
+                      alt="image-20231107133906380"
+                ></p>
+<h3 id="类的初始化"><a href="#类的初始化" class="headerlink" title="类的初始化"></a>类的初始化</h3><blockquote>
+<p>执行static代码块，给不是final的静态变量初始化赋值</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231102124323549.png"
+                      alt="image-20231102124323549"
+                ></p>
+<blockquote>
+<ol>
+<li>当类被加载之后会触发一次初始化，但是在同一个类下多 new新对象就不会触发类加载，也不会触发初始化动作，不会执行静态代码块。</li>
+<li>代码块在执行类构造器的时候会把代码合并在构造方法里面，并比构造方法更先执行</li>
+</ol>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231105202016449.png"
+                      alt="image-20231105202016449"
+                ></p>
+<h2 id="栈（运行时数据区）"><a href="#栈（运行时数据区）" class="headerlink" title="栈（运行时数据区）"></a>栈（运行时数据区）</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231106172745572.png"
+                      alt="image-20231106172745572"
+                ></p>
+<h3 id="栈帧的组成"><a href="#栈帧的组成" class="headerlink" title="栈帧的组成"></a>栈帧的组成</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231107111148938.png"
+                      alt="image-20231107111148938"
+                ></p>
+<h4 id="局部变量表"><a href="#局部变量表" class="headerlink" title="局部变量表"></a>局部变量表</h4><blockquote>
+<p>位于栈帧，用于保存方法中的所有局部变量（包括：局部变量，方法参数，this（非静态方法)）</p>
+</blockquote>
+<h4 id="操作数栈"><a href="#操作数栈" class="headerlink" title="操作数栈"></a>操作数栈</h4><blockquote>
+<p>用于保存运行时的临时数据</p>
+</blockquote>
+<h4 id="帧数据"><a href="#帧数据" class="headerlink" title="帧数据"></a>帧数据</h4><blockquote>
+<p>保存方法出口（保存了上一个方法的地址，以便程序计数器将方法跳出）</p>
+</blockquote>
+<h3 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231107112410112.png"
+                      alt="image-20231107112410112"
+                ></p>
+<h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><blockquote>
+<p>用于保存加载的对象信息，栈中局部变量创建对象其实是保存了堆中对象的引用地址</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231107134835111.png"
+                      alt="image-20231107134835111"
+                ></p>
+<h2 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h2><blockquote>
+<p><strong>为什么要将永久代 (PermGen) 替换为元空间 (MetaSpace) 呢?</strong></p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231107145725445.png"
+                      alt="image-20231107145725445"
+                ></p>
+<p><strong>元空间初始和最大空间的设置</strong></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:MetaspaceSize=N //设置 Metaspace 的初始（和最小大小）</span><br><span class="line">-XX:MaxMetaspaceSize=N //设置 Metaspace 的最大大小</span><br></pre></td></tr></table></figure></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         </div>
 
@@ -347,7 +509,7 @@
         
             <li>
                 <strong>Updated at
-                    :</strong> 2023-11-01 22:46:57
+                    :</strong> 2023-11-07 16:25:02
             </li>
         
         <li>
@@ -374,6 +536,21 @@
 
         
             <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/11/07/%E5%95%86%E5%93%81%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">推荐算法</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
                 
                 
                     <div class="article-next">
@@ -448,7 +625,7 @@
     <div class="post-toc">
         <div class="toc-title">On this page</div>
         <div class="page-title">JVM虚拟机</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-text">JVM虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM%E7%89%B9%E6%80%A7"><span class="nav-text">JVM特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91"><span class="nav-text">即时编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E5%95%86%E9%A2%86%E5%9F%9F%E9%AB%98%E6%80%A7%E8%83%BD%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-text">电商领域高性能虚拟机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-text">JVM运行流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81"><span class="nav-text">字节码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%AD%97%E8%8A%82%E7%A0%81%E5%AF%B9%E6%AF%94"><span class="nav-text">类字节码对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="nav-text">文件内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E9%98%85%E8%AF%BB%E6%96%B9%E6%B3%95"><span class="nav-text">字节码阅读方法</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-text">JVM虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM%E7%89%B9%E6%80%A7"><span class="nav-text">JVM特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91"><span class="nav-text">即时编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E5%95%86%E9%A2%86%E5%9F%9F%E9%AB%98%E6%80%A7%E8%83%BD%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-text">电商领域高性能虚拟机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-text">JVM运行流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81"><span class="nav-text">字节码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%AD%97%E8%8A%82%E7%A0%81%E5%AF%B9%E6%AF%94"><span class="nav-text">类字节码对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="nav-text">文件内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E9%98%85%E8%AF%BB%E6%96%B9%E6%B3%95"><span class="nav-text">字节码阅读方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-text">类加载器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-text">类的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-text">类的初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%88%EF%BC%88%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%EF%BC%89"><span class="nav-text">栈（运行时数据区）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%88%E5%B8%A7%E7%9A%84%E7%BB%84%E6%88%90"><span class="nav-text">栈帧的组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA"><span class="nav-text">内存溢出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86"><span class="nav-text">堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="nav-text">方法区</span></a></li></ol></li></ol>
 
     </div>
 </div>
