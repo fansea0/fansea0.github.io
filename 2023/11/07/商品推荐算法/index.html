@@ -26,8 +26,10 @@
 <meta property="og:description" content="校园闲置推荐算法构建推荐模型$$F（Y|X）$$ F：为商品算分决定推荐商品的排序 Y：为推测用户的行为，例如：点击商品详情页 X：商品特征（标签，地区，价格，用户点击次数），用户特征（兴趣，搜索历史，我想要） 商品特征 标签  用户发表闲置商品时，选择商品标签并保存在数据库表中  地区  按照发布地区与用户地区的距离对商品的推荐指数进行算分 用户特征 兴趣  在用户新登录软件时，增加用户选择兴趣">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/image/image-20231107170303477.png">
+<meta property="og:image" content="http://example.com/image/image-20231107200956623.png">
+<meta property="og:image" content="http://example.com/image/image-20231107201025304.png">
 <meta property="article:published_time" content="2023-11-07T08:25:59.000Z">
-<meta property="article:modified_time" content="2023-11-07T09:04:14.217Z">
+<meta property="article:modified_time" content="2023-11-07T12:10:26.674Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -242,8 +244,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-11-07 17:04:14</span>
-            <span class="mobile">2023-11-07 17:04:14</span>
+            <span class="desktop">2023-11-07 20:10:26</span>
+            <span class="mobile">2023-11-07 20:10:26</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -314,7 +316,24 @@
                      data-src="/../image/image-20231107170303477.png"
                       alt="image-20231107170303477"
                 ></p>
-<h3 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h3>
+<h3 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h3><h3 id="基于协同的推荐算法"><a href="#基于协同的推荐算法" class="headerlink" title="基于协同的推荐算法"></a>基于协同的推荐算法</h3><blockquote>
+<p>基于协同过滤的推荐算法( Collaborative Filtering Recommendation)技术是推荐系统中应用最早和最为成功的技术之一。它一般采用最近邻技术，利用用户的历史喜好信息计算用户之间的距离，然后利用目标用户的最近邻居用户对商品评价的加权评价值来预测目标用户对特定商品的喜好程度，从而根据这一喜好程度来对目标用户进行推荐。</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231107200956623.png"
+                      alt="image-20231107200956623"
+                ></p>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;</span><br><span class="line">    <span class="string">&quot;1&quot;</span>:&#123;<span class="string">&quot;诺基亚&quot;</span>:<span class="number">4.8</span>,<span class="string">&#x27;iphone&#x27;</span>:<span class="number">5.0</span>,<span class="string">&quot;联想&quot;</span>:<span class="number">0.1</span>&#125;,</span><br><span class="line">    <span class="string">&quot;2&quot;</span>:&#123;<span class="string">&quot;诺基亚&quot;</span>:<span class="number">3.0</span>,<span class="string">&quot;vivo&quot;</span>:<span class="number">5.0</span>,<span class="string">&quot;htc&quot;</span>:<span class="number">0.2</span>&#125;,</span><br><span class="line">    <span class="string">&quot;3&quot;</span>:&#123;<span class="string">&quot;锤子&quot;</span>:<span class="number">0.1</span>,<span class="string">&quot;魅族&quot;</span>:<span class="number">0.3</span>,<span class="string">&quot;一加&quot;</span>:<span class="number">5.0</span>&#125;,</span><br><span class="line">    <span class="string">&quot;4&quot;</span>:&#123;<span class="string">&quot;联想&quot;</span>:<span class="number">0.1</span>,<span class="string">&quot;魅族&quot;</span>:<span class="number">0.3</span>,<span class="string">&quot;一加&quot;</span>:<span class="number">5.0</span>&#125;,</span><br><span class="line">    <span class="string">&quot;5&quot;</span>:&#123;<span class="string">&quot;诺基亚&quot;</span>:<span class="number">2.0</span>,<span class="string">&#x27;oppe&#x27;</span>:<span class="number">5.0</span>,<span class="string">&quot;htc&quot;</span>:<span class="number">0.2</span>&#125;,</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#| x | = √(x[1]2 + x[2]2 + … + x[n]2)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#pow返回 xy（x的y次方） 的值</span></span><br><span class="line"><span class="comment">#sqrt返回数字x的平方根</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#计算用户之间的相似度</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">Euclid</span>(<span class="params">user1,user2</span>):</span><br><span class="line">    <span class="comment">#根据key获取value</span></span><br><span class="line">    user1_data = data[user1]</span><br><span class="line">    user2_data = data[user2]</span><br><span class="line">    distance = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> user1_data.keys():</span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">in</span> user2_data.keys():</span><br><span class="line">            distance += <span class="built_in">pow</span>(<span class="built_in">float</span>(user1_data[key]) - <span class="built_in">float</span>(user2_data[key]),<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">#变成小数便于比较，值越小相似度越高</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/(<span class="number">1</span>+sqrt(distance))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(Euclid(<span class="string">&quot;1&quot;</span>,<span class="string">&quot;2&quot;</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#构建最相似的用户top_people</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">top_user</span>(<span class="params">user</span>):</span><br><span class="line">    res = []</span><br><span class="line">    <span class="keyword">for</span> uid <span class="keyword">in</span> data.keys():</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> uid == user:</span><br><span class="line">            simliar = Euclid(user,uid)</span><br><span class="line">            res.append((uid,simliar))</span><br><span class="line"></span><br><span class="line">    res.sort(key=<span class="keyword">lambda</span> val:val[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(top_user(<span class="string">&#x27;1&#x27;</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#构建推荐商品</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">recommend</span>(<span class="params">user</span>):</span><br><span class="line">    top_people = top_user(user)[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment">#获取当前相似度最高的用户的商品列表</span></span><br><span class="line">    items = data[top_people]</span><br><span class="line"></span><br><span class="line">    recommed_list = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> items.keys():</span><br><span class="line">        <span class="comment">#当这个商品不存在于目标用户的商品列表中，添加到推荐列表中</span></span><br><span class="line">        <span class="keyword">if</span> item <span class="keyword">not</span>  <span class="keyword">in</span> data[user].keys():</span><br><span class="line">            recommed_list.append((item,items[item]))</span><br><span class="line"></span><br><span class="line">    <span class="comment">#根据推荐列表里的打分请款从小到大排序，然后反转</span></span><br><span class="line">    recommed_list.sort(key=<span class="keyword">lambda</span> val:val[<span class="number">1</span>],reverse=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#取出top10推荐</span></span><br><span class="line">    <span class="keyword">return</span> recommed_list[:<span class="number">10</span>]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(recommend(<span class="string">&quot;1&quot;</span>))</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="基于特征的推荐算法"><a href="#基于特征的推荐算法" class="headerlink" title="基于特征的推荐算法"></a>基于特征的推荐算法</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20231107201025304.png"
+                      alt="image-20231107201025304"
+                ></p>
+
         </div>
 
         
@@ -328,7 +347,7 @@
         
             <li>
                 <strong>Updated at
-                    :</strong> 2023-11-07 17:04:14
+                    :</strong> 2023-11-07 20:10:26
             </li>
         
         <li>
@@ -363,6 +382,21 @@
 
         
             <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/11/08/%E7%AE%97%E6%B3%95%E6%97%A5%E8%AE%B0/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">算法日记</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
                 
                 
                     <div class="article-next">
@@ -437,7 +471,7 @@
     <div class="post-toc">
         <div class="toc-title">On this page</div>
         <div class="page-title">推荐算法</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%A1%E5%9B%AD%E9%97%B2%E7%BD%AE%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95"><span class="nav-text">校园闲置推荐算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E6%8E%A8%E8%8D%90%E6%A8%A1%E5%9E%8B"><span class="nav-text">构建推荐模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%95%86%E5%93%81%E7%89%B9%E5%BE%81"><span class="nav-text">商品特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%89%B9%E5%BE%81"><span class="nav-text">用户特征</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E7%AE%97%E6%B3%95"><span class="nav-text">涉及算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91"><span class="nav-text">决策树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-text">神经网络</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%A1%E5%9B%AD%E9%97%B2%E7%BD%AE%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95"><span class="nav-text">校园闲置推荐算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E6%8E%A8%E8%8D%90%E6%A8%A1%E5%9E%8B"><span class="nav-text">构建推荐模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%95%86%E5%93%81%E7%89%B9%E5%BE%81"><span class="nav-text">商品特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%89%B9%E5%BE%81"><span class="nav-text">用户特征</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E7%AE%97%E6%B3%95"><span class="nav-text">涉及算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91"><span class="nav-text">决策树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-text">神经网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%8D%8F%E5%90%8C%E7%9A%84%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95"><span class="nav-text">基于协同的推荐算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81%E7%9A%84%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95"><span class="nav-text">基于特征的推荐算法</span></a></li></ol></li></ol></li></ol>
 
     </div>
 </div>
