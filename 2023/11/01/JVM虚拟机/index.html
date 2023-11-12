@@ -18,12 +18,12 @@
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="JVM虚拟机面试题面试题   什么是方法区  方法区和永久代以及元空间有什么关系？  方法区常用参数有哪些？  为什么要将永久代 (PermGen) 替换为元空间 (MetaSpace) 呢?  什么是运行时常量池？  字符串常量池有什么作用？  JDK 1.7 为什么要将字符串常量池移动到堆中？  GC是什么时候触发的?      由于对象进行了分代处理，因此垃圾回收 区域、时间也不一样。GC有">
+        <meta name="description" content="JVM虚拟机面试题面试题   什么是方法区   他是java虚拟机规范定义的一个虚拟的概念，保存了类的元信息，运行时常量池，字符串常量池。是各线程共享的。 方法区会存储已被虚拟机加载的 类信息、字段信息、方法信息、常量、静态变量、即时编译器编译后的代码缓存等数据。   方法区和永久代以及元空间有什么关系？   是方法区的不同实现，遵循同一规范   方法区常用参数有哪些？   12-XX:PermS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM虚拟机">
 <meta property="og:url" content="http://example.com/2023/11/01/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="JVM虚拟机面试题面试题   什么是方法区  方法区和永久代以及元空间有什么关系？  方法区常用参数有哪些？  为什么要将永久代 (PermGen) 替换为元空间 (MetaSpace) 呢?  什么是运行时常量池？  字符串常量池有什么作用？  JDK 1.7 为什么要将字符串常量池移动到堆中？  GC是什么时候触发的?      由于对象进行了分代处理，因此垃圾回收 区域、时间也不一样。GC有">
+<meta property="og:description" content="JVM虚拟机面试题面试题   什么是方法区   他是java虚拟机规范定义的一个虚拟的概念，保存了类的元信息，运行时常量池，字符串常量池。是各线程共享的。 方法区会存储已被虚拟机加载的 类信息、字段信息、方法信息、常量、静态变量、即时编译器编译后的代码缓存等数据。   方法区和永久代以及元空间有什么关系？   是方法区的不同实现，遵循同一规范   方法区常用参数有哪些？   12-XX:PermS">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/image/image-20231101130644796.png">
 <meta property="og:image" content="http://example.com/image/image-20231101130859530.png">
@@ -78,7 +78,7 @@
 <meta property="og:image" content="http://example.com/image/image-20231111142050129.png">
 <meta property="og:image" content="http://example.com/image/image-20231111142540975.png">
 <meta property="article:published_time" content="2023-11-01T05:00:59.000Z">
-<meta property="article:modified_time" content="2023-11-11T06:53:56.969Z">
+<meta property="article:modified_time" content="2023-11-12T06:29:35.597Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="面试篇">
 <meta name="twitter:card" content="summary">
@@ -293,8 +293,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-11-11 14:53:56</span>
-            <span class="mobile">2023-11-11 14:53:56</span>
+            <span class="desktop">2023-11-12 14:29:35</span>
+            <span class="mobile">2023-11-12 14:29:35</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -333,38 +333,72 @@
 
         <div class="article-content markdown-body">
             <h1 id="JVM虚拟机"><a href="#JVM虚拟机" class="headerlink" title="JVM虚拟机"></a>JVM虚拟机</h1><h2 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h2><p><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46228112/article/details/123962019?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169967968716800180612529%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=169967968716800180612529&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-123962019-null-null.142%5Ev96%5Epc_search_result_base8&utm_term=%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%B0%86%E6%B0%B8%E4%B9%85%E4%BB%A3%20(PermGen)%20%E6%9B%BF%E6%8D%A2%E4%B8%BA%E5%85%83%E7%A9%BA%E9%97%B4%20(MetaSpace)%20%E5%91%A2&spm=1018.2226.3001.4187" >面试题 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<ol>
-<li><p><strong>什么是方法区</strong></p>
-</li>
-<li><p><strong>方法区和永久代以及元空间有什么关系？</strong></p>
-</li>
-<li><p><strong>方法区常用参数有哪些？</strong></p>
-</li>
-<li><p><strong>为什么要将永久代 (PermGen) 替换为元空间 (MetaSpace) 呢?</strong></p>
-</li>
-<li><p><strong>什么是运行时常量池？</strong></p>
-</li>
-<li><p><strong>字符串常量池有什么作用？</strong></p>
-</li>
-<li><p><strong>JDK 1.7 为什么要将字符串常量池移动到堆中？</strong></p>
-</li>
-<li><p><strong>GC是什么时候触发的?</strong></p>
-</li>
-</ol>
+<ul>
+<li><strong>什么是方法区</strong></li>
+</ul>
 <blockquote>
-<p>  由于对象进行了分代处理，因此<a class="link"   target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6&spm=1001.2101.3001.7020" >垃圾回收 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>区域、时间也不一样。GC有两种类型：Scavenge GC和Full GC。</p>
+<p>他是java虚拟机规范定义的一个虚拟的概念，保存了类的元信息，运行时常量池，字符串常量池。是各线程共享的。</p>
+<p>方法区会存储已被虚拟机加载的 <strong>类信息、字段信息、方法信息、常量、静态变量、即时编译器编译后的代码缓存等数据</strong>。</p>
+</blockquote>
+<ul>
+<li><strong>方法区和永久代以及元空间有什么关系？</strong></li>
+</ul>
+<blockquote>
+<p>是方法区的不同实现，遵循同一规范</p>
+</blockquote>
+<ul>
+<li><strong>方法区常用参数有哪些？</strong></li>
+</ul>
+<blockquote>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:PermSize=N //方法区 (永久代) 初始大小</span><br><span class="line">-XX:MaxPermSize=N //方法区 (永久代) 最大大小,超过这个值将会抛出 OutOfMemoryError 常:java.lang.OutOfMemoryError: PermGen</span><br></pre></td></tr></table></figure></div>
+</blockquote>
+<ul>
+<li><strong>为什么要将永久代 (PermGen) 替换为元空间 (MetaSpace) 呢?</strong></li>
+</ul>
+<blockquote>
 <ol>
-<li><strong>Scavenge GC</strong></li>
+<li>永久代脱离堆内存管理，内存只受系统内存限制，不容易内存溢出</li>
 </ol>
-<p>  一般情况下，当新对象生成，并且在Eden申请空间失败时，就会触发Scavenge GC，对Eden区域进行GC，清除非存活对象，并且把尚且存活的对象移动到Survivor区。然后整理Survivor的两个区。这种方式的GC是对年轻代的Eden区进行，不会影响到年老代。因为大部分对象都是从Eden区开始的，同时Eden区不会分配的很大，所以Eden区的GC会频繁进行。因而，一般在这里需要使用速度快、效率高的算法，使Eden去能尽快空闲出来（<strong>复制算法</strong>）。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX：MaxMetaspaceSize //用此方法配置</span><br></pre></td></tr></table></figure></div>
+
 <ol start="2">
-<li><strong>Full GC</strong></li>
+<li>能加载更多类</li>
 </ol>
-<p>  对整个堆进行整理，包括Young、Tenured和Perm。<strong>Full GC因为需要对整个堆进行回收</strong>，所以比Scavenge GC要慢，因此应该尽可能减少Full GC的次数。在对JVM调优的过程中，很大一部分工作就是对于Full GC的调节。有如下原因可能导致Full GC：</p>
-<p>a) 年老代（Tenured）被写满；</p>
-<p>b) 持久代（Perm）被写满；</p>
-<p>c) System.gc()被显示调用；</p>
-<p>d) 上一次GC之后Heap的各域分配策略动态变化；</p>
+</blockquote>
+<ul>
+<li><strong>什么是运行时常量池？</strong></li>
+</ul>
+<blockquote>
+<p>保存了字节码文件中的常量池内容</p>
+</blockquote>
+<ul>
+<li><strong>字符串常量池有什么作用？</strong></li>
+</ul>
+<blockquote>
+<p>避免字符串重新创建</p>
+</blockquote>
+<ul>
+<li><strong>JDK 1.7 为什么要将字符串常量池移动到堆中？</strong></li>
+</ul>
+<blockquote>
+<p>主要是因为永久代（方法区实现）的 GC 回收效率太低，只有在整堆收集 (Full GC)的时候才会被执行 GC。Java 程序中通常会有大量的被创建的字符串等待回收，<strong>将字符串常量池放到堆中，能够更高效及时地回收字符串内存</strong>。</p>
+</blockquote>
+<ul>
+<li><strong>GC是什么时候触发的?</strong></li>
+</ul>
+<blockquote>
+<ol>
+<li><strong>Scavenge GC</strong>（<strong>Minor GC</strong>）</li>
+</ol>
+<p><strong>Minor GC触发条件：当Eden区满时，触发Minor GC。</strong></p>
+<p>一般情况下，当新对象生成，并且在Eden申请空间失败时，就会触发Scavenge GC，对Eden区域进行GC，清除非存活对象，并且把尚且存活的对象移动到Survivor区。然后整理Survivor的两个区。这种方式的GC是对年轻代的Eden区进行，不会影响到年老代。因为大部分对象都是从Eden区开始的，同时Eden区不会分配的很大，所以Eden区的GC会频繁进行。因而，一般在这里需要使用速度快、效率高的算法，使Eden去能尽快空闲出来（<strong>复制算法</strong>）。</p>
+<ol start="2">
+<li><strong>Full GC触发条件</strong></li>
+</ol>
+<p>（1）调用System.gc时，系统建议执行Full GC，但是不必然执行</p>
+<p>（2）老年代空间不足</p>
+<p>（3）方法区空间不足</p>
+<p>（4）通过Minor GC后进入老年代的平均大小大于老年代的可用内存</p>
 </blockquote>
 <h2 id="JVM特性"><a href="#JVM特性" class="headerlink" title="JVM特性"></a>JVM特性</h2><p><img  
                      lazyload
@@ -564,15 +598,27 @@
                 ></p>
 <h3 id="字符串常量池"><a href="#字符串常量池" class="headerlink" title="字符串常量池"></a>字符串常量池</h3><p><strong>JDK 1.7 为什么要将字符串常量池移动到堆中？</strong></p>
 <p>主要是因为永久代（方法区实现）的 GC 回收效率太低，只有在整堆收集 (Full GC)的时候才会被执行 GC。Java 程序中通常会有大量的被创建的字符串等待回收，将字符串常量池放到堆中，能够更高效及时地回收字符串内存。</p>
+<h3 id="堆内存设置"><a href="#堆内存设置" class="headerlink" title="堆内存设置"></a>堆内存设置</h3><ol>
+<li><strong>设置堆内存</strong></li>
+</ol>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-Xms&lt;heap size&gt;[unit]</span><br><span class="line">-Xmx&lt;heap size&gt;[unit]</span><br><span class="line"></span><br><span class="line">-Xms2G -Xmx5G</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li><strong>设置新生代内存</strong></li>
+</ol>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-XX:NewSize=&lt;young size&gt;[unit]</span><br><span class="line">-XX:MaxNewSize=&lt;young size&gt;[unit]</span><br><span class="line">-Xmn&lt;young size&gt;[unit]</span><br><span class="line"></span><br><span class="line">-XX:NewSize=256m</span><br><span class="line">-XX:MaxNewSize=1024m</span><br><span class="line">-Xmn256m</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>GC 调优策略中很重要的一条经验总结是这样说的</strong>：</p>
+<blockquote>
+<p>将新对象预留在新生代，由于 Full GC 的成本远高于 Minor GC，因此尽可能将对象分配在新生代是明智的做法，实际项目中根据 GC 日志分析新生代空间大小分配是否合理，适当通过“-Xmn”命令调节新生代大小，最大限度降低新对象直接进入老年代的情况。</p>
+</blockquote>
+<p>另外，你还可以通过 <strong><code>-XX:NewRatio=&lt;int&gt;</code></strong> 来设置<strong>老年代与新生代内存的比值</strong>。</p>
+<p>比如下面的参数就是设置老年代与新生代内存的比值为 1。也就是说老年代和新生代所占比值为 1：1，新生代占整个堆栈的 1&#x2F;2。</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:NewRatio=1</span><br></pre></td></tr></table></figure></div>
+
+<hr>
 <h2 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h2><blockquote>
 <p>方法区的实现就是永久代和元空间是在堆里面的，在jdk7之前为永久代，jdk8之后为MetaSpace（元空间）</p>
-</blockquote>
-<blockquote>
-<p><strong>为什么要将永久代 (PermGen) 替换为元空间 (MetaSpace) 呢?</strong></p>
-<ol>
-<li>元空间内存不受堆内存限制，不容易出现内存溢出</li>
-<li></li>
-</ol>
 </blockquote>
 <p><img  
                      lazyload
@@ -586,7 +632,7 @@
                      data-src="/../image/image-20231107145725445.png"
                       alt="image-20231107145725445"
                 ></p>
-<p><strong>元空间初始和最大空间的设置</strong></p>
+<h3 id="方法区内存设置"><a href="#方法区内存设置" class="headerlink" title="方法区内存设置"></a>方法区内存设置</h3><p><strong>元空间初始和最大空间的设置</strong></p>
 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:MetaspaceSize=N //设置 Metaspace 的初始（和最小大小）</span><br><span class="line">-XX:MaxMetaspaceSize=N //设置 Metaspace 的最大大小</span><br></pre></td></tr></table></figure></div>
 
 <h3 id="方法区的内部结构"><a href="#方法区的内部结构" class="headerlink" title="方法区的内部结构"></a>方法区的内部结构</h3><ol>
@@ -809,7 +855,28 @@
                      data-src="/../image/image-20231110092146849.png"
                       alt="image-20231110092146849"
                 ></p>
-<h2 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h2><h3 id="serial垃圾回收器"><a href="#serial垃圾回收器" class="headerlink" title="serial垃圾回收器"></a>serial垃圾回收器</h3><p><img  
+<h2 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h2><h3 id="垃圾收集器参数"><a href="#垃圾收集器参数" class="headerlink" title="垃圾收集器参数"></a>垃圾收集器参数</h3><ol>
+<li><strong>设置回收器</strong></li>
+</ol>
+<p>JVM 具有四种类型的 GC 实现：</p>
+<ul>
+<li>串行垃圾收集器</li>
+<li>并行垃圾收集器</li>
+<li>CMS 垃圾收集器</li>
+<li>G1 垃圾收集器</li>
+</ul>
+<p>可以使用以下参数声明这些实现：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseSerialGC</span><br><span class="line">-XX:+UseParallelGC</span><br><span class="line">-XX:+UseParNewGC</span><br><span class="line">-XX:+UseG1GC</span><br></pre></td></tr></table></figure></div>
+
+<hr>
+<ol start="2">
+<li><strong>GC 日志记录</strong></li>
+</ol>
+<p>生产环境上，或者其他要测试 GC 问题的环境上，一定会配置上打印 GC 日志的参数，便于分析 GC 相关的问题。</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 必选</span></span><br><span class="line"><span class="comment"># 打印基本 GC 信息</span></span><br><span class="line">-XX:+PrintGCDetails</span><br><span class="line">-XX:+PrintGCDateStamps</span><br><span class="line"><span class="comment"># 打印对象分布</span></span><br><span class="line">-XX:+PrintTenuringDistribution</span><br><span class="line"><span class="comment"># 打印堆数据</span></span><br><span class="line">-XX:+PrintHeapAtGC</span><br><span class="line"><span class="comment"># 打印Reference处理信息</span></span><br><span class="line"><span class="comment"># 强引用/弱引用/软引用/虚引用/finalize 相关的方法</span></span><br><span class="line">-XX:+PrintReferenceGC</span><br><span class="line"><span class="comment"># 打印STW时间</span></span><br><span class="line">-XX:+PrintGCApplicationStoppedTime</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可选</span></span><br><span class="line"><span class="comment"># 打印safepoint信息，进入 STW 阶段之前，需要要找到一个合适的 safepoint</span></span><br><span class="line">-XX:+PrintSafepointStatistics</span><br><span class="line">-XX:PrintSafepointStatisticsCount=1</span><br><span class="line"></span><br><span class="line"><span class="comment"># GC日志输出的文件路径</span></span><br><span class="line">-Xloggc:/path/to/gc-%t.log</span><br><span class="line"><span class="comment"># 开启日志文件分割</span></span><br><span class="line">-XX:+UseGCLogFileRotation</span><br><span class="line"><span class="comment"># 最多分割几个文件，超过之后从头文件开始写</span></span><br><span class="line">-XX:NumberOfGCLogFiles=14</span><br><span class="line"><span class="comment"># 每个文件上限大小，超过就触发分割</span></span><br><span class="line">-XX:GCLogFileSize=50M</span><br></pre></td></tr></table></figure></div>
+
+<hr>
+<h3 id="serial垃圾回收器"><a href="#serial垃圾回收器" class="headerlink" title="serial垃圾回收器"></a>serial垃圾回收器</h3><p><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="/../image/image-20231110092640717.png"
@@ -916,7 +983,7 @@
         
             <li>
                 <strong>Updated at
-                    :</strong> 2023-11-11 14:53:56
+                    :</strong> 2023-11-12 14:29:35
             </li>
         
         <li>
@@ -1040,7 +1107,7 @@
     <div class="post-toc">
         <div class="toc-title">On this page</div>
         <div class="page-title">JVM虚拟机</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-text">JVM虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-text">面试题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM%E7%89%B9%E6%80%A7"><span class="nav-text">JVM特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91"><span class="nav-text">即时编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E5%95%86%E9%A2%86%E5%9F%9F%E9%AB%98%E6%80%A7%E8%83%BD%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-text">电商领域高性能虚拟机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-text">JVM运行流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81"><span class="nav-text">字节码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%AD%97%E8%8A%82%E7%A0%81%E5%AF%B9%E6%AF%94"><span class="nav-text">类字节码对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="nav-text">文件内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E9%98%85%E8%AF%BB%E6%96%B9%E6%B3%95"><span class="nav-text">字节码阅读方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-text">类加载器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-text">类的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-text">类的初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%88%EF%BC%88%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%EF%BC%89"><span class="nav-text">栈（运行时数据区）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%88%E5%B8%A7%E7%9A%84%E7%BB%84%E6%88%90"><span class="nav-text">栈帧的组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA"><span class="nav-text">内存溢出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86"><span class="nav-text">堆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="nav-text">静态变量有什么作用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E7%BB%93%E6%9E%84"><span class="nav-text">堆结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="nav-text">字符串常量池</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="nav-text">方法区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84"><span class="nav-text">方法区的内部结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98"><span class="nav-text">直接内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="nav-text">垃圾回收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="nav-text">方法区垃圾回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E5%86%85%E5%AD%98%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="nav-text">堆内存垃圾回收算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E5%BC%95%E7%94%A8"><span class="nav-text">软引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%B1%E5%BC%95%E7%94%A8"><span class="nav-text">弱引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E5%BC%95%E7%94%A8%E4%B8%8E%E7%BB%88%E7%BB%93%E5%99%A8%E5%BC%95%E7%94%A8"><span class="nav-text">虚引用与终结器引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="nav-text">垃圾回收算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E8%A1%A1%E9%87%8F%E6%A0%87%E5%87%86"><span class="nav-text">垃圾回收衡量标准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95"><span class="nav-text">标记清除算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95"><span class="nav-text">复制算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0%E6%95%B4%E7%90%86%E7%AE%97%E6%B3%95"><span class="nav-text">标记整理算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E4%BB%A3GC"><span class="nav-text">分代GC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="nav-text">垃圾回收器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#serial%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="nav-text">serial垃圾回收器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMS%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="nav-text">CMS回收器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parallel%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="nav-text">parallel回收器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G1%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="nav-text">G1回收器</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-text">JVM虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-text">面试题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM%E7%89%B9%E6%80%A7"><span class="nav-text">JVM特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91"><span class="nav-text">即时编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E5%95%86%E9%A2%86%E5%9F%9F%E9%AB%98%E6%80%A7%E8%83%BD%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-text">电商领域高性能虚拟机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-text">JVM运行流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81"><span class="nav-text">字节码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%AD%97%E8%8A%82%E7%A0%81%E5%AF%B9%E6%AF%94"><span class="nav-text">类字节码对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="nav-text">文件内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E9%98%85%E8%AF%BB%E6%96%B9%E6%B3%95"><span class="nav-text">字节码阅读方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-text">类加载器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-text">类的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-text">类的初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%88%EF%BC%88%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%EF%BC%89"><span class="nav-text">栈（运行时数据区）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%88%E5%B8%A7%E7%9A%84%E7%BB%84%E6%88%90"><span class="nav-text">栈帧的组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA"><span class="nav-text">内存溢出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86"><span class="nav-text">堆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="nav-text">静态变量有什么作用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E7%BB%93%E6%9E%84"><span class="nav-text">堆结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="nav-text">字符串常量池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E5%86%85%E5%AD%98%E8%AE%BE%E7%BD%AE"><span class="nav-text">堆内存设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="nav-text">方法区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA%E5%86%85%E5%AD%98%E8%AE%BE%E7%BD%AE"><span class="nav-text">方法区内存设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84"><span class="nav-text">方法区的内部结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98"><span class="nav-text">直接内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="nav-text">垃圾回收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="nav-text">方法区垃圾回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E5%86%85%E5%AD%98%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="nav-text">堆内存垃圾回收算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E5%BC%95%E7%94%A8"><span class="nav-text">软引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%B1%E5%BC%95%E7%94%A8"><span class="nav-text">弱引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E5%BC%95%E7%94%A8%E4%B8%8E%E7%BB%88%E7%BB%93%E5%99%A8%E5%BC%95%E7%94%A8"><span class="nav-text">虚引用与终结器引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="nav-text">垃圾回收算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E8%A1%A1%E9%87%8F%E6%A0%87%E5%87%86"><span class="nav-text">垃圾回收衡量标准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95"><span class="nav-text">标记清除算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95"><span class="nav-text">复制算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0%E6%95%B4%E7%90%86%E7%AE%97%E6%B3%95"><span class="nav-text">标记整理算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E4%BB%A3GC"><span class="nav-text">分代GC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="nav-text">垃圾回收器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E5%8F%82%E6%95%B0"><span class="nav-text">垃圾收集器参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#serial%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="nav-text">serial垃圾回收器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMS%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="nav-text">CMS回收器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parallel%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="nav-text">parallel回收器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G1%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="nav-text">G1回收器</span></a></li></ol></li></ol></li></ol>
 
     </div>
 </div>

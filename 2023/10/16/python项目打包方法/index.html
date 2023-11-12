@@ -18,18 +18,18 @@
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="python项目打包方法项目结构 安装pyinstaller1pip install pyinstaller  生成.spec文件1pyinstaller -F main.py（main.py是入口程序）   ​                                   删除生成的build和dist文件夹 编辑.spec文件 ​">
+        <meta name="description" content="python设置pip镜像源1pip config set global.index-url https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;pypi&#x2F;web&#x2F;simple  项目打包方法项目结构 安装pyinstaller1pip install pyinstaller  生成.spec文件1pyinstaller -F main.py（main.py是入口程序）   ​">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python项目打包方法">
 <meta property="og:url" content="http://example.com/2023/10/16/python%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="python项目打包方法项目结构 安装pyinstaller1pip install pyinstaller  生成.spec文件1pyinstaller -F main.py（main.py是入口程序）   ​                                   删除生成的build和dist文件夹 编辑.spec文件 ​">
+<meta property="og:description" content="python设置pip镜像源1pip config set global.index-url https:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;pypi&#x2F;web&#x2F;simple  项目打包方法项目结构 安装pyinstaller1pip install pyinstaller  生成.spec文件1pyinstaller -F main.py（main.py是入口程序）   ​">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/image/cafaac6bf7df41fab17fcb72d0b34489.png">
 <meta property="og:image" content="http://example.com/image/62f74fb2fac747138200e41d403625e0.png">
 <meta property="og:image" content="http://example.com/image/697086237de446b685b5ab212a986053.png">
 <meta property="article:published_time" content="2023-10-16T03:08:53.991Z">
-<meta property="article:modified_time" content="2023-10-17T06:10:49.990Z">
+<meta property="article:modified_time" content="2023-11-11T13:15:19.140Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/image/cafaac6bf7df41fab17fcb72d0b34489.png">
@@ -243,8 +243,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-10-17 14:10:49</span>
-            <span class="mobile">2023-10-17 14:10:49</span>
+            <span class="desktop">2023-11-11 21:15:19</span>
+            <span class="mobile">2023-11-11 21:15:19</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -271,15 +271,17 @@
 
 
         <div class="article-content markdown-body">
-            <h1 id="python项目打包方法"><a href="#python项目打包方法" class="headerlink" title="python项目打包方法"></a>python项目打包方法</h1><h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><p><img  
+            <h1 id="python"><a href="#python" class="headerlink" title="python"></a>python</h1><h2 id="设置pip镜像源"><a href="#设置pip镜像源" class="headerlink" title="设置pip镜像源"></a>设置pip镜像源</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip config <span class="built_in">set</span> global.index-url https://mirrors.ustc.edu.cn/pypi/web/simple</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="项目打包方法"><a href="#项目打包方法" class="headerlink" title="项目打包方法"></a>项目打包方法</h2><h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="/../image/cafaac6bf7df41fab17fcb72d0b34489.png"
                       alt="img"
                 ></p>
-<h2 id="安装pyinstaller"><a href="#安装pyinstaller" class="headerlink" title="安装pyinstaller"></a>安装pyinstaller</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pyinstaller</span><br></pre></td></tr></table></figure></div>
+<h3 id="安装pyinstaller"><a href="#安装pyinstaller" class="headerlink" title="安装pyinstaller"></a>安装pyinstaller</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pyinstaller</span><br></pre></td></tr></table></figure></div>
 
-<h2 id="生成-spec文件"><a href="#生成-spec文件" class="headerlink" title="生成.spec文件"></a>生成.spec文件</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller -F main.py（main.py是入口程序）</span><br></pre></td></tr></table></figure></div>
+<h3 id="生成-spec文件"><a href="#生成-spec文件" class="headerlink" title="生成.spec文件"></a>生成.spec文件</h3><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller -F main.py（main.py是入口程序）</span><br></pre></td></tr></table></figure></div>
 
 <p><img  
                      lazyload
@@ -288,16 +290,16 @@
                       alt="img"
                 ></p>
 <p>​                                   <strong>删除生成的build和dist文件夹</strong></p>
-<h2 id="编辑-spec文件"><a href="#编辑-spec文件" class="headerlink" title="编辑.spec文件"></a>编辑.spec文件</h2><p><img  
+<h3 id="编辑-spec文件"><a href="#编辑-spec文件" class="headerlink" title="编辑.spec文件"></a>编辑.spec文件</h3><p><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="/../image/697086237de446b685b5ab212a986053.png"
                       alt="img"
                 ></p>
 <p>​                                  <strong>将项目下的其他python文件加入到analysis里面</strong></p>
-<h2 id="重新打包"><a href="#重新打包" class="headerlink" title="重新打包"></a>重新打包</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller  main.spec</span><br></pre></td></tr></table></figure></div>
+<h3 id="重新打包"><a href="#重新打包" class="headerlink" title="重新打包"></a>重新打包</h3><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller  main.spec</span><br></pre></td></tr></table></figure></div>
 
-<h2 id="试运行exe文件"><a href="#试运行exe文件" class="headerlink" title="试运行exe文件"></a>试运行exe文件</h2><p>注意如果出现闪退可能因为配置的其他py文件目录不一致</p>
+<h3 id="试运行exe文件"><a href="#试运行exe文件" class="headerlink" title="试运行exe文件"></a>试运行exe文件</h3><p>注意如果出现闪退可能因为配置的其他py文件目录不一致</p>
 <p>可以将exe文件从dist移出来</p>
 
         </div>
@@ -313,7 +315,7 @@
         
             <li>
                 <strong>Updated at
-                    :</strong> 2023-10-17 14:10:49
+                    :</strong> 2023-11-11 21:15:19
             </li>
         
         <li>
@@ -429,7 +431,7 @@
     <div class="post-toc">
         <div class="toc-title">On this page</div>
         <div class="page-title">python项目打包方法</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85%E6%96%B9%E6%B3%95"><span class="nav-text">python项目打包方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85pyinstaller"><span class="nav-text">安装pyinstaller</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90-spec%E6%96%87%E4%BB%B6"><span class="nav-text">生成.spec文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%BE%91-spec%E6%96%87%E4%BB%B6"><span class="nav-text">编辑.spec文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E6%89%93%E5%8C%85"><span class="nav-text">重新打包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%95%E8%BF%90%E8%A1%8Cexe%E6%96%87%E4%BB%B6"><span class="nav-text">试运行exe文件</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python"><span class="nav-text">python</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEpip%E9%95%9C%E5%83%8F%E6%BA%90"><span class="nav-text">设置pip镜像源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85%E6%96%B9%E6%B3%95"><span class="nav-text">项目打包方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85pyinstaller"><span class="nav-text">安装pyinstaller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90-spec%E6%96%87%E4%BB%B6"><span class="nav-text">生成.spec文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%BE%91-spec%E6%96%87%E4%BB%B6"><span class="nav-text">编辑.spec文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E6%89%93%E5%8C%85"><span class="nav-text">重新打包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%95%E8%BF%90%E8%A1%8Cexe%E6%96%87%E4%BB%B6"><span class="nav-text">试运行exe文件</span></a></li></ol></li></ol></li></ol>
 
     </div>
 </div>
