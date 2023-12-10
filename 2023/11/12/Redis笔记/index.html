@@ -46,7 +46,7 @@
 <meta property="og:image" content="http://example.com/image/image-20230717093957319.png">
 <meta property="og:image" content="http://example.com/image/image-20230717101321755.png">
 <meta property="article:published_time" content="2023-11-12T08:07:26.000Z">
-<meta property="article:modified_time" content="2023-11-12T08:10:38.786Z">
+<meta property="article:modified_time" content="2023-12-10T11:36:08.918Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
@@ -247,7 +247,7 @@
                     <div class="author">
                         <span class="name">FANSEA</span>
                         
-                            <span class="author-label">Lv.3</span>
+                            <span class="author-label">Lv.4</span>
                         
                     </div>
                     <div class="meta-info">
@@ -261,8 +261,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-11-12 16:10:38</span>
-            <span class="mobile">2023-11-12 16:10:38</span>
+            <span class="desktop">2023-12-10 19:36:08</span>
+            <span class="mobile">2023-12-10 19:36:08</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -420,11 +420,9 @@
                       alt="image-20230610214606913"
                 ></p>
 <p><strong>jedis依赖</strong></p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.3.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>redis.clients<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jedis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
 
-<h2 id="spring-Data-redis使用"><a href="#spring-Data-redis使用" class="headerlink" title="spring -Data redis使用"></a>spring -Data redis使用</h2><div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--redis的依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--连接池的依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.commons<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-pool2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+<h2 id="spring-Data-redis使用"><a href="#spring-Data-redis使用" class="headerlink" title="spring -Data redis使用"></a>spring -Data redis使用</h2><div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--redis的依赖默认使用自带版本不然容易报错--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.commons<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-pool2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
 
 <img  
                      lazyload
@@ -472,6 +470,11 @@
                 ></p>
 <h3 id="方式二，自定义序列化器"><a href="#方式二，自定义序列化器" class="headerlink" title="方式二，自定义序列化器"></a>方式二，自定义序列化器</h3><p><strong>定义配置类</strong></p>
 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class RedisConfig &#123;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    @SuppressWarnings(value = &#123; &quot;unchecked&quot;, &quot;rawtypes&quot; &#125;)</span><br><span class="line">    public RedisTemplate&lt;Object, Object&gt; redisTemplate(RedisConnectionFactory connectionFactory)</span><br><span class="line">    &#123;</span><br><span class="line">        RedisTemplate&lt;Object, Object&gt; template = new RedisTemplate&lt;&gt;();</span><br><span class="line">        template.setConnectionFactory(connectionFactory);</span><br><span class="line"></span><br><span class="line">        FastJsonRedisSerializer serializer = new FastJsonRedisSerializer(Object.class);</span><br><span class="line"></span><br><span class="line">        // 使用StringRedisSerializer来序列化和反序列化redis的key值</span><br><span class="line">        template.setKeySerializer(new StringRedisSerializer());</span><br><span class="line">        template.setValueSerializer(serializer);</span><br><span class="line"></span><br><span class="line">        // Hash的key也采用StringRedisSerializer的序列化方式</span><br><span class="line">        template.setHashKeySerializer(new StringRedisSerializer());</span><br><span class="line">        template.setHashValueSerializer(serializer);</span><br><span class="line"></span><br><span class="line">        template.afterPropertiesSet();</span><br><span class="line">        return template;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>注意需要添加序列化坐标：</p>
+</blockquote>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.20<span class="tag">&lt;/<span class="name">version</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
 
 <h2 id="主动更新"><a href="#主动更新" class="headerlink" title="主动更新"></a>主动更新</h2><p><strong>保持数据库和缓存信息的一致性</strong></p>
 <p><img  
@@ -557,7 +560,7 @@
         
             <li>
                 <strong>Updated at
-                    :</strong> 2023-11-12 16:10:38
+                    :</strong> 2023-12-10 19:36:08
             </li>
         
         <li>
@@ -592,6 +595,21 @@
 
         
             <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/11/24/%E9%BB%91%E9%A9%AC%E7%82%B9%E8%AF%84/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">黑马点评</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
                 
                 
                     <div class="article-next">

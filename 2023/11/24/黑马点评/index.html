@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="FANSEA">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2023/11/24/黑马点评/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="黑马点评前端nginx项目启动 nginx重新加载配置文件1nginx.exe reload  session实现短信验证 redis实现短信验证  发送验证码存入redis 验证成功登录，并以token为键，保存用户数据，把token返回前端 在拦截器中对token进行校验获取用户信息来显示登录状态  库存减一的方法123boolean success &#x3D; seckillVoucherServi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="黑马点评">
+<meta property="og:url" content="http://example.com/2023/11/24/%E9%BB%91%E9%A9%AC%E7%82%B9%E8%AF%84/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="黑马点评前端nginx项目启动 nginx重新加载配置文件1nginx.exe reload  session实现短信验证 redis实现短信验证  发送验证码存入redis 验证成功登录，并以token为键，保存用户数据，把token返回前端 在拦截器中对token进行校验获取用户信息来显示登录状态  库存减一的方法123boolean success &#x3D; seckillVoucherServi">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image/image-20230902202754208.png">
+<meta property="og:image" content="http://example.com/image/image-20230711132813197.png">
+<meta property="og:image" content="http://example.com/image/image-20230714142156437.png">
+<meta property="og:image" content="http://example.com/image/image-20230904150231750.png">
+<meta property="og:image" content="http://example.com/image/image-20230904151141861.png">
+<meta property="og:image" content="http://example.com/2023/11/24/image/image-20230905160922950.png">
+<meta property="og:image" content="http://example.com/image/image-20230907094435429.png">
+<meta property="og:image" content="http://example.com/image/image-20230905161227430.png">
+<meta property="og:image" content="http://example.com/image/image-20230908084824897.png">
+<meta property="og:image" content="http://example.com/image/image-20230905193034114.png">
+<meta property="og:image" content="http://example.com/image/image-20230909135545001.png">
+<meta property="og:image" content="http://example.com/image/image-20230909143307348.png">
+<meta property="og:image" content="http://example.com/image/image-20230910112626390.png">
+<meta property="og:image" content="http://example.com/2023/11/24/image/image-20230911231428729.png">
+<meta property="og:image" content="http://example.com/2023/11/24/image/image-20230914230337073.png">
+<meta property="og:image" content="http://example.com/2023/11/24/image/image-20230914230436508.png">
+<meta property="og:image" content="http://example.com/image/image-20230916084420403.png">
+<meta property="og:image" content="http://example.com/image/image-20230916084703023.png">
+<meta property="og:image" content="http://example.com/2023/11/24/image/image-20230916092245804.png">
+<meta property="og:image" content="http://example.com/2023/11/24/image/image-20230916092423998.png">
+<meta property="og:image" content="http://example.com/2023/11/24/image/image-20230916104204859.png">
+<meta property="og:image" content="http://example.com/2023/11/24/image/image-20230916132250195.png">
+<meta property="og:image" content="http://example.com/image/image-20230918170909636.png">
+<meta property="og:image" content="http://example.com/2023/11/24/image/image-20230918185754344.png">
+<meta property="og:image" content="http://example.com/image/image-20230918204825251.png">
+<meta property="og:image" content="http://example.com/image/image-20230919230517150.png">
+<meta property="og:image" content="http://example.com/image/image-20230919231844464.png">
+<meta property="og:image" content="http://example.com/image/image-20230923131430511.png">
+<meta property="og:image" content="c:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20230920142004136.png">
+<meta property="og:image" content="http://example.com/image/image-20230921231240002.png">
+<meta property="og:image" content="http://example.com/image/image-20230923151702697.png">
+<meta property="og:image" content="http://example.com/image/image-20230923163613466.png">
+<meta property="og:image" content="http://example.com/image/image-20230924131126304.png">
+<meta property="og:image" content="http://example.com/image/image-20230924170913733.png">
+<meta property="article:published_time" content="2023-11-24T05:13:05.907Z">
+<meta property="article:modified_time" content="2023-12-09T08:46:52.402Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/image-20230902202754208.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            黑马点评 -
+        
+        DOVIS
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+    
+    
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":"ture","family":null,"url":"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap"},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"Theme Redefine","subtitle":{"text":[],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.4.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"}},"search":{"enable":false,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":null},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/8/17 11:45:14"};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="http://example.com/">
+                
+                DOVIS
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
+        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                <h1 class="article-title-regular">黑马点评</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/redefine-avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">FANSEA</span>
+                        
+                            <span class="author-label">Lv.4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-11-24 13:13:05</span>
+        <span class="mobile">2023-11-24 13:13:05</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-12-09 16:46:52</span>
+            <span class="mobile">2023-12-09 16:46:52</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <h1 id="黑马点评"><a href="#黑马点评" class="headerlink" title="黑马点评"></a>黑马点评</h1><h2 id="前端nginx项目启动"><a href="#前端nginx项目启动" class="headerlink" title="前端nginx项目启动"></a>前端nginx项目启动</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230902202754208.png"
+                      alt="image-20230902202754208"
+                ></p>
+<h2 id="nginx重新加载配置文件"><a href="#nginx重新加载配置文件" class="headerlink" title="nginx重新加载配置文件"></a>nginx重新加载配置文件</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx.exe reload</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="session实现短信验证"><a href="#session实现短信验证" class="headerlink" title="session实现短信验证"></a>session实现短信验证</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230711132813197.png"
+                      alt="image-20230711132813197"
+                ></p>
+<h2 id="redis实现短信验证"><a href="#redis实现短信验证" class="headerlink" title="redis实现短信验证"></a>redis实现短信验证</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230714142156437.png"
+                      alt="image-20230714142156437"
+                ></p>
+<ol>
+<li>发送验证码存入redis</li>
+<li>验证成功登录，并以token为键，保存用户数据，把token返回前端</li>
+<li>在拦截器中对token进行校验获取用户信息来显示登录状态</li>
+</ol>
+<h2 id="库存减一的方法"><a href="#库存减一的方法" class="headerlink" title="库存减一的方法"></a>库存减一的方法</h2><div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">success</span> <span class="operator">=</span> seckillVoucherService.update()</span><br><span class="line">        .setSql(<span class="string">&quot;stock = stock-1&quot;</span>)</span><br><span class="line">        .eq(<span class="string">&quot;voucher_id&quot;</span>, voucherId).update();</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="乐观锁解决高并发"><a href="#乐观锁解决高并发" class="headerlink" title="乐观锁解决高并发"></a>乐观锁解决高并发</h2><p><strong>CAS法</strong></p>
+<p><strong>添加版本号version，简化以库存为版本号</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230904150231750.png"
+                      alt="image-20230904150231750"
+                ></p>
+<p><strong>弊端：</strong></p>
+<p><strong>多线程并执行，库存安全问题虽然会解决，但是购买失败率大大提高，扩大了业务上的安全问题，并且多次访问数据库压力巨大</strong></p>
+<p><strong>改进：</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230904151141861.png"
+                      alt="image-20230904151141861"
+                ></p>
+<p><strong>在每次减库存的时候都判断当时的库存是否大于0</strong></p>
+<h2 id="悲观锁实现一人一单"><a href="#悲观锁实现一人一单" class="headerlink" title="悲观锁实现一人一单"></a>悲观锁实现一人一单</h2><p>&#x2F;&#x2F;synchronized (字符串){代码块}设置悲观锁，此时多个线程中只有首先获的userId这把锁的才能执行事务</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span> (userId.toString().intern())&#123;</span><br><span class="line">    		<span class="comment">//只有spring管理的对象才能控制事务，这里所以需要使用代理对象,还需要做代理对象的配置，见下文</span></span><br><span class="line">            <span class="type">IVoucherOrderService</span> <span class="variable">proxy</span> <span class="operator">=</span>(IVoucherOrderService) AopContext.currentProxy();</span><br><span class="line">            <span class="keyword">return</span> proxy.createVoucherOrder(voucherId);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>代理对象的配置</strong></p>
+<ol>
+<li><strong>导入aspectj依赖</strong></li>
+</ol>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li><strong>启动类加上注解@EnableAspectJAutoProxy(exposeProxy &#x3D; true)</strong></li>
+</ol>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@EnableAspectJAutoProxy(exposeProxy = true)</span><br><span class="line">@MapperScan(&quot;com.hmdp.mapper&quot;)</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class HmDianPingApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(HmDianPingApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>&#x2F;&#x2F;此方法实现判断是否已有用户订单的一人一单的秒杀券，作为事务，同时失败同时成功</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">createVoucherOrder</span><span class="params">(Long voucherId)</span> &#123;</span><br><span class="line">        <span class="type">Long</span> <span class="variable">userId</span> <span class="operator">=</span> UserHolder.getUser().getId();</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">count</span> <span class="operator">=</span> query().eq(<span class="string">&quot;user_id&quot;</span>, userId).eq(<span class="string">&quot;voucher_id&quot;</span>, voucherId).count();</span><br><span class="line">        <span class="keyword">if</span> (count&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> Result.fail(<span class="string">&quot;用户已购买一单！&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//4,减少库存,创建订单,生成订单id返回</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">success</span> <span class="operator">=</span> seckillVoucherService.update()</span><br><span class="line">                .setSql(<span class="string">&quot;stock = stock-1&quot;</span>)</span><br><span class="line">                .eq(<span class="string">&quot;voucher_id&quot;</span>, voucherId)</span><br><span class="line">                .gt(<span class="string">&quot;stock&quot;</span>,<span class="number">0</span>).update();</span><br><span class="line">        <span class="keyword">if</span> (!success)&#123;</span><br><span class="line">            <span class="keyword">return</span> Result.fail(<span class="string">&quot;库存不足&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        id:订单id</span></span><br><span class="line"><span class="comment">        userId:用户id</span></span><br><span class="line"><span class="comment">        voucherId:优惠券id</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="type">VoucherOrder</span> <span class="variable">voucherOrder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">VoucherOrder</span>();</span><br><span class="line">        <span class="comment">//生成全局订单id</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">orderId</span> <span class="operator">=</span> redisIdWorker.nextId(<span class="string">&quot;order&quot;</span>);</span><br><span class="line">        voucherOrder.setVoucherId(voucherId);</span><br><span class="line">        voucherOrder.setId(orderId);</span><br><span class="line">        voucherOrder.setUserId(userId);</span><br><span class="line">        save(voucherOrder);</span><br><span class="line">        <span class="keyword">return</span> Result.ok(orderId);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="IDEA配置集群"><a href="#IDEA配置集群" class="headerlink" title="IDEA配置集群"></a>IDEA配置集群</h2><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230905160922950.png"
+                      alt="image-20230905160922950"
+                >
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230907094435429.png"
+                      alt="image-20230907094435429"
+                ></p>
+<p><strong>重新加载nignx的配置文件</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230905161227430.png"
+                      alt="image-20230905161227430"
+                ></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//关闭nginx程序</span><br><span class="line">taskkill /IM nginx.exe /F</span><br><span class="line">//重启NGINX</span><br><span class="line">start nginx</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230908084824897.png"
+                      alt="image-20230908084824897"
+                ></p>
+<h2 id="分布式锁解决集群上锁问题"><a href="#分布式锁解决集群上锁问题" class="headerlink" title="分布式锁解决集群上锁问题"></a>分布式锁解决集群上锁问题</h2><p><strong>分布式锁</strong>：满足分布式式系统或集群模式下多进程可见并且互斥的锁。</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="type">boolean</span> <span class="title function_">tryLock</span><span class="params">(String key)</span> &#123;</span><br><span class="line">        <span class="type">Boolean</span> <span class="variable">aBoolean</span> <span class="operator">=</span> stringRedisTemplate.opsForValue().setIfAbsent(key, <span class="string">&quot;1&quot;</span>, <span class="number">10</span>, TimeUnit.SECONDS);</span><br><span class="line">        <span class="keyword">return</span> BooleanUtil.isTrue(aBoolean);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">unLock</span><span class="params">(String key)</span> &#123;</span><br><span class="line">        stringRedisTemplate.delete(key);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230905193034114.png"
+                      alt="image-20230905193034114"
+                ></p>
+<h2 id="LUA脚本实现原子性"><a href="#LUA脚本实现原子性" class="headerlink" title="LUA脚本实现原子性"></a>LUA脚本实现原子性</h2><p><strong>问题：释放锁的代码中有多行代码，多行代码有概率产生jvm阻塞，导致判断当前锁是自己的但是由于超时原因误删了别人的锁，这个时候需要想办法使用一段代码将判断标识和删除锁的动作同时执行！此时Lua横空出世，说了声：交给我吧</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230909135545001.png"
+                      alt="image-20230909135545001"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230909143307348.png"
+                      alt="image-20230909143307348"
+                ></p>
+<p><strong>一、Lua脚本实现线程标识判断和释放锁统一的动作</strong></p>
+<div class="highlight-container" data-rel="Lua"><figure class="iseeu highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 将unlock()方法变成Lua脚本，这里的KEY[1]为key，ARGV[1]为传入的当前的线程标识 </span></span><br><span class="line"><span class="keyword">if</span>(redis.call(<span class="string">&#x27;get&#x27;</span>,KEY[<span class="number">1</span>]) ==ARGV[<span class="number">1</span>]) <span class="keyword">then</span></span><br><span class="line">    <span class="comment">--释放锁</span></span><br><span class="line">    <span class="keyword">return</span> redis.call(<span class="string">&#x27;del&#x27;</span>,KEY[<span class="number">1</span>])</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">-- flase</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>二、java代码调用Lua脚本实现原子性</strong></p>
+<ol>
+<li><em><strong>初始化加载Lua脚本转化为DefaultRedisScript类</strong></em></li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> DefaultRedisScript&lt;Long&gt; UNLOCK_SCRIPT;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        UNLOCK_SCRIPT = <span class="keyword">new</span> <span class="title class_">DefaultRedisScript</span>&lt;&gt;();</span><br><span class="line">        UNLOCK_SCRIPT.setLocation(<span class="keyword">new</span> <span class="title class_">ClassPathResource</span>(<span class="string">&quot;redisUnlock.lua&quot;</span>));</span><br><span class="line">        UNLOCK_SCRIPT.setResultType(Long.class);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li><em><strong>调用脚本</strong></em></li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">unLock</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//以免业务阻塞时，查询线程id是否一致,错删别人的锁以至于一人多单</span></span><br><span class="line">        stringRedisTemplate.execute(</span><br><span class="line">                UNLOCK_SCRIPT,</span><br><span class="line">                Collections.singletonList(KEY_PREFIX+name),</span><br><span class="line">                THREAD_PREFIX +Thread.currentThread().getId()</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>直接生成单元素集合</strong></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Collections.singletonList(元素)</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Redisson—-Redis分布式锁优化"><a href="#Redisson—-Redis分布式锁优化" class="headerlink" title="Redisson—-Redis分布式锁优化"></a>Redisson—-Redis分布式锁优化</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230910112626390.png"
+                      alt="image-20230910112626390"
+                ></p>
+<p><strong>一、配置Redission</strong></p>
+<ol>
+<li>引入依赖</li>
+</ol>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--redisson配置--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.redisson<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>redisson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.13.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li>引入配置类</li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisConfig</span> &#123;</span><br><span class="line"><span class="comment">//    配置Redisson</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RedissonClient <span class="title function_">redissonClient</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">Config</span> <span class="variable">config</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Config</span>();</span><br><span class="line">        config.useSingleServer().setAddress(<span class="string">&quot;127.0.0.1:6379&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> Redisson.create(config);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>二、使用Redisson</strong></p>
+<ol>
+<li>获取锁对象，获取锁</li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">RLock</span> <span class="variable">redisLock</span> <span class="operator">=</span> redissonClient.getLock(<span class="string">&quot;lock:order:&quot;</span> + userId);</span><br><span class="line"><span class="type">boolean</span> <span class="variable">success</span> <span class="operator">=</span> redisLock.tryLock();</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li>释放锁</li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redisLock.unlock(重复获取锁等待时间,锁释放时间,时间单位);</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Redisson可重入原理"><a href="#Redisson可重入原理" class="headerlink" title="Redisson可重入原理"></a>Redisson可重入原理</h2><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230911231428729.png"
+                      alt="image-20230911231428729"
+                >
+
+
+
+<p><strong>Redisson底层原理</strong></p>
+<p><strong>获取锁Lua脚本</strong></p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230914230337073.png"
+                      alt="image-20230914230337073"
+                >
+
+<p><strong>释放锁Lua脚本</strong></p>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230914230436508.png"
+                      alt="image-20230914230436508" 
+                >
+
+
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230916084420403.png"
+                      alt="image-20230916084420403"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230916084703023.png"
+                      alt="image-20230916084703023"
+                ></p>
+<h2 id="RedissonMultiLock解决分布式主从一致问题"><a href="#RedissonMultiLock解决分布式主从一致问题" class="headerlink" title="RedissonMultiLock解决分布式主从一致问题"></a>RedissonMultiLock解决分布式主从一致问题</h2><ol>
+<li><strong>配置多个分布式锁</strong></li>
+</ol>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230916092245804.png"
+                      alt="image-20230916092245804" 
+                >
+
+<ol start="2">
+<li><strong>创建Multilock</strong></li>
+</ol>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230916092423998.png"
+                      alt="image-20230916092423998" 
+                >
+
+<p><strong>后续使用此锁，锁对象会创建在各个服务器的Redis里，解决主从不一致的问题，多层保护，防止一台Redis宕机，造成其他线程获取到锁造成安全隐患</strong></p>
+<h2 id="Redis消息队列优化性能"><a href="#Redis消息队列优化性能" class="headerlink" title="Redis消息队列优化性能"></a>Redis消息队列优化性能</h2><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230916104204859.png"
+                      alt="image-20230916104204859" 
+                >
+
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230916132250195.png"
+                      alt="image-20230916132250195"
+                >
+
+
+
+<ol>
+<li><strong>新增秒杀券的同时，将优惠券信息保存到Redis</strong></li>
+<li><strong>基于Lua脚本，判断秒杀库存，一人一单，决定用户是否抢购成功</strong></li>
+<li><strong>抢购成功，将优惠券id和用户id封装存入阻塞队列</strong></li>
+<li><strong>开启线程任务，不断从阻塞队列中获取信息，实现异步下单功能</strong></li>
+</ol>
+<h2 id="基于Redis的Stream实现消息队列"><a href="#基于Redis的Stream实现消息队列" class="headerlink" title="基于Redis的Stream实现消息队列"></a>基于Redis的Stream实现消息队列</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230918170909636.png"
+                      alt="image-20230918170909636"
+                ></p>
+<ol>
+<li>创建阻塞队列和消费组</li>
+</ol>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XGROUP create stream.orders g1 0 MKSTREAM</span><br></pre></td></tr></table></figure></div>
+
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="../image/image-20230918185754344.png"
+                      alt="image-20230918185754344" 
+                >
+
+<p><strong>不需要自己创建消费者，因为当需要消费者消费时系统会自动创建消费者</strong></p>
+<ol start="2">
+<li>判断一人一单，和是否在抢购时间确定是否有抢购资格，有资格直接返回订单id，将数据发送到消息队列异步处理</li>
+</ol>
+<div class="highlight-container" data-rel="Lua"><figure class="iseeu highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--传入优惠券id，用户id</span></span><br><span class="line"><span class="keyword">local</span> seckillId = ARGV[<span class="number">1</span>]</span><br><span class="line"><span class="keyword">local</span> userId =ARGV[<span class="number">2</span>]</span><br><span class="line"><span class="keyword">local</span> orderId = ARGV[<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">--拼接KEY（1.库存key 2.订单key）</span></span><br><span class="line"><span class="keyword">local</span> seckillKey =<span class="string">&#x27;seckill:stock:&#x27;</span>..seckillId</span><br><span class="line"><span class="keyword">local</span> orderKey =<span class="string">&#x27;seckill:order:&#x27;</span>..seckillId</span><br><span class="line"></span><br><span class="line"><span class="comment">--脚本业务</span></span><br><span class="line"><span class="comment">--1.库存是否充足</span></span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">tonumber</span>(redis.call(<span class="string">&#x27;get&#x27;</span>,seckillKey)) &lt;= <span class="number">0</span>) <span class="keyword">then</span></span><br><span class="line">    <span class="comment">--库存不足返回1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--2.一人是否一单</span></span><br><span class="line"><span class="keyword">if</span>(redis.call(<span class="string">&#x27;sismeber&#x27;</span>,orderKey,userId) == <span class="number">1</span> ) <span class="keyword">then</span></span><br><span class="line">    <span class="comment">--存在，说明重复下单，返回2</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">--3.扣减库存 incrby seckillKey -1</span></span><br><span class="line">redis.call(<span class="string">&#x27;incrby&#x27;</span>,seckillKey)</span><br><span class="line"><span class="comment">--4.保存用户id在order集合</span></span><br><span class="line">redis.call(<span class="string">&#x27;sadd&#x27;</span>,orderKey,userId)</span><br><span class="line"><span class="comment">--将数据添加到阻塞队列中，开辟一个独立线程去执行下单操做</span></span><br><span class="line">redis.call(<span class="string">&#x27;xadd&#x27;</span>,<span class="string">&#x27;stream.orders&#x27;</span>,<span class="string">&#x27;*&#x27;</span>,<span class="string">&#x27;userId&#x27;</span>,userId,<span class="string">&#x27;voucherId&#x27;</span>,seckillId,<span class="string">&#x27;id&#x27;</span>,orderId)</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure></div>
+
+<ol start="3">
+<li>java代码读取依次循环读取队列消息，然后创建订单，报错就在try catch里面处理pending-list消息</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230918204825251.png"
+                      alt="image-20230918204825251"
+                ></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建线程池，用与异步处理秒杀订单</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">ExecutorService</span> <span class="variable">SECKILL_ORDER_EXECUTOR</span> <span class="operator">=</span> Executors.newSingleThreadExecutor();</span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">()</span>&#123;</span><br><span class="line">        SECKILL_ORDER_EXECUTOR.submit(<span class="keyword">new</span> <span class="title class_">VoucherOrderHandle</span>());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">String</span> <span class="variable">queueName</span> <span class="operator">=</span> <span class="string">&quot;stream.orders&quot;</span>;</span><br><span class="line"><span class="comment">//异步处理订单的操作</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">VoucherOrderHandle</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span>&#123;</span><br><span class="line">        <span class="comment">//这边实现读取消息队列创建订单的操作</span></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>)&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">              <span class="comment">//1.获取消息队列中的订单消息 XREADGROUP GROUP g1 c1 COUNT 1 BLOCK 2000 STREAMS stream.orders &gt;</span></span><br><span class="line">                    List&lt;MapRecord&lt;String, Object, Object&gt;&gt; list = stringRedisTemplate.opsForStream().read(</span><br><span class="line">                            Consumer.from(<span class="string">&quot;g1&quot;</span>, <span class="string">&quot;c1&quot;</span>),</span><br><span class="line">                            StreamReadOptions.empty().count(<span class="number">1</span>).block(Duration.ofSeconds(<span class="number">2</span>)),</span><br><span class="line">                            StreamOffset.create(queueName, ReadOffset.lastConsumed())</span><br><span class="line">                    );</span><br><span class="line">                    <span class="comment">//1.1判断是否获取成功</span></span><br><span class="line">                    <span class="keyword">if</span> (list==<span class="literal">null</span>) &#123;</span><br><span class="line">                        <span class="comment">//1.2不成功，说明无消息，重新执行</span></span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//解析订单信息</span></span><br><span class="line">                    MapRecord&lt;String, Object, Object&gt; record = list.get(<span class="number">0</span>);</span><br><span class="line">                    Map&lt;Object, Object&gt; value = record.getValue();</span><br><span class="line">                    <span class="type">VoucherOrder</span> <span class="variable">voucherOrder</span> <span class="operator">=</span> BeanUtil.fillBeanWithMap(value, <span class="keyword">new</span> <span class="title class_">VoucherOrder</span>(), <span class="literal">true</span>);</span><br><span class="line">                    <span class="comment">//1.3成功，创建订单</span></span><br><span class="line">                    createVoucherOrder(voucherOrder);</span><br><span class="line">                    <span class="comment">//2.ACK确认</span></span><br><span class="line">                    stringRedisTemplate.opsForStream().acknowledge(queueName,<span class="string">&quot;g1&quot;</span>,record.getId());</span><br><span class="line">                &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">                    log.error(<span class="string">&quot;出现订单异常&quot;</span>,e);</span><br><span class="line">                    handlePendingList();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">handlePendingList</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>)&#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="comment">//1.获取pending—list队列中的订单消息 XREADGROUP GROUP g1 c1 COUNT 1 STREAMS stream.orders 0</span></span><br><span class="line">                    List&lt;MapRecord&lt;String, Object, Object&gt;&gt; list = stringRedisTemplate.opsForStream().read(</span><br><span class="line">                            Consumer.from(<span class="string">&quot;g1&quot;</span>, <span class="string">&quot;c1&quot;</span>),</span><br><span class="line">                            StreamReadOptions.empty().count(<span class="number">1</span>),</span><br><span class="line">                            StreamOffset.create(queueName, ReadOffset.from(<span class="string">&quot;0&quot;</span>))</span><br><span class="line">                    );</span><br><span class="line">                    <span class="comment">//1.1判断是否获取成功</span></span><br><span class="line">                    <span class="keyword">if</span> (list==<span class="literal">null</span> || list.isEmpty()) &#123;</span><br><span class="line">                        <span class="comment">//1.2不成功，说明无消息，重新执行</span></span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//解析订单信息</span></span><br><span class="line">                    MapRecord&lt;String, Object, Object&gt; record = list.get(<span class="number">0</span>);</span><br><span class="line">                    Map&lt;Object, Object&gt; value = record.getValue();</span><br><span class="line">                    <span class="type">VoucherOrder</span> <span class="variable">voucherOrder</span> <span class="operator">=</span> BeanUtil.fillBeanWithMap(value, <span class="keyword">new</span> <span class="title class_">VoucherOrder</span>(), <span class="literal">true</span>);</span><br><span class="line">                    <span class="comment">//1.3成功，创建订单</span></span><br><span class="line">                    createVoucherOrder(voucherOrder);</span><br><span class="line">                    <span class="comment">//2.ACK确认</span></span><br><span class="line">                    stringRedisTemplate.opsForStream().acknowledge(queueName,<span class="string">&quot;g1&quot;</span>,record.getId());</span><br><span class="line">                &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">                    log.error(<span class="string">&quot;出现pending-list订单异常&quot;</span>,e);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>将链表每个内容补充</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230919230517150.png"
+                      alt="image-20230919230517150"
+                ></p>
+<h2 id="实现点赞功能"><a href="#实现点赞功能" class="headerlink" title="实现点赞功能"></a>实现点赞功能</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230919231844464.png"
+                      alt="image-20230919231844464"
+                ></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Result <span class="title function_">likeBlog</span><span class="params">(Long id)</span> &#123;</span><br><span class="line">        <span class="comment">//更改使用scoreSet，用分数进行排行，然后按顺序返回点赞用户头像</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">userId</span> <span class="operator">=</span> UserHolder.getUser().getId();</span><br><span class="line">        <span class="comment">//判断是否已经点赞</span></span><br><span class="line">        <span class="type">Double</span> <span class="variable">score</span> <span class="operator">=</span> stringRedisTemplate</span><br><span class="line">            .opsForZSet().score(RedisConstants.BLOG_LIKED_KEY + id, userId.toString());</span><br><span class="line">        <span class="keyword">if</span> (score ==<span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="comment">//1.如果没点赞，点赞数+1，增加集合</span></span><br><span class="line">            <span class="type">boolean</span> <span class="variable">like</span> <span class="operator">=</span> update().setSql(<span class="string">&quot;liked = liked+1&quot;</span>).eq(<span class="string">&quot;id&quot;</span>, id).update();</span><br><span class="line">            <span class="keyword">if</span> (BooleanUtil.isTrue(like))&#123;</span><br><span class="line">                stringRedisTemplate.opsForZSet()</span><br><span class="line">                    .add(RedisConstants.BLOG_LIKED_KEY+id,userId.toString(),System.currentTimeMillis());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//2.如果已经点赞，则取消点赞-1，并删除集合</span></span><br><span class="line">            <span class="type">boolean</span> <span class="variable">ifLike</span> <span class="operator">=</span> update().setSql(<span class="string">&quot;liked = liked-1&quot;</span>).eq(<span class="string">&quot;id&quot;</span>, id).update();</span><br><span class="line">            <span class="keyword">if</span> (BooleanUtil.isTrue(ifLike))&#123;</span><br><span class="line">                stringRedisTemplate.opsForZSet().remove(RedisConstants.BLOG_LIKED_KEY+id,userId.toString());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Result.ok();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="关注与取关"><a href="#关注与取关" class="headerlink" title="关注与取关"></a>关注与取关</h2><ol>
+<li>创建follow表，包含用户id和关注对象id，创建时间</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230923131430511.png"
+                      alt="image-20230923131430511"
+                ></p>
+<ol start="2">
+<li>点击关注就保存在表中，取关就删除数据</li>
+</ol>
+<h2 id="共同关注"><a href="#共同关注" class="headerlink" title="共同关注"></a>共同关注</h2><ol>
+<li>改进关注功能：在关注之后，将用户id与关注对象id存在Redis的<strong>SortedSet</strong></li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Result <span class="title function_">isFollowed</span><span class="params">(Long id)</span> &#123;</span><br><span class="line">        <span class="type">Long</span> <span class="variable">userId</span> <span class="operator">=</span> UserHolder.getUser().getId();</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">count</span> <span class="operator">=</span> query().eq(<span class="string">&quot;user_id&quot;</span>, userId).eq(<span class="string">&quot;follow_user_id&quot;</span>, id).count();</span><br><span class="line">        <span class="keyword">return</span> Result.ok(count &gt;<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span> Result <span class="title function_">follow</span><span class="params">(Long id, Boolean isFollow)</span> &#123;</span><br><span class="line">        <span class="comment">//1.获取userId</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">userId</span> <span class="operator">=</span> UserHolder.getUser().getId();</span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;follower:&quot;</span>+userId;</span><br><span class="line">        <span class="comment">//2.判断是否关注</span></span><br><span class="line">        <span class="keyword">if</span> (isFollow)&#123;</span><br><span class="line">            <span class="comment">//执行关注操作</span></span><br><span class="line">            <span class="type">Follow</span> <span class="variable">follow</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Follow</span>();</span><br><span class="line">            follow.setFollowUserId(id);</span><br><span class="line">            follow.setUserId(userId);</span><br><span class="line">            <span class="type">boolean</span> <span class="variable">success</span> <span class="operator">=</span> save(follow);</span><br><span class="line">            <span class="keyword">if</span> (success)&#123;</span><br><span class="line">                stringRedisTemplate.opsForSet().add(key,id.toString());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//执行取关操作</span></span><br><span class="line">            <span class="type">boolean</span> <span class="variable">success</span> <span class="operator">=</span> remove(<span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;Follow&gt;().eq(<span class="string">&quot;user_id&quot;</span>, userId).eq(<span class="string">&quot;follow_user_id&quot;</span>, id));</span><br><span class="line">            <span class="keyword">if</span> (success)&#123;</span><br><span class="line">                stringRedisTemplate.opsForSet().remove(key,id.toString());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Result.ok();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li>查询用户ID和主页ID对应的Redis**”follower:”+userId<strong>键值对，并求交集</strong>stringRedisTemplate.opsForSet().intersect(key, key1);**</li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/common/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">commonFollow</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id)</span>&#123;</span><br><span class="line">        <span class="comment">//获取当前用户</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;follower:&quot;</span>+ UserHolder.getUser().getId();</span><br><span class="line">        <span class="type">String</span> <span class="variable">key1</span> <span class="operator">=</span> <span class="string">&quot;follower:&quot;</span>+id;</span><br><span class="line">        Set&lt;String&gt; ids = stringRedisTemplate.opsForSet().intersect(key, key1);</span><br><span class="line">        List&lt;Long&gt; list = ids.stream().map(Long::valueOf).collect(Collectors.toList());</span><br><span class="line">        <span class="keyword">if</span> (list == <span class="literal">null</span> || list.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">return</span> Result.ok(Collections.emptyList());</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;UserDTO&gt; userDTOS = userService.listByIds(list).stream().map(user -&gt; BeanUtil.copyProperties(user, UserDTO.class)).collect(Collectors.toList());</span><br><span class="line">        <span class="keyword">return</span> Result.ok(userDTOS);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20230920142004136.png"
+                      alt="image-20230920142004136"
+                ></p>
+<h2 id="Feed流实现关注用户消息推送"><a href="#Feed流实现关注用户消息推送" class="headerlink" title="Feed流实现关注用户消息推送"></a>Feed流实现关注用户消息推送</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230921231240002.png"
+                      alt="image-20230921231240002"
+                ></p>
+<ol>
+<li>在“大V”写下一篇博客之后，将文章的id保存到Redis用户SortedSet邮箱中</li>
+<li>用户查询邮箱，获取所有关注的博主的博客id列表，按时间戳Feed流滚动排序解析到用户关注页</li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ScrollResult</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;?&gt; list;</span><br><span class="line">    <span class="keyword">private</span> Long minTime;</span><br><span class="line">    <span class="keyword">private</span> Integer offset;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/of/follow&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">queryFollowBlog</span><span class="params">(</span></span><br><span class="line"><span class="params">            <span class="meta">@RequestParam(&quot;lastId&quot;)</span> Long max,<span class="meta">@RequestParam(value = &quot;offset&quot; ,defaultValue = &quot;0&quot;)</span> Integer offset)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> blogService.queryFollowBlog(max,offset);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Result <span class="title function_">queryFollowBlog</span><span class="params">(Long max, Integer offset)</span> &#123;</span><br><span class="line">        <span class="comment">//1.获取用户id</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">userId</span> <span class="operator">=</span> UserHolder.getUser().getId();</span><br><span class="line">        <span class="comment">//2.查询邮件箱</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;mail:&quot;</span> + userId;</span><br><span class="line">        Set&lt;ZSetOperations.TypedTuple&lt;String&gt;&gt; blogSet =</span><br><span class="line">                stringRedisTemplate.opsForZSet().reverseRangeByScoreWithScores(key, <span class="number">0</span>, max, offset, <span class="number">2</span>);</span><br><span class="line">        <span class="comment">//3.非空判断</span></span><br><span class="line">        <span class="keyword">if</span> (blogSet == <span class="literal">null</span> || blogSet.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">return</span> Result.ok();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">long</span> <span class="variable">minTime</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">os</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        List&lt;Long&gt; ids = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(blogSet.size());</span><br><span class="line">        <span class="keyword">for</span> (ZSetOperations.TypedTuple&lt;String&gt; blogTuple : blogSet)&#123;</span><br><span class="line">            ids.add(Long.valueOf(blogTuple.getValue()));</span><br><span class="line">            <span class="type">long</span> <span class="variable">time</span> <span class="operator">=</span> blogTuple.getScore().longValue();</span><br><span class="line">            <span class="keyword">if</span> (time == minTime)&#123;</span><br><span class="line">                os++;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                minTime = time;</span><br><span class="line">                os = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">String</span> <span class="variable">idStr</span> <span class="operator">=</span> StrUtil.join(<span class="string">&quot;,&quot;</span>, ids);</span><br><span class="line">        List&lt;Blog&gt; blogs = query().in(<span class="string">&quot;id&quot;</span>,ids).last(<span class="string">&quot;ORDER BY FIELD(id,&quot;</span>+idStr+<span class="string">&quot;)&quot;</span>).list();</span><br><span class="line">        <span class="keyword">for</span> (Blog blog : blogs)&#123;</span><br><span class="line">            isBlogLiked(blog);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">ScrollResult</span> <span class="variable">scrollResult</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ScrollResult</span>(blogs,minTime,os);</span><br><span class="line">        <span class="keyword">return</span> Result.ok(scrollResult);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">isBlogLiked</span><span class="params">(Blog blog)</span>&#123;</span><br><span class="line">        <span class="type">UserDTO</span> <span class="variable">user</span> <span class="operator">=</span> UserHolder.getUser();</span><br><span class="line">        <span class="keyword">if</span> (user ==<span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">Long</span> <span class="variable">userId</span> <span class="operator">=</span> user.getId();</span><br><span class="line">        <span class="type">Double</span> <span class="variable">isLike</span> <span class="operator">=</span> stringRedisTemplate.opsForZSet().score(RedisConstants.BLOG_LIKED_KEY + blog.getId(), userId.toString());</span><br><span class="line">        blog.setIsLike(isLike !=<span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="GEO地理坐标"><a href="#GEO地理坐标" class="headerlink" title="GEO地理坐标"></a>GEO地理坐标</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230923151702697.png"
+                      alt="image-20230923151702697"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230923163613466.png"
+                      alt="image-20230923163613466"
+                ></p>
+<ol>
+<li>先将所有的店铺经纬度信息按照不同类型存入Redis</li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">loadShopData</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">//将所有的店铺经纬度信息按照不同类型存入Redis</span></span><br><span class="line">        List&lt;Shop&gt; list = shopService.list();</span><br><span class="line">        Map&lt;Long, List&lt;Shop&gt;&gt; map = list.stream().collect(Collectors.groupingBy(Shop::getTypeId));</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;Long,List&lt;Shop&gt;&gt; entry: map.entrySet()) &#123;</span><br><span class="line">            <span class="type">Long</span> <span class="variable">typeId</span> <span class="operator">=</span> entry.getKey();</span><br><span class="line">            <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;shop:geo:&quot;</span>+ typeId;</span><br><span class="line">            List&lt;Shop&gt; value = entry.getValue();</span><br><span class="line">            List&lt;RedisGeoCommands.GeoLocation&lt;String&gt;&gt; locations = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(value.size());</span><br><span class="line">            <span class="keyword">for</span> (Shop shop : value) &#123;</span><br><span class="line">                locations.add(<span class="keyword">new</span> <span class="title class_">RedisGeoCommands</span>.GeoLocation&lt;&gt;(shop.getId().toString(),<span class="keyword">new</span> <span class="title class_">Point</span>(shop.getX(),shop.getY())));</span><br><span class="line">            &#125;</span><br><span class="line">            stringRedisTemplate.opsForGeo().add(key,locations);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="BitMap解决用户签到数据保存"><a href="#BitMap解决用户签到数据保存" class="headerlink" title="BitMap解决用户签到数据保存"></a>BitMap解决用户签到数据保存</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230924131126304.png"
+                      alt="image-20230924131126304"
+                ></p>
+<ol>
+<li><strong>将签到数据保存到Redis</strong></li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Result <span class="title function_">sign</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//1.获取用户id</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">userId</span> <span class="operator">=</span> UserHolder.getUser().getId();</span><br><span class="line">        <span class="comment">//2.获取当前年月日,组装成key</span></span><br><span class="line">        <span class="type">LocalDateTime</span> <span class="variable">now</span> <span class="operator">=</span> LocalDateTime.now();</span><br><span class="line">        <span class="type">String</span> <span class="variable">keySuffix</span> <span class="operator">=</span> now.format(DateTimeFormatter.ofPattern(<span class="string">&quot;:yyyyMM&quot;</span>));</span><br><span class="line">        <span class="type">int</span> <span class="variable">dayOfMonth</span> <span class="operator">=</span> now.getDayOfMonth();</span><br><span class="line">        <span class="comment">//拼装成key</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> SystemConstants.USER_SIGN + userId + keySuffix;</span><br><span class="line">        <span class="comment">//3.对Redis操作</span></span><br><span class="line">        stringRedisTemplate.opsForValue().setBit(key,dayOfMonth-<span class="number">1</span>,<span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">return</span> Result.ok();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li><strong>获取连续签到天数</strong></li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Result <span class="title function_">signCount</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//1.获取用户和年月日</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">userId</span> <span class="operator">=</span> UserHolder.getUser().getId();</span><br><span class="line">        <span class="type">LocalDateTime</span> <span class="variable">now</span> <span class="operator">=</span> LocalDateTime.now();</span><br><span class="line">        <span class="type">String</span> <span class="variable">keySuffix</span> <span class="operator">=</span> now.format(DateTimeFormatter.ofPattern(<span class="string">&quot;:yyyyMM&quot;</span>));</span><br><span class="line">        <span class="type">int</span> <span class="variable">dayOfMonth</span> <span class="operator">=</span> now.getDayOfMonth();</span><br><span class="line">        <span class="comment">//2.拼接key，并且查询0到当天的签到量 BITFIELD sign:1010:202309 GET u24 0</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> SystemConstants.USER_SIGN + userId + keySuffix;</span><br><span class="line">        List&lt;Long&gt; result = stringRedisTemplate.opsForValue().bitField(key,</span><br><span class="line">                BitFieldSubCommands.create().get(BitFieldSubCommands.BitFieldType.unsigned(dayOfMonth)).valueAt(<span class="number">0</span>));</span><br><span class="line">        <span class="keyword">if</span> (result == <span class="literal">null</span> || result.isEmpty())&#123;</span><br><span class="line">            <span class="keyword">return</span> Result.ok(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">Long</span> <span class="variable">num</span> <span class="operator">=</span> result.get(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (num == <span class="literal">null</span> || num == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> Result.ok(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//3.右移运算和与运算获取当前位，是1就加一，是0就返回</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>)&#123;</span><br><span class="line">            <span class="comment">//相与获取当前位的数 1&amp;1=1 1&amp;0=0</span></span><br><span class="line">            <span class="keyword">if</span> ((num &amp; <span class="number">1</span>) == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//执行右移操作，使其循环向右读取</span></span><br><span class="line">            num &gt;&gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Result.ok(count);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="HyperLoglog——用于统计网站访问量的数据结构"><a href="#HyperLoglog——用于统计网站访问量的数据结构" class="headerlink" title="HyperLoglog——用于统计网站访问量的数据结构"></a>HyperLoglog——用于统计网站访问量的数据结构</h2><p><strong>PFMERGE用来合并两个key计算总共的统计量</strong></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20230924170913733.png"
+                      alt="image-20230924170913733"
+                ></p>
+<h2 id="swagger配置"><a href="#swagger配置" class="headerlink" title="swagger配置"></a>swagger配置</h2><ol>
+<li><strong>引入依赖</strong></li>
+</ol>
+<blockquote>
+<p>注意这里有个大坑，不同springboot版本适配不同swagger！</p>
+</blockquote>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--        swagger--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li><strong>配置取消拦截</strong></li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">String[] swaggerExcludes=<span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;/swagger-ui.html&quot;</span>,<span class="string">&quot;/swagger-resources/**&quot;</span>,<span class="string">&quot;/webjars/**&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> &#123;</span><br><span class="line">        registry.addInterceptor(<span class="keyword">new</span> <span class="title class_">LoginInterceptor</span>())</span><br><span class="line">                .excludePathPatterns(swaggerExcludes).order(<span class="number">1</span>);</span><br><span class="line">        registry.addInterceptor(<span class="keyword">new</span> <span class="title class_">RefreshInterceptor</span>(stringRedisTemplate)).addPathPatterns(<span class="string">&quot;/**&quot;</span>).order(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="3">
+<li><strong>配置swagger资源映射</strong></li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> &#123;</span><br><span class="line">        registry.addResourceHandler(<span class="string">&quot;swagger-ui.html&quot;</span>)</span><br><span class="line">                .addResourceLocations(<span class="string">&quot;classpath:/META-INF/resources/&quot;</span>);</span><br><span class="line">        registry.addResourceHandler(<span class="string">&quot;/webjars/**&quot;</span>)</span><br><span class="line">                .addResourceLocations(<span class="string">&quot;classpath:/META-INF/resources/webjars/&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="4">
+<li><strong>配置swagger</strong></li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span> <span class="comment">//加入到配置类 springboot声明配置类</span></span><br><span class="line"><span class="meta">@EnableSwagger2</span>  <span class="comment">//开启Swagger2</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SwaggerConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="5">
+<li><strong>使用注解完善页面内容</strong></li>
+</ol>
+<blockquote>
+<p>@Api 更改controller备注</p>
+<p>@ApiOperation 更改方法备注</p>
+<p>@ApiImplicitParam 更改方法参数备注</p>
+<p>@ApiModel 更改方法参数类备注</p>
+<p>@ApiModelProperty更改模型属性备注</p>
+</blockquote>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Api(tags = &quot;优惠券&quot;,description = &quot;优惠券相关的接口&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">VoucherController</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@PostMapping</span></span><br><span class="line">    <span class="meta">@ApiOperation(value = &quot;添加消费券&quot;,notes = &quot;用于商家添加优惠券&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">addVoucher</span><span class="params">(<span class="meta">@RequestBody</span> Voucher voucher)</span> &#123;</span><br><span class="line">        voucherService.save(voucher);</span><br><span class="line">        <span class="keyword">return</span> Result.ok(voucher.getId());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/list/&#123;shopId&#125;&quot;)</span></span><br><span class="line">    <span class="meta">@ApiOperation(value = &quot;查询消费券&quot;,notes = &quot;用于查询消费券&quot;)</span></span><br><span class="line">    <span class="meta">@ApiImplicitParam(name = &quot;shopId&quot;,value = &quot;消费券id&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">queryVoucherOfShop</span><span class="params">(<span class="meta">@PathVariable(&quot;shopId&quot;)</span> Long shopId)</span> &#123;</span><br><span class="line">       <span class="keyword">return</span> voucherService.queryVoucherOfShop(shopId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiModel(value = &quot;优惠券类&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Voucher</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;使用规则&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String rules;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="导出Excel"><a href="#导出Excel" class="headerlink" title="导出Excel"></a>导出Excel</h2><ol>
+<li><strong>引入依赖</strong></li>
+</ol>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- POI --&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--xlsx(07)--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi-ooxml<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.17<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li><strong>获取Excel模板</strong></li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FileInputStream</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;D:\\桌面\\Code\\dianping\\hm-dianping\\src\\main\\resources\\template\\shopList.xlsx&quot;</span>);</span><br></pre></td></tr></table></figure></div>
+
+<ol start="3">
+<li><strong>在对应单元格填入数据</strong></li>
+</ol>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">XSSFWorkbook</span> <span class="variable">excel</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">XSSFWorkbook</span>(in);</span><br><span class="line">            <span class="type">XSSFSheet</span> <span class="variable">sheet</span> <span class="operator">=</span> excel.getSheet(<span class="string">&quot;Sheet1&quot;</span>);</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>;i&lt;=list.size();i++)&#123;</span><br><span class="line">                sheet.getRow(i).getCell(<span class="number">0</span>).setCellValue(list.get(i-<span class="number">1</span>).getName());</span><br><span class="line">                sheet.getRow(i).getCell(<span class="number">1</span>).setCellValue(list.get(i-<span class="number">1</span>).getAddress());</span><br><span class="line">                sheet.getRow(i).getCell(<span class="number">2</span>).setCellValue(list.get(i-<span class="number">1</span>).getAvgPrice());</span><br><span class="line">                sheet.getRow(i).getCell(<span class="number">3</span>).setCellValue(list.get(i-<span class="number">1</span>).getScore());</span><br><span class="line">                sheet.getRow(i).getCell(<span class="number">4</span>).setCellValue(list.get(i-<span class="number">1</span>).getOpenHours());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">ServletOutputStream</span> <span class="variable">out</span> <span class="operator">=</span> response.getOutputStream();</span><br><span class="line">            excel.write(out);</span><br><span class="line">            out.close();</span><br><span class="line">            excel.close();</span><br></pre></td></tr></table></figure></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> 黑马点评</li>
+        <li><strong>Author:</strong> FANSEA</li>
+        <li><strong>Created at
+                :</strong> 2023-11-24 13:13:05</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2023-12-09 16:46:52
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://redefine.ohevan.com/2023/11/24/黑马点评/
+        </li>
+        <li style="word-wrap: break-word; white-space: normal;">
+            <strong>
+                License:
+            </strong>
+            
+            This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+            
+
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/11/24/%E5%8F%A3%E6%89%8D%E9%94%BB%E7%82%BC/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">口才锻炼</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/11/12/Redis%E7%AC%94%E8%AE%B0/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">Redis学习笔记</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container">
+                <div class="comments-container pjax">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;Comments
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-swup-reload-script>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://example.example.com',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">黑马点评</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%BB%91%E9%A9%AC%E7%82%B9%E8%AF%84"><span class="nav-text">黑马点评</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AFnginx%E9%A1%B9%E7%9B%AE%E5%90%AF%E5%8A%A8"><span class="nav-text">前端nginx项目启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx%E9%87%8D%E6%96%B0%E5%8A%A0%E8%BD%BD%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">nginx重新加载配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#session%E5%AE%9E%E7%8E%B0%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81"><span class="nav-text">session实现短信验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis%E5%AE%9E%E7%8E%B0%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81"><span class="nav-text">redis实现短信验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%93%E5%AD%98%E5%87%8F%E4%B8%80%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-text">库存减一的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%90%E8%A7%82%E9%94%81%E8%A7%A3%E5%86%B3%E9%AB%98%E5%B9%B6%E5%8F%91"><span class="nav-text">乐观锁解决高并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%82%B2%E8%A7%82%E9%94%81%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%BA%BA%E4%B8%80%E5%8D%95"><span class="nav-text">悲观锁实现一人一单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDEA%E9%85%8D%E7%BD%AE%E9%9B%86%E7%BE%A4"><span class="nav-text">IDEA配置集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E8%A7%A3%E5%86%B3%E9%9B%86%E7%BE%A4%E4%B8%8A%E9%94%81%E9%97%AE%E9%A2%98"><span class="nav-text">分布式锁解决集群上锁问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LUA%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0%E5%8E%9F%E5%AD%90%E6%80%A7"><span class="nav-text">LUA脚本实现原子性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redisson%E2%80%94-Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E4%BC%98%E5%8C%96"><span class="nav-text">Redisson—-Redis分布式锁优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redisson%E5%8F%AF%E9%87%8D%E5%85%A5%E5%8E%9F%E7%90%86"><span class="nav-text">Redisson可重入原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RedissonMultiLock%E8%A7%A3%E5%86%B3%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%BB%E4%BB%8E%E4%B8%80%E8%87%B4%E9%97%AE%E9%A2%98"><span class="nav-text">RedissonMultiLock解决分布式主从一致问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD"><span class="nav-text">Redis消息队列优化性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8ERedis%E7%9A%84Stream%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-text">基于Redis的Stream实现消息队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%82%B9%E8%B5%9E%E5%8A%9F%E8%83%BD"><span class="nav-text">实现点赞功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E6%B3%A8%E4%B8%8E%E5%8F%96%E5%85%B3"><span class="nav-text">关注与取关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B1%E5%90%8C%E5%85%B3%E6%B3%A8"><span class="nav-text">共同关注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feed%E6%B5%81%E5%AE%9E%E7%8E%B0%E5%85%B3%E6%B3%A8%E7%94%A8%E6%88%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81"><span class="nav-text">Feed流实现关注用户消息推送</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GEO%E5%9C%B0%E7%90%86%E5%9D%90%E6%A0%87"><span class="nav-text">GEO地理坐标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BitMap%E8%A7%A3%E5%86%B3%E7%94%A8%E6%88%B7%E7%AD%BE%E5%88%B0%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98"><span class="nav-text">BitMap解决用户签到数据保存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HyperLoglog%E2%80%94%E2%80%94%E7%94%A8%E4%BA%8E%E7%BB%9F%E8%AE%A1%E7%BD%91%E7%AB%99%E8%AE%BF%E9%97%AE%E9%87%8F%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-text">HyperLoglog——用于统计网站访问量的数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#swagger%E9%85%8D%E7%BD%AE"><span class="nav-text">swagger配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%87%BAExcel"><span class="nav-text">导出Excel</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">FANSEA</a>
+        </div>
+        
+            <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.4.4</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex justify-center items-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+        ],
+        containers: ["#swup"],
+    });
+
+    swup.hooks.on("page:view", () => {
+        Global.refresh();
+    });
+
+    // if (document.readyState === "complete") {
+    //
+    // } else {
+    //     document.addEventListener("DOMContentLoaded", () => init());
+    // }
+</script>
+
+
+
+
+
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/libs/anime.min.js"></script>
+
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>

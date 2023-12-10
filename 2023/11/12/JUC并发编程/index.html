@@ -18,15 +18,15 @@
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="JUC并发编程重量级锁 线程切换时间成本高  轻量级锁 乐观锁+重量级锁兜底">
+        <meta name="description" content="JUC并发编程重量级锁 线程切换时间成本高  轻量级锁 乐观锁+重量级锁兜底  可重入锁 可重入就是说某个线程已经获得某个锁，可以再次获取锁而不会出现死锁  可重入锁有：  synchronized ReentrantLock   公平锁与非公平锁其实锁分为公平锁和非公平锁，默认我们创建出来的ReentrantLock是采用的非公平锁作为底层锁机制。那么什么是公平锁什么又是非公平锁呢？  公平锁：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JUC并发编程">
 <meta property="og:url" content="http://example.com/2023/11/12/JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="JUC并发编程重量级锁 线程切换时间成本高  轻量级锁 乐观锁+重量级锁兜底">
+<meta property="og:description" content="JUC并发编程重量级锁 线程切换时间成本高  轻量级锁 乐观锁+重量级锁兜底  可重入锁 可重入就是说某个线程已经获得某个锁，可以再次获取锁而不会出现死锁  可重入锁有：  synchronized ReentrantLock   公平锁与非公平锁其实锁分为公平锁和非公平锁，默认我们创建出来的ReentrantLock是采用的非公平锁作为底层锁机制。那么什么是公平锁什么又是非公平锁呢？  公平锁：">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-12T06:53:44.000Z">
-<meta property="article:modified_time" content="2023-11-13T05:23:34.745Z">
+<meta property="article:modified_time" content="2023-12-08T11:18:16.816Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="juc">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
                     <div class="author">
                         <span class="name">FANSEA</span>
                         
-                            <span class="author-label">Lv.3</span>
+                            <span class="author-label">Lv.4</span>
                         
                     </div>
                     <div class="meta-info">
@@ -240,8 +240,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-11-13 13:23:34</span>
-            <span class="mobile">2023-11-13 13:23:34</span>
+            <span class="desktop">2023-12-08 19:18:16</span>
+            <span class="mobile">2023-12-08 19:18:16</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -285,6 +285,49 @@
 <h2 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h2><blockquote>
 <p>乐观锁+重量级锁兜底</p>
 </blockquote>
+<h2 id="可重入锁"><a href="#可重入锁" class="headerlink" title="可重入锁"></a>可重入锁</h2><blockquote>
+<p>可重入就是说某个线程已经获得某个锁，可以再次获取锁而不会出现<a class="link"   target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%AD%BB%E9%94%81&spm=1001.2101.3001.7020" >死锁 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>可重入锁有：</p>
+<ul>
+<li>synchronized</li>
+<li>ReentrantLock</li>
+</ul>
+</blockquote>
+<h2 id="公平锁与非公平锁"><a href="#公平锁与非公平锁" class="headerlink" title="公平锁与非公平锁"></a>公平锁与非公平锁</h2><p>其实锁分为公平锁和非公平锁，默认我们创建出来的ReentrantLock是采用的非公平锁作为底层锁机制。那么什么是公平锁什么又是非公平锁呢？</p>
+<ul>
+<li>公平锁：多个线程按照<strong>申请锁的顺序去获得锁</strong>，线程会直接进入队列去排队，永远都是队列的第一位才能得到锁。</li>
+<li>非公平锁：多个线程去获取锁的时候，会直接去尝试获取，获取不到，再去进入等待队列，如果能获取到，就直接获取到锁</li>
+</ul>
+<blockquote>
+<p>非公平锁就是多线程抢一把锁，能抢到就是谁的！</p>
+</blockquote>
+<h2 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h2><p>读写锁维护了一个读锁和一个写锁，这两个锁的机制是不同的。</p>
+<ul>
+<li>读锁：在没有任何线程占用写锁的情况下，同一时间可以有多个线程加读锁。</li>
+<li>写锁：在没有任何线程占用读锁的情况下，同一时间只能有一个线程加写锁。</li>
+</ul>
+<blockquote>
+<p><strong>实现：ReentrantReadWriteLock</strong></p>
+<ol>
+<li>可重入锁机制</li>
+<li>公平非公平锁机制</li>
+<li>读写锁机制</li>
+</ol>
+<p>此接口有一个实现类ReentrantReadWriteLock（实现的是ReadWriteLock接口，不是Lock接口，它本身并不是锁），注意我们操作ReentrantReadWriteLock时，不能直接上锁，而是需要获取读锁或是写锁，再进行锁操作</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">    <span class="type">ReentrantReadWriteLock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantReadWriteLock</span>();</span><br><span class="line">    lock.readLock().lock();</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Thread</span>(lock.readLock()::lock).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+</blockquote>
+<h3 id="锁升级"><a href="#锁升级" class="headerlink" title="锁升级"></a>锁升级</h3><p>注意在仅持有读锁的情况下去申请写锁，属于”锁升级”，ReentrantReadWriteLock是<strong>不支持</strong>的：</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">    <span class="type">ReentrantReadWriteLock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantReadWriteLock</span>();</span><br><span class="line">    lock.readLock().lock();</span><br><span class="line">    lock.writeLock().lock();</span><br><span class="line">    System.out.println(<span class="string">&quot;锁升级成功！&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="锁降级"><a href="#锁降级" class="headerlink" title="锁降级"></a>锁降级</h3><p>锁降级指的是写锁降级为读锁。当一个线程持有写锁的情况下，虽然其他线程不能加读锁，但是线程自己是可以加读锁的：</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">    <span class="type">ReentrantReadWriteLock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantReadWriteLock</span>();</span><br><span class="line">    lock.writeLock().lock();</span><br><span class="line">    lock.readLock().lock();</span><br><span class="line">    System.out.println(<span class="string">&quot;成功加读锁！&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>但是此时其他线程是依旧获取不到读锁的，只有当可重入锁写锁释放其他线程才能获取读锁</p>
+</blockquote>
+<h2 id="CAS算法"><a href="#CAS算法" class="headerlink" title="CAS算法"></a>CAS算法</h2><blockquote>
+<p>悲观锁</p>
+</blockquote>
 
         </div>
 
@@ -299,7 +342,7 @@
         
             <li>
                 <strong>Updated at
-                    :</strong> 2023-11-13 13:23:34
+                    :</strong> 2023-12-08 19:18:16
             </li>
         
         <li>
@@ -423,7 +466,7 @@
     <div class="post-toc">
         <div class="toc-title">On this page</div>
         <div class="page-title">JUC并发编程</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B"><span class="nav-text">JUC并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E9%87%8F%E7%BA%A7%E9%94%81"><span class="nav-text">重量级锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%94%81"><span class="nav-text">轻量级锁</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B"><span class="nav-text">JUC并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E9%87%8F%E7%BA%A7%E9%94%81"><span class="nav-text">重量级锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%94%81"><span class="nav-text">轻量级锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81"><span class="nav-text">可重入锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AC%E5%B9%B3%E9%94%81%E4%B8%8E%E9%9D%9E%E5%85%AC%E5%B9%B3%E9%94%81"><span class="nav-text">公平锁与非公平锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E9%94%81"><span class="nav-text">读写锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E5%8D%87%E7%BA%A7"><span class="nav-text">锁升级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E9%99%8D%E7%BA%A7"><span class="nav-text">锁降级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CAS%E7%AE%97%E6%B3%95"><span class="nav-text">CAS算法</span></a></li></ol></li></ol>
 
     </div>
 </div>
