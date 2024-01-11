@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://example.com/image/image-20231111202514108.png">
 <meta property="og:image" content="http://example.com/image/image-20231115082709023.png">
 <meta property="article:published_time" content="2023-11-08T08:43:57.000Z">
-<meta property="article:modified_time" content="2023-12-08T12:15:17.612Z">
+<meta property="article:modified_time" content="2023-12-19T12:38:14.985Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -245,8 +245,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-12-08 20:15:17</span>
-            <span class="mobile">2023-12-08 20:15:17</span>
+            <span class="desktop">2023-12-19 20:38:14</span>
+            <span class="mobile">2023-12-19 20:38:14</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -361,11 +361,8 @@
                 ></p>
 <div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">hillSort</span><span class="params">(Comparable[] a)</span>&#123;</span><br><span class="line">        <span class="comment">//循环后确认h的最大值</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">h</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(h&lt; a.length/<span class="number">2</span>)&#123;</span><br><span class="line">            h=<span class="number">2</span>*h+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (h&gt;=<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i=h;i&lt;a.length;i++)&#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> j=i;j&gt;=h;j-=h)&#123;</span><br><span class="line">                    <span class="keyword">if</span> (Util.greater(a[j-h],a[j]))&#123;</span><br><span class="line">                        Util.exchange(a,j,j-h);</span><br><span class="line">                    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//h的减小规则：</span></span><br><span class="line">            h=h/<span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
 
-
-
-
-
-
+<h2 id="合并两个有序链表"><a href="#合并两个有序链表" class="headerlink" title="合并两个有序链表"></a>合并两个有序链表</h2><p><a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-two-sorted-lists/" >合并两个有序链表 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//合并两个有序链表:https://leetcode.cn/problems/merge-two-sorted-lists/</span></span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">mergeTwoLists</span><span class="params">(ListNode list1, ListNode list2)</span> &#123;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">dum</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> dum;</span><br><span class="line">        <span class="keyword">while</span> (list1!=<span class="literal">null</span> &amp;&amp; list2!=<span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span> (list1.val&gt;list2.val)&#123;</span><br><span class="line">                cur.next = list2;</span><br><span class="line">                list2 = list2.next;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                cur.next = list1;</span><br><span class="line">                list1 = list1.next;</span><br><span class="line">            &#125;</span><br><span class="line">            cur = cur.next;</span><br><span class="line">        &#125;</span><br><span class="line">        cur.next = list1 != <span class="literal">null</span> ? list1 :list2;</span><br><span class="line">        <span class="keyword">return</span> dum.next;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
 
 
 
@@ -411,7 +408,7 @@
         
             <li>
                 <strong>Updated at
-                    :</strong> 2023-12-08 20:15:17
+                    :</strong> 2023-12-19 20:38:14
             </li>
         
         <li>
@@ -535,7 +532,7 @@
     <div class="post-toc">
         <div class="toc-title">On this page</div>
         <div class="page-title">算法日记</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%97%A5%E8%AE%B0"><span class="nav-text">算法日记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%B3%95%E6%9F%A5%E6%89%BE"><span class="nav-text">二分法查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C"><span class="nav-text">两数之和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E6%96%87%E6%95%B0"><span class="nav-text">回文数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E6%96%87%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">回文字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="nav-text">简单排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">插入排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="nav-text">高级排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F"><span class="nav-text">希尔排序</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%97%A5%E8%AE%B0"><span class="nav-text">算法日记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%B3%95%E6%9F%A5%E6%89%BE"><span class="nav-text">二分法查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C"><span class="nav-text">两数之和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E6%96%87%E6%95%B0"><span class="nav-text">回文数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E6%96%87%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">回文字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="nav-text">简单排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-text">插入排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="nav-text">高级排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F"><span class="nav-text">希尔排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8"><span class="nav-text">合并两个有序链表</span></a></li></ol></li></ol>
 
     </div>
 </div>
@@ -563,7 +560,7 @@
               <span>2022</span>
               -
             
-            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">FANSEA</a>
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">FANSEA</a>
         </div>
         
             <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
