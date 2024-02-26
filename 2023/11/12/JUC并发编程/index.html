@@ -18,18 +18,24 @@
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="JUC并发编程重量级锁 线程切换时间成本高  轻量级锁 乐观锁+重量级锁兜底  可重入锁 可重入就是说某个线程已经获得某个锁，可以再次获取锁而不会出现死锁  可重入锁有：  synchronized ReentrantLock   公平锁与非公平锁其实锁分为公平锁和非公平锁，默认我们创建出来的ReentrantLock是采用的非公平锁作为底层锁机制。那么什么是公平锁什么又是非公平锁呢？  公平锁：">
+        <meta name="description" content="JUC并发编程 什么是juc?   juc是java中处理线程的工具包   wait和sleep？   sleep不释放锁睡觉，wait释放锁睡觉   并行和并发？   并行： 常出现在多核处理器，多个任务同一时间执行 并发： 多任务同时执行，cpu执行一个任务一段时间再切换到其他任务，实现同时进行的效果   用户线程和守护线程？   java对象头  偏向锁：在很多情况下抢锁过程一般都是同一个线">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JUC并发编程">
 <meta property="og:url" content="http://example.com/2023/11/12/JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="JUC并发编程重量级锁 线程切换时间成本高  轻量级锁 乐观锁+重量级锁兜底  可重入锁 可重入就是说某个线程已经获得某个锁，可以再次获取锁而不会出现死锁  可重入锁有：  synchronized ReentrantLock   公平锁与非公平锁其实锁分为公平锁和非公平锁，默认我们创建出来的ReentrantLock是采用的非公平锁作为底层锁机制。那么什么是公平锁什么又是非公平锁呢？  公平锁：">
+<meta property="og:description" content="JUC并发编程 什么是juc?   juc是java中处理线程的工具包   wait和sleep？   sleep不释放锁睡觉，wait释放锁睡觉   并行和并发？   并行： 常出现在多核处理器，多个任务同一时间执行 并发： 多任务同时执行，cpu执行一个任务一段时间再切换到其他任务，实现同时进行的效果   用户线程和守护线程？   java对象头  偏向锁：在很多情况下抢锁过程一般都是同一个线">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image/image-20240120194544257.png">
+<meta property="og:image" content="http://example.com/image/image-20240125191628428.png">
+<meta property="og:image" content="http://example.com/image/image-20240125191709212.png">
+<meta property="og:image" content="http://example.com/image/image-20240125193440205.png">
+<meta property="og:image" content="http://example.com/image/image-20240127191100553.png">
 <meta property="article:published_time" content="2023-11-12T06:53:44.000Z">
-<meta property="article:modified_time" content="2023-12-08T11:18:16.816Z">
+<meta property="article:modified_time" content="2024-01-27T11:18:06.988Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="juc">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/image-20240120194544257.png">
     
     
     <!--- Icon Part-->
@@ -240,8 +246,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-12-08 19:18:16</span>
-            <span class="mobile">2023-12-08 19:18:16</span>
+            <span class="desktop">2024-01-27 19:18:06</span>
+            <span class="mobile">2024-01-27 19:18:06</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -279,7 +285,139 @@
 
 
         <div class="article-content markdown-body">
-            <h1 id="JUC并发编程"><a href="#JUC并发编程" class="headerlink" title="JUC并发编程"></a>JUC并发编程</h1><h2 id="重量级锁"><a href="#重量级锁" class="headerlink" title="重量级锁"></a>重量级锁</h2><blockquote>
+            <h1 id="JUC并发编程"><a href="#JUC并发编程" class="headerlink" title="JUC并发编程"></a>JUC并发编程</h1><ol>
+<li><strong>什么是juc?</strong></li>
+</ol>
+<blockquote>
+<p>juc是java中处理线程的工具包</p>
+</blockquote>
+<ol start="2">
+<li><strong>wait和sleep？</strong></li>
+</ol>
+<blockquote>
+<p>sleep不释放锁睡觉，wait释放锁睡觉</p>
+</blockquote>
+<ol start="3">
+<li><strong>并行和并发？</strong></li>
+</ol>
+<blockquote>
+<p>并行：</p>
+<p>常出现在多核处理器，多个任务<strong>同一时间</strong>执行</p>
+<p>并发：</p>
+<p>多任务<strong>同时</strong>执行，cpu执行一个任务一段时间再切换到其他任务，实现同时进行的效果</p>
+</blockquote>
+<ol start="4">
+<li><strong>用户线程和守护线程？</strong></li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20240120194544257.png"
+                      alt="image-20240120194544257"
+                ></p>
+<h2 id="java对象头"><a href="#java对象头" class="headerlink" title="java对象头"></a>java对象头</h2><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20240125191628428.png"
+                      alt="image-20240125191628428"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20240125191709212.png"
+                      alt="image-20240125191709212"
+                ></p>
+<p><strong>偏向锁</strong>：在很多情况下抢锁过程一般都是同一个线程抢锁成功，所以设置了偏向锁，Markword用于记录“常胜者”线程id，当参与竞争资源时，偏向锁指向的id代表的线程可以直接获取锁，无需进行CAS操作</p>
+<blockquote>
+<p><strong>注意</strong>：MarkWord里默认数据是存储对象的HashCode等信息,但是在运行期间，Mark Word里存储的数据会随着锁标志位的变化而变化</p>
+<p><strong>在表2-4中</strong>：<strong>每一个对象都有一个monitor与之关联</strong>。重量级锁也就是通常说synchronized的对象锁，锁标识位为10，其中指针指向的是monitor对象（也称为管程或监视器锁）的起始地址</p>
+</blockquote>
+<h2 id="Monitor"><a href="#Monitor" class="headerlink" title="Monitor"></a>Monitor</h2><p><strong>Monitor监视器</strong></p>
+<p><strong>每一个对象都有一个monitor与之关联</strong>，当且一个monitor被持有后，它将处于锁定状态。线程执行到monitorenter 指令时，将会尝试获取对象所对应的monitor的所有权，即尝试获得对象的锁。</p>
+<p>monitor在JVM中是基于C++的实现的，ObjectMonitor中有几个关键属性：</p>
+<ul>
+<li><p>_owner：指向持有ObjectMonitor对象的线程</p>
+</li>
+<li><p>_WaitSet：存放处于wait状态的线程队列</p>
+</li>
+<li><p>_EntryList：存放处于等待锁block状态的线程队列</p>
+</li>
+<li><p>_recursions：锁的重入次数</p>
+</li>
+<li><p>_count：用来记录该线程获取锁的次数</p>
+</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20240125193440205.png"
+                      alt="image-20240125193440205"
+                ></p>
+<p>原文链接：<a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43369986/article/details/109357146" >https://blog.csdn.net/qq_43369986/article/details/109357146 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<blockquote>
+<p>tips：wait()方法要配合while使用，若用if唤醒时会跳过判断条件</p>
+</blockquote>
+<p><strong>在JDK1.4.2引入自旋锁：</strong></p>
+<blockquote>
+<p>为了避免每个未得到锁的线程长时间处于等待状态，引入自旋锁，它不会将处于等待状态的线程挂起，而是通过无限循环的方式，不断检测是否能够获取锁，由于单个线程占用锁的时间非常短，所以说循环次数不会太多；但是会消耗CPU性能</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/../image/image-20240127191100553.png"
+                      alt="image-20240127191100553"
+                ></p>
+<p><strong>在JDK6之后，自旋锁得到了一次优化：</strong></p>
+<blockquote>
+<p>循环次数会判断此次能得到锁的概率，调整自旋次数！</p>
+<p>自旋的次数限制不再是固定的，而是自适应变化的，比如在同一个锁对象上，自旋等待刚刚成功获得过锁，并且持有锁的线程正在运行，那么这次自旋也是有可能成功的，所以会允许自旋更多次。当然，如果某个锁经常都自旋失败，那么有可能会不再采用自旋策略，而是直接使用重量级锁。</p>
+</blockquote>
+<h2 id="LOCK接口锁"><a href="#LOCK接口锁" class="headerlink" title="LOCK接口锁"></a>LOCK接口锁</h2><blockquote>
+<p>隶属于：java.util.concurrent.locks包下</p>
+</blockquote>
+<p><strong>Condition</strong>：<code>Condition</code> 将 <code>Object</code> 监视器方法（<a href="../../../../java/lang/Object.html#wait()"><code>wait</code></a>、<a href="../../../../java/lang/Object.html#notify()"><code>notify</code></a> 和 <a href="../../../../java/lang/Object.html#notifyAll()"><code>notifyAll</code></a>）分解成截然不同的对象，以便通过将这些对象与任意  <a href="../../../../java/util/concurrent/locks/Lock.html"><code>Lock</code></a>  实现组合使用，为每个对象提供多个等待 set（wait-set）。其中，<code>Lock</code> 替代了  <code>synchronized</code> 方法和语句的使用，<code>Condition</code> 替代了 Object 监视器方法的使用。</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Lock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantLock</span>();</span><br><span class="line"><span class="type">Condition</span> <span class="variable">condition</span> <span class="operator">=</span> lock.newCondition();</span><br></pre></td></tr></table></figure></div>
+
+<table>
+<thead>
+<tr>
+<th><strong>方法摘要</strong></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>await</code></td>
+<td>造成当前线程在接到信号或被中断之前一直处于等待状态。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>signal</code></td>
+<td>唤醒一个等待线程。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>signalAll</code></td>
+<td>唤醒所有等待线程。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>Lock</strong>：</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lock.Lock();</span><br><span class="line">lock.unLock();</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="重量级锁"><a href="#重量级锁" class="headerlink" title="重量级锁"></a>重量级锁</h2><blockquote>
 <p>线程切换时间成本高</p>
 </blockquote>
 <h2 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h2><blockquote>
@@ -292,6 +430,8 @@
 <li>synchronized</li>
 <li>ReentrantLock</li>
 </ul>
+<p>性能优于sychronized关键字</p>
+<p>与sychronized的区别是Lock是接口，而且可以响应中断，在程序中获取锁的状态可观</p>
 </blockquote>
 <h2 id="公平锁与非公平锁"><a href="#公平锁与非公平锁" class="headerlink" title="公平锁与非公平锁"></a>公平锁与非公平锁</h2><p>其实锁分为公平锁和非公平锁，默认我们创建出来的ReentrantLock是采用的非公平锁作为底层锁机制。那么什么是公平锁什么又是非公平锁呢？</p>
 <ul>
@@ -342,7 +482,7 @@
         
             <li>
                 <strong>Updated at
-                    :</strong> 2023-12-08 19:18:16
+                    :</strong> 2024-01-27 19:18:06
             </li>
         
         <li>
@@ -466,7 +606,7 @@
     <div class="post-toc">
         <div class="toc-title">On this page</div>
         <div class="page-title">JUC并发编程</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B"><span class="nav-text">JUC并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E9%87%8F%E7%BA%A7%E9%94%81"><span class="nav-text">重量级锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%94%81"><span class="nav-text">轻量级锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81"><span class="nav-text">可重入锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AC%E5%B9%B3%E9%94%81%E4%B8%8E%E9%9D%9E%E5%85%AC%E5%B9%B3%E9%94%81"><span class="nav-text">公平锁与非公平锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E9%94%81"><span class="nav-text">读写锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E5%8D%87%E7%BA%A7"><span class="nav-text">锁升级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E9%99%8D%E7%BA%A7"><span class="nav-text">锁降级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CAS%E7%AE%97%E6%B3%95"><span class="nav-text">CAS算法</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JUC%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B"><span class="nav-text">JUC并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E5%AF%B9%E8%B1%A1%E5%A4%B4"><span class="nav-text">java对象头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Monitor"><span class="nav-text">Monitor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LOCK%E6%8E%A5%E5%8F%A3%E9%94%81"><span class="nav-text">LOCK接口锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E9%87%8F%E7%BA%A7%E9%94%81"><span class="nav-text">重量级锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%94%81"><span class="nav-text">轻量级锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81"><span class="nav-text">可重入锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AC%E5%B9%B3%E9%94%81%E4%B8%8E%E9%9D%9E%E5%85%AC%E5%B9%B3%E9%94%81"><span class="nav-text">公平锁与非公平锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E9%94%81"><span class="nav-text">读写锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E5%8D%87%E7%BA%A7"><span class="nav-text">锁升级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%81%E9%99%8D%E7%BA%A7"><span class="nav-text">锁降级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CAS%E7%AE%97%E6%B3%95"><span class="nav-text">CAS算法</span></a></li></ol></li></ol>
 
     </div>
 </div>
