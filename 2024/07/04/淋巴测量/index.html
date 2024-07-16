@@ -1,0 +1,697 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>淋巴测量 | FANSEA</title><meta name="author" content="FANSEA"><meta name="copyright" content="FANSEA"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="淋巴测量"><meta name="application-name" content="淋巴测量"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="淋巴测量"><meta property="og:url" content="http://example.com/2024/07/04/%E6%B7%8B%E5%B7%B4%E6%B5%8B%E9%87%8F/index.html"><meta property="og:site_name" content="FANSEA"><meta property="og:description" content="淋巴测量   重点词语：qualitative part 定性的部分；volume vs. time diagram 体积与时间关系图  1定义java方法监听串口，串口会每20ms发送modbus格式的数据并以\n对每个指令进行分隔，要求对每个完整的指令进行处理计算，当读取到的数据末尾不是\n则留"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="http://example.com/fansea.png"><meta property="article:author" content="FANSEA"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="http://example.com/fansea.png"><meta name="description" content="淋巴测量   重点词语：qualitative part 定性的部分；volume vs. time diagram 体积与时间关系图  1定义java方法监听串口，串口会每20ms发送modbus格式的数据并以\n对每个指令进行分隔，要求对每个完整的指令进行处理计算，当读取到的数据末尾不是\n则留"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://example.com/2024/07/04/%E6%B7%8B%E5%B7%B4%E6%B5%8B%E9%87%8F/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: FANSEA","link":"链接: ","source":"来源: FANSEA","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'FANSEA',
+  title: '淋巴测量',
+  postAI: '',
+  pageFillDescription: '淋巴测量, 基础知识, ModBus, RS485, 寄存器, CRC校验, 若依, 若依新建自己的模块, 新建菜单, Java, JNA, java调用cpp, 前端, vue项目引入外部js, 数据库设计, 字典表（ruoyi自带）, 医生表（ruoyi自带）, 检查结果表(Check_Condition), 图形信息表（暂未确定采用存储方式）, 使用时间序列数据库（如InfluxDB或TimescaleDB）, 优点：, 图像保存表, 设计模式选择, 命令模式, 工厂模式, 策略模式, 观察者模式, 适配器模式, 单例模式, 技术选型, mybatis-plus, 模块设计, 信息录入, 预处理, 串口参数配置, 设备参数, 扫描, 实时数据展示, 诊断淋巴测量重点词语定性的部分体积与时间关系图定义方法监听串口串口会每发送格式的数据并以对每个指令进行分隔要求对每个完整的指令进行处理计算当读取到的数据末尾不是则留到下次读取确保发过来的每条指令都能完整收到并处理基础知识和还傻傻分不清看了本文你就清楚了协议和协议博客学习使用模式首要就是要知道报文格式其中地址位一个位的二进制数用于标识从设备的地址主设备通过地址位来选择要通信的从设备功能码一个位的二进制数用于指示主设备要执行的操作类型如读取数据写入数据等数据位根据功能码的不同数据位可以包含读取或写入的数据校验位一个位的循环冗余校验码用于检测数据在传输过程中是否发生错误是一种物理层通信标准用于在串行通信中传输数据它定义了电气特性信号传输方式和连接方式等通信可以支持多个设备通过同一总线进行通信其中一个设备作为主设备发送指令其他设备作为从设备接收指令寄存器寄存器是内部用来存放数据的一些小型存储区域用来暂时存放参与运算的数据和运算结果其实寄存器就是一种常用的时序逻辑电路但这种时序逻辑电路只包含存储电路寄存器的存储电路是由锁存器或触发器构成的因为一个锁存器或触发器能存储位二进制数所以由个锁存器或触发器可以构成位寄存器寄存器是中央处理器内的组成部分寄存器是有限存储容量的高速存储部件它们可用来暂存指令数据和位址校验校验原理及步骤博客即循环冗余校验码是数据通信领域中最常用的一种查错校验码其特征是信息字段和校验字段的长度可以任意选定循环冗余检查是一种数据传输检错功能对数据进行多项式计算并将得到的结果附在帧的后面接收设备也执行类似的算法以保证数据传输的正确性和完整性若依若依新建自己的模块若依框架一自定义模块添加晨光静默博客园在父目录下新建新模块在父类项目中添加自己的模块诊断模块在模块添加自己的模块并在自己模块引入新建菜单若依分离版手把手教你新建菜单配置路由自动生成前后端代码若依菜单配置博客之调用第三方库博客之调用第三方库博客之调用第三方库博客提供一组工具类用于在运行期间动态访问系统本地库如的而不需要编写任何代码开发人员只要在一个接口中描述目标的函数与结构将自动实现接口到的映射调用写一个程序使用工具打包成或动态链接文件引入依赖实现接口动态库接口创建动态库实例调用程序前端项目引入外部在中加入数据库设计字典表自带医生表自带采用若依自带的表医生表要求登录可以看到自己负责的病人并做诊断需要包含账号密码用于登录检查结果表字段含义数据类型默认值是否可空约束诊断结果编号否主键病人负责的医生否诊断状态对应字典异常正常等诊断描述诊断部位对应字典左右臂等扫描图形创建时间更新时间采集次数创建人更新人病人设备号图形信息表暂未确定采用存储方式不确定前端数据渲染方案听甲方需求是后端返回长宽信息交给前端做渲染可能会使用具体方案待明确字段含义图形体积总长度采集模型的图像创建时间更新时间创建人更新人使用时间序列数据库如或优点高性能写入时间序列数据库特别优化了时间序列数据的写入和查询非常适合高频率的数据记录压缩与存储优化这类数据库通常内置数据压缩机制可以有效减少存储空间需求预聚合功能对于历史数据的统计分析时间序列数据库能够预先计算聚合结果加速查询速度图像保存表使用选型理由高效海量数据存取并且方便清理历史数据并且存储结构合适记录图像展示颜色字段则就记录长宽实际信息设计模式选择在项目中尤其是在处理上下位机通信的固定指令集时采用合适的设计模式可以显著提高代码的可读性可维护性和扩展性以下是几种可能适用的设计模式命令模式应用场景当你的系统需要将请求封装成对象以便使用不同的请求队列请求或者记录请求日志时可以使用命令模式特别适用于有固定指令集的上下位机通信实现思路定义一个命令接口所有的具体指令类都继承该接口这样每个指令都是一个对象可以被单独处理和执行这使得添加新的指令变得容易只需实现命令接口即可工厂模式应用场景当系统中有多个具体的命令类时可以通过工厂模式来创建这些命令实例而无需知道具体的创建细节实现思路创建一个工厂类根据传入的参数如指令类型返回相应的命令实例这样可以避免在客户端代码中直接命令类使代码更加清晰和可维护策略模式应用场景当系统中存在多种算法或行为且这些算法或行为可以互换时可以使用策略模式实现思路定义一系列的算法把它们一个个封装起来并且使它们可以相互替换这样可以根据不同的上下位机通信协议动态选择不同的处理策略观察者模式应用场景当上位机需要监听下位机的状态变化时可以使用观察者模式实现思路下位机作为主题上位机作为观察者当下位机状态发生改变时主动通知所有注册的观察者这样可以实现松耦合的通信机制适配器模式应用场景当上位机需要与不同品牌或型号的下位机通信而这些下位机的通信协议不同时可以使用适配器模式实现思路创建适配器类将目标接口转换为客户期望的另一个接口从而使原本不兼容的接口能够协同工作单例模式应用场景当需要在整个系统中共享唯一的通信实例时可以使用单例模式实现思路确保一个类只有一个实例并提供一个全局访问点结合以上设计模式可以构建出既灵活又强大的上下位机通信框架在实际开发中根据具体需求选择合适的模式组合可以使代码结构更加清晰易于理解和扩展技术选型核心库模块设计信息录入预处理串口参数配置波特率串口号校验位数据位停止位设备参数采集次数步进长度轮询频率最大运行距离原点位置扫描实时数据展示诊断',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-16 12:31:47',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">FANSEA</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Activiti/" style="font-size: 1.05rem;">Activiti<sup>1</sup></a><a href="/tags/MySQL/" style="font-size: 1.05rem;">MySQL<sup>1</sup></a><a href="/tags/Redis/" style="font-size: 1.05rem;">Redis<sup>3</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>2</sup></a><a href="/tags/SpringSecurity/" style="font-size: 1.05rem;">SpringSecurity<sup>1</sup></a><a href="/tags/es/" style="font-size: 1.05rem;">es<sup>1</sup></a><a href="/tags/git/" style="font-size: 1.05rem;">git<sup>1</sup></a><a href="/tags/java/" style="font-size: 1.05rem;">java<sup>1</sup></a><a href="/tags/juc/" style="font-size: 1.05rem;">juc<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>1</sup></a><a href="/tags/vue/" style="font-size: 1.05rem;">vue<sup>1</sup></a><a href="/tags/%E4%BE%9D%E8%B5%96%E5%8C%85/" style="font-size: 1.05rem;">依赖包<sup>1</sup></a><a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 1.05rem;">内网穿透<sup>1</sup></a><a href="/tags/%E5%95%86%E4%B8%9A%E6%80%9D%E8%80%83/" style="font-size: 1.05rem;">商业思考<sup>2</sup></a><a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" style="font-size: 1.05rem;">微服务<sup>1</sup></a><a href="/tags/%E6%80%9D%E8%80%83/" style="font-size: 1.05rem;">思考<sup>1</sup></a><a href="/tags/%E6%8A%80%E8%83%BD%E6%8F%90%E5%8D%87/" style="font-size: 1.05rem;">技能提升<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1.05rem;">数据结构<sup>1</sup></a><a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 1.05rem;">日记<sup>1</sup></a><a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 1.05rem;">服务器<sup>1</sup></a><a href="/tags/%E6%A8%A1%E5%9E%8B%E9%A2%84%E6%B5%8B-%E7%89%A9%E8%81%94%E7%BD%91/" style="font-size: 1.05rem;">模型预测 物联网<sup>1</sup></a><a href="/tags/%E7%89%A9%E8%81%94%E7%BD%91/" style="font-size: 1.05rem;">物联网<sup>1</sup></a><a href="/tags/%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C/" style="font-size: 1.05rem;">登录校验<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.05rem;">算法<sup>5</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">编程工具<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 1.05rem;">读书<sup>2</sup></a><a href="/tags/%E8%B1%AA%E8%BD%A6/" style="font-size: 1.05rem;">豪车<sup>1</sup></a><a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 1.05rem;">面试<sup>5</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 1.05rem;">项目<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">13</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">11</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">14</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/02/"><span class="card-archive-list-date">二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="article-meta tags"></span></div></div><h1 class="post-title" itemprop="name headline">淋巴测量</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-07-04T12:54:41.000Z" title="发表于 2024-07-04 20:54:41">2024-07-04</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-07-16T04:31:47.406Z" title="更新于 2024-07-16 12:31:47">2024-07-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为湘潭"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>湘潭</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2024/07/04/%E6%B7%8B%E5%B7%B4%E6%B5%8B%E9%87%8F/"><header><h1 id="CrawlerTitle" itemprop="name headline">淋巴测量</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">FANSEA</span><time itemprop="dateCreated datePublished" datetime="2024-07-04T12:54:41.000Z" title="发表于 2024-07-04 20:54:41">2024-07-04</time><time itemprop="dateCreated datePublished" datetime="2024-07-16T04:31:47.406Z" title="更新于 2024-07-16 12:31:47">2024-07-16</time></header><h1 id="淋巴测量"><a href="#淋巴测量" class="headerlink" title="淋巴测量"></a>淋巴测量</h1><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../image/image-20240712150911428.png" alt="image-20240712150911428"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../image/image-20240712095033823.png" alt="image-20240712095033823"></p>
+<blockquote>
+<p>重点词语：<code>qualitative part</code> 定性的部分；<code>volume vs. time diagram</code> 体积与时间关系图</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">定义java方法监听串口，串口会每20ms发送modbus格式的数据并以\n对每个指令进行分隔，要求对每个完整的指令进行处理计算，当读取到的数据末尾不是\n则留到下次读取，确保发过来的每条指令都能完整收到并处理</span><br></pre></td></tr></table></figure>
+
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="ModBus"><a href="#ModBus" class="headerlink" title="ModBus"></a>ModBus</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_57223278/article/details/133169629">RS485和Modbus还傻傻分不清？看了本文你就清楚了_485协议和modbus协议-CSDN博客</a></p>
+</blockquote>
+<p>学习使用<code>Modbus RTU</code>模式，首要就是要知道报文格式。其中：</p>
+<ul>
+<li><p>地址位（Address）：一个8位的二进制数，用于标识从设备的地址。主设备通过地址位来选择要通信的从设备。</p>
+</li>
+<li><p>功能码（Function Code）：一个8位的二进制数，用于指示主设备要执行的操作类型，如读取数据、写入数据等。</p>
+</li>
+<li><p>数据位（Data）：根据功能码的不同，数据位可以包含读取或写入的数据。</p>
+</li>
+<li><p>校验位（Checksum）：一个16位的循环冗余校验（CRC）码，用于检测数据在传输过程中是否发生错误。</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../image/image-20240704213948867.png" alt="image-20240704213948867"></p>
+<h3 id="RS485"><a href="#RS485" class="headerlink" title="RS485"></a>RS485</h3><blockquote>
+<p><code> RS485</code>是一种<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E7%89%A9%E7%90%86%E5%B1%82&spm=1001.2101.3001.7020">物理层</a>通信标准，用于在串行通信中传输数据。它定义了电气特性、信号传输方式和连接方式等。RS485通信可以支持多个设备通过同一总线进行通信，其中一个设备作为主设备发送指令，其他设备作为从设备接收指令。</p>
+</blockquote>
+<h3 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h3><blockquote>
+<p>寄存器是<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/CPU/120556?fromModule=lemma_inlink">CPU</a>内部用来存放数据的一些小型<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AD%98%E5%82%A8%E5%8C%BA%E5%9F%9F/10350355?fromModule=lemma_inlink">存储区域</a>，用来暂时存放参与运算的数据和运算结果。其实寄存器就是一种常用的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/2083647?fromModule=lemma_inlink">时序逻辑电路</a>，但这种时序逻辑电路只包含存储电路。寄存器的存储电路是由锁存器或<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%A7%A6%E5%8F%91%E5%99%A8/193146?fromModule=lemma_inlink">触发器</a>构成的，因为一个锁存器或触发器能存储1位<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B0/108101?fromModule=lemma_inlink">二进制数</a>，所以由N个<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%94%81%E5%AD%98%E5%99%A8/10801965?fromModule=lemma_inlink">锁存器</a>或触发器可以构成N位寄存器。寄存器是<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%AD%E5%A4%AE%E5%A4%84%E7%90%86%E5%99%A8/284033?fromModule=lemma_inlink">中央处理器</a>内的组成部分。寄存器是有限<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AD%98%E5%82%A8%E5%AE%B9%E9%87%8F/3043601?fromModule=lemma_inlink">存储容量</a>的高速存储部件，它们可用来<strong>暂存指令、数据和位址</strong>。</p>
+</blockquote>
+<h3 id="CRC校验"><a href="#CRC校验" class="headerlink" title="CRC校验"></a>CRC校验</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/d_leo/article/details/73572373">CRC校验原理及步骤-CSDN博客</a></p>
+</blockquote>
+<p>CRC即循环冗余校验码：是数据通信领域中最常用的一种查错校验码，其特征是信息字段和校验字段的长度可以任意选定。循环冗余检查（CRC）是一种数据传输检错功能，对数据进行多项式计算，并将得到的结果附在帧的后面，接收设备也执行类似的算法，以保证数据传输的正确性和完整性。</p>
+<h3 id="若依"><a href="#若依" class="headerlink" title="若依"></a>若依</h3><blockquote>
+<h4 id="若依新建自己的模块"><a href="#若依新建自己的模块" class="headerlink" title="若依新建自己的模块"></a>若依新建自己的模块</h4></blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhangmo/p/15403505.html">若依框架-(一)自定义模块添加 - 晨光静默 - 博客园 (cnblogs.com)</a></p>
+<ol>
+<li>在父目录下新建新模块</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../image/image-20240712164737929.png" alt="image-20240712164737929"></p>
+<ol start="2">
+<li>在父类项目中添加自己的模块</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 诊断模块--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.ruoyi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ruoyi-diagnosis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;ruoyi.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">modules</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">module</span>&gt;</span>ruoyi-admin<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">module</span>&gt;</span>ruoyi-framework<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">module</span>&gt;</span>ruoyi-system<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">module</span>&gt;</span>ruoyi-quartz<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">module</span>&gt;</span>ruoyi-generator<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">module</span>&gt;</span>ruoyi-common<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">module</span>&gt;</span>ruoyi-diagnosis<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">modules</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在admin模块添加自己的模块，并在自己模块引入common</li>
+</ol>
+<blockquote>
+<h4 id="新建菜单"><a href="#新建菜单" class="headerlink" title="新建菜单"></a>新建菜单</h4></blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wuzushun/article/details/135475466">若依分离版手把手教你新建菜单，配置路由，自动生成前后端代码_若依菜单配置-CSDN博客</a></p>
+<h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><blockquote>
+<h4 id="JNA"><a href="#JNA" class="headerlink" title="JNA"></a>JNA</h4></blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013919153/article/details/102882896">Java 之 JNA(调用第三方库)-CSDN博客</a></p>
+<p>![Java 之 JNA(调用第三方库)-CSDN博客 - image](..&#x2F;image&#x2F;Java 之 JNA(调用第三方库)-CSDN博客 - image.png)</p>
+<p><strong>JNA（Java Native Access）</strong>：提供一组Java工具类用于在运行期间动态访问系统本地库（native library：如Window的dll）而不需要编写任何Native&#x2F;JNI代码。开发人员只要在一个java接口中描述目标native library的函数与结构，JNA将自动实现Java接口到native function的映射。</p>
+<blockquote>
+<h5 id="java调用cpp"><a href="#java调用cpp" class="headerlink" title="java调用cpp"></a>java调用cpp</h5></blockquote>
+<ol>
+<li>写一个c程序使用<a href="E:\APP\mingw64">MinGw</a>工具打包成dll或so动态链接文件</li>
+</ol>
+<p><em>windows</em></p>
+<ul>
+<li>gcc -m64 -shared -o <dll_name> <c_name></li>
+</ul>
+<p><em>linux</em></p>
+<ul>
+<li>gcc -m64 -fPIC -shared -o <so_name> <c_name></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">sum</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x + y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>引入依赖，实现<code>Library</code>接口</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sun.jna<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jna<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Sum</span> <span class="keyword">extends</span> <span class="title class_">Library</span> &#123;</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//动态库接口</span></span><br><span class="line">        <span class="type">int</span> <span class="title function_">sum</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//创建动态库实例 dllPath = src/main/resources/sum.dll</span></span><br><span class="line">        <span class="type">Sum</span> <span class="variable">INSTANCE</span> <span class="operator">=</span> (Sum) Native.loadLibrary(dllPath, Sum.class);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>java调用cpp程序</strong></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sum.INSTANCE.sum(<span class="number">1</span>,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><blockquote>
+<h4 id="vue项目引入外部js"><a href="#vue项目引入外部js" class="headerlink" title="vue项目引入外部js"></a>vue项目引入外部js</h4></blockquote>
+<p>在<code>public/index.html</code>中加入</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span></span></span><br><span class="line"><span class="tag"><span class="attr">async</span></span></span><br><span class="line"><span class="tag"><span class="attr">defer</span></span></span><br><span class="line"><span class="tag"><span class="attr">src</span>=<span class="string">&quot;http://120.77.201.84:8080/api/application/embed?protocol=http&amp;host=120.77.201.84:8080&amp;token=40dc856f3373d0da&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/../image/image-20240712150344650.png" alt="image-20240712150344650"></p>
+<h3 id="字典表（ruoyi自带）"><a href="#字典表（ruoyi自带）" class="headerlink" title="字典表（ruoyi自带）"></a>字典表（ruoyi自带）</h3><h3 id="医生表（ruoyi自带）"><a href="#医生表（ruoyi自带）" class="headerlink" title="医生表（ruoyi自带）"></a>医生表（ruoyi自带）</h3><blockquote>
+<p>采用若依自带的<code>user</code>表，医生表要求登录可以看到自己负责的病人并做诊断，需要包含账号密码用于登录</p>
+</blockquote>
+<h3 id="检查结果表-Check-Condition"><a href="#检查结果表-Check-Condition" class="headerlink" title="检查结果表(Check_Condition)"></a>检查结果表(Check_Condition)</h3><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+<th>数据类型</th>
+<th>默认值</th>
+<th>是否可空</th>
+<th>约束</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>诊断结果编号</td>
+<td>bigint(20)</td>
+<td></td>
+<td>否</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>patient_code</td>
+<td>病人id</td>
+<td>bigint(20)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>doctor_id</td>
+<td>负责的医生id</td>
+<td>bigint(20)</td>
+<td></td>
+<td>否</td>
+<td></td>
+</tr>
+<tr>
+<td>diagnostic_status</td>
+<td>诊断状态(对应字典：异常&#x2F;正常等)</td>
+<td>bigint(20)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>diagnostic_describe</td>
+<td>诊断描述</td>
+<td>varchar(512)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>diagnostic_part</td>
+<td>诊断部位(对应字典：左右臂等)</td>
+<td>bigint(20)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>figure_id</td>
+<td>扫描图形id</td>
+<td>bigint(20)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>create_time</td>
+<td>创建时间</td>
+<td>datetime</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>update_time</td>
+<td>更新时间</td>
+<td>datetime</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>frequency</td>
+<td>采集次数</td>
+<td>int</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>create_by</td>
+<td>创建人</td>
+<td>varchar(64)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>update_by</td>
+<td>更新人</td>
+<td>varchar(64)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>patient_name</td>
+<td>病人name</td>
+<td>varchar(10)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>device</td>
+<td>设备号</td>
+<td>int</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="图形信息表（暂未确定采用存储方式）"><a href="#图形信息表（暂未确定采用存储方式）" class="headerlink" title="图形信息表（暂未确定采用存储方式）"></a>图形信息表（暂未确定采用存储方式）</h3><blockquote>
+<p>不确定前端数据渲染方案，听甲方需求是后端返回长宽信息交给前端做渲染，可能会使用influxDB&#x2F;mongoDB，具体方案待明确</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>figure_id</td>
+<td>图形id</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>volume</td>
+<td>体积</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>total_length</td>
+<td>总长度</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>img</td>
+<td>采集模型的图像</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>create_time</td>
+<td>创建时间</td>
+<td>datetime</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>update_time</td>
+<td>更新时间</td>
+<td>datetime</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>create_by</td>
+<td>创建人</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>update_by</td>
+<td>更新人</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<h3 id="使用时间序列数据库（如InfluxDB或TimescaleDB）"><a href="#使用时间序列数据库（如InfluxDB或TimescaleDB）" class="headerlink" title="使用时间序列数据库（如InfluxDB或TimescaleDB）"></a>使用时间序列数据库（如InfluxDB或TimescaleDB）</h3><h4 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h4><ol>
+<li><strong>高性能写入</strong>：时间序列数据库特别优化了时间序列数据的写入和查询，非常适合高频率的数据记录。</li>
+<li><strong>压缩与存储优化</strong>：这类数据库通常内置数据压缩机制，可以有效减少存储空间需求。</li>
+<li><strong>预聚合功能</strong>：对于历史数据的统计分析，时间序列数据库能够预先计算聚合结果，加速查询速度。</li>
+</ol>
+</blockquote>
+<h3 id="图像保存表"><a href="#图像保存表" class="headerlink" title="图像保存表"></a>图像保存表</h3><blockquote>
+<p>使用<code>influxDB</code> </p>
+<p>选型理由：高效海量数据存取，并且方便清理历史数据，并且存储结构合适，<code>tag</code> 记录图像id，展示颜色；字段则就记录长宽实际信息</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="设计模式选择"><a href="#设计模式选择" class="headerlink" title="设计模式选择"></a>设计模式选择</h2><p>在Java项目中，尤其是在处理上下位机通信的固定指令集时，采用合适的设计模式可以显著提高代码的可读性、可维护性和扩展性。以下是几种可能适用的设计模式：</p>
+<h3 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h3><ul>
+<li><strong>应用场景</strong>：当你的系统需要将请求封装成对象，以便使用不同的请求、队列请求或者记录请求日志时，可以使用命令模式。特别适用于有固定指令集的上下位机通信。</li>
+<li><strong>实现思路</strong>：定义一个命令接口，所有的具体指令类都继承该接口。这样，每个指令都是一个对象，可以被单独处理和执行。这使得添加新的指令变得容易，只需实现命令接口即可。</li>
+</ul>
+<h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><ul>
+<li><strong>应用场景</strong>：当系统中有多个具体的命令类时，可以通过工厂模式来创建这些命令实例，而无需知道具体的创建细节。</li>
+<li><strong>实现思路</strong>：创建一个工厂类，根据传入的参数（如指令类型）返回相应的命令实例。这样可以避免在客户端代码中直接new命令类，使代码更加清晰和可维护。</li>
+</ul>
+<h3 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h3><ul>
+<li><strong>应用场景</strong>：当系统中存在多种算法或行为，且这些算法或行为可以互换时，可以使用策略模式。</li>
+<li><strong>实现思路</strong>：定义一系列的算法，把它们一个个封装起来，并且使它们可以相互替换。这样可以根据不同的上下位机通信协议，动态选择不同的处理策略。</li>
+</ul>
+<h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><ul>
+<li><strong>应用场景</strong>：当上位机需要监听下位机的状态变化时，可以使用观察者模式。</li>
+<li><strong>实现思路</strong>：下位机作为主题，上位机作为观察者。当下位机状态发生改变时，主动通知所有注册的观察者，这样可以实现松耦合的通信机制。</li>
+</ul>
+<h3 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h3><ul>
+<li><strong>应用场景</strong>：当上位机需要与不同品牌或型号的下位机通信，而这些下位机的通信协议不同时，可以使用适配器模式。</li>
+<li><strong>实现思路</strong>：创建适配器类，将目标接口转换为客户期望的另一个接口，从而使原本不兼容的接口能够协同工作。</li>
+</ul>
+<h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><ul>
+<li><strong>应用场景</strong>：当需要在整个系统中共享唯一的通信实例时，可以使用单例模式。</li>
+<li><strong>实现思路</strong>：确保一个类只有一个实例，并提供一个全局访问点。</li>
+</ul>
+<p>结合以上设计模式，可以构建出既灵活又强大的上下位机通信框架。在实际开发中，根据具体需求选择合适的模式组合，可以使代码结构更加清晰，易于理解和扩展。</p>
+<h2 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h2><h3 id="mybatis-plus"><a href="#mybatis-plus" class="headerlink" title="mybatis-plus"></a>mybatis-plus</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- MyBatis Plus 核心库 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="模块设计"><a href="#模块设计" class="headerlink" title="模块设计"></a>模块设计</h2><h3 id="信息录入"><a href="#信息录入" class="headerlink" title="信息录入"></a>信息录入</h3><h3 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h3><h4 id="串口参数配置"><a href="#串口参数配置" class="headerlink" title="串口参数配置"></a>串口参数配置</h4><blockquote>
+<p>波特率，串口号，校验位，数据位，停止位</p>
+</blockquote>
+<h4 id="设备参数"><a href="#设备参数" class="headerlink" title="设备参数"></a>设备参数</h4><blockquote>
+<p>采集次数，步进长度，轮询频率，最大运行距离，原点位置</p>
+</blockquote>
+<h3 id="扫描"><a href="#扫描" class="headerlink" title="扫描"></a>扫描</h3><h4 id="实时数据展示"><a href="#实时数据展示" class="headerlink" title="实时数据展示"></a>实时数据展示</h4><h3 id="诊断"><a href="#诊断" class="headerlink" title="诊断"></a>诊断</h3></article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/fansea.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/fansea.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">FANSEA</div><div class="post-copyright__author_desc">目标明确，只管去做</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2024/07/04/%E6%B7%8B%E5%B7%B4%E6%B5%8B%E9%87%8F/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2024/07/04/%E6%B7%8B%E5%B7%B4%E6%B5%8B%E9%87%8F/')">淋巴测量</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2024/07/04/%E6%B7%8B%E5%B7%B4%E6%B5%8B%E9%87%8F/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=淋巴测量&amp;url=http://example.com/2024/07/04/%E6%B7%8B%E5%B7%B4%E6%B5%8B%E9%87%8F/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">FANSEA</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"></div></div></div><div class="post_share"><div class="social-share" data-image="/fansea.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/06/21/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">人工智能</div></div></a></div><div class="next-post pull-right"><a href="/2024/07/05/%E8%8B%A5%E4%BE%9D/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">若依</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/fansea.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description"></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/05/13/645fa415e8694.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%8B%E5%B7%B4%E6%B5%8B%E9%87%8F"><span class="toc-number">1.</span> <span class="toc-text">淋巴测量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ModBus"><span class="toc-number">1.1.1.</span> <span class="toc-text">ModBus</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RS485"><span class="toc-number">1.1.2.</span> <span class="toc-text">RS485</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">1.1.3.</span> <span class="toc-text">寄存器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CRC%E6%A0%A1%E9%AA%8C"><span class="toc-number">1.1.4.</span> <span class="toc-text">CRC校验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8B%A5%E4%BE%9D"><span class="toc-number">1.1.5.</span> <span class="toc-text">若依</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8B%A5%E4%BE%9D%E6%96%B0%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">若依新建自己的模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E8%8F%9C%E5%8D%95"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">新建菜单</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java"><span class="toc-number">1.1.6.</span> <span class="toc-text">Java</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JNA"><span class="toc-number">1.1.6.1.</span> <span class="toc-text">JNA</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#java%E8%B0%83%E7%94%A8cpp"><span class="toc-number">1.1.6.1.1.</span> <span class="toc-text">java调用cpp</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF"><span class="toc-number">1.1.7.</span> <span class="toc-text">前端</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#vue%E9%A1%B9%E7%9B%AE%E5%BC%95%E5%85%A5%E5%A4%96%E9%83%A8js"><span class="toc-number">1.1.7.1.</span> <span class="toc-text">vue项目引入外部js</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.</span> <span class="toc-text">数据库设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E8%A1%A8%EF%BC%88ruoyi%E8%87%AA%E5%B8%A6%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">字典表（ruoyi自带）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BB%E7%94%9F%E8%A1%A8%EF%BC%88ruoyi%E8%87%AA%E5%B8%A6%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">医生表（ruoyi自带）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%BB%93%E6%9E%9C%E8%A1%A8-Check-Condition"><span class="toc-number">1.2.3.</span> <span class="toc-text">检查结果表(Check_Condition)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E4%BF%A1%E6%81%AF%E8%A1%A8%EF%BC%88%E6%9A%82%E6%9C%AA%E7%A1%AE%E5%AE%9A%E9%87%87%E7%94%A8%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F%EF%BC%89"><span class="toc-number">1.2.4.</span> <span class="toc-text">图形信息表（暂未确定采用存储方式）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88%E5%A6%82InfluxDB%E6%88%96TimescaleDB%EF%BC%89"><span class="toc-number">1.2.5.</span> <span class="toc-text">使用时间序列数据库（如InfluxDB或TimescaleDB）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">优点：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E4%BF%9D%E5%AD%98%E8%A1%A8"><span class="toc-number">1.2.6.</span> <span class="toc-text">图像保存表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E9%80%89%E6%8B%A9"><span class="toc-number">1.3.</span> <span class="toc-text">设计模式选择</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.1.</span> <span class="toc-text">命令模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.2.</span> <span class="toc-text">工厂模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.3.</span> <span class="toc-text">策略模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.4.</span> <span class="toc-text">观察者模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.5.</span> <span class="toc-text">适配器模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.6.</span> <span class="toc-text">单例模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B"><span class="toc-number">1.4.</span> <span class="toc-text">技术选型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mybatis-plus"><span class="toc-number">1.4.1.</span> <span class="toc-text">mybatis-plus</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.5.</span> <span class="toc-text">模块设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E5%BD%95%E5%85%A5"><span class="toc-number">1.5.1.</span> <span class="toc-text">信息录入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-number">1.5.2.</span> <span class="toc-text">预处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">串口参数配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E5%8F%82%E6%95%B0"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">设备参数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F"><span class="toc-number">1.5.3.</span> <span class="toc-text">扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E6%97%B6%E6%95%B0%E6%8D%AE%E5%B1%95%E7%A4%BA"><span class="toc-number">1.5.3.1.</span> <span class="toc-text">实时数据展示</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%8A%E6%96%AD"><span class="toc-number">1.5.4.</span> <span class="toc-text">诊断</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/10/%E7%83%A4%E8%82%A0%E7%81%AB%E9%B8%A1%E9%9D%A2%EF%BC%9A%E5%AE%BF%E8%88%8D%E7%BB%8F%E6%B5%8E%E7%9A%84%E7%8E%8B%E7%89%8C/" title="烤肠火鸡面：宿舍经济的王牌">烤肠火鸡面：宿舍经济的王牌</a><time datetime="2024-07-10T13:27:47.000Z" title="发表于 2024-07-10 21:27:47">2024-07-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/10/%E6%B7%8B%E5%B7%B4%E6%B5%8B%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1v1-0/" title="淋巴测量数据库设计v1.0">淋巴测量数据库设计v1.0</a><time datetime="2024-07-10T06:55:50.000Z" title="发表于 2024-07-10 14:55:50">2024-07-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/09/%E6%B7%8B%E5%B7%B4%E9%A1%B9%E7%9B%AE%E9%97%AE%E9%A2%98/" title="淋巴项目问题">淋巴项目问题</a><time datetime="2024-07-09T01:45:06.000Z" title="发表于 2024-07-09 09:45:06">2024-07-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/" title="计算机底层原理">计算机底层原理</a><time datetime="2024-07-08T14:55:38.000Z" title="发表于 2024-07-08 22:55:38">2024-07-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/08/MaxKB-%E5%8D%93%E8%B6%8A%E7%9A%84AI%E9%A9%B1%E5%8A%A8%E7%9F%A5%E8%AF%86%E5%BA%93%E6%9E%84%E5%BB%BA%E4%B8%8E%E4%BC%98%E5%8C%96%E5%B9%B3%E5%8F%B0/" title="MaxKB:卓越的AI驱动知识库构建与优化平台">MaxKB:卓越的AI驱动知识库构建与优化平台</a><time datetime="2024-07-08T01:40:06.000Z" title="发表于 2024-07-08 09:40:06">2024-07-08</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2024 By <a class="footer-bar-link" href="/" title="FANSEA" target="_blank">FANSEA</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">90</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">30</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">0</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Activiti/" style="font-size: 0.88rem;">Activiti<sup>1</sup></a><a href="/tags/MySQL/" style="font-size: 0.88rem;">MySQL<sup>1</sup></a><a href="/tags/Redis/" style="font-size: 0.88rem;">Redis<sup>3</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>2</sup></a><a href="/tags/SpringSecurity/" style="font-size: 0.88rem;">SpringSecurity<sup>1</sup></a><a href="/tags/es/" style="font-size: 0.88rem;">es<sup>1</sup></a><a href="/tags/git/" style="font-size: 0.88rem;">git<sup>1</sup></a><a href="/tags/java/" style="font-size: 0.88rem;">java<sup>1</sup></a><a href="/tags/juc/" style="font-size: 0.88rem;">juc<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>1</sup></a><a href="/tags/vue/" style="font-size: 0.88rem;">vue<sup>1</sup></a><a href="/tags/%E4%BE%9D%E8%B5%96%E5%8C%85/" style="font-size: 0.88rem;">依赖包<sup>1</sup></a><a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 0.88rem;">内网穿透<sup>1</sup></a><a href="/tags/%E5%95%86%E4%B8%9A%E6%80%9D%E8%80%83/" style="font-size: 0.88rem;">商业思考<sup>2</sup></a><a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" style="font-size: 0.88rem;">微服务<sup>1</sup></a><a href="/tags/%E6%80%9D%E8%80%83/" style="font-size: 0.88rem;">思考<sup>1</sup></a><a href="/tags/%E6%8A%80%E8%83%BD%E6%8F%90%E5%8D%87/" style="font-size: 0.88rem;">技能提升<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 0.88rem;">数据结构<sup>1</sup></a><a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 0.88rem;">日记<sup>1</sup></a><a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 0.88rem;">服务器<sup>1</sup></a><a href="/tags/%E6%A8%A1%E5%9E%8B%E9%A2%84%E6%B5%8B-%E7%89%A9%E8%81%94%E7%BD%91/" style="font-size: 0.88rem;">模型预测 物联网<sup>1</sup></a><a href="/tags/%E7%89%A9%E8%81%94%E7%BD%91/" style="font-size: 0.88rem;">物联网<sup>1</sup></a><a href="/tags/%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C/" style="font-size: 0.88rem;">登录校验<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 0.88rem;">算法<sup>5</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">编程工具<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 0.88rem;">读书<sup>2</sup></a><a href="/tags/%E8%B1%AA%E8%BD%A6/" style="font-size: 0.88rem;">豪车<sup>1</sup></a><a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 0.88rem;">面试<sup>5</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 0.88rem;">项目<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 FANSEA 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
