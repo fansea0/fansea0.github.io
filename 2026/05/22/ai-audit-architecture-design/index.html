@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<title>设计案例解读 001 | AI审核服务插件化架构 | FANSEA</title>
+<meta name="description" content="wespy-http-go 项目设计案例解读：AI审核服务的插件化架构设计">
+<link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<style>
+  .article-content { max-width: 800px; margin: 0 auto; padding: 40px 20px; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.8; }
+  .article-content h1 { font-size: 28px; color: #1a365d; border-bottom: 3px solid #2c5282; padding-bottom: 15px; margin-bottom: 30px; }
+  .article-content h2 { font-size: 20px; color: #2c5282; margin: 30px 0 15px; border-left: 4px solid #2c5282; padding-left: 12px; }
+  .article-content h3 { font-size: 16px; color: #4a5568; margin: 20px 0 10px; }
+  .article-content p { margin: 15px 0; color: #2d3748; }
+  .article-content pre { background: #f7fafc; border-radius: 8px; padding: 15px; overflow-x: auto; font-family: Consolas, Monaco, monospace; font-size: 13px; margin: 15px 0; border: 1px solid #e2e8f0; }
+  .article-content table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+  .article-content th { background: #2c5282; color: white; padding: 12px; text-align: left; }
+  .article-content td { padding: 10px; border: 1px solid #e2e8f0; }
+  .article-content tr:nth-child(even) { background: #f7fafc; }
+  .article-content ul, .article-content ol { margin: 15px 0; padding-left: 25px; }
+  .article-content li { margin: 8px 0; color: #2d3748; }
+  .article-content .meta { background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%); padding: 15px; border-radius: 10px; margin: 20px 0; font-size: 14px; color: #4a5568; }
+  .article-content .flow { text-align: center; font-family: Consolas, monospace; font-size: 14px; padding: 15px; background: #1a365d; color: white; border-radius: 8px; margin: 20px 0; }
+  .article-content footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e2e8f0; text-align: center; color: #718096; font-size: 14px; }
+</style>
+
+<div class="article-content">
+<h1>设计案例解读 001 | AI审核服务插件化架构</h1>
+
+<div class="meta">
+<strong>项目</strong>：wespy-http-go | 
+<strong>分支</strong>：fd-5sp1-audit-music | 
+<strong>日期</strong>：2026-05-22
+</div>
+
+<h2>一、背景</h2>
+<p>在社交娱乐产品中，用户生成内容（UGC）的审核是保障平台安全的核心环节。传统的审核方式依赖人工或简单的关键词匹配，效率低且扩展性差。本项目采用 AI 大模型进行内容审核，并设计了<strong>插件化的多 Provider 架构</strong>，支持灵活切换不同的 AI 服务商。</p>
+
+<h2>二、核心设计：Provider 插件化</h2>
+
+<h3>2.1 设计思路</h3>
+<p>AI审核服务通过统一的 provider 接口抽象了不同 AI 服务商（DeepSeek、Qwen、Doubao），每种服务商实现相同的接口方法，业务代码无需关心底层调用的是哪家模型。</p>
+
+<pre>// 定义统一的 Provider 接口
+type AiCommonChecker interface {
+    Check(ctx context.Context, input string) (string, error)
+}</pre>
+
+<h3>2.2 配置驱动切换</h3>
+<p>通过配置文件中的 UseProvider 字段决定使用哪个 Provider：</p>
+
+<pre>switch checkConf.UseProvider {
+case DeepSeek:
+    checker, err = deepseek.NewDeepSeekChecker(ctx, config)
+case Qwen:
+    checker, err = qwen.NewQwenChecker(ctx, config)
+case Doubao:
+    checker, err = doubao.NewDoubaoChecker(ctx, config)
+}</pre>
+
+<h3>2.3 优势</h3>
+<table>
+<tr><th>优势</th><th>说明</th></tr>
+<tr><td><strong>可扩展</strong></td><td>新增 Provider 只需实现接口，无需修改核心逻辑</td></tr>
+<tr><td><strong>可切换</strong></td><td>通过配置变更就能切换 AI 服务商</td></tr>
+<tr><td><strong>可测试</strong></td><td>可以轻松 Mock 不同的 Provider 进行单元测试</td></tr>
+<tr><td><strong>解耦合</strong></td><td>业务逻辑与具体 AI 服务商解耦</td></tr>
+</table>
+
+<h2>三、Tool 工具系统</h2>
+
+<h3>3.1 设计思路</h3>
+<p>AI 审核需要大量上下文信息（活动配置、礼物信息、礼包信息等），系统设计了 Tool 机制来收集这些信息，并注入到 prompt 中。</p>
+
+<pre>tools := provider.GetAvailableTools(checkConf.UseProvider)
+for _, tool := range tools {
+    result := tool.Execute(ctx, map[string]interface{}{
+        "act_id": actId,
+    })
+    allToolResult += result
+}</pre>
+
+<h3>3.2 工具列表</h3>
+<table>
+<tr><th>工具名称</th><th>说明</th></tr>
+<tr><td>gift_pkg.go</td><td>礼包工具，获取活动绑定的礼包配置</td></tr>
+<tr><td>reward.go</td><td>奖励工具，获取活动奖励信息</td></tr>
+<tr><td>coupon.go</td><td>优惠券工具</td></tr>
+<tr><td>trigger.go</td><td>触发器工具</td></tr>
+</table>
+
+<h3>3.3 优势</h3>
+<ul>
+<li><strong>信息完整</strong>：AI 模型可以获取到完整的活动上下文</li>
+<li><strong>职责分离</strong>：每种信息由专门的 Tool 负责收集</li>
+<li><strong>灵活扩展</strong>：新增信息来源只需新增 Tool</li>
+</ul>
+
+<h2>四、上下文信息收集</h2>
+<p>审核前需要收集大量上下文信息，包括：</p>
+<ol>
+<li><strong>活动基础信息</strong>：actinfo.GetActById(actId)</li>
+<li><strong>礼物列表</strong>：遍历 actInfo.GiftList，调用 gift.GetGiftInfo()</li>
+<li><strong>盲盒配置</strong>：gift.GetBlindBoxConfig()</li>
+<li><strong>礼盒配置</strong>：gift.GetGiftBoxConfigByGiftId()</li>
+<li><strong>礼包信息</strong>：遍历 weconfig.GetGiftPkgInfo()</li>
+</ol>
+
+<h2>五、敏感词过滤（分层审核策略）</h2>
+
+<div class="flow">用户输入 -> 本地敏感词过滤 -> AI审核 -> 结果返回</div>
+
+<p>好处：</p>
+<ul>
+<li><strong>成本优化</strong>：本地过滤拦截明显违规的内容，减少 AI 调用</li>
+<li><strong>速度快</strong>：敏感词过滤是本地操作，毫秒级响应</li>
+<li><strong>精准度</strong>：AI 专注于复杂场景的判断</li>
+</ul>
+
+<h2>六、设计模式总结</h2>
+<table>
+<tr><th>设计模式</th><th>应用场景</th></tr>
+<tr><td>策略模式</td><td>多 Provider 切换，通过配置选择不同算法</td></tr>
+<tr><td>插件模式</td><td>Tool 工具系统，可插拔的信息收集器</td></tr>
+<tr><td>模板方法</td><td>审核流程固定，具体实现可替换</td></tr>
+<tr><td>责任链模式</td><td>多层过滤（敏感词 -> AI审核 -> 结果处理）</td></tr>
+</table>
+
+<h2>七、值得学习的地方</h2>
+<ol>
+<li><strong>接口抽象优于继承</strong>：用 interface 定义能力，而不是用继承构建类型体系</li>
+<li><strong>配置驱动行为</strong>：通过配置文件切换实现，而不是硬编码判断</li>
+<li><strong>信息收集分离</strong>：Tool 机制让上下文收集变得可扩展</li>
+<li><strong>容错设计</strong>：每个环节都有错误处理，单点失败不影响整体</li>
+<li><strong>成本意识</strong>：本地预过滤 + AI 审核的分层设计，优化成本</li>
+</ol>
+
+<h2>八、改进建议</h2>
+<ol>
+<li><strong>Tool 注册机制</strong>：目前 Tool 是硬编码获取，可以改为配置文件注册</li>
+<li><strong>缓存机制</strong>：上下文信息（如活动配置）可以加缓存，减少重复查询</li>
+<li><strong>异步处理</strong>：AI 审核是耗时操作，可以考虑异步队列处理</li>
+<li><strong>熔断降级</strong>：AI 服务不可用时，可以降级到本地规则审核</li>
+</ol>
+
+<h2>九、相关文件</h2>
+<ul>
+<li>app/activity/common/actcheck/ai_check/ai_check.go — 核心审核逻辑</li>
+<li>app/activity/common/actcheck/ai_check/provider/ — Provider 实现</li>
+<li>app/activity/common/actcheck/ai_check/provider/tools/ — 工具实现</li>
+</ul>
+
+<footer>本案例由 Mavis 自动生成</footer>
+</div>
+
+</body>
+</html>
