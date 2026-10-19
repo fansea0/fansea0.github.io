@@ -1,32 +1,46 @@
-<div class="container index">
-  <div class="post-list">
-    <!-- 遍历渲染文章 -->
-    <% page.posts.forEach(function(item) { %>
-      <div class="post-item" title="<%- item.title %>">
-        <div class="time-m-d"><%- item.date.format("YYYY-MM-DD") %></div>
-        <div class="title">
-          <a href="<%- url_for(item.path) %>">
-            <% if(item.title !== "") { %>
-              <% if (item.top) { %>
-                <span><span title="<%= __('pinned') %>" class="icon iconfont icon-pin-top post-top"></span><%- item.title %></span>
-              <% } else { %>
-                <span><%- item.title %></span>
-              <% } %>
-            <% } else { %>
-              <span>untitled</span>
-            <% } %>
-          </a>
-        </div>
-      </div>
-    <% }) %>
+<%
+const wikiCfg = theme.wiki || {}
+const tree = site.wikiTree || { folders: [], docs: [], total: 0 }
+const posts = site.posts ? site.posts.sort('date', -1).toArray() : []
+const recent = posts.slice(0, wikiCfg.recentCount || 10)
+%>
+<div class="wiki-page wiki-home">
+  <div class="wiki-page-head">
+    <h1 class="wiki-page-title"><%- wikiCfg.homeTitle || '知识库' %></h1>
+    <div class="wiki-page-meta">共 <%- tree.total %> 篇文档</div>
   </div>
-  <nav class="post-navigation">
-    <% if(page.prev !== 0){ %>
-      <a href="<%- url_for(page.prev_link)%>"><i class="iconfont icon-angleleft"></i></a>
-    <% } %>
-    <span class="page-num"><%- page.current %> / <%- page.total -%></span>
-    <% if(page.next !== 0){ %>
-      <a href="<%- url_for(page.next_link)%>"><i class="iconfont icon-angleright"></i></a>
-    <% } %>
-  </nav>
+
+  <% if (tree.folders.length) { %>
+  <section class="wiki-section">
+    <h2 class="wiki-section-title">文件夹</h2>
+    <div class="wiki-folder-grid">
+      <% tree.folders.forEach(function (folder) { %>
+        <a class="wiki-folder-card" href="<%- url_for(folder.url) %>">
+          <span class="wiki-folder-card-icon"><%- wikiIcon('folder') %></span>
+          <span class="wiki-folder-card-body">
+            <span class="wiki-folder-card-name"><%- folder.name %></span>
+            <span class="wiki-folder-card-count"><%- folder.total %> 篇文档</span>
+          </span>
+        </a>
+      <% }) %>
+    </div>
+  </section>
+  <% } %>
+
+  <section class="wiki-section">
+    <h2 class="wiki-section-title">最近更新</h2>
+    <ul class="wiki-doc-list">
+      <% recent.forEach(function (post) { %>
+        <li class="wiki-doc-item">
+          <a href="<%- url_for(post.path) %>">
+            <span class="wiki-doc-icon"><%- wikiIcon('doc') %></span>
+            <span class="wiki-doc-body">
+              <span class="wiki-doc-title"><%- post.title %></span>
+            </span>
+            <span class="wiki-doc-date"><%- post.date.format('YYYY-MM-DD') %></span>
+          </a>
+        </li>
+      <% }) %>
+    </ul>
+  </section>
 </div>

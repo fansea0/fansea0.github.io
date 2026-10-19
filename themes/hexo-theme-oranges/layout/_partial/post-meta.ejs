@@ -1,0 +1,28 @@
+<%# 文章顶部的元信息:更新时间 / 标签 / 所属文件夹 %>
+<%
+const postFolders = (site.wikiPostFolders && site.wikiPostFolders[page.path]) || []
+const updated = page.updated || page.date
+%>
+<span class="post-pubtime">
+  <%- updated.format("YYYY-MM-DD HH:mm:ss") %>
+</span>
+
+<% if (page.tags && page.tags.length > 0) { %>
+<span class="post-tags">
+  <% page.tags.data.forEach(function (item) { %>
+    <span class="span--tag">
+      <a href="<%- url_for(item.path) %>" title="<%- item.name %>">#<%- item.name %></a>
+    </span>
+  <% }) %>
+</span>
+<% } %>
+
+<% if (postFolders.length) { %>
+<span class="post-folders">
+  <% postFolders.forEach(function (folder) { %>
+    <span class="span--folder">
+      <a href="<%- url_for(folder.url) %>" title="<%- folder.path %>"><%- folder.name %></a>
+    </span>
+  <% }) %>
+</span>
+<% } %>

@@ -1,0 +1,15 @@
+<%
+const wikiCfg = theme.wiki || {}
+const tree = site.wikiTree || { children: [] }
+%>
+<aside class="wiki-sidebar" id="wiki-sidebar">
+  <div class="wiki-sidebar-head">
+    <a class="wiki-sidebar-title" href="<%- url_for('/') %>">
+      <%- wikiCfg.sidebarTitle || '知识库' %>
+    </a>
+  </div>
+
+  <nav class="wiki-tree" id="wiki-tree">
+    <%- partial('wiki-node', { nodes: tree.children }) %>
+  </nav>
+</aside>

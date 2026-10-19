@@ -48,14 +48,29 @@ node scripts/feishu-sync/sync.mjs               # 真跑(提交 + 部署)
 - 同步脚本只增删 `source/_posts/` 里 `-feishu-` 前缀的文件和 `source/images/feishu/`,
   不会动 EssayPad 写的 `-essaypad-` 文章。
 
-## 4. 风格与提交
+## 4. 站点展示:飞书 Wiki 风格
+
+主题 `hexo-theme-oranges` 已改成飞书 Wiki 形态:顶栏 + 左侧目录树 + 内容区。
+
+- **目录层级来自文章 front matter 的 `categories`**,层级用 ` / ` 连接
+  (`categories: ["工具链 / 排错"]` → 两级文件夹)。飞书那边加一级目录,
+  博客这边自动多一层,主题不用改。没写分类的文章归到「未分类」。
+- 目录树和文件夹合集页由 `themes/hexo-theme-oranges/scripts/wiki.js` 生成
+  (主题脚本会被 Hexo 自动加载),文件夹页路径是 `categories/<层级>/`。
+- 模板在 `themes/hexo-theme-oranges/layout/`(顶栏 `topbar.ejs`、目录树
+  `sidebar.ejs` / `wiki-node.ejs`、合集页 `folder.ejs`),
+  样式在 `source/css/_common/wiki.styl`,交互脚本在 `source/js/wiki.js`。
+- ⚠️ 改了主题 CSS 或模板后,先 `npx hexo clean` 再 `npx hexo generate`:
+  只跑 generate 不会重新编译 stylus,会把旧样式部署上去。
+
+## 5. 风格与提交
 
 - 中文为主,代码标识符保持英文。
 - commit message 用中文,格式 `type(scope): 说明`,例如 `feat(sync): 支持知识库节点树作为源`。
 - 一次对话的逻辑改动合并成一个 commit,验证通过再提交。
 - 改完必须真的跑一遍(同步 → `hexo generate`),不要只写不验。
 
-## 5. 不要做的事
+## 6. 不要做的事
 
 - ❌ 不在 `main` 分支上直接编辑文件,会被下次 `hexo deploy` 覆盖。
 - ❌ 不改 `source/_posts/` 里 `-essaypad-` 前缀的文件(那是 EssayPad 管的)。

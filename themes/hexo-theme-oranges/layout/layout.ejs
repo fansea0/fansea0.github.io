@@ -4,12 +4,18 @@
   <%- partial('_partial/header') %>
 
   <body>
-    <div id="app">
-      <%- partial('_partial/navigation') %>
+    <div id="app" class="wiki-app">
+      <%- partial('_partial/topbar') %>
 
-      <div class="flex-container">
-        <%- body %>
-        <%- partial('_partial/footer') %>
+      <div class="wiki-body">
+        <%- partial('_partial/sidebar') %>
+
+        <div class="wiki-scrim" id="wiki-scrim"></div>
+
+        <main class="wiki-main">
+          <%- body %>
+          <%- partial('_partial/footer') %>
+        </main>
       </div>
 
       <div class="tools-bar">
@@ -17,10 +23,10 @@
 
         <%- partial('_partial/search') %>
 
-        <%- partial('_partial/colorscheme') %>
-
         <%- partial('_partial/shares') %>
       </div>
     </div>
+
+    <%- js(['/js/wiki.js']) %>
   </body>
 </html>

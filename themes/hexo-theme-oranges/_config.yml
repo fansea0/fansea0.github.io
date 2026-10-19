@@ -77,6 +77,18 @@ comments:
     enable: false
     serverURL:
 
+# 飞书 Wiki 风格布局
+wiki:
+  enable: true
+  # 顶栏左侧的站点名,留空则用站点配置里的 title
+  siteName: ''
+  # 侧边栏顶部标题
+  sidebarTitle: 知识库
+  # 首页大标题
+  homeTitle: 知识库
+  # 首页「最近更新」显示条数
+  recentCount: 10
+
 # 主题页面导航栏
 navbar:
   -
@@ -85,22 +97,22 @@ navbar:
     path: /
     key: home
   -
-    name: Archives
+    name: 归档
     enable: true
     path: /archives/
     key: archives
   -
-    name: Categories
+    name: 分类
     enable: false
     path: /categories/
     key: categories
   -
-    name: Tags
+    name: 标签
     enable: true
     path: /tags/
     key: tags
   -
-    name: About
+    name: 关于
     enable: true
     path: /about/
     key: about

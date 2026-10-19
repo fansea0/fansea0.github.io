@@ -1,0 +1,66 @@
+<%# 文件夹合集页:列出这个文件夹下的子文件夹和文档 %>
+<%
+const folder = page.folder
+const ancestors = folder.ancestors || []
+%>
+<div class="wiki-page wiki-folder-page">
+  <nav class="wiki-breadcrumb">
+    <a href="<%- url_for('/') %>">知识库</a>
+    <% ancestors.forEach(function (item) { %>
+      <span class="wiki-crumb-sep">/</span>
+      <a href="<%- url_for(item.url) %>"><%- item.name %></a>
+    <% }) %>
+    <span class="wiki-crumb-sep">/</span>
+    <span class="wiki-crumb-current"><%- folder.name %></span>
+  </nav>
+
+  <div class="wiki-page-head">
+    <h1 class="wiki-page-title"><%- folder.name %></h1>
+    <div class="wiki-page-meta">
+      <%- folder.count %> 篇文档<% if (folder.folders.length) { %> · <%- folder.folders.length %> 个子文件夹<% } %>
+    </div>
+  </div>
+
+  <% if (folder.folders.length) { %>
+  <section class="wiki-section">
+    <h2 class="wiki-section-title">文件夹</h2>
+    <ul class="wiki-doc-list">
+      <% folder.folders.forEach(function (item) { %>
+        <li class="wiki-doc-item wiki-doc-item-folder">
+          <a href="<%- url_for(item.url) %>">
+            <span class="wiki-doc-icon"><%- wikiIcon('folder') %></span>
+            <span class="wiki-doc-body">
+              <span class="wiki-doc-title"><%- item.name %></span>
+              <span class="wiki-doc-desc"><%- item.total %> 篇文档</span>
+            </span>
+          </a>
+        </li>
+      <% }) %>
+    </ul>
+  </section>
+  <% } %>
+
+  <% if (folder.docs.length) { %>
+  <section class="wiki-section">
+    <h2 class="wiki-section-title">文档</h2>
+    <ul class="wiki-doc-list">
+      <% folder.docs.forEach(function (doc) { %>
+        <li class="wiki-doc-item">
+          <a href="<%- url_for(doc.url) %>">
+            <span class="wiki-doc-icon"><%- wikiIcon('doc') %></span>
+            <span class="wiki-doc-body">
+              <span class="wiki-doc-title"><%- doc.name %></span>
+              <% if (doc.excerpt) { %><span class="wiki-doc-desc"><%- doc.excerpt %></span><% } %>
+            </span>
+            <span class="wiki-doc-date"><%- doc.dateText %></span>
+          </a>
+        </li>
+      <% }) %>
+    </ul>
+  </section>
+  <% } %>
+
+  <% if (!folder.folders.length && !folder.docs.length) { %>
+    <div class="wiki-empty">这个文件夹还没有内容</div>
+  <% } %>
+</div>

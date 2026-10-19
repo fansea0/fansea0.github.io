@@ -1,0 +1,14 @@
+<%# 文章所在文件夹的面包屑 %>
+<%
+const postFolders = (site.wikiPostFolders && site.wikiPostFolders[page.path]) || []
+const chain = postFolders.length ? postFolders[0].ancestors.concat([postFolders[0]]) : []
+%>
+<% if (chain.length) { %>
+<nav class="wiki-breadcrumb">
+  <a href="<%- url_for('/') %>">知识库</a>
+  <% chain.forEach(function (item) { %>
+    <span class="wiki-crumb-sep">/</span>
+    <a href="<%- url_for(item.url) %>"><%- item.name %></a>
+  <% }) %>
+</nav>
+<% } %>
