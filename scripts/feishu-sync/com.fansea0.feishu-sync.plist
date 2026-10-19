@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.fansea0.feishu-sync</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/Admin/code/hexo-repository/scripts/feishu-sync/run.sh</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/Admin/code/hexo-repository</string>
+
+  <!-- 每 30 分钟跑一次;内容没变化时脚本会自动跳过提交和部署 -->
+  <key>StartInterval</key>
+  <integer>1800</integer>
+
+  <key>RunAtLoad</key>
+  <false/>
+
+  <key>StandardOutPath</key>
+  <string>/tmp/feishu-sync.out.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>/tmp/feishu-sync.err.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    <key>HOME</key>
+    <string>/Users/Admin</string>
+  </dict>
+</dict>
+</plist>

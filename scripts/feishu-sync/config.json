@@ -1,0 +1,12 @@
+{
+  "folderUrl": "",
+  "postDir": "source/_posts",
+  "assetDir": "source/images/feishu",
+  "assetUrlPrefix": "/images/feishu",
+  "defaultCategory": "飞书",
+  "defaultTags": ["飞书"],
+  "categoryFromFolder": true,
+  "excludeTitlePatterns": [],
+  "commitMessage": "feishu: sync %d posts",
+  "deploy": true
+}
