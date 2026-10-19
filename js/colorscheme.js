@@ -1,28 +1,13 @@
 // colorscheme.js
-let switchHandle = document.querySelector('#switch-color-scheme')
-let themeIcon = document.querySelector('#theme-icon')
+// 图标切换交给 CSS(深浅色各一套 SVG),这里只负责切属性和记状态
+var switchHandle = document.querySelector('#switch-color-scheme')
 var html = document.documentElement
 
-const switchMode = () => {
-    let attr = html.getAttribute('color-mode')
-    let colorMode = 'light'
-    if (attr === 'light') {
-        html.setAttribute('color-mode', 'dark')
-        themeIcon.classList = 'iconfont icon-sun'
-        colorMode = 'dark'
-    } else {
-        html.setAttribute('color-mode', 'light')
-        themeIcon.classList = 'iconfont icon-moon'
-        colorMode = 'light'
-    }
+if (switchHandle) {
+  switchHandle.addEventListener('click', function () {
+    var attr = html.getAttribute('color-mode')
+    var colorMode = attr === 'light' ? 'dark' : 'light'
+    html.setAttribute('color-mode', colorMode)
     localStorage.setItem('color-mode', colorMode)
-}
-
-switchHandle.addEventListener('click', switchMode, false)
-
-const currColorMode = localStorage.getItem('color-mode')
-if (currColorMode === 'light') {
-    themeIcon.classList = 'iconfont icon-moon'
-} else {
-    themeIcon.classList = 'iconfont icon-sun'
+  }, false)
 }

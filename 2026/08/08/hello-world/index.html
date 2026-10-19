@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" color-mode="light">
+<html lang="zh-CN" color-mode="light">
 
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="author" content="John Doe" />
+  <meta name="author" content="fansea" />
   <!-- Open Graph Description 简短摘要-->
   
   <!-- 用于搜索引擎的文章摘要 -->
@@ -18,7 +18,7 @@
       
       |
     
-     Hexo
+     fansea 的知识库
   </title>
 
   
@@ -64,47 +64,192 @@
 
 
   <body>
-    <div id="app">
-      <div class="header">
-  <div class="avatar">
-    <a href="/">
-      <!-- 头像取消懒加载，添加no-lazy -->
+    <div id="app" class="wiki-app">
       
-        <img src="/images/avatar.png" alt="">
-      
+<header class="wiki-topbar">
+  <div class="wiki-topbar-left">
+    <button class="wiki-icon-btn wiki-menu-btn" id="wiki-menu-btn" type="button" aria-label="目录">
+      <svg class="wiki-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <a class="wiki-logo" href="/">
+      <img class="wiki-logo-icon" src="/images/favicon.png" alt="">
+      <span class="wiki-logo-text">fansea 的知识库</span>
     </a>
-    <div class="nickname"><a href="/">fansea</a></div>
   </div>
-  <div class="navbar">
-    <ul>
-      
-        <li class="nav-item" data-path="/">
-          <a href="/">Home</a>
-        </li>
-      
-        <li class="nav-item" data-path="/archives/">
-          <a href="/archives/">Archives</a>
-        </li>
-      
-        <li class="nav-item" data-path="/tags/">
-          <a href="/tags/">Tags</a>
-        </li>
-      
-        <li class="nav-item" data-path="/about/">
-          <a href="/about/">About</a>
-        </li>
-      
-    </ul>
+
+  <div class="wiki-topbar-center">
+    
+      <button class="wiki-search-btn" id="search-icon" type="button">
+        <svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="m20 20-4.2-4.2m1.2-5.3a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"/></svg>
+        <span class="wiki-search-text">搜索</span>
+      </button>
+    
   </div>
-</div>
+
+  <div class="wiki-topbar-right">
+    
+      <a class="wiki-top-link" href="/archives/">归档</a>
+    
+      <a class="wiki-top-link" href="/tags/">标签</a>
+    
+      <a class="wiki-top-link" href="/about/">关于</a>
+    
+
+    
+      <button class="wiki-icon-btn wiki-theme-btn" id="switch-color-scheme" type="button" aria-label="切换配色">
+        <span class="wiki-theme-icon wiki-theme-icon-light"><svg class="wiki-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg></span>
+        <span class="wiki-theme-icon wiki-theme-icon-dark"><svg class="wiki-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 3v2m0 14v2M5.6 5.6 7 7m10 10 1.4 1.4M3 12h2m14 0h2M5.6 18.4 7 17m10-10 1.4-1.4"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span>
+      </button>
+      
+<script src="/js/colorscheme.js"></script>
+
+    
+
+    <a class="wiki-avatar" href="/" title="fansea">
+      <img src="/images/avatar.png" alt="fansea">
+    </a>
+  </div>
+</header>
 
 
-<script src="/js/activeNav.js"></script>
+      <div class="wiki-body">
+        
+<aside class="wiki-sidebar" id="wiki-sidebar">
+  <div class="wiki-sidebar-head">
+    <a class="wiki-sidebar-title" href="/">
+      知识库
+    </a>
+  </div>
+
+  <nav class="wiki-tree" id="wiki-tree">
+    
+
+<ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-folder" data-folder="个人开发经验">
+        <div class="wiki-node-row">
+          <button class="wiki-node-toggle" type="button" aria-expanded="true" aria-label="展开或收起">
+            <svg class="wiki-icon wiki-icon-chevron" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></svg>
+          </button>
+          <a class="wiki-node-link" href="/categories/%E4%B8%AA%E4%BA%BA%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/" title="个人开发经验">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
+            <span class="wiki-node-name">个人开发经验</span>
+          </a>
+          <span class="wiki-node-count">2</span>
+        </div>
+        
+
+<ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/18/2026-10-18-feishu-post-371e6262/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/18/2026-10-18-feishu-post-371e6262/" title="访问不了图片">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">访问不了图片</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/12/2026-10-12-feishu-post-32dc5ad9/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/12/2026-10-12-feishu-post-32dc5ad9/" title="如何自建网站">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">如何自建网站</span>
+          </a>
+        </div>
+      </li>
+    
+  
+</ul>
+
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-folder" data-folder="未分类">
+        <div class="wiki-node-row">
+          <button class="wiki-node-toggle" type="button" aria-expanded="true" aria-label="展开或收起">
+            <svg class="wiki-icon wiki-icon-chevron" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></svg>
+          </button>
+          <a class="wiki-node-link" href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/" title="未分类">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
+            <span class="wiki-node-name">未分类</span>
+          </a>
+          <span class="wiki-node-count">4</span>
+        </div>
+        
+
+<ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-doc is-current" data-doc="2026/08/08/hello-world/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/08/08/hello-world/" title="Hello World">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">Hello World</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/08/08/2026-08-08-essaypad-1/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/08/08/2026-08-08-essaypad-1/" title="测试">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">测试</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/07/17/2026-07-17-essaypad-28/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/07/17/2026-07-17-essaypad-28/" title="工单风控">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">工单风控</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/07/11/2026-07-11-essaypad-15/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/07/11/2026-07-11-essaypad-15/" title="羁绊连线冲突">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">羁绊连线冲突</span>
+          </a>
+        </div>
+      </li>
+    
+  
+</ul>
+
+      </li>
+    
+  
+</ul>
+
+  </nav>
+</aside>
 
 
+        <div class="wiki-scrim" id="wiki-scrim"></div>
 
-      <div class="flex-container">
-        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+        <main class="wiki-main">
+          <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
 <!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
 
@@ -147,18 +292,48 @@
 
   
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
-  <div class="container post-details" id="post-details">
-    <div class="post-content">
-      <div class="post-title">Hello World</div>
-      <div class="post-attach">
-        <span class="post-pubtime">
-          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2026-08-08 12:40:56
-        </span>
-        
-      </div>
-      <div class="markdown-body">
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+  <div class="wiki-page wiki-post" id="post-details">
+    
+
+
+<nav class="wiki-breadcrumb">
+  <a href="/">知识库</a>
+  
+    <span class="wiki-crumb-sep">/</span>
+    <a href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/">未分类</a>
+  
+</nav>
+
+
+
+    <div class="wiki-post-layout">
+      <article class="wiki-post-body">
+        <div class="wiki-page-head">
+          <h1 class="wiki-page-title">Hello World</h1>
+          <div class="wiki-page-meta">
+            
+
+<span class="post-pubtime">
+  2026-08-08 12:40:56
+</span>
+
+
+
+
+<span class="post-folders">
+  
+    <span class="span--folder">
+      <a href="/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/" title="未分类">未分类</a>
+    </span>
+  
+</span>
+
+
+          </div>
+        </div>
+
+        <div class="markdown-body">
+          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
@@ -172,41 +347,49 @@
 
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
-      </div>
-      
-        <div class="prev-or-next">
-          <div class="post-foot-next">
-            
-              <a href="/2026/08/08/2026-08-08-essaypad-1/" target="_self">
-                <i class="iconfont icon-chevronleft"></i>
-                <span>Prev</span>
-              </a>
-            
-          </div>
-          <div class="post-attach">
-            <span class="post-pubtime">
-              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2026-08-08 12:40:56
-            </span>
-            
-          </div>
-          <div class="post-foot-prev">
-            
-              <a href="/2026/10/12/2026-10-12-feishu-post-32dc5ad9/" target="_self">
-                <span>Next</span>
-                <i class="iconfont icon-chevronright"></i>
-              </a>
-            
-          </div>
         </div>
+
+        
+          <div class="prev-or-next">
+            <div class="post-foot-prev">
+              
+                <a href="/2026/10/12/2026-10-12-feishu-post-32dc5ad9/" target="_self">
+                  <i class="iconfont icon-chevronleft"></i>
+                  <span>上一页</span>
+                </a>
+              
+            </div>
+            <div class="post-foot-next">
+              
+                <a href="/2026/08/08/2026-08-08-essaypad-1/" target="_self">
+                  <span>下一页</span>
+                  <i class="iconfont icon-chevronright"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+
+        
+          <div class="comments-container">
+            
+
+
+
+
+
+
+
+          </div>
+        
+      </article>
+
       
-    </div>
-    
   <div id="btn-catalog" class="btn-catalog">
     <i class="iconfont icon-catalog"></i>
   </div>
   <div class="post-catalog hidden" id="catalog">
-    <div class="title">Contents</div>
+    <div class="title">目录</div>
     <div class="catalog-content">
       
         <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
@@ -220,22 +403,11 @@
 
 
 
-    
-      <div class="comments-container">
-        
-
-
-
-
-
-
-
-      </div>
-    
+    </div>
   </div>
 
 
-        
+          
 <div class="footer">
   <div class="social">
     <ul>
@@ -268,6 +440,7 @@
   
 </div>
 
+        </main>
       </div>
 
       <div class="tools-bar">
@@ -283,12 +456,6 @@
 
 
         
-  <div class="search-icon tools-bar-item" id="search-icon">
-    <a href="javascript: void(0)">
-      <i class="iconfont icon-search"></i>
-    </a>
-  </div>
-
   <div class="search-overlay hidden">
     <div class="search-content" tabindex="0">
       <div class="search-title">
@@ -298,7 +465,7 @@
           </a>
         </span>
         
-          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
         
         <span class="search-close-icon" id="search-close-icon">
           <a href="javascript: void(0)">
@@ -350,7 +517,7 @@
       'use strict';
       var $input = document.getElementById(search_id);
       var $resultContent = document.getElementById(content_id);
-      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
       $.ajax({
         // 0x01. load xml file
         url: path,
@@ -446,7 +613,7 @@
             });
             str += "</ul>";
             if (str.indexOf('<li>') === -1) {
-              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
             }
             $resultContent.innerHTML = str;
           });
@@ -454,9 +621,9 @@
         error: function(xhr, status, error) {
           $resultContent.innerHTML = ""
           if (xhr.status === 404) {
-            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
           } else {
-            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
           }
         }
       });
@@ -476,20 +643,6 @@
 
 
         
-  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
-    <a href="javascript: void(0)">
-      <i id="theme-icon" class="iconfont icon-moon"></i>
-    </a>
-  </div>
-
-  
-<script src="/js/colorscheme.js"></script>
-
-
-
-
-
-        
   
     <div class="share-icon tools-bar-item">
       <a href="javascript: void(0)" id="share-icon">
@@ -497,12 +650,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Hello%20World + '&url=' + http%3A%2F%2Fexample.com%2F2026%2F08%2F08%2Fhello-world%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Hello%20World + '&url=' + https%3A%2F%2Ffansea0.github.io%2F2026%2F08%2F08%2Fhello-world%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2026/08/08/hello-world/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://fansea0.github.io/2026/08/08/hello-world/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         
@@ -516,5 +669,9 @@
 
       </div>
     </div>
+
+    
+<script src="/js/wiki.js"></script>
+
   </body>
 </html>
