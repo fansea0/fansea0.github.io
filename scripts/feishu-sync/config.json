@@ -1,11 +1,14 @@
 {
-  "folderUrl": "",
+  "sourceType": "wiki",
+  "wikiNodeToken": "Guq8wshili9MSdkjrDDcQKtjnGb",
+  "wikiUrl": "https://my.feishu.cn/wiki/Guq8wshili9MSdkjrDDcQKtjnGb",
   "postDir": "source/_posts",
   "assetDir": "source/images/feishu",
   "assetUrlPrefix": "/images/feishu",
   "defaultCategory": "飞书",
   "defaultTags": ["飞书"],
   "categoryFromFolder": true,
+  "skipEmptyNodes": true,
   "excludeTitlePatterns": [],
   "commitMessage": "feishu: sync %d posts",
   "deploy": true
