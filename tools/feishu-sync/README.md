@@ -51,8 +51,8 @@ hexo generate && hexo deploy            ← 推 public/ 到 main 分支
 3. **试跑**
 
    ```bash
-   node scripts/feishu-sync/sync.mjs --dry-run
-   node scripts/feishu-sync/sync.mjs
+   node tools/feishu-sync/sync.mjs --dry-run
+   node tools/feishu-sync/sync.mjs
    ```
 
 ## 命令行参数
@@ -100,7 +100,7 @@ hexo generate && hexo deploy            ← 推 public/ 到 main 分支
 
 ## 增量与删除
 
-- 状态记录在 `scripts/feishu-sync/.state.json`(不进 git),记录每篇文档的
+- 状态记录在 `tools/feishu-sync/.state.json`(不进 git),记录每篇文档的
   `revision_id` 和产出文件名。文档没改 → 跳过,不重新拉取。
 - 飞书侧删掉文档 → 对应的本地文章和图片会被移除。
 - 没有任何文档认领的 `-feishu-` 文章会被当作残留清掉(状态文件丢失时也不会留下孤儿文章)。

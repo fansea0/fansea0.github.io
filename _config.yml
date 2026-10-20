@@ -90,6 +90,7 @@ pagination_dir: page
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
 include:
+  - .nojekyll
 exclude:
 ignore:
 
@@ -104,3 +105,5 @@ deploy:
   type: git
   repo: git@github.com:fansea0/fansea0.github.io.git
   branch: main
+  # hexo-deployer-git 默认跳过点文件,关掉才能把 public/.nojekyll 推上去
+  ignore_hidden: false

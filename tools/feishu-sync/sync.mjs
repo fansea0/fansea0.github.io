@@ -9,7 +9,7 @@
 //       → 清理飞书侧已删文档 → git 提交推送 → hexo generate/deploy
 //
 // 用法:
-//   node scripts/feishu-sync/sync.mjs [--dry-run] [--no-deploy] [--force] [--source <wikiUrl>]
+//   node tools/feishu-sync/sync.mjs [--dry-run] [--no-deploy] [--force] [--source <wikiUrl>]
 
 import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'

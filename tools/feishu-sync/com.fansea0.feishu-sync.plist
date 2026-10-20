@@ -8,7 +8,7 @@
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
-    <string>/Users/Admin/code/hexo-repository/scripts/feishu-sync/run.sh</string>
+    <string>/Users/Admin/code/hexo-repository/tools/feishu-sync/run.sh</string>
   </array>
 
   <key>WorkingDirectory</key>

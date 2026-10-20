@@ -23,6 +23,11 @@
 - 依赖本机 SSH key(推 `git@github.com:...`)。
 - ⚠️ **必须先 `hexo clean`**:`hexo generate` 不会删除 `public/` 里的过期目录,
   删掉的文章、改名后的旧链接都会残留在线上。同步脚本的发布流程已经带了 clean。
+- `.nojekyll` 放在 `source/.nojekyll` 并在 `_config.yml` 的 `include` 里列出,
+  才会被 `hexo generate` 复制进 `public/`。直接往 `main` 分支手工加这个文件没用——
+  `hexo deploy` 是从 `origin/main` 重建整棵树的,手工文件会被冲掉。
+  另外 `hexo-deployer-git` 默认跳过点文件,`deploy` 段必须配 `ignore_hidden: false`,
+  否则 `public/.nojekyll` 到了部署这一步又会被滤掉。
 - GitHub Pages 走内置的 `pages-build-deployment` 动态工作流。
   2026-10-20 出现过一次该账号所有 Actions 任务卡在 `queued` 拿不到 runner
   (同时段其它公开仓库正常),约 10 小时后自行恢复,内容在 main 上一直就绪,
@@ -35,14 +40,18 @@
 
 ## 3. 飞书 → 博客同步
 
-`scripts/feishu-sync/` 是飞书文档同步器,详见该目录的 `README.md`。
+`tools/feishu-sync/` 是飞书文档同步器,详见该目录的 `README.md`。
+
+⚠️ **别把工具放回 `scripts/`**:hexo 会把 `scripts/` 下所有文件当 hexo 脚本加载,
+非 JS 文件会刷一屏 `Script load failed` 报错,把真正的构建错误淹掉。
+hexo 自己的脚本才放 `scripts/`(比如主题的 `themes/hexo-theme-oranges/scripts/wiki.js`)。
 
 ```bash
-node scripts/feishu-sync/sync.mjs --dry-run   # 试跑
-node scripts/feishu-sync/sync.mjs               # 真跑(提交 + 部署)
+node tools/feishu-sync/sync.mjs --dry-run   # 试跑
+node tools/feishu-sync/sync.mjs               # 真跑(提交 + 部署)
 ```
 
-- 源在 `scripts/feishu-sync/config.json`(当前是知识库节点 `Guq8wshili9MSdkjrDDcQKtjnGb`)。
+- 源在 `tools/feishu-sync/config.json`(当前是知识库节点 `Guq8wshili9MSdkjrDDcQKtjnGb`)。
 - 定时任务:`~/Library/LaunchAgents/com.f Committed...plist`,每 30 分钟一次。
   日志在 `/tmp/feishu-sync.out.log`。
 - 依赖 `lark-cli`(全局 `@larksuite/cli`)。**用户 OAuth 的 refresh token 有效期约 7 天**,
@@ -51,7 +60,7 @@ node scripts/feishu-sync/sync.mjs               # 真跑(提交 + 部署)
   不会动 EssayPad 写的 `-essaypad-` 文章。
 - **改标题不动链接**:文章文件名(= URL)首次生成后固定,飞书里改标题只改 front matter 的
   `title`。想换 URL 就删掉 `source/_posts/` 下对应的 `.md`,下次同步会按新标题重建。
-  这条靠 `scripts/feishu-sync/sync.mjs` 里的 `keepFile` 逻辑维持,别改回按标题生成。
+  这条靠 `tools/feishu-sync/sync.mjs` 里的 `keepFile` 逻辑维持,别改回按标题生成。
 
 ## 4. 站点展示:飞书 Wiki 风格
 
@@ -68,14 +77,26 @@ node scripts/feishu-sync/sync.mjs               # 真跑(提交 + 部署)
 - ⚠️ 改了主题 CSS 或模板后,先 `npx hexo clean` 再 `npx hexo generate`:
   只跑 generate 不会重新编译 stylus,会把旧样式部署上去。
 
-## 5. 风格与提交
+## 5. 站内搜索
+
+依赖 `hexo-generator-search`,生成根路径的 `/search.xml`(Atom 格式)。
+主题 `hexo-theme-oranges` 的搜索逻辑在 `layout/_partial/search.ejs`,
+用 `$.ajax` 以 `dataType: "xml"` 拉 `/search.xml`,读每个 `<entry>` 里的
+`<title>` / `<content>` / `<url>` 三个节点。
+
+- 少装这个生成器就会在搜索时提示「未找到 search.xml 文件」并给出 configuration 链接。
+- 路径是写死的 `/search.xml`,站点必须部署在域名根路径(当前是 `fansea0.github.io`),
+  部署到子路径下搜索会失效。
+- `themes/hexo-theme-oranges/source/js/search.js` 是同一套逻辑的旧副本,没有任何模板引用它。
+
+## 6. 风格与提交
 
 - 中文为主,代码标识符保持英文。
 - commit message 用中文,格式 `type(scope): 说明`,例如 `feat(sync): 支持知识库节点树作为源`。
 - 一次对话的逻辑改动合并成一个 commit,验证通过再提交。
 - 改完必须真的跑一遍(同步 → `hexo generate`),不要只写不验。
 
-## 6. 不要做的事
+## 7. 不要做的事
 
 - ❌ 不在 `main` 分支上直接编辑文件,会被下次 `hexo deploy` 覆盖。
 - ❌ 不改 `source/_posts/` 里 `-essaypad-` 前缀的文件(那是 EssayPad 管的)。

@@ -7,4 +7,4 @@ export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export HOME="${HOME:-/Users/Admin}"
 
 cd "$REPO"
-exec /opt/homebrew/bin/node scripts/feishu-sync/sync.mjs "$@"
+exec /opt/homebrew/bin/node tools/feishu-sync/sync.mjs "$@"
