@@ -389,7 +389,7 @@
             <span class="wiki-doc-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
             <span class="wiki-doc-body">
               <span class="wiki-doc-title">Map</span>
-              <span class="wiki-doc-desc">map的实现设计 原生的map是非线程安全的 hash表 桶 如何顺序读 Key 用slice保存，顺序由外部控制，for range这个Slice实现 扩容机制 渐进式，分配新的</span>
+              <span class="wiki-doc-desc">map的实现设计 原生的map是非线程安全的 hash表 桶 同一个 map 里面，所有桶的总大小全部一模一样！ 哪怕 key、value 大小不一样（比如 map [string</span>
             </span>
             <span class="wiki-doc-date">2026-10-20</span>
           </a>

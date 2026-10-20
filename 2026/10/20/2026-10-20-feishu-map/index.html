@@ -425,7 +425,7 @@
             
 
 <span class="post-pubtime">
-  2026-10-20 15:10:38
+  2026-10-20 17:23:18
 </span>
 
 
@@ -457,6 +457,32 @@
 <li>hash表</li>
 <li>桶</li>
 </ul>
+<p><img src="/images/feishu/GkapbdaaCoU5cfxEBIncID5dn5g.png"></p>
+<p><img src="/images/feishu/SYBfbvLaOomzZdxKNA7ctHopnJd.png"></p>
+<p><strong>同一个 map 里面，所有桶的总大小全部一模一样！</strong> 哪怕 key、value 大小不一样（比如 map [string] int），只要是这一个 map，它所有 bmap（主桶、溢出桶）尺寸固定相等。</p>
+<p>当map初始化的时候，他内部捅的大小的字结束就固定了，设计的原因，就是我就可以通过每个桶大小，因为所有的桶它是排放连续的就可以通过桶的大小，然后逐个的去定位第i个桶</p>
+<blockquote>
+<p>你可以简单理解： buckets 指向<strong>第 0 号桶的起始地址</strong>。 想拿到第 i 个桶：地址 &#x3D; buckets + i * 单个桶的大小。</p>
+</blockquote>
+<p>那有个疑问，如果value存放了string，string长度不一样，那怎么保障每个桶长度一致呢？</p>
+<p>事实上，string 是包装头，桶里只存这个头，超长文本放外面堆内存。</p>
+<p><img src="/images/feishu/LiQdbGEwnoKYDRxVbbvcCCwMnzd.png"></p>
+<ol>
+<li><strong>如何根据key定位到bmap？</strong></li>
+</ol>
+<p>先计算key的哈希值，取哈希低位与(2^B - 1)按位与得到桶编号，再通过hmap的buckets指针找到主桶数组起始地址，第i个桶地址&#x3D;起始地址+i×单个桶大小。若正在扩容，需先去oldbuckets的对应旧桶查找。  </p>
+<ol>
+<li><strong>tophash的作用是什么？</strong></li>
+</ol>
+<p>每个桶开头有8个tophash值，存对应slot中key的哈希高8位。查找时先对比tophash，不同则跳过该slot，相同再比较真实key，减少key比较次数。  </p>
+<ol>
+<li><strong>B的含义及作用？</strong></li>
+</ol>
+<p>B是hmap中记录的整数，<strong>主桶数量&#x3D;2^B</strong>。用2的幂次方桶数，可通过“哈希低位&amp;(2^B-1)”快速计算桶编号，比取模快；扩容时B+1，桶数翻倍，提升查找效率。  </p>
+<ol>
+<li><strong>哈希表何时会“变长”？</strong></li>
+</ol>
+<p>当负载因子&gt;6.5或溢出桶过多时，触发扩容，B增大，主桶数组长度从2^B变为2^(B+1)，旧桶数据搬迁到新桶数组。  </p>
 <h2 id="如何顺序读"><a href="#如何顺序读" class="headerlink" title="如何顺序读"></a>如何顺序读</h2><p>Key 用slice保存，顺序由外部控制，for range这个Slice实现</p>
 <h2 id="扩容机制"><a href="#扩容机制" class="headerlink" title="扩容机制"></a>扩容机制</h2><p>渐进式，分配新的地址空间，每次put和get操作迁移部分，降低stw时间</p>
 <h2 id="delete元素会释放空间吗"><a href="#delete元素会释放空间吗" class="headerlink" title="delete元素会释放空间吗"></a>delete元素会释放空间吗</h2><p>桶的大小是固定的，会把位置设置为空，使元素无法被指向，让他的内容后续可以被GC掉</p>
