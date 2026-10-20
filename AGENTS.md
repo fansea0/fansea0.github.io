@@ -16,14 +16,16 @@
 ## 2. 发布链路
 
 ```
-改动 source 分支 → 本机 hexo generate → hexo deploy → 强推 main → GitHub Pages 重建
+改动 source 分支 → 本机 hexo clean → hexo generate → hexo deploy → 强推 main → GitHub Pages 重建
 ```
 
 - `hexo deploy` 用 hexo-deployer-git,每次都是孤儿提交 + 强推,不是 fast-forward。
 - 依赖本机 SSH key(推 `git@github.com:...`)。
+- ⚠️ **必须先 `hexo clean`**:`hexo generate` 不会删除 `public/` 里的过期目录,
+  删掉的文章、改名后的旧链接都会残留在线上。同步脚本的发布流程已经带了 clean。
 - GitHub Pages 走内置的 `pages-build-deployment` 动态工作流。
-  **2026-10-20 观察:该账号的所有 Actions 任务都卡在 queued 拿不到 runner**,
-  导致推上去的 main 内容迟迟不生效;内容本身在 main 上是就绪的,
+  2026-10-20 出现过一次该账号所有 Actions 任务卡在 `queued` 拿不到 runner
+  (同时段其它公开仓库正常),约 10 小时后自行恢复,内容在 main 上一直就绪,
   队列一恢复就自动发布。排查用:
 
   ```bash
@@ -47,6 +49,9 @@ node scripts/feishu-sync/sync.mjs               # 真跑(提交 + 部署)
   过期后定时任务会报错,手动 `lark-cli auth login --recommend` 重新授权。
 - 同步脚本只增删 `source/_posts/` 里 `-feishu-` 前缀的文件和 `source/images/feishu/`,
   不会动 EssayPad 写的 `-essaypad-` 文章。
+- **改标题不动链接**:文章文件名(= URL)首次生成后固定,飞书里改标题只改 front matter 的
+  `title`。想换 URL 就删掉 `source/_posts/` 下对应的 `.md`,下次同步会按新标题重建。
+  这条靠 `scripts/feishu-sync/sync.mjs` 里的 `keepFile` 逻辑维持,别改回按标题生成。
 
 ## 4. 站点展示:飞书 Wiki 风格
 
