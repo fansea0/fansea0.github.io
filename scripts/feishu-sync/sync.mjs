@@ -523,8 +523,13 @@ async function main() {
       if (!created) created = Math.floor(Date.now() / 1000)
       if (!modified) modified = created
 
+      // 文件名(= 文章 URL)一旦生成就固定下来:飞书里改标题只改 front matter 的 title,
+      // 不动链接,老文章留在老目录。想换 URL 就把 source/_posts 下对应的 .md 删掉,
+      // 下次同步会按新标题重新生成一个。
+      const prevFile = prev?.file
+      const keepFile = prevFile && fs.existsSync(path.join(POST_DIR, prevFile))
       const slug = slugify(title, item.key)
-      const postName = `${dateOnly(created)}-feishu-${slug}.md`
+      const postName = keepFile ? prevFile : `${dateOnly(created)}-feishu-${slug}.md`
       const postPath = path.join(POST_DIR, postName)
 
       const content = buildFrontMatter({
@@ -538,11 +543,6 @@ async function main() {
       fs.mkdirSync(POST_DIR, { recursive: true })
       if (!DRY_RUN) fs.writeFileSync(postPath, content, 'utf8')
 
-      // 文档改名后产生的旧文件要清掉
-      if (prev && prev.file && prev.file !== postName) {
-        const oldPath = path.join(POST_DIR, prev.file)
-        if (fs.existsSync(oldPath) && !DRY_RUN) fs.rmSync(oldPath)
-      }
       // 不再引用的旧图片清掉
       if (prev && Array.isArray(prev.assets)) {
         for (const old of prev.assets) {
@@ -584,6 +584,18 @@ async function main() {
     for (const asset of prev.assets || []) {
       const assetPath = path.join(ASSET_DIR, asset)
       if (fs.existsSync(assetPath) && !DRY_RUN) fs.rmSync(assetPath)
+    }
+  }
+
+  // 兜底:清掉没人认领的 -feishu- 文章(状态文件丢失、或历史上按标题生成过旧文件时会出现)
+  const claimed = new Set(Object.values(nextDocs).map((d) => d.file))
+  if (fs.existsSync(POST_DIR)) {
+    for (const name of fs.readdirSync(POST_DIR)) {
+      if (!name.endsWith('.md') || !name.includes('-feishu-')) continue
+      if (claimed.has(name)) continue
+      if (!DRY_RUN) fs.rmSync(path.join(POST_DIR, name))
+      removed++
+      log(`- 无主文章,移除: ${name}`)
     }
   }
 
@@ -638,6 +650,10 @@ function commitAndPush(count) {
 
 function buildAndDeploy() {
   const hexo = path.join(REPO_ROOT, 'node_modules', '.bin', 'hexo')
+  // 先 clean:hexo generate 不会删除 public/ 里的过期目录(改名后的旧链接、
+  // 已删分类页都会残留),clean 之后 public/ 与 source/ 完全一致
+  log('hexo clean ...')
+  run(hexo, ['clean'])
   log('hexo generate ...')
   run(hexo, ['generate'])
   log('hexo deploy ...')

@@ -103,6 +103,24 @@ hexo generate && hexo deploy            ← 推 public/ 到 main 分支
 - 状态记录在 `scripts/feishu-sync/.state.json`(不进 git),记录每篇文档的
   `revision_id` 和产出文件名。文档没改 → 跳过,不重新拉取。
 - 飞书侧删掉文档 → 对应的本地文章和图片会被移除。
+- 没有任何文档认领的 `-feishu-` 文章会被当作残留清掉(状态文件丢失时也不会留下孤儿文章)。
+
+## 改名后 URL 不变
+
+**在飞书里改标题,只改文章标题,不动链接。** 文件名(= 文章 URL)在第一次生成时
+就固定下来了,改名时继续沿用,所以老链接、老书签、老搜索引擎收录都不会失效。
+
+```
+飞书标题:ReactDemo实践  →  2026-10-15-feishu-reactdemo.md  →  /2026/10/15/2026-10-15-feishu-reactdemo/
+改成      React 实践笔记  →  2026-10-15-feishu-reactdemo.md  →  /2026/10/15/2026-10-15-feishu-reactdemo/
+                                                          ↑ 链接不变,只有页面标题变了
+```
+
+**想换 URL**:把 `source/_posts/` 下对应的 `.md` 删掉,下次同步会按新标题重新生成
+一个新文件(旧文件同时被清理)。这相当于「重新发一篇」。
+
+> 发布前会先执行 `hexo clean`。`hexo generate` 不会删除 `public/` 里的过期目录,
+> 不 clean 的话,删掉的文章和改过名的旧目录会一直残留在站点上。
 
 ## 定时执行
 
