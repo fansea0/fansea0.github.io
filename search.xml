@@ -54,6 +54,31 @@
     
     
     <entry>
+      <title>方法栈</title>
+      <link href="/2026/10/16/2026-10-16-feishu-post-7e2a6a7b/"/>
+      <url>/2026/10/16/2026-10-16-feishu-post-7e2a6a7b/</url>
+      
+        <content type="html"><![CDATA[<p>有没有想过，主函数在执行时，计算机底层是如何保证执行顺序的？嵌套调用的函数，又是怎么维持调用次序的？</p><p>在各类语言的底层，函数执行顺序依靠<strong>调用栈</strong>来保障。每一次函数调用都会生成一个<strong>栈帧</strong>，栈帧保存着函数运行的关键信息： </p><p>第一，<strong>返回地址</strong>，也就是上一层调用指令的地址； </p><p>第二，<strong>参数，返回值</strong>的存储空间。</p><p>每次函数执行完毕后，上层就可以从这个空间拿到当前函数的执行结果，回到上一层继续执行。</p><p>前面提到栈里保存的返回地址，是第二层保障。栈的设计，让 CPU 只需要关注栈顶，不用维护复杂的调用链；真正的执行顺序，在压栈的过程中就已经确定好了。</p><blockquote><p>每次方法的调用都会产生一个栈帧，一个函数能拥有多个栈帧</p></blockquote><p>来看一个简单的案例</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">c</span><span class="params">(n <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> n * <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">b</span><span class="params">(n <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> c(n) + <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">a</span><span class="params">(n <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> b(n) + <span class="number">100</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    x := a(<span class="number">5</span>)</span><br><span class="line">    <span class="built_in">println</span>(x)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">时间 →   main    a      b      c</span><br><span class="line">         │</span><br><span class="line">         ├─调用 a ──────►</span><br><span class="line">         │              │</span><br><span class="line">         │              ├─调用 b ─────►</span><br><span class="line">         │              │              │</span><br><span class="line">         │              │              ├─调用 c ──►</span><br><span class="line">         │              │              │           │</span><br><span class="line">         │              │              │           ├ return 10</span><br><span class="line">         │              │              ├◄──────────┘</span><br><span class="line">         │              │              │  算出 11</span><br><span class="line">         │              ├◄─────────────┘</span><br><span class="line">         │              │  算出 111</span><br><span class="line">         ├◄─────────────┘</span><br><span class="line">         │  x=111</span><br><span class="line">         ▼</span><br><span class="line"></span><br><span class="line">栈深度： 1      2      3      4  (最深)</span><br><span class="line">         ←──── 增长 ────→</span><br><span class="line">         ←──── 收缩 ────→</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">低地址（栈顶）</span><br><span class="line">┌─────────────────────┐</span><br><span class="line">│   c 的栈帧           │  ← 最后调用</span><br><span class="line">├─────────────────────┤</span><br><span class="line">│   b 的栈帧           │</span><br><span class="line">├─────────────────────┤</span><br><span class="line">│   a 的栈帧           │</span><br><span class="line">├─────────────────────┤</span><br><span class="line">│   main 的栈帧        │  ← 最先调用，栈底</span><br><span class="line">└─────────────────────┘</span><br><span class="line">高地址（栈底）</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机底层 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 飞书 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ReactDemo实践</title>
       <link href="/2026/10/15/2026-10-15-feishu-reactdemo/"/>
       <url>/2026/10/15/2026-10-15-feishu-reactdemo/</url>
@@ -89,6 +114,31 @@
       <categories>
           
           <category> 独立开发经验 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 飞书 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>GMP模型</title>
+      <link href="/2026/08/12/2026-08-12-feishu-gmp/"/>
+      <url>/2026/08/12/2026-08-12-feishu-gmp/</url>
+      
+        <content type="html"><![CDATA[<ul><li>G：Goroutine，可以理解为一个任务&#x2F;工作包，保存协程执行上下文（栈，pc寄存器）</li><li>M：OS 线程，真正的执行单位</li><li>P：调度者，协调M去运行G，G会存放在P的执行队列中</li></ul><p>G 出现阻塞的两种情况：</p><ol><li><p>**程序语意上的等待：**channel接受等待，time.After，sync锁</p><ol><li>G 加入等待队列</li><li>P绑定的M继续处理队列其他可执行的G</li><li>G 等待成功时，分配P执行</li></ol><blockquote><p>整个G的切换唤醒都存在于用户态，性能开销相对较少</p></blockquote></li><li><p>**线程等待内核操作：**内核处理文件IO，网络IO等</p><ol><li>M 无法解除P的绑定，进入挂起状态</li></ol></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> GO </category>
           
       </categories>
       
