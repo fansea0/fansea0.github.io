@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Dify</title>
+      <link href="/2026/10/24/2026-10-24-feishu-dify/"/>
+      <url>/2026/10/24/2026-10-24-feishu-dify/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Dify插件编写"><a href="#Dify插件编写" class="headerlink" title="Dify插件编写"></a>Dify插件编写</h2><p><a href="https://docs.dify.ai/zh/develop-plugin/dev-guides-and-walkthroughs/tool-plugin">https://docs.dify.ai/zh/develop-plugin/dev-guides-and-walkthroughs/tool-plugin</a></p><h2 id="MD处理插件实现"><a href="#MD处理插件实现" class="headerlink" title="MD处理插件实现"></a>MD处理插件实现</h2><p>可选参数：重叠块大小，</p><ol><li>获取到文件资源</li><li>AST转化为结构树</li><li>输出分块结果：array[chunk]、array[parentChunk]</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI / RAG </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 飞书 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Map</title>
       <link href="/2026/10/20/2026-10-20-feishu-map/"/>
       <url>/2026/10/20/2026-10-20-feishu-map/</url>
