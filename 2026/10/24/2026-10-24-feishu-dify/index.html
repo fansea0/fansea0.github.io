@@ -458,7 +458,7 @@
             
 
 <span class="post-pubtime">
-  2026-10-24 11:05:00
+  2026-10-24 11:30:26
 </span>
 
 
@@ -505,9 +505,8 @@
 </li>
 </ol>
 <p><strong>父块边界定义</strong></p>
-<p><strong>父块的边界 &#x3D; 天然语义边界（MD 标题），父块的大小上限是约束，不是切分依据；优先按标题切，超过 token 上限才二次拆分出新父块，而不是固定 token 硬切破坏标题结构。</strong></p>
-<p>一个最小级别标题的所有内容，可以理解为一个父块</p>
-<p>舒适区间：600 ~ 1200 token（首选）</p>
+<p>父块边界优先取**“最小语义完整章节”**；章节过短时不设父子，直接单层较大 token 整合；上级标题只有在确实需要返回整个大章节时才用，不能为了结构整齐而用。 这个判断标准是合理的。</p>
+<p>舒适区间：600 ~ 1200 token（首选），超过这个大小，则需要对父块进行切割</p>
 <h3 id="通用块"><a href="#通用块" class="headerlink" title="通用块"></a>通用块</h3><figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;&quot;id&quot;:&quot;c1&quot;,&quot;content&quot;:&quot;文本&quot;,&quot;metadata&quot;:&#123;&#125;,&quot;position&quot;:0,&quot;keywords&quot;:[]&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
 <p>超限：拆为多个独立Chunk，顺序递增</p>
@@ -517,6 +516,9 @@
 <h3 id="QA块"><a href="#QA块" class="headerlink" title="QA块"></a>QA块</h3><figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;&quot;id&quot;:&quot;q1&quot;,&quot;question&quot;:&quot;问题&quot;,&quot;answer&quot;:&quot;答案&quot;,&quot;metadata&quot;:&#123;&#125;,&quot;position&quot;:0&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
 <p>answer超限：拆成多条独立QA，question复用，sub_part标记分片</p>
+<h2 id="QA"><a href="#QA" class="headerlink" title="QA"></a>QA</h2><h3 id="父块选择标准？"><a href="#父块选择标准？" class="headerlink" title="父块选择标准？"></a>父块选择标准？</h3><p>父子分块的价值在于**“子块精准命中、父块补全上下文”**。但如果章节内容本来就少，还硬用上级标题做父块，下面多个子标题各成子块、却都映射到同一个父块，就会出现你说的重复问题——<strong>多个子块召回同一个父块</strong>，返回内容重复，浪费上下文窗口，精度也没提升。</p>
+<p>更关键的是，内容过少的章节，本来就不需要靠父块来“补上下文”。它自身语义已经完整，直接调大一点 token、把同一标题下的多个自然段整合成一个块就够了，检索命中的块本身就是完整答案。硬拆父子反而多了一层映射，收益接近零。</p>
+<p>所以你的结论可以归纳为：父块边界优先取**“最小语义完整章节”**；章节过短时不设父子，直接单层较大 token 整合；上级标题只有在确实需要返回整个大章节时才用，不能为了结构整齐而用。 这个判断标准是合理的。</p>
 
         </div>
 
@@ -558,7 +560,7 @@
     <div class="title">目录</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Dify%E6%8F%92%E4%BB%B6%E7%BC%96%E5%86%99"><span class="toc-text">Dify插件编写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MD%E5%A4%84%E7%90%86%E6%8F%92%E4%BB%B6%E5%AE%9E%E7%8E%B0"><span class="toc-text">MD处理插件实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%9D%97"><span class="toc-text">通用块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%B6%E5%AD%90%E5%9D%97"><span class="toc-text">父子块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#QA%E5%9D%97"><span class="toc-text">QA块</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Dify%E6%8F%92%E4%BB%B6%E7%BC%96%E5%86%99"><span class="toc-text">Dify插件编写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MD%E5%A4%84%E7%90%86%E6%8F%92%E4%BB%B6%E5%AE%9E%E7%8E%B0"><span class="toc-text">MD处理插件实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%9D%97"><span class="toc-text">通用块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%B6%E5%AD%90%E5%9D%97"><span class="toc-text">父子块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#QA%E5%9D%97"><span class="toc-text">QA块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#QA"><span class="toc-text">QA</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%B6%E5%9D%97%E9%80%89%E6%8B%A9%E6%A0%87%E5%87%86%EF%BC%9F"><span class="toc-text">父块选择标准？</span></a></li></ol></li></ol>
       
     </div>
   </div>
