@@ -1,7 +1,7 @@
 ---
 title: "Dify"
 date: 2026-10-24 00:44:14
-updated: 2026-10-24 11:30:26
+updated: 2026-10-24 12:07:16
 categories: ["AI / RAG"]
 tags: ["飞书"]
 ---
@@ -14,17 +14,27 @@ https://docs.dify.ai/zh/develop-plugin/dev-guides-and-walkthroughs/tool-plugin
 
 ## MD处理插件实现
 
-可选参数：最长token数量，重叠块大小（前部分内容重叠，参与建立索引），父子块/通用分块/QA问答块（选择项，多选一），是否携带标题（开关），
+可选参数：最长token数量，重叠块大小（前部分内容重叠，参与建立索引），父子块/通用分块/QA问答块（选择项，多选一），是否携带标题（开关）
 
 1. 获取到文件资源
 2. AST转化为结构树
 3. 结构树处理块
 
-   1. 分割线内内容为一个整块：overLap不能超越分割线
-   2. 每一分段需要携带完整的层级标题在前部分，可选
-   3. 尽可能保证一个段落在一块
-   4. overLap对段落内子块生效(一般为大段落超过设定最大token大小，需要切分子块)，跨段落不需要overlap
-   5. 列表/表格 这种单元内容不能分割，表格转化为语述格式
+   1. “携带标题”的 token 预算
+   2. 分割线内内容为一个整块：overLap不能超越分割线
+   3. 每一分段需要携带完整的层级标题在前部分，可选
+   4. 尽可能保证一个段落在一块
+   5. overLap规则
+   
+      1. **大小**：设定大小，一般是token 的15%，默认为60
+      2. **触发条件：**对段落内子块生效(一般为大段落超过设定最大token大小，需要切分子块)，跨段落不需要。比如一个标题下只有一段文本，文本长度超过设定最大token数量，分为前后A,B文本，A文本不用overlap，因为前面就是标题，B前面是A，都是一个最小标题下的内容，可以截取overLap，取完整语义长度。
+   6. 列表/表格 这种单元内容不能分割，表格转化为语述格式
+   7. 父子块
+   
+      - 父块拆分后，若最后一个子父块低于父块下限（如 < 400 token），则与前一个父块合并，或将其内容吸收为前一个父块的尾部。
+      - 子块层面同理：设置一个 `min_child_tokens` 硬下限（如 80～100 token），低于下限的子块不应独立入库。
+
+   - 
 4. 输出分块结果：array[Object]
 
 
@@ -37,7 +47,9 @@ https://docs.dify.ai/zh/develop-plugin/dev-guides-and-walkthroughs/tool-plugin
 
 
 
-### 通用块
+### 分块格式
+
+#### 通用块
 
 ```Plain Text
 [
@@ -47,7 +59,7 @@ https://docs.dify.ai/zh/develop-plugin/dev-guides-and-walkthroughs/tool-plugin
 
 超限：拆为多个独立Chunk，顺序递增
 
-### 父子块
+#### 父子块
 
 ```Plain Text
 [
@@ -60,7 +72,7 @@ https://docs.dify.ai/zh/develop-plugin/dev-guides-and-walkthroughs/tool-plugin
 
 父超限：本段内拆分，生成多个平级ParentChunk，id全新；子超限：父内滑动切片
 
-### QA块
+#### QA块
 
 ```Plain Text
 [
@@ -69,6 +81,15 @@ https://docs.dify.ai/zh/develop-plugin/dev-guides-and-walkthroughs/tool-plugin
 ```
 
 answer超限：拆成多条独立QA，question复用，sub_part标记分片
+
+
+
+### Mate-Data定义
+
+- `document_name` (string)：文件名。系统自动提取。
+- `uploader` (string)：上传者标识。系统自动提取。
+- `upload_date` (time)：上传日期。系统自动提取。
+- `last_update_date` (time)：最后更新时间。系统自动提取。
 
 
 
@@ -83,3 +104,15 @@ answer超限：拆成多条独立QA，question复用，sub_part标记分片
 更关键的是，内容过少的章节，本来就不需要靠父块来“补上下文”。它自身语义已经完整，直接调大一点 token、把同一标题下的多个自然段整合成一个块就够了，检索命中的块本身就是完整答案。硬拆父子反而多了一层映射，收益接近零。
 
 所以你的结论可以归纳为：父块边界优先取**“最小语义完整章节”**；章节过短时不设父子，直接单层较大 token 整合；上级标题只有在确实需要返回整个大章节时才用，不能为了结构整齐而用。 这个判断标准是合理的。
+
+
+
+### 父子分块设定舒适区件问题
+
+你的父块舒适区间是 600～1200 token，超限时“本段内拆分，生成多个平级 ParentChunk”。这里的问题是：拆分之后，**尾部很可能产生一个远低于 600 token 的碎片父块**。
+
+LightRAG 的段落语义切分实现中专门有一个 “尾部小块吸收” 策略：当一个块拆分后留下的小尾巴不足以独立成块时，向上游合并，消除文档结尾的零碎残片。chunk-bench 的基准也显示，recursive 策略与其他策略之间存在高达 9% 的召回差距，而差距的来源往往就是小碎片。
+
+建议补：
+
+- 父块拆分后，若最后一个子父块低于父块下限（如 < 400 token），则与前一个父块合并，或将其内容吸收为前一个父块的尾部。
