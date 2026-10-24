@@ -458,7 +458,7 @@
             
 
 <span class="post-pubtime">
-  2026-10-24 12:07:16
+  2026-10-24 23:11:59
 </span>
 
 
@@ -486,13 +486,14 @@
 
         <div class="markdown-body">
           <h2 id="Dify插件编写"><a href="#Dify插件编写" class="headerlink" title="Dify插件编写"></a>Dify插件编写</h2><p><a target="_blank" rel="noopener" href="https://docs.dify.ai/zh/develop-plugin/dev-guides-and-walkthroughs/tool-plugin">https://docs.dify.ai/zh/develop-plugin/dev-guides-and-walkthroughs/tool-plugin</a></p>
-<h2 id="MD处理插件实现"><a href="#MD处理插件实现" class="headerlink" title="MD处理插件实现"></a>MD处理插件实现</h2><p>可选参数：最长token数量，重叠块大小（前部分内容重叠，参与建立索引），父子块&#x2F;通用分块&#x2F;QA问答块（选择项，多选一），是否携带标题（开关）</p>
+<h2 id="MD处理插件实现"><a href="#MD处理插件实现" class="headerlink" title="MD处理插件实现"></a>MD处理插件实现</h2><p>**目的：**基于父子块、overlap、ast结构树实现高质量rag分块</p>
+<p>可选参数：最长token数量，重叠块大小（前部分内容重叠，参与建立索引），父子块&#x2F;通用分块&#x2F;QA问答块（选择项，多选一），是否携带标题（开关）</p>
 <ol>
 <li><p>获取到文件资源</p>
 </li>
 <li><p>AST转化为结构树</p>
 </li>
-<li><p>结构树处理块</p>
+<li><p>分块核心实现</p>
 <ol>
 <li><p>“携带标题”的 token 预算</p>
 </li>
@@ -510,14 +511,15 @@
 </li>
 <li><p>列表&#x2F;表格 这种单元内容不能分割，表格转化为语述格式</p>
 </li>
-<li><p>父子块</p>
-<ul>
+<li><p>父子块最小项</p>
+<ol>
 <li>父块拆分后，若最后一个子父块低于父块下限（如 &lt; 400 token），则与前一个父块合并，或将其内容吸收为前一个父块的尾部。</li>
 <li>子块层面同理：设置一个 <code>min_child_tokens</code> 硬下限（如 80～100 token），低于下限的子块不应独立入库。</li>
-</ul>
+</ol>
+</li>
+<li><p>QA对处理：对于QA对，其格式会遵照<strong>问题（三级标题）\n 回答内容</strong>格式。如果用户选择的是QA问答对就需要做对应的解析</p>
 </li>
 </ol>
-<p>- </p>
 </li>
 <li><p>输出分块结果：array[Object]</p>
 </li>
