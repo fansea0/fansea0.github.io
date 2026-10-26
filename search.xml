@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>问题与解法</title>
+      <link href="/2026/10/26/2026-10-26-feishu-post-b56a5c0e/"/>
+      <url>/2026/10/26/2026-10-26-feishu-post-b56a5c0e/</url>
+      
+        <content type="html"><![CDATA[<h2 id="模型幻觉"><a href="#模型幻觉" class="headerlink" title="模型幻觉"></a>模型幻觉</h2><p> 模型输出了看起来通顺合理、但没有事实依据的内容。</p><p>**原因：**无据生成、有据不用、忠实错误</p><p><sheet sheet-id="5ZChBs" token="Mzm2sgPqPhzuM8txrD0c6ia8nle"></sheet></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI / RAG </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 飞书 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>评测指标与实现</title>
+      <link href="/2026/10/26/2026-10-26-feishu-post-cc5a2883/"/>
+      <url>/2026/10/26/2026-10-26-feishu-post-cc5a2883/</url>
+      
+        <content type="html"><![CDATA[<h2 id="HitRate-K"><a href="#HitRate-K" class="headerlink" title="HitRate@K"></a>HitRate@K</h2><p>「找到了没找到」</p><p>前K条至少出现一个标准答案，统计简单</p><h2 id="Recall-K"><a href="#Recall-K" class="headerlink" title="Recall@K"></a>Recall@K</h2><p>「找到了多少」</p><p>前K条包含完整答案的比例，计算需要标注有哪些标准答案</p><figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Recall@k = |检索结果 ∩ 标准答案片段| / |标准答案片段总数|</span><br><span class="line"></span><br><span class="line">检索 top5 = [A, B, C, D, E]</span><br><span class="line">gold      = [B, D]</span><br><span class="line"></span><br><span class="line">Recall@5 = |&#123;B,D&#125; ∩ &#123;A,B,C,D,E&#125;| / 2 = 2/2 = 1.0</span><br></pre></td></tr></table></figure><h2 id="MRR"><a href="#MRR" class="headerlink" title="MRR"></a>MRR</h2><p>「找到的位置好不好用」</p><p>正确答案排在第一几位，评测正确答案是否相似度更高</p><p>比如说正确答案排在第 5 位，前面 4 段噪声会稀释注意力，模型可能压根没认真看那段就答了</p><p><sheet sheet-id="BuqCO6" token="BnzrscEcLhj1wttJ6eCc9AZpnvd"></sheet></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI / RAG </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 飞书 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>MD分块Dify插件方案</title>
       <link href="/2026/10/24/2026-10-24-feishu-dify/"/>
       <url>/2026/10/24/2026-10-24-feishu-dify/</url>
