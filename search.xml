@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>审核流程</title>
+      <link href="/2026/10/26/2026-10-26-feishu-post-804674c7/"/>
+      <url>/2026/10/26/2026-10-26-feishu-post-804674c7/</url>
+      
+        <content type="html"><![CDATA[<p>审核流程包含初审、复审、发布等标准环节及审核数据统计。可在顶层做抽象，定义核心方法，各业务自行实现逻辑。该方案仅需一套后台接口统一收口，支撑全量审核流程，减少冗余代码，架构更简洁。</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Service <span class="keyword">interface</span> &#123;</span><br><span class="line">    <span class="comment">//初审列表</span></span><br><span class="line">    GetList(c *gin.Context) (<span class="keyword">interface</span>&#123;&#125;, <span class="type">int</span>)</span><br><span class="line">    <span class="comment">//初审未完成数量</span></span><br><span class="line">    UndetermineCount() <span class="type">int</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初审在start,end期间未完成审核的数量</span></span><br><span class="line">    UndetermineTimeRangeCount(start, end <span class="type">int64</span>) <span class="type">int</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//审核处理</span></span><br><span class="line">    Determine(c *gin.Context) <span class="type">error</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//抽样</span></span><br><span class="line">    Sampling(reqParams *SamplingParams, taskId <span class="type">int64</span>) (<span class="type">int</span>, <span class="type">int</span>)</span><br><span class="line">    <span class="comment">//抽样列表</span></span><br><span class="line">    SampleList(c *gin.Context, taskId <span class="type">int64</span>) (<span class="keyword">interface</span>&#123;&#125;, <span class="type">int</span>, <span class="type">int</span>)</span><br><span class="line">    <span class="comment">//复审</span></span><br><span class="line">    Review(c *gin.Context) <span class="type">error</span></span><br><span class="line">    <span class="comment">//复审未完成数量</span></span><br><span class="line">    UnreviewCount(taskId <span class="type">int64</span>) (<span class="type">int</span>, <span class="type">int</span>)</span><br><span class="line">    <span class="comment">//复审抽样统计</span></span><br><span class="line">    ReviewStatistics(taskId <span class="type">int64</span>) ([]Statistics, []<span class="type">string</span>)</span><br><span class="line">    <span class="comment">// DeleteReview 删除复审任务</span></span><br><span class="line">    <span class="comment">// - 对于未复审的（review_state=1）：重置 review_state 和 review_task_id</span></span><br><span class="line">    <span class="comment">// - 对于已复审的（review_state=2）：额外重置 ReviewDetermine中修改的字段</span></span><br><span class="line">    DeleteReview(taskId <span class="type">int64</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//发布审核内容</span></span><br><span class="line">    UnpublishCount(c *gin.Context) <span class="type">int</span></span><br><span class="line">    Publish(c *gin.Context) <span class="type">error</span></span><br><span class="line"></span><br><span class="line">    RefuseReason(c *gin.Context) (<span class="keyword">map</span>[<span class="type">int</span>]<span class="type">string</span>, <span class="type">error</span>)</span><br><span class="line">    TicketDetail(ticketDetail TicketDetailParam) (<span class="keyword">interface</span>&#123;&#125;, <span class="type">error</span>)                              <span class="comment">// 某一条工单的详情</span></span><br><span class="line">    StatReviewAuditRet(param audit.StatisticsResultReq) <span class="keyword">map</span>[<span class="type">string</span>]*audit.StatisticsList           <span class="comment">// 复审结果统计数据</span></span><br><span class="line">    StatReviewAuditRetDetail(param *audit.StatisticsDetailListReq) ([]*audit.ListData, <span class="type">int</span>, <span class="type">error</span>) <span class="comment">// 复审结果详情列表</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后台业务 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 飞书 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>问题与解法</title>
       <link href="/2026/10/26/2026-10-26-feishu-post-b56a5c0e/"/>
       <url>/2026/10/26/2026-10-26-feishu-post-b56a5c0e/</url>
