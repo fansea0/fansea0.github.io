@@ -1,7 +1,7 @@
 ---
 title: "MD分块Dify插件方案"
 date: 2026-10-24 00:44:14
-updated: 2026-10-25 16:43:56
+updated: 2026-10-27 20:52:07
 categories: ["AI / RAG"]
 tags: ["飞书"]
 ---
@@ -17,6 +17,15 @@ https://docs.dify.ai/zh/develop-plugin/dev-guides-and-walkthroughs/tool-plugin
 **目的：**基于父子块、overlap、ast结构树实现高质量rag分块
 
 可选参数：最长token数量，重叠块大小（前部分内容重叠，参与建立索引），父子块/通用分块/QA问答块（选择项，多选一），是否携带标题（开关）
+
+<grid>
+<column width-ratio="0.500000">
+![](/images/feishu/AXogbnJpzoHk1Cxuu6EcWH9Xn9c.png)
+</column>
+<column width-ratio="0.500000"></column>
+</grid>
+
+
 
 | **参数** | **类型** | **默认** | **说明** |
 |-|-|-|-|
