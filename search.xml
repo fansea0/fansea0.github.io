@@ -179,6 +179,31 @@
     
     
     <entry>
+      <title>MySQL</title>
+      <link href="/2026/10/19/2026-10-19-feishu-mysql/"/>
+      <url>/2026/10/19/2026-10-19-feishu-mysql/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Char和Varchar的区别"><a href="#Char和Varchar的区别" class="headerlink" title="Char和Varchar的区别"></a>Char和Varchar的区别</h2><p><strong>char 定长，适合固定长度；varchar 变长，适合长短不定的字符串。</strong></p><p><strong>定长行结构简化了内存读取、计算、页内寻址</strong></p><p><code>char(n)</code>：n 代表<strong>字符数</strong>，最多 255。</p><ul><li>不管你存的字符串有多短，<strong>都会占用 n 个字符的空间</strong>，不足的部分用<strong>空格填充</strong>，读取时自动把末尾空格删掉</li></ul><p><code>varchar(n)</code>：n 是<strong>最大字符数</strong>，MySQL5.0.3+ 最大支持 65535 字节（不是字符）。</p><ul><li><p><strong>占用空间 &#x3D; 实际字符串长度 + 长度前缀</strong></p><ul><li>长度 ≤255：前缀 1 字节</li><li>＞255：前缀 2 字节</li></ul></li><li><p>例子：<code>varchar(10)</code></p><ul><li>存 <code>&#39;abc&#39;</code> → 只占用 3 字符 + 1 字节前缀</li></ul></li></ul><p><sheet sheet-id="xwZxY1" token="KRxzsfFyXho8xTt0ZfWcRdNvnub"></sheet></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 飞书 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>访问不了图片</title>
       <link href="/2026/10/18/2026-10-18-feishu-post-371e6262/"/>
       <url>/2026/10/18/2026-10-18-feishu-post-371e6262/</url>
