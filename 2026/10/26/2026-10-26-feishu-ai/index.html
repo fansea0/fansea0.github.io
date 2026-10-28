@@ -572,7 +572,7 @@
             
 
 <span class="post-pubtime">
-  2026-10-27 19:44:25
+  2026-10-27 22:12:59
 </span>
 
 
@@ -605,9 +605,15 @@
 <li>评估集:100-500 条标注数据,量化打分,而不是”感觉变好了”。</li>
 <li>A&#x2F;B 测试:多版本并行跑,数据决定用哪个。</li>
 <li>提示词库:沉淀验证过的模板供团队复用。</li>
-<li>工具链:LangSmith(追踪+评估)、Promptflow&#x2F;PromptFlow(编排测试)、Langfuse(开源 tracing)。</li>
+<li>工具链:LangSmith(追踪+评估)、Promptflow&#x2F;PromptFlow(编排测试)、<strong>Langfuse(开源 tracing)</strong>。</li>
 </ul>
-<h2 id="提示词经验"><a href="#提示词经验" class="headerlink" title="提示词经验"></a>提示词经验</h2>
+<h2 id="Json格式化输出"><a href="#Json格式化输出" class="headerlink" title="Json格式化输出"></a>Json格式化输出</h2><p>JSON 输出治理 &#x3D; 协议约束（JSON Mode&#x2F;Structured Outputs）→ Prompt 钉格式（schema 示例+枚举+few-shot）→ 代码清洗（剥围栏、Decoder 截取）→ 业务兜底（校验、带错重试、降级+告警</p>
+<ul>
+<li>提示词约束输出json，定义Few - Shot，temperature 调低</li>
+<li>约束json_object，json_schema</li>
+<li>代码上容错解析，清理block块</li>
+</ul>
+
         </div>
 
         
@@ -653,7 +659,7 @@
     <div class="title">目录</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%BF%85%E9%A1%BB%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AE%A1%E7%90%86"><span class="toc-text">提示词必须工程化管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA%E8%AF%8D%E7%BB%8F%E9%AA%8C"><span class="toc-text">提示词经验</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%BF%85%E9%A1%BB%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AE%A1%E7%90%86"><span class="toc-text">提示词必须工程化管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Json%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA"><span class="toc-text">Json格式化输出</span></a></li></ol>
       
     </div>
   </div>

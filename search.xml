@@ -33,7 +33,7 @@
       <link href="/2026/10/26/2026-10-26-feishu-ai/"/>
       <url>/2026/10/26/2026-10-26-feishu-ai/</url>
       
-        <content type="html"><![CDATA[<h2 id="提示词必须工程化管理"><a href="#提示词必须工程化管理" class="headerlink" title="提示词必须工程化管理"></a>提示词必须工程化管理</h2><p>prompt 不是文案,是代码:</p><ul><li>版本控制:prompt 进 Git,每次变更配效果数据。</li><li>评估集:100-500 条标注数据,量化打分,而不是”感觉变好了”。</li><li>A&#x2F;B 测试:多版本并行跑,数据决定用哪个。</li><li>提示词库:沉淀验证过的模板供团队复用。</li><li>工具链:LangSmith(追踪+评估)、Promptflow&#x2F;PromptFlow(编排测试)、Langfuse(开源 tracing)。</li></ul><h2 id="提示词经验"><a href="#提示词经验" class="headerlink" title="提示词经验"></a>提示词经验</h2>]]></content>
+        <content type="html"><![CDATA[<h2 id="提示词必须工程化管理"><a href="#提示词必须工程化管理" class="headerlink" title="提示词必须工程化管理"></a>提示词必须工程化管理</h2><p>prompt 不是文案,是代码:</p><ul><li>版本控制:prompt 进 Git,每次变更配效果数据。</li><li>评估集:100-500 条标注数据,量化打分,而不是”感觉变好了”。</li><li>A&#x2F;B 测试:多版本并行跑,数据决定用哪个。</li><li>提示词库:沉淀验证过的模板供团队复用。</li><li>工具链:LangSmith(追踪+评估)、Promptflow&#x2F;PromptFlow(编排测试)、<strong>Langfuse(开源 tracing)</strong>。</li></ul><h2 id="Json格式化输出"><a href="#Json格式化输出" class="headerlink" title="Json格式化输出"></a>Json格式化输出</h2><p>JSON 输出治理 &#x3D; 协议约束（JSON Mode&#x2F;Structured Outputs）→ Prompt 钉格式（schema 示例+枚举+few-shot）→ 代码清洗（剥围栏、Decoder 截取）→ 业务兜底（校验、带错重试、降级+告警</p><ul><li>提示词约束输出json，定义Few - Shot，temperature 调低</li><li>约束json_object，json_schema</li><li>代码上容错解析，清理block块</li></ul>]]></content>
       
       
       <categories>
