@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Channel</title>
+      <link href="/2026/10/28/2026-10-28-feishu-channel/"/>
+      <url>/2026/10/28/2026-10-28-feishu-channel/</url>
+      
+        <content type="html"><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>channel是go专门给多个协程之间传递消息协调执行顺序的工具。底层有环形缓冲区、发送等待队列、接收等待队列。可以存数据，让协程阻塞等待。关闭后通知所有等待协程，一般用于传数据、分发任务、通知退出。</p><h2 id="结构与实现"><a href="#结构与实现" class="headerlink" title="结构与实现"></a>结构与实现</h2><ul><li>环形数组</li><li>收发等待队列</li></ul><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> hchan <span class="keyword">struct</span> &#123;</span><br><span class="line">  qcount   <span class="type">uint</span>           <span class="comment">// 当前长度</span></span><br><span class="line">  dataqsiz <span class="type">uint</span>           <span class="comment">// 缓冲区大小</span></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 环形队列组成</span></span><br><span class="line">  buf      unsafe.Pointer <span class="comment">// 数组头指针，用于标识数组</span></span><br><span class="line">  elemsize <span class="type">uint16</span></span><br><span class="line">  sendx    <span class="type">uint</span>   <span class="comment">// 发送数据的索引</span></span><br><span class="line">  recvx    <span class="type">uint</span>   <span class="comment">// 接受数据的索引</span></span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  recvq    waitq  <span class="comment">// list of recv waiters</span></span><br><span class="line">  sendq    waitq  <span class="comment">// list of send waiters</span></span><br><span class="line"></span><br><span class="line">  closed   <span class="type">uint32</span> <span class="comment">// close操作会把该字段设置为1</span></span><br><span class="line">  lock mutex <span class="comment">// 同步close操作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="/images/feishu/EyiqbAP0Oo5gnpxCE6CcPSAgnXg.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> GO / GO学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 飞书 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>AI代码软件开发经验</title>
       <link href="/2026/10/27/2026-10-27-feishu-ai/"/>
       <url>/2026/10/27/2026-10-27-feishu-ai/</url>
