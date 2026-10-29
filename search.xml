@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Eino 编排</title>
+      <link href="/2026/10/29/2026-10-29-feishu-eino/"/>
+      <url>/2026/10/29/2026-10-29-feishu-eino/</url>
+      
+        <content type="html"><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>Eino 的 Graph 本质上是一个有向图编排引擎，你可以把任何确定性流程（包括带循环的 Agent 逻辑）拆成“节点 + 边 + 分支”来描述。它比 Chain 灵活得多，核心价值在于支持循环、条件分支和并行汇聚，这正是实现 ReAct Agent 的基础。</p><h3 id="核心概念：用“画图”的方式理解-Graph"><a href="#核心概念：用“画图”的方式理解-Graph" class="headerlink" title="核心概念：用“画图”的方式理解 Graph"></a>核心概念：用“画图”的方式理解 Graph</h3><ul><li>节点：一个执行步骤。最常用的是 <code>LambdaNode</code>（塞任意函数），也可以直接挂载 ChatModel、Tools、Retriever 等预置组件。</li><li>边：定义数据流向。用 <code>AddEdge</code> 连接节点，用 <code>START</code> 和 <code>END</code> 表示入口和出口。</li><li>分支：条件路由。根据上游节点的输出决定下一步走哪条路，是实现 ReAct 循环（判断“继续调工具”还是“结束”）的关键。</li></ul><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI / agent开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 飞书 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Channel</title>
       <link href="/2026/10/28/2026-10-28-feishu-channel/"/>
       <url>/2026/10/28/2026-10-28-feishu-channel/</url>
