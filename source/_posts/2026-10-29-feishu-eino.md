@@ -1,7 +1,7 @@
 ---
 title: "Eino 编排"
 date: 2026-10-29 22:15:20
-updated: 2026-11-03 20:20:00
+updated: 2026-11-03 22:53:03
 categories: ["AI / agent开发"]
 tags: ["飞书"]
 ---
@@ -39,6 +39,26 @@ Eino 的 Graph 本质上是一个有向图编排引擎，你可以把任何确�
 当agent的处理问题的时候，通常需要用户去选择某一项结果，选择后继续执行，这里讲述一下具体实现
 
 在编译的方法中，可以选择memory的option，这样就可以实现图的暂停
+
+流程：
+
+**中断方**
+
+1. 检验ctx是否是打断的 GetInterruptState
+
+   1. 不是打断的，就抛 StatefulInterrupt 错误
+   2. 是打断的就通过ctx获取继续的数据 GetResumeContext
+2. 基于新的数据进行业务逻辑
+
+**恢复方**
+
+恢复必须的参数：中断ID、CheckPointID
+
+1. 检测到中断Err
+2. 提取中断ID，UUID，本ID是用于标识中断的位置
+3. 重新Invoke，传递中断ID、CheckPointID
+
+![](/images/feishu/Bl2ibwcLwoZFvDxxwL9cCd2lnGc.png)
 
 ![](/images/feishu/Jd0Sb44bKoia8oxWXx8cCyn0nMf.png)
 
@@ -321,8 +341,6 @@ func main() {
     }
 }
 ```
-
-![](/images/feishu/WUVTbNgLroNB3AxPPiJc7kxXnbK.png)
 
 ### 分支与状态
 
