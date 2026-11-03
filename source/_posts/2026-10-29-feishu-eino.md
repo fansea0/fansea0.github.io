@@ -1,7 +1,7 @@
 ---
 title: "Eino 编排"
 date: 2026-10-29 22:15:20
-updated: 2026-10-29 23:29:55
+updated: 2026-11-03 20:20:00
 categories: ["AI / agent开发"]
 tags: ["飞书"]
 ---
