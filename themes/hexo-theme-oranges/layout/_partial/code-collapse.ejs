@@ -1,0 +1,8 @@
+<%
+const collapseCfg = (theme.codeBlock && theme.codeBlock.collapse) || {}
+if (collapseCfg.enable) { %>
+<script>
+  window.__codeCollapse = <%- JSON.stringify({ minLines: collapseCfg.minLines || 12, defaultCollapsed: !!collapseCfg.defaultCollapsed }) %>
+</script>
+<%- js(['/js/codeCollapse.js']) %>
+<% } %>

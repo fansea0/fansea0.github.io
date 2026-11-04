@@ -33,11 +33,30 @@ if (catalog && tocElement) {
   }
 
   var btnCatalog = document.getElementById('btn-catalog')
+  var closeBtn = document.getElementById('btn-catalog-close')
+  var backdrop = document.getElementById('catalog-backdrop')
+
+  function setOpen (open) {
+    catalog.classList.toggle('hidden', !open)
+    if (backdrop) backdrop.classList.toggle('is-open', open)
+    if (btnCatalog) btnCatalog.setAttribute('aria-expanded', open ? 'true' : 'false')
+  }
+
   if (btnCatalog) {
     btnCatalog.addEventListener('click', function () {
-      catalog.classList.toggle('hidden')
+      setOpen(catalog.classList.contains('hidden'))
     }, false)
   }
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function () { setOpen(false) }, false)
+  }
+  if (backdrop) {
+    backdrop.addEventListener('click', function () { setOpen(false) }, false)
+  }
+  // 移动端选完标题就收起,不然正文被挡住
+  tocElement.addEventListener('click', function (e) {
+    if (e.target.closest('a')) setOpen(false)
+  }, false)
 
   document.addEventListener('scroll', isActiveCat, false)
   isActiveCat()

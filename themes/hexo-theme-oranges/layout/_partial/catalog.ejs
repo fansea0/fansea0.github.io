@@ -1,9 +1,13 @@
 <% if (theme.catalog.enable && (toc(page.content) || toc(page.origin))) { %>
-  <div id="btn-catalog" class="btn-catalog">
+  <button id="btn-catalog" class="btn-catalog" type="button" aria-controls="catalog" aria-expanded="false">
     <i class="iconfont icon-catalog"></i>
-  </div>
+  </button>
+  <div class="catalog-backdrop" id="catalog-backdrop"></div>
   <div class="post-catalog hidden" id="catalog">
-    <div class="title"><%= __('catalog') %></div>
+    <div class="title">
+      <span><%= __('catalog') %></span>
+      <button class="catalog-close" id="btn-catalog-close" type="button" aria-label="关闭大纲">×</button>
+    </div>
     <div class="catalog-content">
       <% if (page.encrypt == true) { %>
         <%- toc(page.origin, { "list_number": false }) %>

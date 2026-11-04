@@ -575,6 +575,9 @@ html, body {
   padding-left: 0;
 
   .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     color: var(--wiki-text-sub);
     font-size: 13px;
     font-weight: 600;
@@ -592,6 +595,19 @@ html, body {
     text-overflow: ellipsis;
     line-height: 1.9;
   }
+}
+
+// 大纲按钮/抽屉只在窄屏出现,宽屏用右侧常驻栏
+.btn-catalog {
+  display: none;
+}
+
+.catalog-close {
+  display: none;
+}
+
+.catalog-backdrop {
+  display: none;
 }
 
 .toc-link {
@@ -752,17 +768,19 @@ html, body {
     display: none;
   }
 
+  // 侧栏是 content-box,按 width 算 left 会露出一条边,用 transform 移出视口
   .wiki-sidebar {
     position: fixed;
     top: $topbar-height;
-    left: -($sidebar-width);
+    left: 0;
     z-index: 120;
-    transition: left 0.25s ease;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
     box-shadow: var(--wiki-shadow);
   }
 
   .wiki-sidebar.is-open {
-    left: 0;
+    transform: translateX(0);
   }
 
   .wiki-scrim {
@@ -803,11 +821,81 @@ html, body {
   }
 
   .post-catalog {
-    display: none;
+    position: fixed;
+    top: $topbar-height;
+    right: 0;
+    bottom: 0;
+    z-index: 130;
+    width: 76%;
+    max-width: 300px;
+    max-height: none;
+    padding: 14px 16px 24px;
+    font-size: 14px;
+    background-color: var(--wiki-bg);
+    border-left: 1px solid var(--wiki-border);
+    box-shadow: var(--wiki-shadow);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.25s ease, visibility 0s linear 0.25s;
+
+    .title {
+      font-size: 14px;
+      padding-bottom: 10px;
+      margin-bottom: 6px;
+      border-bottom: 1px solid var(--wiki-border);
+    }
+
+    li {
+      line-height: 2.1;
+    }
+  }
+
+  .post-catalog:not(.hidden) {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.25s ease;
+  }
+
+  .catalog-close {
+    display: block;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    background-color: transparent;
+    color: var(--wiki-text-3);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .catalog-backdrop {
+    display: block;
+    position: fixed;
+    top: $topbar-height;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 125;
+    background-color: rgba(31, 35, 41, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+  }
+
+  .catalog-backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.25s ease;
   }
 
   .btn-catalog {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: fixed;
     top: $topbar-height + 8px;
     right: 8px;
@@ -820,9 +908,65 @@ html, body {
     border: 1px solid var(--wiki-border);
     box-shadow: var(--wiki-shadow);
     color: var(--wiki-text-sub);
-  }
+    cursor: pointer;
 
-  .post-catalog.hidden {
-    display: none;
+    i {
+      font-size: 18px;
+    }
   }
+}
+
+/* 代码块折叠 */
+figure.highlight figcaption {
+  position: relative;
+}
+
+figure.highlight figcaption.code-collapse-bar {
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+}
+
+.code-collapse-hint {
+  display: none;
+  color: #999;
+  font-size: 0.85rem;
+}
+
+figure.highlight.is-code-collapsed .code-collapse-hint {
+  display: inline;
+}
+
+.code-collapse-toggle {
+  position: absolute;
+  top: 50%;
+  right: 3.2rem;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.code-collapse-toggle::before {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  margin: 0 auto;
+  border-left: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  transform: rotate(-45deg);
+  transition: transform 0.15s ease;
+}
+
+figure.highlight.is-code-collapsed .code-collapse-toggle::before {
+  transform: rotate(-135deg);
+}
+
+figure.highlight.is-code-collapsed table {
+  display: none;
 }

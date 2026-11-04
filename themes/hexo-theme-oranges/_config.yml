@@ -220,7 +220,7 @@ colorSwitch:
 
 # 文章分享
 postShare:
-  enable: true
+  enable: false
 
   twitter:
     enable: true
@@ -236,6 +236,12 @@ codeBlock:
   # 代码复制
   copy:
     enable: true
+  # 代码块折叠:行数达到 minLines 的代码块,标题栏出现折叠按钮
+  collapse:
+    enable: true
+    minLines: 12
+    # true 时长代码块默认收起,点击展开
+    defaultCollapsed: false
 
 # MathJax Support
 # 数学公式支持

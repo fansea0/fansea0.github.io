@@ -18,17 +18,38 @@
     }
   }
 
-  // ---- 目录树展开/收起 ----
+  // ---- 目录树展开/收起(默认收起,只展开当前文章所在的分支) ----
   var tree = document.getElementById('wiki-tree')
 
   if (tree) {
     var state = loadState()
 
-    tree.querySelectorAll('.wiki-node-folder').forEach(function (node) {
-      node.classList.add('is-open')
-      if (state[node.getAttribute('data-folder')] === 'collapsed') {
-        node.classList.add('is-collapsed')
+    // 当前所在文件夹,以及当前这篇文章的各级父文件夹
+    var activeKeys = {}
+    tree.querySelectorAll('.wiki-node-folder.is-current').forEach(function (node) {
+      activeKeys[node.getAttribute('data-folder')] = true
+    })
+    var currentDoc = tree.querySelector('.wiki-node-doc.is-current')
+    for (var el = currentDoc; el; el = el.parentElement) {
+      if (el.classList && el.classList.contains('wiki-node-folder')) {
+        activeKeys[el.getAttribute('data-folder')] = true
       }
+    }
+
+    function isDefaultOpen (node) {
+      return Object.prototype.hasOwnProperty.call(activeKeys, node.getAttribute('data-folder'))
+    }
+
+    function setOpen (node, open) {
+      node.classList.toggle('is-open', open)
+      node.classList.toggle('is-collapsed', !open)
+      var toggle = node.querySelector(':scope > .wiki-node-row > .wiki-node-toggle')
+      if (toggle) toggle.setAttribute('aria-expanded', open ? 'true' : 'false')
+    }
+
+    tree.querySelectorAll('.wiki-node-folder').forEach(function (node) {
+      var key = node.getAttribute('data-folder')
+      setOpen(node, state[key] === 'expanded' || (isDefaultOpen(node) && state[key] !== 'collapsed'))
     })
 
     tree.addEventListener('click', function (e) {
@@ -40,11 +61,17 @@
       var node = row.closest('.wiki-node-folder')
       if (!node) return
 
-      var collapsed = node.classList.toggle('is-collapsed')
+      var open = !node.classList.contains('is-open')
+      setOpen(node, open)
+
       var key = node.getAttribute('data-folder')
       var next = loadState()
-      if (collapsed) next[key] = 'collapsed'
-      else delete next[key]
+      if (open === isDefaultOpen(node)) {
+        // 回到默认状态,不需要记住
+        delete next[key]
+      } else {
+        next[key] = open ? 'expanded' : 'collapsed'
+      }
       saveState(next)
     })
   }
