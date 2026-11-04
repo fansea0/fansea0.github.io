@@ -655,6 +655,16 @@
 
 
 
+<script>
+  window.__codeCollapse = {"minLines":12,"defaultCollapsed":false}
+</script>
+
+<script src="/js/codeCollapse.js"></script>
+
+
+
+
+
 
   
 
@@ -720,7 +730,7 @@
 </ul>
 <h2 id="G-阻塞场景讨论"><a href="#G-阻塞场景讨论" class="headerlink" title="G 阻塞场景讨论"></a>G 阻塞场景讨论</h2><p>G 出现阻塞的两种情况：</p>
 <ol>
-<li><p>**程序语意上（用户态）的等待：**channel接受等待，time.After，sync锁</p>
+<li><p><strong>程序语意上（用户态）的等待：</strong> channel接受等待，time.After，sync锁</p>
 <ol>
 <li>G 加入等待队列</li>
 <li><strong>M不会阻塞</strong>，P绑定的M继续处理队列其他可执行的G</li>
@@ -730,7 +740,7 @@
 <p>整个G的切换唤醒都存在于用户态，性能开销相对较少</p>
 </blockquote>
 </li>
-<li><p>**线程等待内核操作：**内核处理文件IO，网络IO等</p>
+<li><p><strong>线程等待内核操作：</strong> 内核处理文件IO，网络IO等</p>
 <ol>
 <li><strong>M 和 P 解绑</strong>，M进入内核挂起，卡在系统调用里面，无法执行go代码</li>
 <li>P 失去绑定的M，会寻找一个空闲M，接管P接续跑队列内剩下的G</li>
@@ -794,11 +804,15 @@
       </article>
 
       
-  <div id="btn-catalog" class="btn-catalog">
+  <button id="btn-catalog" class="btn-catalog" type="button" aria-controls="catalog" aria-expanded="false">
     <i class="iconfont icon-catalog"></i>
-  </div>
+  </button>
+  <div class="catalog-backdrop" id="catalog-backdrop"></div>
   <div class="post-catalog hidden" id="catalog">
-    <div class="title">目录</div>
+    <div class="title">
+      <span>目录</span>
+      <button class="catalog-close" id="btn-catalog-close" type="button" aria-label="关闭大纲">×</button>
+    </div>
     <div class="catalog-content">
       
         <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B%E8%A7%A3%E9%87%8A"><span class="toc-text">GMP模型解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#G-%E9%98%BB%E5%A1%9E%E5%9C%BA%E6%99%AF%E8%AE%A8%E8%AE%BA"><span class="toc-text">G 阻塞场景讨论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GO-%E5%92%8C-Java-%E5%AF%B9%E6%AF%94"><span class="toc-text">GO 和 Java 对比</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9C%85-Go-%E6%9B%B4%E5%8D%A0%E4%BC%98%E5%9C%BA%E6%99%AF"><span class="toc-text">✅ Go 更占优场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9C%85-Java-%E6%9B%B4%E5%8D%A0%E4%BC%98%E5%9C%BA%E6%99%AF"><span class="toc-text">✅ Java 更占优场景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85-GMP-%E6%A0%B8%E5%BF%83%E8%A6%81%E7%82%B9"><span class="toc-text">补充 GMP 核心要点</span></a></li></ol>
@@ -1052,29 +1066,6 @@
 
 
         
-  
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + GMP%E6%A8%A1%E5%9E%8B + '&url=' + https%3A%2F%2Ffansea0.github.io%2F2026%2F08%2F12%2F2026-08-12-feishu-gmp%2F + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://fansea0.github.io/2026/08/12/2026-08-12-feishu-gmp/" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
-  
-  
-<script src="/js/shares.js"></script>
-
-
 
       </div>
     </div>

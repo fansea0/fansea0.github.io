@@ -655,6 +655,16 @@
 
 
 
+<script>
+  window.__codeCollapse = {"minLines":12,"defaultCollapsed":false}
+</script>
+
+<script src="/js/codeCollapse.js"></script>
+
+
+
+
+
 
   
 
@@ -768,11 +778,15 @@
       </article>
 
       
-  <div id="btn-catalog" class="btn-catalog">
+  <button id="btn-catalog" class="btn-catalog" type="button" aria-controls="catalog" aria-expanded="false">
     <i class="iconfont icon-catalog"></i>
-  </div>
+  </button>
+  <div class="catalog-backdrop" id="catalog-backdrop"></div>
   <div class="post-catalog hidden" id="catalog">
-    <div class="title">目录</div>
+    <div class="title">
+      <span>目录</span>
+      <button class="catalog-close" id="btn-catalog-close" type="button" aria-label="关闭大纲">×</button>
+    </div>
     <div class="catalog-content">
       
         <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%B8%8E%E6%96%B9%E6%A1%88"><span class="toc-text">问题与方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%80%83"><span class="toc-text">思考</span></a></li></ol>
@@ -1026,29 +1040,6 @@
 
 
         
-  
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86%E5%9B%BE%E7%89%87 + '&url=' + https%3A%2F%2Ffansea0.github.io%2F2026%2F10%2F18%2F2026-10-18-feishu-post-371e6262%2F + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://fansea0.github.io/2026/10/18/2026-10-18-feishu-post-371e6262/" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
-  
-  
-<script src="/js/shares.js"></script>
-
-
 
       </div>
     </div>

@@ -655,6 +655,16 @@
 
 
 
+<script>
+  window.__codeCollapse = {"minLines":12,"defaultCollapsed":false}
+</script>
+
+<script src="/js/codeCollapse.js"></script>
+
+
+
+
+
 
   
 
@@ -786,11 +796,15 @@
       </article>
 
       
-  <div id="btn-catalog" class="btn-catalog">
+  <button id="btn-catalog" class="btn-catalog" type="button" aria-controls="catalog" aria-expanded="false">
     <i class="iconfont icon-catalog"></i>
-  </div>
+  </button>
+  <div class="catalog-backdrop" id="catalog-backdrop"></div>
   <div class="post-catalog hidden" id="catalog">
-    <div class="title">目录</div>
+    <div class="title">
+      <span>目录</span>
+      <button class="catalog-close" id="btn-catalog-close" type="button" aria-label="关闭大纲">×</button>
+    </div>
     <div class="catalog-content">
       
         <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E5%88%86%E8%82%A1%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%EF%BC%88%E9%87%8C%E9%9D%A2%E8%A3%85%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%89"><span class="toc-text">成分股有哪些？（里面装了什么）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B6%E7%9B%8A%E6%96%B9%E5%BC%8F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">收益方式是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E6%8E%A8%E8%8D%90%E4%B9%B0%EF%BC%9F"><span class="toc-text">什么时候推荐买？</span></a></li></ol>
@@ -1044,29 +1058,6 @@
 
 
         
-  
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E7%BA%A2%E5%88%A9%E4%BD%8E%E6%B3%A2 + '&url=' + https%3A%2F%2Ffansea0.github.io%2F2026%2F11%2F02%2F2026-11-02-feishu-post-84ce0033%2F + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://fansea0.github.io/2026/11/02/2026-11-02-feishu-post-84ce0033/" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
-  
-  
-<script src="/js/shares.js"></script>
-
-
 
       </div>
     </div>

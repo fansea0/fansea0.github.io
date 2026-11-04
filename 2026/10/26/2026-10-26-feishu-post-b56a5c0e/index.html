@@ -655,6 +655,16 @@
 
 
 
+<script>
+  window.__codeCollapse = {"minLines":12,"defaultCollapsed":false}
+</script>
+
+<script src="/js/codeCollapse.js"></script>
+
+
+
+
+
 
   
 
@@ -714,7 +724,7 @@
 
         <div class="markdown-body">
           <h2 id="模型幻觉"><a href="#模型幻觉" class="headerlink" title="模型幻觉"></a>模型幻觉</h2><p> 模型输出了看起来通顺合理、但没有事实依据的内容。</p>
-<p>**原因：**无据生成、有据不用、忠实错误</p>
+<p><strong>原因：</strong> 无据生成、有据不用、忠实错误</p>
 <p><sheet sheet-id="5ZChBs" token="Mzm2sgPqPhzuM8txrD0c6ia8nle"></sheet></p>
 
         </div>
@@ -755,11 +765,15 @@
       </article>
 
       
-  <div id="btn-catalog" class="btn-catalog">
+  <button id="btn-catalog" class="btn-catalog" type="button" aria-controls="catalog" aria-expanded="false">
     <i class="iconfont icon-catalog"></i>
-  </div>
+  </button>
+  <div class="catalog-backdrop" id="catalog-backdrop"></div>
   <div class="post-catalog hidden" id="catalog">
-    <div class="title">目录</div>
+    <div class="title">
+      <span>目录</span>
+      <button class="catalog-close" id="btn-catalog-close" type="button" aria-label="关闭大纲">×</button>
+    </div>
     <div class="catalog-content">
       
         <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E5%B9%BB%E8%A7%89"><span class="toc-text">模型幻觉</span></a></li></ol>
@@ -1013,29 +1027,6 @@
 
 
         
-  
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%B3%95 + '&url=' + https%3A%2F%2Ffansea0.github.io%2F2026%2F10%2F26%2F2026-10-26-feishu-post-b56a5c0e%2F + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://fansea0.github.io/2026/10/26/2026-10-26-feishu-post-b56a5c0e/" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
-  
-  
-<script src="/js/shares.js"></script>
-
-
 
       </div>
     </div>

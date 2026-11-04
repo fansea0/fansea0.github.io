@@ -655,6 +655,16 @@
 
 
 
+<script>
+  window.__codeCollapse = {"minLines":12,"defaultCollapsed":false}
+</script>
+
+<script src="/js/codeCollapse.js"></script>
+
+
+
+
+
 
   
 
@@ -801,11 +811,15 @@
       </article>
 
       
-  <div id="btn-catalog" class="btn-catalog">
+  <button id="btn-catalog" class="btn-catalog" type="button" aria-controls="catalog" aria-expanded="false">
     <i class="iconfont icon-catalog"></i>
-  </div>
+  </button>
+  <div class="catalog-backdrop" id="catalog-backdrop"></div>
   <div class="post-catalog hidden" id="catalog">
-    <div class="title">目录</div>
+    <div class="title">
+      <span>目录</span>
+      <button class="catalog-close" id="btn-catalog-close" type="button" aria-label="关闭大纲">×</button>
+    </div>
     <div class="catalog-content">
       
         <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-text">定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%EF%BC%9A%E7%94%A8%E2%80%9C%E7%94%BB%E5%9B%BE%E2%80%9D%E7%9A%84%E6%96%B9%E5%BC%8F%E7%90%86%E8%A7%A3-Graph"><span class="toc-text">核心概念：用“画图”的方式理解 Graph</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9A%82%E5%81%9C%E4%B8%8E%E6%81%A2%E5%A4%8D"><span class="toc-text">暂停与恢复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E4%B8%8E%E7%8A%B6%E6%80%81"><span class="toc-text">分支与状态</span></a></li></ol></li></ol>
@@ -1059,29 +1073,6 @@
 
 
         
-  
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Eino%20%E7%BC%96%E6%8E%92 + '&url=' + https%3A%2F%2Ffansea0.github.io%2F2026%2F10%2F29%2F2026-10-29-feishu-eino%2F + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://fansea0.github.io/2026/10/29/2026-10-29-feishu-eino/" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
-  
-  
-<script src="/js/shares.js"></script>
-
-
 
       </div>
     </div>

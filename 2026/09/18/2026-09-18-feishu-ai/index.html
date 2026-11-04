@@ -655,6 +655,16 @@
 
 
 
+<script>
+  window.__codeCollapse = {"minLines":12,"defaultCollapsed":false}
+</script>
+
+<script src="/js/codeCollapse.js"></script>
+
+
+
+
+
 
   
 
@@ -779,11 +789,15 @@
       </article>
 
       
-  <div id="btn-catalog" class="btn-catalog">
+  <button id="btn-catalog" class="btn-catalog" type="button" aria-controls="catalog" aria-expanded="false">
     <i class="iconfont icon-catalog"></i>
-  </div>
+  </button>
+  <div class="catalog-backdrop" id="catalog-backdrop"></div>
   <div class="post-catalog hidden" id="catalog">
-    <div class="title">目录</div>
+    <div class="title">
+      <span>目录</span>
+      <button class="catalog-close" id="btn-catalog-close" type="button" aria-label="关闭大纲">×</button>
+    </div>
     <div class="catalog-content">
       
         <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A7%E5%87%BA%E7%BB%8F%E9%AA%8C"><span class="toc-text">产出经验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Json-%E6%A0%BC%E5%BC%8F%E4%BF%9D%E9%9A%9C"><span class="toc-text">Json 格式保障</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E4%B8%9A%E5%8A%A1%E5%9C%BA%E6%99%AF%E5%A4%84%E7%90%86"><span class="toc-text">不同业务场景处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%BB%8F%E9%AA%8C"><span class="toc-text">其他经验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA%E8%AF%8D%E7%BB%8F%E9%AA%8C"><span class="toc-text">提示词经验</span></a></li></ol>
@@ -1037,29 +1051,6 @@
 
 
         
-  
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + AI%20%E5%86%85%E5%AE%B9%E4%BA%A7%E5%87%BA + '&url=' + https%3A%2F%2Ffansea0.github.io%2F2026%2F09%2F18%2F2026-09-18-feishu-ai%2F + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://fansea0.github.io/2026/09/18/2026-09-18-feishu-ai/" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
-  
-  
-<script src="/js/shares.js"></script>
-
-
 
       </div>
     </div>
