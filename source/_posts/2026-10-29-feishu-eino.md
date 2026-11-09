@@ -1,7 +1,7 @@
 ---
-title: "Eino 编排"
+title: "Eino 图编排"
 date: 2026-10-29 22:15:20
-updated: 2026-11-03 22:53:03
+updated: 2026-11-09 16:20:05
 categories: ["AI / agent开发"]
 tags: ["飞书"]
 ---
@@ -46,7 +46,7 @@ Eino 的 Graph 本质上是一个有向图编排引擎，你可以把任何确�
 
 1. 检验ctx是否是打断的 GetInterruptState
 
-   1. 不是打断的，就抛 StatefulInterrupt 错误
+   1. 不是打断的，就抛 StatefulInterrupt 错误：包含中断信息、中断UUID
    2. 是打断的就通过ctx获取继续的数据 GetResumeContext
 2. 基于新的数据进行业务逻辑
 
