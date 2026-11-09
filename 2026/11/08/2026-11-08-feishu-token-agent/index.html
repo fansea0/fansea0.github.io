@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="zh-CN" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="fansea" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      token、采样与上下文窗口如何决定 Agent 的行为边界 
+      
+      
+      |
+    
+     fansea 的知识库
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+  <body>
+    <div id="app" class="wiki-app">
+      
+<header class="wiki-topbar">
+  <div class="wiki-topbar-left">
+    <button class="wiki-icon-btn wiki-menu-btn" id="wiki-menu-btn" type="button" aria-label="目录">
+      <svg class="wiki-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <a class="wiki-logo" href="/">
+      <img class="wiki-logo-icon" src="/images/favicon.png" alt="">
+      <span class="wiki-logo-text">fansea 的知识库</span>
+    </a>
+  </div>
+
+  <div class="wiki-topbar-center">
+    
+      <button class="wiki-search-btn" id="search-icon" type="button">
+        <svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="m20 20-4.2-4.2m1.2-5.3a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"/></svg>
+        <span class="wiki-search-text">搜索</span>
+      </button>
+    
+  </div>
+
+  <div class="wiki-topbar-right">
+    
+      <a class="wiki-top-link" href="/archives/">归档</a>
+    
+      <a class="wiki-top-link" href="/tags/">标签</a>
+    
+      <a class="wiki-top-link" href="/about/">关于</a>
+    
+
+    
+      <button class="wiki-icon-btn wiki-theme-btn" id="switch-color-scheme" type="button" aria-label="切换配色">
+        <span class="wiki-theme-icon wiki-theme-icon-light"><svg class="wiki-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg></span>
+        <span class="wiki-theme-icon wiki-theme-icon-dark"><svg class="wiki-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 3v2m0 14v2M5.6 5.6 7 7m10 10 1.4 1.4M3 12h2m14 0h2M5.6 18.4 7 17m10-10 1.4-1.4"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span>
+      </button>
+      
+<script src="/js/colorscheme.js"></script>
+
+    
+
+    <a class="wiki-avatar" href="/" title="fansea">
+      <img src="/images/avatar.png" alt="fansea">
+    </a>
+  </div>
+</header>
+
+
+      <div class="wiki-body">
+        
+<aside class="wiki-sidebar" id="wiki-sidebar">
+  <div class="wiki-sidebar-head">
+    <a class="wiki-sidebar-title" href="/">
+      知识库
+    </a>
+  </div>
+
+  <nav class="wiki-tree" id="wiki-tree">
+    
+
+<ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-folder" data-folder="程序设计工程">
+        <div class="wiki-node-row">
+          <button class="wiki-node-toggle" type="button" aria-expanded="true" aria-label="展开或收起">
+            <svg class="wiki-icon wiki-icon-chevron" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></svg>
+          </button>
+          <a class="wiki-node-link" href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%B7%A5%E7%A8%8B/" title="程序设计工程">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
+            <span class="wiki-node-name">程序设计工程</span>
+          </a>
+          <span class="wiki-node-count">2</span>
+        </div>
+        
+
+<ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/11/06/2026-11-06-feishu-worker/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/11/06/2026-11-06-feishu-worker/" title="worker处理异步任务">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">worker处理异步任务</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/11/04/2026-11-04-feishu-post-a6a99dea/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/11/04/2026-11-04-feishu-post-a6a99dea/" title="代码设计思想">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">代码设计思想</span>
+          </a>
+        </div>
+      </li>
+    
+  
+</ul>
+
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-folder" data-folder="独立开发经验">
+        <div class="wiki-node-row">
+          <button class="wiki-node-toggle" type="button" aria-expanded="true" aria-label="展开或收起">
+            <svg class="wiki-icon wiki-icon-chevron" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></svg>
+          </button>
+          <a class="wiki-node-link" href="/categories/%E7%8B%AC%E7%AB%8B%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/" title="独立开发经验">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
+            <span class="wiki-node-name">独立开发经验</span>
+          </a>
+          <span class="wiki-node-count">3</span>
+        </div>
+        
+
+<ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/20/2026-10-20-feishu-post-57c81b53/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/20/2026-10-20-feishu-post-57c81b53/" title="如果提升网站曝光">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">如果提升网站曝光</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/18/2026-10-18-feishu-post-371e6262/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/18/2026-10-18-feishu-post-371e6262/" title="访问不了图片">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">访问不了图片</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/12/2026-10-12-feishu-post-32dc5ad9/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/12/2026-10-12-feishu-post-32dc5ad9/" title="如何自建网站">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">如何自建网站</span>
+          </a>
+        </div>
+      </li>
+    
+  
+</ul>
+
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-folder" data-folder="后台业务">
+        <div class="wiki-node-row">
+          <button class="wiki-node-toggle" type="button" aria-expanded="true" aria-label="展开或收起">
+            <svg class="wiki-icon wiki-icon-chevron" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></svg>
+          </button>
+          <a class="wiki-node-link" href="/categories/%E5%90%8E%E5%8F%B0%E4%B8%9A%E5%8A%A1/" title="后台业务">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
+            <span class="wiki-node-name">后台业务</span>
+          </a>
+          <span class="wiki-node-count">1</span>
+        </div>
+        
+
+<ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/26/2026-10-26-feishu-post-804674c7/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/26/2026-10-26-feishu-post-804674c7/" title="审核流程">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">审核流程</span>
+          </a>
+        </div>
+      </li>
+    
+  
+</ul>
+
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-folder" data-folder="计算机底层">
+        <div class="wiki-node-row">
+          <button class="wiki-node-toggle" type="button" aria-expanded="true" aria-label="展开或收起">
+            <svg class="wiki-icon wiki-icon-chevron" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></svg>
+          </button>
+          <a class="wiki-node-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BA%95%E5%B1%82/" title="计算机底层">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
+            <span class="wiki-node-name">计算机底层</span>
+          </a>
+          <span class="wiki-node-count">1</span>
+        </div>
+        
+
+<ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/16/2026-10-16-feishu-post-7e2a6a7b/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/16/2026-10-16-feishu-post-7e2a6a7b/" title="方法栈">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">方法栈</span>
+          </a>
+        </div>
+      </li>
+    
+  
+</ul>
+
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-folder" data-folder="数据库">
+        <div class="wiki-node-row">
+          <button class="wiki-node-toggle" type="button" aria-expanded="true" aria-label="展开或收起">
+            <svg class="wiki-icon wiki-icon-chevron" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></svg>
+          </button>
+          <a class="wiki-node-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="数据库">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
+            <span class="wiki-node-name">数据库</span>
+          </a>
+          <span class="wiki-node-count">1</span>
+        </div>
+        
+
+<ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/19/2026-10-19-feishu-mysql/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/19/2026-10-19-feishu-mysql/" title="MySQL">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">MySQL</span>
+          </a>
+        </div>
+      </li>
+    
+  
+</ul>
+
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-folder" data-folder="投资笔记">
+        <div class="wiki-node-row">
+          <button class="wiki-node-toggle" type="button" aria-expanded="true" aria-label="展开或收起">
+            <svg class="wiki-icon wiki-icon-chevron" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></svg>
+          </button>
+          <a class="wiki-node-link" href="/categories/%E6%8A%95%E8%B5%84%E7%AC%94%E8%AE%B0/" title="投资笔记">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
+            <span class="wiki-node-name">投资笔记</span>
+          </a>
+          <span class="wiki-node-count">3</span>
+        </div>
+        
+
+<ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/11/02/2026-11-02-feishu-post-84ce0033/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/11/02/2026-11-02-feishu-post-84ce0033/" title="红利低波">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">红利低波</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/30/2026-10-30-feishu-post-938da205/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/30/2026-10-30-feishu-post-938da205/" title="经验之谈">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">经验之谈</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/30/2026-10-30-feishu-post-0547dab5/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/30/2026-10-30-feishu-post-0547dab5/" title="基础知识">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">基础知识</span>
+          </a>
+        </div>
+      </li>
+    
+  
+</ul>
+
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-folder" data-folder="AI">
+        <div class="wiki-node-row">
+          <button class="wiki-node-toggle" type="button" aria-expanded="true" aria-label="展开或收起">
+            <svg class="wiki-icon wiki-icon-chevron" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></svg>
+          </button>
+          <a class="wiki-node-link" href="/categories/AI/" title="AI">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
+            <span class="wiki-node-name">AI</span>
+          </a>
+          <span class="wiki-node-count">10</span>
+        </div>
+        
+
+<ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-folder" data-folder="AI / agent开发">
+        <div class="wiki-node-row">
+          <button class="wiki-node-toggle" type="button" aria-expanded="true" aria-label="展开或收起">
+            <svg class="wiki-icon wiki-icon-chevron" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></svg>
+          </button>
+          <a class="wiki-node-link" href="/categories/AI/agent%E5%BC%80%E5%8F%91/" title="agent开发">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
+            <span class="wiki-node-name">agent开发</span>
+          </a>
+          <span class="wiki-node-count">1</span>
+        </div>
+        
+
+<ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/29/2026-10-29-feishu-eino/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/29/2026-10-29-feishu-eino/" title="Eino 图编排">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">Eino 图编排</span>
+          </a>
+        </div>
+      </li>
+    
+  
+</ul>
+
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-folder" data-folder="AI / Agent开发">
+        <div class="wiki-node-row">
+          <button class="wiki-node-toggle" type="button" aria-expanded="true" aria-label="展开或收起">
+            <svg class="wiki-icon wiki-icon-chevron" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></svg>
+          </button>
+          <a class="wiki-node-link" href="/categories/AI/Agent%E5%BC%80%E5%8F%91/" title="Agent开发">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
+            <span class="wiki-node-name">Agent开发</span>
+          </a>
+          <span class="wiki-node-count">2</span>
+        </div>
+        
+
+<ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/11/09/2026-11-09-feishu-react/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/11/09/2026-11-09-feishu-react/" title="ReAct">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">ReAct</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc is-current" data-doc="2026/11/08/2026-11-08-feishu-token-agent/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/11/08/2026-11-08-feishu-token-agent/" title="token、采样与上下文窗口如何决定 Agent 的行为边界">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">token、采样与上下文窗口如何决定 Agent 的行为边界</span>
+          </a>
+        </div>
+      </li>
+    
+  
+</ul>
+
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-folder" data-folder="AI / AI Coding">
+        <div class="wiki-node-row">
+          <button class="wiki-node-toggle" type="button" aria-expanded="true" aria-label="展开或收起">
+            <svg class="wiki-icon wiki-icon-chevron" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></svg>
+          </button>
+          <a class="wiki-node-link" href="/categories/AI/AI-Coding/" title="AI Coding">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
+            <span class="wiki-node-name">AI Coding</span>
+          </a>
+          <span class="wiki-node-count">1</span>
+        </div>
+        
+
+<ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/11/05/2026-11-05-feishu-post-946aaa15/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/11/05/2026-11-05-feishu-post-946aaa15/" title="经验笔记">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">经验笔记</span>
+          </a>
+        </div>
+      </li>
+    
+  
+</ul>
+
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-folder" data-folder="AI / RAG">
+        <div class="wiki-node-row">
+          <button class="wiki-node-toggle" type="button" aria-expanded="true" aria-label="展开或收起">
+            <svg class="wiki-icon wiki-icon-chevron" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></svg>
+          </button>
+          <a class="wiki-node-link" href="/categories/AI/RAG/" title="RAG">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
+            <span class="wiki-node-name">RAG</span>
+          </a>
+          <span class="wiki-node-count">3</span>
+        </div>
+        
+
+<ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/26/2026-10-26-feishu-post-b56a5c0e/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/26/2026-10-26-feishu-post-b56a5c0e/" title="问题与解法">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">问题与解法</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/26/2026-10-26-feishu-post-cc5a2883/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/26/2026-10-26-feishu-post-cc5a2883/" title="评测指标与实现">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">评测指标与实现</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/24/2026-10-24-feishu-dify/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/24/2026-10-24-feishu-dify/" title="MD分块Dify插件方案">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">MD分块Dify插件方案</span>
+          </a>
+        </div>
+      </li>
+    
+  
+</ul>
+
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/26/2026-10-26-feishu-ai/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/26/2026-10-26-feishu-ai/" title="AI业务经验">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">AI业务经验</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/15/2026-10-15-feishu-reactdemo/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/15/2026-10-15-feishu-reactdemo/" title="ReactDemo实践">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">ReactDemo实践</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/09/18/2026-09-18-feishu-ai/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/09/18/2026-09-18-feishu-ai/" title="AI 内容产出">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">AI 内容产出</span>
+          </a>
+        </div>
+      </li>
+    
+  
+</ul>
+
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-folder" data-folder="GO">
+        <div class="wiki-node-row">
+          <button class="wiki-node-toggle" type="button" aria-expanded="true" aria-label="展开或收起">
+            <svg class="wiki-icon wiki-icon-chevron" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></svg>
+          </button>
+          <a class="wiki-node-link" href="/categories/GO/" title="GO">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
+            <span class="wiki-node-name">GO</span>
+          </a>
+          <span class="wiki-node-count">6</span>
+        </div>
+        
+
+<ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-folder" data-folder="GO / GO学习笔记">
+        <div class="wiki-node-row">
+          <button class="wiki-node-toggle" type="button" aria-expanded="true" aria-label="展开或收起">
+            <svg class="wiki-icon wiki-icon-chevron" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></svg>
+          </button>
+          <a class="wiki-node-link" href="/categories/GO/GO%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="GO学习笔记">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
+            <span class="wiki-node-name">GO学习笔记</span>
+          </a>
+          <span class="wiki-node-count">5</span>
+        </div>
+        
+
+<ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/11/03/2026-11-03-feishu-context/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/11/03/2026-11-03-feishu-context/" title="Context">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">Context</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/28/2026-10-28-feishu-channel/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/28/2026-10-28-feishu-channel/" title="Channel">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">Channel</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/20/2026-10-20-feishu-map/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/20/2026-10-20-feishu-map/" title="Map">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">Map</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/16/2026-10-16-feishu-slice/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/16/2026-10-16-feishu-slice/" title="Slice">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">Slice</span>
+          </a>
+        </div>
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/10/15/2026-10-15-feishu-go/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/10/15/2026-10-15-feishu-go/" title="Go基础">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">Go基础</span>
+          </a>
+        </div>
+      </li>
+    
+  
+</ul>
+
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/08/12/2026-08-12-feishu-gmp/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/08/12/2026-08-12-feishu-gmp/" title="GMP模型">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">GMP模型</span>
+          </a>
+        </div>
+      </li>
+    
+  
+</ul>
+
+      </li>
+    
+  
+</ul>
+
+  </nav>
+</aside>
+
+
+        <div class="wiki-scrim" id="wiki-scrim"></div>
+
+        <main class="wiki-main">
+          <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+<script>
+  window.__codeCollapse = {"minLines":12,"defaultCollapsed":false}
+</script>
+
+<script src="/js/codeCollapse.js"></script>
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="wiki-page wiki-post" id="post-details">
+    
+
+
+<nav class="wiki-breadcrumb">
+  <a href="/">知识库</a>
+  
+    <span class="wiki-crumb-sep">/</span>
+    <a href="/categories/AI/Agent%E5%BC%80%E5%8F%91/">Agent开发</a>
+  
+</nav>
+
+
+
+    <div class="wiki-post-layout">
+      <article class="wiki-post-body">
+        <div class="wiki-page-head">
+          <h1 class="wiki-page-title">token、采样与上下文窗口如何决定 Agent 的行为边界</h1>
+          <div class="wiki-page-meta">
+            
+
+<span class="post-pubtime">
+  2026-11-09 18:30:13
+</span>
+
+
+<span class="post-tags">
+  
+    <span class="span--tag">
+      <a href="/tags/%E9%A3%9E%E4%B9%A6/" title="飞书">#飞书</a>
+    </span>
+  
+</span>
+
+
+
+<span class="post-folders">
+  
+    <span class="span--folder">
+      <a href="/categories/AI/Agent%E5%BC%80%E5%8F%91/" title="AI / Agent开发">Agent开发</a>
+    </span>
+  
+</span>
+
+
+          </div>
+        </div>
+
+        <div class="markdown-body">
+          <h2 id="Token"><a href="#Token" class="headerlink" title="Token"></a>Token</h2><ul>
+<li>一个 token 可以是半个字、一个字、两个字、一个词、一段字母，<strong>取决于分词词表，不是看语义上能不能拆开</strong>。</li>
+<li>Tokenizer 实现id与token的映射，大模型通过id再去拿向量去计算</li>
+</ul>
+<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">人类文本：我爱AI</span><br><span class="line">↓ tokenizer分词</span><br><span class="line">token列表：[&quot;我&quot;, &quot;爱&quot;, &quot;AI&quot;]</span><br><span class="line">↓ 查词表映射</span><br><span class="line">token ID序列：[345, 782, 9641]</span><br><span class="line">✅ 传给大模型</span><br><span class="line">↓ 模型内部Embedding层查表</span><br><span class="line">向量序列 → 进入Transformer计算</span><br><span class="line">↓ 计算输出，得到下一个token的概率分布</span><br><span class="line">↓ 选出下一个ID</span><br><span class="line">↓ detokenizer：ID → token → 拼接成文字</span><br></pre></td></tr></table></figure>
+
+<h2 id="采样"><a href="#采样" class="headerlink" title="采样"></a>采样</h2><p>大模型回复是一个个token输出出来的，每输出一个token需要做下一个token的选择，这里称为采样。</p>
+<p>假设现在上下文是：<code>春天来了，公园里开了</code></p>
+<ol>
+<li>先经过 tokenizer，转成一串 ID 给模型</li>
+<li>Transformer 跑完计算，输出一个巨大的列表：词表里面每一个 token，<strong>作为下一个词的概率</strong>示例（简化）：</li>
+</ol>
+<p>概率总和 &#x3D; 1。理论上，下一个 token 可以是词表里任意一个，只是大部分概率极低。</p>
+<table>
+<thead>
+<tr>
+<th>token</th>
+<th>概率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>花</td>
+<td>0.70</td>
+</tr>
+<tr>
+<td>树</td>
+<td>0.15</td>
+</tr>
+<tr>
+<td>草</td>
+<td>0.08</td>
+</tr>
+<tr>
+<td>鸟</td>
+<td>0.04</td>
+</tr>
+<tr>
+<td>坦克</td>
+<td>0.0001</td>
+</tr>
+<tr>
+<td>……</td>
+<td>……</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>重点：<strong>模型本身只算出这堆原始概率，它不负责 “挑哪个”</strong>。挑哪个，就是采样器干的活，temperature &#x2F;top_p&#x2F;top_k 都是采样器参数。</p>
+</blockquote>
+<p><strong>原始概率分布 → top_k 过滤 → top_p 过滤 → temperature 缩放概率 → 随机采样选出下一个 token</strong></p>
+<ul>
+<li><p>top_k：按数量砍候选，其他PASS。topK为1top_k&#x3D;1：只留第一名，永远选概率最高的，结果固定不变（贪心解码）top_k&#x3D;0 &#x2F; 不填：关闭，不做这一步过滤如果合理的候选有 5 个，你设 k&#x3D;3，强行砍掉 2 个合理选项；如果只有 2 个高概率词，k&#x3D;100 也没用。</p>
+</li>
+<li><p>top_p：按累计概率砍候选，从最高概率开始累加，加到总和 ≥ p，就停，后面全部删掉</p>
+</li>
+<li><p>temperature：增大压缩概率差距</p>
+<ul>
+<li>T &lt; 1 放大强者优势</li>
+<li>T &#x3D; 1 概率不变</li>
+<li>T &gt; 1 减小强者和弱者的差距，输出更随机</li>
+</ul>
+</li>
+</ul>
+<p><strong>注意：<strong>top_k 和 top_p 都是</strong>直接删掉一些候选 token，删掉之后，剩下的概率会重新归一化（等比例放大，总和变回 1）</strong>，再进入下一步</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">Admin@MacBook-Pro</span> <span class="string">qoder</span> <span class="string">%</span> <span class="string">./minimax_param_test.sh</span></span><br><span class="line"><span class="comment">############ 问题 1: 请随便说一个 1 到 10000 之间的随机整数，只输出这个数字本身，不要任何解释。 ############</span></span><br><span class="line"><span class="string">---</span> <span class="string">高温随机</span> <span class="string">(T=1.9,</span> <span class="string">top_p=1.0,</span> <span class="string">top_k=0)</span> <span class="string">x5</span> <span class="string">---</span></span><br><span class="line"><span class="number">7421</span></span><br><span class="line"><span class="number">7429</span></span><br><span class="line"><span class="number">5273</span></span><br><span class="line"><span class="number">7421</span></span><br><span class="line"><span class="number">5274</span></span><br><span class="line"><span class="string">---</span> <span class="string">贪心对照</span> <span class="string">(T=0.01,</span> <span class="string">top_p=1.0,</span> <span class="string">top_k=1)</span> <span class="string">x3</span> <span class="string">---</span></span><br><span class="line"><span class="number">7421</span></span><br><span class="line"><span class="number">7314</span></span><br><span class="line"><span class="number">7421</span></span><br><span class="line"></span><br><span class="line"><span class="comment">############ 问题 2: 请随便说一个不常见的汉字，只输出这一个字，不要任何解释。 ############</span></span><br><span class="line"><span class="string">---</span> <span class="string">高温随机</span> <span class="string">(T=1.9,</span> <span class="string">top_p=1.0,</span> <span class="string">top_k=0)</span> <span class="string">x5</span> <span class="string">---</span></span><br><span class="line"><span class="string">龘</span></span><br><span class="line"><span class="string">龘</span></span><br><span class="line"><span class="string">爨</span></span><br><span class="line"><span class="string">龘</span></span><br><span class="line"><span class="string">龘</span></span><br><span class="line"><span class="string">---</span> <span class="string">贪心对照</span> <span class="string">(T=0.01,</span> <span class="string">top_p=1.0,</span> <span class="string">top_k=1)</span> <span class="string">x3</span> <span class="string">---</span></span><br><span class="line"><span class="string">龘</span></span><br><span class="line"><span class="string">龘</span></span><br><span class="line"><span class="string">龘</span></span><br><span class="line"></span><br><span class="line"><span class="comment">############ 问题 3: 写一个荒诞故事的开头，一句话即可，越天马行空越好。只输出这句话。 ############</span></span><br><span class="line"><span class="string">---</span> <span class="string">高温随机</span> <span class="string">(T=1.9,</span> <span class="string">top_p=1.0,</span> <span class="string">top_k=0)</span> <span class="string">x5</span> <span class="string">---</span></span><br><span class="line"><span class="string">宇宙飞船误闯上帝的冰箱后，全世界的星星开始按照爵士舞步轮流爆炸，而邮差正在追赶一只会背乘法表的透明奶牛。</span></span><br><span class="line"><span class="string">宇宙在一场由失踪的月亮主持的婚礼上醒来，发现自己其实是一名正在逃亡的巨型冰淇淋，而地球只是它口袋里一颗会被上课点名的玻璃弹珠。</span></span><br><span class="line"><span class="string">宇宙的尽头是一家只在凌晨三点营业的邮局，而它的新员工刚发现，每一封寄往过去的信都会让寄信人长出一条多余的腿。</span></span><br><span class="line"><span class="string">宇宙的尽头有一家24小时营业的月球邮局，而每个寄往过去的信都会让寄信人长出一条多余的触手。</span></span><br><span class="line"><span class="string">宇宙的尽头是一只会背元素周期表讲睡前故事的旧冰箱，而地球正被它塞进冷冻室当作明天醒来的早餐。</span></span><br><span class="line"><span class="string">---</span> <span class="string">贪心对照</span> <span class="string">(T=0.01,</span> <span class="string">top_p=1.0,</span> <span class="string">top_k=1)</span> <span class="string">x3</span> <span class="string">---</span></span><br><span class="line"><span class="string">宇宙尽头那只患有星期二恐惧症的老虎，一口气吞下了整座城市的梦，却发现梦里的所有人类都在排队竞选它肚子里的国王。</span></span><br><span class="line"><span class="string">宇宙听见冰箱打了个喷嚏，便决定把自己腌成一颗会发光的橄榄，然后在全宇宙的冰箱门上郑重签名。</span></span><br><span class="line"><span class="string">宇宙广播员把星期二发射进宇宙后，发现整片星空都在偷偷背诵《刑法》，而他的左眼皮开始长出一座会自己报时的钟。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="上下文窗口"><a href="#上下文窗口" class="headerlink" title="上下文窗口"></a>上下文窗口</h2><ul>
+<li>长上下文中间部分的影响力被显著削弱，首尾反而更受关注</li>
+<li>输入无关内容会造成伤害</li>
+<li>Agent 循环每轮重放历史 → 上下文随步数近似线性增长 → 成本、延迟、首 token 延迟同步上升；长会话还会出现「忘了最初目标」、重复调用同一工具、不收敛</li>
+</ul>
+<h2 id="三者合起来-Agent-的三条边界"><a href="#三者合起来-Agent-的三条边界" class="headerlink" title="三者合起来 &#x3D; Agent 的三条边界"></a>三者合起来 &#x3D; Agent 的三条边界</h2><p><sheet sheet-id="d7a9wa" token="CHd3sj9HvhrXpft0GV7cwKtHn6f"></sheet></p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p><strong>为什么t&#x3D;0了，还是会输出不一样？</strong></p>
+<blockquote>
+<p>temperature&#x3D;0 在绝大多数实现里不是「从多个候选里按概率挑」，而是贪心解码：把分布削到只剩概率最大的那个 token，其余置 -inf，argmax 取值。所以「概率大的更可能被选中」这句在 T&#x3D;0 时不成立——它就是那个大的</p>
+<p>T&#x3D;0只是关掉了模型本身随机选字的逻辑，但GPU底层计算、服务器调度这些外部环节没法保证完全一致，所以输出依然可能不一样。</p>
+<p><strong>温度改的是分布形状，T&#x3D;0 的「确定性」是工程近似，不是数学保证。</strong></p>
+</blockquote>
+<p><strong>为什么会出现重复调用工具？</strong></p>
+<blockquote>
+<p>重复调用本身是症状，先看它是不是被闸门挡住了。排查要能区分三种可能</p>
+<ol>
+<li>闸门缺失（没有重复检测、没有步数上限）</li>
+<li>采样路径分叉（同一 query 走出不同参数）</li>
+<li>上下文稀释（目标被挤掉，模型重新发明一个任务）</li>
+</ol>
+<p><strong>现象 A：</strong> 参数完全一样，重复出现 判据：<code>params_hash</code> 连续两轮相同。这是工程闸门缺失，不是模型笨——模型看不到”我刚做过这件事”。修：编排层加”无进展熔断”。</p>
+<p><strong>现象 B：</strong> 参数在变，越改越花 判据：<code>params_hash</code> 每轮都不同，且偏离原始目标越来越远。这是目标漂移：目标句被工具结果挤到上下文尾部、被截断、或处在中间位置被忽略（长上下文里中段信息最容易被跳过）。修：目标固定在不被裁剪的位置；工具结果用”摘要 + 指针”替换原文；给模型一份结构化的”已尝试清单”。</p>
+<p><strong>现象 C：</strong> 参数几乎一样，模型在”再确认一次” 判据：工具返回没有明确终态——没有 <code>has_more: false</code>、没有 cursor 结束标记、没有”未找到”的语义。模型无法判断该继续还是该停。修：返回 schema 里把终态写清楚，错误信息也要可读（”未找到 ERROR 级别日志” ≠ 空字符串）。</p>
+</blockquote>
+<p><strong>如果检索出来5w行日志，agent如何处理？</strong></p>
+<blockquote>
+<ol>
+<li><p><strong>L0 工具契约层：</strong> 工具需要照顾到如果查询内容多如何去处理，比如说，限制最大limit、或者定义filter。原则一句话：<strong>工具返回”决策所需的最小充分信息”，不是数据源的全量导出。</strong></p>
+<ol>
+<li>比如说查询一段时间的日志，可以返回总行数、样本topN、错误码分组</li>
+</ol>
+</li>
+<li><p><strong>L1 上下文装配层（token 预算分配器）：</strong> 系统提示 &#x2F; 工具定义 &#x2F; 历史 &#x2F; 工具结果 &#x2F; 预留输出留一部分预算，告诉AI在遇到工具返回超预算的时候，保留 <strong>top-N + 聚合统计 + 显式标注”</strong> 这是 5 万行中的 200 行样本，完整数据在 SLS 查询 X”。不标注，模型就会以为它看全了 → 自信编造（能力边界那条直接落地）</p>
+</li>
+<li><p><strong>L2 模型调用层（硬参数）</strong> <code>max_tokens</code>、<code>context_length</code>，加上”自动截断最旧消息”这件事要知道——它会静默删掉你的早期目标句。</p>
+</li>
+<li><p><strong>L3 编排层（Agent 循环真正的闸门）</strong> <code>max_steps</code>、单工具调用上限、参数指纹熔断（同一 tool + 归一化参数 hash 连续命中 N 次 → 停止或强制换路径）、token&#x2F;成本闸门。</p>
+</li>
+<li><p><strong>L4 状态层</strong> checkpoint 里存的是指针 + 摘要（doc id 列表、聚合数、ES 查询 URL），不是 5 万行原文。你的 Redis checkpoint 正好是这个位置。</p>
+</li>
+<li><p><strong>L5 观测层</strong> Trace 字段要能回答”这一轮发生了什么”：<code>prompt_tokens</code>、<code>tool_result_tokens</code>、<code>params_hash</code>、<code>truncated</code>、<code>circuit_broken</code>。你现有 Trace Hook 缺的就是 <code>params_hash</code> 和 <code>truncated</code> 这两个字段——没有它们，线上重复调用你只能靠猜。</p>
+</li>
+</ol>
+</blockquote>
+<p><strong>如何设计日志工具返回的json</strong>？</p>
+<blockquote>
+<p>先说结论：这个 JSON 有两个可能的消费者——人和 LLM。如果它是喂给模型的 tool 结果，设计的硬约束只有三条：体积有界、状态显式、留好续查句柄。你提的”topN &#x2F; 剩余量 &#x2F; 是否读完 &#x2F; 索引 &#x2F; sheet”正好对应这三条。</p>
+<p>关键点：<code>matched</code> 必须来自全量扫描后的统计，不是”当前返回窗口”的计数。否则 <code>remaining</code> 永远是错的，模型也无法判断”是不是还有没读到的 ERROR”。</p>
+</blockquote>
+<p><sheet sheet-id="YY6fC8" token="CHd3sj9HvhrXpft0GV7cwKtHn6f"></sheet></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;ok&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;query&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;sheet&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2026-11-09&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;group_by&quot;</span><span class="punctuation">:</span> <span class="string">&quot;level&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;top_n&quot;</span><span class="punctuation">:</span> <span class="number">20</span><span class="punctuation">,</span> <span class="attr">&quot;offset&quot;</span><span class="punctuation">:</span> <span class="number">0</span> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;source&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;file&quot;</span><span class="punctuation">:</span> <span class="string">&quot;app-2026-11-09.log&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;sheet&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2026-11-09&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;sheet_index&quot;</span><span class="punctuation">:</span> <span class="number">2</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;total_sheets&quot;</span><span class="punctuation">:</span> <span class="number">5</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;total_rows&quot;</span><span class="punctuation">:</span> <span class="number">50000</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;scanned_rows&quot;</span><span class="punctuation">:</span> <span class="number">50000</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;coverage&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;status&quot;</span><span class="punctuation">:</span> <span class="string">&quot;complete&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;matched&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;returned&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;remaining&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;truncated&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;truncated_reason&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;groups&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;key&quot;</span><span class="punctuation">:</span> <span class="string">&quot;level:ERROR&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ERROR&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;matched&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;returned&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;remaining&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;offset&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;next_offset&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;has_more&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;items&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;index&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span> <span class="attr">&quot;row&quot;</span><span class="punctuation">:</span> <span class="number">12341</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;ts&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2026-11-09T10:02:11.412Z&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;level&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ERROR&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;logger&quot;</span><span class="punctuation">:</span> <span class="string">&quot;biz.OrderService&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;create order failed: timeout after 3s&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;fields&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;order_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;O202611090001&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;trace_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;7f2ca1&quot;</span> <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;index&quot;</span><span class="punctuation">:</span> <span class="number">1</span><span class="punctuation">,</span> <span class="attr">&quot;row&quot;</span><span class="punctuation">:</span> <span class="number">23887</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;ts&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2026-11-09T12:44:03.901Z&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;level&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ERROR&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;logger&quot;</span><span class="punctuation">:</span> <span class="string">&quot;biz.PayCallback&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;sign verify failed, mismatch&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;fields&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;order_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;O202611090077&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;trace_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;a10b93&quot;</span> <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;index&quot;</span><span class="punctuation">:</span> <span class="number">2</span><span class="punctuation">,</span> <span class="attr">&quot;row&quot;</span><span class="punctuation">:</span> <span class="number">44902</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;ts&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2026-11-09T19:31:55.220Z&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;level&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ERROR&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;logger&quot;</span><span class="punctuation">:</span> <span class="string">&quot;biz.UserRepo&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;mysql: connection refused after retry 3&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;fields&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;user_id&quot;</span><span class="punctuation">:</span> <span class="number">88213</span><span class="punctuation">,</span> <span class="attr">&quot;trace_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;c33f70&quot;</span> <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;next&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;warnings&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+          <div class="prev-or-next">
+            <div class="post-foot-prev">
+              
+                <a href="/2026/11/09/2026-11-09-feishu-react/" target="_self">
+                  <i class="iconfont icon-chevronleft"></i>
+                  <span>上一页</span>
+                </a>
+              
+            </div>
+            <div class="post-foot-next">
+              
+                <a href="/2026/11/06/2026-11-06-feishu-worker/" target="_self">
+                  <span>下一页</span>
+                  <i class="iconfont icon-chevronright"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+
+        
+          <div class="comments-container">
+            
+
+
+
+
+
+
+
+          </div>
+        
+      </article>
+
+      
+  <button id="btn-catalog" class="btn-catalog" type="button" aria-controls="catalog" aria-expanded="false">
+    <i class="iconfont icon-catalog"></i>
+  </button>
+  <div class="catalog-backdrop" id="catalog-backdrop"></div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">
+      <span>目录</span>
+      <button class="catalog-close" id="btn-catalog-close" type="button" aria-label="关闭大纲">×</button>
+    </div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Token"><span class="toc-text">Token</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%87%E6%A0%B7"><span class="toc-text">采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AA%97%E5%8F%A3"><span class="toc-text">上下文窗口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E8%80%85%E5%90%88%E8%B5%B7%E6%9D%A5-Agent-%E7%9A%84%E4%B8%89%E6%9D%A1%E8%BE%B9%E7%95%8C"><span class="toc-text">三者合起来 &#x3D; Agent 的三条边界</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    </div>
+  </div>
+
+
+          
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2026 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+        </main>
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>未找到search.xml文件，具体请参考：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>请求失败，尝试重新刷新页面或稍后重试。<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+
+      </div>
+    </div>
+
+    
+<script src="/js/wiki.js"></script>
+
+  </body>
+</html>
