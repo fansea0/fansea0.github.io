@@ -1,7 +1,7 @@
 ---
 title: "Function Call"
 date: 2026-11-10 11:55:19
-updated: 2026-11-10 16:58:42
+updated: 2026-11-10 20:04:21
 categories: ["AI / Agent开发"]
 tags: ["飞书"]
 ---
@@ -14,6 +14,74 @@ tags: ["飞书"]
 4. 执行function call 的Agent 其实是是代码抽象，包含llm和tools，内部整合了工具调用的链路
 
 
+
+## 协议
+
+分OpenAI和 Anthropic 两种
+
+OpenAI：
+
+```JSON
+[
+  {"role": "user", "content": "旧金山天气怎么样？"},
+  {
+    "role": "assistant",
+    "content": null,
+    "tool_calls": [{
+      "id": "call_abc123", // id由大模型自主生成
+      "type": "function",
+      "function": {
+        "name": "get_weather",
+        "arguments": "{\"location\":\"San Francisco, CA\"}"
+      }
+    }]
+  },
+  // 每一个
+  {"role": "tool", "tool_call_id": "call_abc123", "content": "15°C, 晴"}
+]
+```
+
+关键约束：每个 `tool_call_id` 都必须有一条对应的 `tool` 消息，缺一条就会触发 400 错误。
+
+**Anthropic**
+
+与openAI的差别是，多个工具的结果都在一个userMsg中
+
+```JSON
+{
+  "role": "assistant",
+  "content": [
+    {
+      "type": "tool_use",
+      "id": "toolu_01AAA",
+      "name": "get_weather",
+      "input": {"location": "San Francisco"}
+    },
+    {
+      "type": "tool_use",
+      "id": "toolu_01BBB",
+      "name": "get_weather",
+      "input": {"location": "New York"}
+    }
+  ]
+}
+
+{
+  "role": "user",
+  "content": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01AAA",
+      "content": "旧金山：18°C，多云"
+    },
+    {
+      "type": "tool_result",
+      "tool_use_id": "toolu_01BBB",
+      "content": "纽约：10°C，晴"
+    }
+  ]
+}
+```
 
 ## 提问
 
