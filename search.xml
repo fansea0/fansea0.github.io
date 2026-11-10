@@ -4,11 +4,61 @@
   
     
     <entry>
+      <title>Function Call</title>
+      <link href="/2026/11/10/2026-11-10-feishu-function-call/"/>
+      <url>/2026/11/10/2026-11-10-feishu-function-call/</url>
+      
+        <content type="html"><![CDATA[<ol><li>执行function的载体是代码，不是模型</li><li></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI / Agent开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 飞书 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>上下文工程</title>
+      <link href="/2026/11/09/2026-11-09-feishu-post-7652ef61/"/>
+      <url>/2026/11/09/2026-11-09-feishu-post-7652ef61/</url>
+      
+        <content type="html"><![CDATA[<p>系统提示词、知识库检索内容、历史对话摘要、工具结果</p><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p><em><strong>一个 AI 客服会话跑了几十轮，你要往上下文窗口里装东西。系统提示、用户长期记忆（VIP 等级、历史投诉）、知识库召回块、历史对话摘要——这四类分别归谁管？也就是：谁在什么时候写它、谁决定装不装它、它超预算时会不会被挤掉。</strong></em></p><p><em>两个具体判断：</em></p><ol><li><em>窗口满了，你先砍哪一类？为什么是这个顺序？</em></li><li><em>落到 Go 代码上，你会做成一个独立的装配器（预算 + 装配策略），还是散在各个 Graph 节点里各自拼 messages？</em></li></ol><blockquote><ol><li>长期记忆 &gt; 召回块（低分）&gt; 历史摘要。</li><li>装配器为什么必须独立成一层，而不是散在各节点拼 msg。散着拼有三个必然后果：每个节点各自决定塞什么，裁剪策略不一致，同一会话两次运行不可复现；你无法回答「这一轮到底给模型塞了什么」；没法单测、没法 A&#x2F;B。</li></ol></blockquote><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ContextAssembler <span class="keyword">struct</span>&#123; Budget TokenBudget &#125;</span><br><span class="line"><span class="keyword">type</span> Layers <span class="keyword">struct</span> &#123;</span><br><span class="line">    System    []schema.Message <span class="comment">// 人写，不裁</span></span><br><span class="line">    Memory    []schema.Message <span class="comment">// 按相关性筛，可裁</span></span><br><span class="line">    Retrieved []schema.Message <span class="comment">// 本轮证据，按分数裁</span></span><br><span class="line">    Summary   <span class="type">string</span>           <span class="comment">// 旧对话降维，可再压</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a *ContextAssembler)</span></span> Assemble(in Layers) ([]schema.Message, AssembleReport, <span class="type">error</span>)</span><br></pre></td></tr></table></figure><p><strong>一个 AI 客服会话跑到第 30 轮，上下文只剩 30% 预算。用户说「我上次投诉的那个订单问题还没解决」。你手上有四样东西：系统提示、用户长期记忆（VIP 等级 + 历史投诉记录）、检索到的 3 个订单相关块、10 轮旧对话的摘要。</strong></p><ol><li>这 30% 预算你怎么分给四层？先砍谁，说清理由。</li><li>「上次投诉的那个订单」这个信息，应该来自记忆层还是检索层？如果记忆里有、检索没有，你怎么办？（这题考边界，不是查库）</li><li>除了 messages，你的装配器还要吐出什么，才能让线上出问题后 5 分钟内说清「这一轮到底塞了什么、为什么这么塞」？</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI / Agent开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 飞书 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ReAct</title>
       <link href="/2026/11/09/2026-11-09-feishu-react/"/>
       <url>/2026/11/09/2026-11-09-feishu-react/</url>
       
-        <content type="html"><![CDATA[<h2 id="是什么？"><a href="#是什么？" class="headerlink" title="是什么？"></a>是什么？</h2><p>标准定义：ReAct 是一种让语言模型交替生成推理轨迹（Reasoning traces）和任务特定行动（Actions） 的范式，使推理帮助行动做规划，行动帮助推理获取外部事实</p><p>关键词拆解：交替是核心。不是先想完再做，也不是边做边瞎想，而是“想一步→做一步→看结果→再想下一步”。推理轨迹是模型输出的自然语言思考，不改变外部环境，只更新模型自己的上下文。行动是调用外部工具（搜索、API、计算器等），会从环境拿回真实反馈。</p><h2 id="如何运作？"><a href="#如何运作？" class="headerlink" title="如何运作？"></a>如何运作？</h2><p>核心是一个循环：Thought → Action → Observation → Thought → … → Final Answer。</p><ul><li>Thought（思考）：模型分析当前状态，决定下一步该干什么。比如“我需要先查交流电的发明者是谁”。</li><li>Action（行动）：调用一个具体工具。比如 <code>Search[交流电发明者]</code>。</li><li>Observation（观察）：工具返回真实结果。比如“交流电由尼古拉·特斯拉推广”。</li><li>拿到观察后，模型进入下一轮 Thought，基于新信息决定下一步</li></ul><h2 id="对比-Plan-and-Execute"><a href="#对比-Plan-and-Execute" class="headerlink" title="对比 Plan-and-Execute"></a>对比 Plan-and-Execute</h2><p>Plan-and-Execute 是一种与 ReAct 互补的 Agent 架构范式。如果说 ReAct 是“走一步看一步”，那 Plan-and-Execute 就是“先看地图再出发”：先把复杂任务拆解成一份结构化计划，再逐步执行</p><p><strong>关键点：</strong></p><ol><li>Plan出来可以让<strong>人工审核</strong>，理解为AI代码软件的Plan模式，每一条计划内部执行ReAct。</li><li>Plan-and-Execute 并非死板的流水线。它通常包含一个<strong>重规划（Replan） 环节</strong>：如果某一步执行失败或环境发生变化，系统可以基于当前结果修订后续计划，而不是硬着头皮走原路线</li></ol><p><strong>好处：</strong></p><p>让AI实现长工程和复杂任务</p><p><strong>场景：</strong></p><p>适合目标明确、可以拆成多个子任务、且子任务之间有依赖的场景，比如复杂的代码修改、多步骤研究报告生成、跨系统的数据整理等。对于简单的任务会有过度设计的风险、并且对于完全未知的任务无法使用，因为无法做规划</p><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p><strong>那个 Agent 连续两轮调同一个 <code>get_order</code>，是模型读不懂工具结果，还是编排代码把「观察」这一步丢掉了？</strong></p><blockquote><p>原因：ai没有拿到结果，但是只有这个工具可用查询结果，工具查询内容没有加入上下文、或者是错的，导致AI一致无法终止，重复使用工具。或者说AI没有</p><ol><li>观察丢失&#x2F;未回填</li><li>观察内容是脏的，和工具给的格式不对，推理漂移</li><li>观察太胖（大块json），上下文稀释，目标偏移</li><li>没有终止条件</li></ol></blockquote>]]></content>
+        <content type="html"><![CDATA[<h2 id="是什么？"><a href="#是什么？" class="headerlink" title="是什么？"></a>是什么？</h2><p>标准定义：ReAct 是一种让语言模型交替生成推理轨迹（Reasoning traces）和任务特定行动（Actions） 的范式，使推理帮助行动做规划，行动帮助推理获取外部事实</p><p>关键词拆解：交替是核心。不是先想完再做，也不是边做边瞎想，而是“想一步→做一步→看结果→再想下一步”。推理轨迹是模型输出的自然语言思考，不改变外部环境，只更新模型自己的上下文。行动是调用外部工具（搜索、API、计算器等），会从环境拿回真实反馈。</p><h2 id="如何运作？"><a href="#如何运作？" class="headerlink" title="如何运作？"></a>如何运作？</h2><p>核心是一个循环：Thought → Action → Observation → Thought → … → Final Answer。</p><ul><li>Thought（思考）：模型分析当前状态，决定下一步该干什么。比如“我需要先查交流电的发明者是谁”。</li><li>Action（行动）：调用一个具体工具。比如 <code>Search[交流电发明者]</code>。</li><li>Observation（观察）：工具返回真实结果。比如“交流电由尼古拉·特斯拉推广”。</li><li>拿到观察后，模型进入下一轮 Thought，基于新信息决定下一步</li></ul><h2 id="对比-Plan-and-Execute"><a href="#对比-Plan-and-Execute" class="headerlink" title="对比 Plan-and-Execute"></a>对比 Plan-and-Execute</h2><p>Plan-and-Execute 是一种与 ReAct 互补的 Agent 架构范式。如果说 ReAct 是“走一步看一步”，那 Plan-and-Execute 就是“先看地图再出发”：先把复杂任务拆解成一份结构化计划，再逐步执行</p><p><strong>关键点：</strong></p><ol><li>Plan出来可以让<strong>人工审核</strong>，理解为AI代码软件的Plan模式，每一条计划内部执行ReAct。</li><li>Plan-and-Execute 并非死板的流水线。它通常包含一个<strong>重规划（Replan） 环节</strong>：如果某一步执行失败或环境发生变化，系统可以基于当前结果修订后续计划，而不是硬着头皮走原路线</li></ol><p><strong>好处：</strong></p><p>让AI实现长工程和复杂任务</p><p><strong>场景：</strong></p><p>适合目标明确、可以拆成多个子任务、且子任务之间有依赖的场景，比如复杂的代码修改、多步骤研究报告生成、跨系统的数据整理等。对于简单的任务会有过度设计的风险、并且对于完全未知的任务无法使用，因为无法做规划</p><h2 id="结束条件"><a href="#结束条件" class="headerlink" title="结束条件"></a>结束条件</h2><p>终止条件是四件套：任务完成信号 &#x2F; 最大步数 &#x2F; token 与成本预算 &#x2F; 重复检测与收敛判定。</p><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p><strong>那个 Agent 连续两轮调同一个 <code>get_order</code>，是模型读不懂工具结果，还是编排代码把「观察」这一步丢掉了？</strong></p><blockquote><p>原因：ai没有拿到结果，但是只有这个工具可用查询结果，工具查询内容没有加入上下文、或者是错的，导致AI一致无法终止，重复使用工具。或者说AI没有设置条件，正确使用工具却拿不到内容应该结束循环</p><ol><li>观察丢失&#x2F;未回填</li><li>观察内容是脏的，和工具给的格式不对，推理漂移</li><li>观察太胖（大块json），上下文稀释，目标偏移</li><li>没有终止条件</li></ol><p><strong>如何定位问题：</strong></p><ol><li>看thought重复调用的思考是什么</li><li>看msg是否缺失tools的使用</li><li>提示词是否约束：“无结果就停止，不要重复同参数调用”。工具无结果一致调用</li></ol><p><strong>解决方案：</strong></p><ol><li>重复调用监测，工具名 + 参数指纹，命中则中断</li><li>步数和token上限控制</li><li>执行前拦截，如pi里面工具id和结果需要完整映射，才能继续执行</li></ol></blockquote>]]></content>
       
       
       <categories>
