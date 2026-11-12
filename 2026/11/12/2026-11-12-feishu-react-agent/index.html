@@ -394,7 +394,7 @@
             <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
             <span class="wiki-node-name">AI</span>
           </a>
-          <span class="wiki-node-count">13</span>
+          <span class="wiki-node-count">14</span>
         </div>
         
 
@@ -443,7 +443,7 @@
             <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
             <span class="wiki-node-name">Agent开发</span>
           </a>
-          <span class="wiki-node-count">5</span>
+          <span class="wiki-node-count">6</span>
         </div>
         
 
@@ -459,11 +459,23 @@
             <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
             <span class="wiki-node-name">Eino</span>
           </a>
-          <span class="wiki-node-count">1</span>
+          <span class="wiki-node-count">2</span>
         </div>
         
 
 <ul class="wiki-tree-list">
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/11/12/2026-11-12-feishu-stream/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/11/12/2026-11-12-feishu-stream/" title="Stream的实现">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">Stream的实现</span>
+          </a>
+        </div>
+      </li>
+    
   
     
       <li class="wiki-node wiki-node-doc is-current" data-doc="2026/11/12/2026-11-12-feishu-react-agent/">
@@ -864,7 +876,7 @@
             
 
 <span class="post-pubtime">
-  2026-11-12 17:44:31
+  2026-11-12 17:45:11
 </span>
 
 
@@ -892,6 +904,8 @@
 
         <div class="markdown-body">
           <p><a target="_blank" rel="noopener" href="https://www.cloudwego.io/zh/docs/eino/core_modules/flow_integration_components/react_agent_manual/#%E8%8A%82%E7%82%B9%E6%8B%93%E6%89%91%E6%95%B0%E6%8D%AE%E6%B5%81%E5%9B%BE">ReAct Agent 使用手册</a></p>
+<h2 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 先初始化所需的 chatModel</span></span><br><span class="line">    toolableChatModel, err := openai.NewChatModel(...)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化所需的 tools</span></span><br><span class="line">    tools := compose.ToolsNodeConfig&#123;</span><br><span class="line">        InvokableTools:  []tool.InvokableTool&#123;mytool&#125;,</span><br><span class="line">        StreamableTools: []tool.StreamableTool&#123;myStreamTool&#125;,</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建 agent</span></span><br><span class="line">    agent, err := react.NewAgent(ctx, &amp;react.AgentConfig&#123;</span><br><span class="line">        ToolCallingModel: toolableChatModel,</span><br><span class="line">        ToolsConfig: tools,</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <h2 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h2><p>让大模型从「只会说」变成「会做事」</p>
 <p>一次完整的工具调用由三段组成，缺一不可：</p>
 <ol>
@@ -910,7 +924,7 @@
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;github.com/cloudwego/eino/flow/agent/react&quot;</span></span><br><span class="line">    <span class="string">&quot;github.com/cloudwego/eino/schema&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    agent, err := react.NewAgent(ctx, &amp;react.AgentConfig&#123;</span><br><span class="line">        Model: toolableChatModel,</span><br><span class="line">        ToolsConfig: tools,</span><br><span class="line">        </span><br><span class="line">        MessageModifier: <span class="function"><span class="keyword">func</span><span class="params">(ctx context.Context, input []*schema.Message)</span></span> []*schema.Message &#123;</span><br><span class="line">            res := <span class="built_in">make</span>([]*schema.Message, <span class="number">0</span>, <span class="built_in">len</span>(input)+<span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">            res = <span class="built_in">append</span>(res, schema.SystemMessage(<span class="string">&quot;你是一个 golang 开发专家.&quot;</span>))</span><br><span class="line">            res = <span class="built_in">append</span>(res, input...)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    agent.Generate(ctx, []*schema.Message&#123;schema.UserMessage(<span class="string">&quot;写一个 hello world 的代码&quot;</span>)&#125;)</span><br><span class="line">    <span class="comment">// 模型得到的实际输入为：</span></span><br><span class="line">    <span class="comment">// []*schema.Message&#123;</span></span><br><span class="line">    <span class="comment">//    &#123;Role: schema.System, Content:&quot;你是一个 golang 开发专家.&quot;&#125;,</span></span><br><span class="line">    <span class="comment">//    &#123;Role: schema.Human, Content: &quot;写一个 hello world 的代码&quot;&#125;</span></span><br><span class="line">    <span class="comment">//&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Agent-in-Graph"><a href="#Agent-in-Graph" class="headerlink" title="Agent in Graph"></a>Agent in Graph</h2><p>Agent 作为一个节点</p>
+<h2 id="Agent-in-Graph"><a href="#Agent-in-Graph" class="headerlink" title="Agent in Graph"></a>Agent in Graph</h2><p>Agent 整体作为一个节点。输入是string 输出是 message格式</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">agent, _ := NewAgent(ctx, &amp;AgentConfig&#123;</span><br><span class="line">    ToolCallingModel: cm,</span><br><span class="line">    ToolsConfig: compose.ToolsNodeConfig&#123;</span><br><span class="line">       Tools: []tool.BaseTool&#123;fakeTool, &amp;fakeStreamToolGreetForTest&#123;&#125;&#125;,</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    MaxStep: <span class="number">40</span>,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">chain := compose.NewChain[[]*schema.Message, <span class="type">string</span>]()</span><br><span class="line">agentLambda, _ := compose.AnyLambda(agent.Generate, agent.Stream, <span class="literal">nil</span>, <span class="literal">nil</span>)</span><br><span class="line"></span><br><span class="line">chain.</span><br><span class="line">    AppendLambda(agentLambda).</span><br><span class="line">    AppendLambda(compose.InvokableLambda(<span class="function"><span class="keyword">func</span><span class="params">(ctx context.Context, input *schema.Message)</span></span> (<span class="type">string</span>, <span class="type">error</span>) &#123;</span><br><span class="line">       t.Log(<span class="string">&quot;got agent response: &quot;</span>, input.Content)</span><br><span class="line">       <span class="keyword">return</span> input.Content, <span class="literal">nil</span></span><br><span class="line">    &#125;))</span><br><span class="line">r, _ := chain.Compile(ctx)</span><br><span class="line"></span><br><span class="line">res, _ := r.Invoke(ctx, []*schema.Message&#123;&#123;Role: schema.User, Content: <span class="string">&quot;hello&quot;</span>&#125;&#125;,</span><br><span class="line">    compose.WithCallbacks(callbackForTest))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
         </div>
@@ -918,6 +932,11 @@
         
           <div class="prev-or-next">
             <div class="post-foot-prev">
+              
+                <a href="/2026/11/12/2026-11-12-feishu-stream/" target="_self">
+                  <i class="iconfont icon-chevronleft"></i>
+                  <span>上一页</span>
+                </a>
               
             </div>
             <div class="post-foot-next">
@@ -957,7 +976,7 @@
     </div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Tools"><span class="toc-text">Tools</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MaxStep"><span class="toc-text">MaxStep</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MessageRewriter-%E4%B8%8E-MessageModifier"><span class="toc-text">MessageRewriter 与 MessageModifier</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Agent-in-Graph"><span class="toc-text">Agent in Graph</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0"><span class="toc-text">构造</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tools"><span class="toc-text">Tools</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MaxStep"><span class="toc-text">MaxStep</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MessageRewriter-%E4%B8%8E-MessageModifier"><span class="toc-text">MessageRewriter 与 MessageModifier</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Agent-in-Graph"><span class="toc-text">Agent in Graph</span></a></li></ol>
       
     </div>
   </div>
