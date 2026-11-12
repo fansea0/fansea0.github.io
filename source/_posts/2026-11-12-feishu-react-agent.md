@@ -1,12 +1,35 @@
 ---
 title: "ReAct Agent"
 date: 2026-11-12 16:58:37
-updated: 2026-11-12 17:44:31
+updated: 2026-11-12 17:45:11
 categories: ["AI / Agent开发 / Eino"]
 tags: ["飞书"]
 ---
 
 [ReAct Agent 使用手册](https://www.cloudwego.io/zh/docs/eino/core_modules/flow_integration_components/react_agent_manual/#%E8%8A%82%E7%82%B9%E6%8B%93%E6%89%91%E6%95%B0%E6%8D%AE%E6%B5%81%E5%9B%BE)
+
+## 构造
+
+```Go
+func main() {
+    // 先初始化所需的 chatModel
+    toolableChatModel, err := openai.NewChatModel(...)
+    
+    // 初始化所需的 tools
+    tools := compose.ToolsNodeConfig{
+        InvokableTools:  []tool.InvokableTool{mytool},
+        StreamableTools: []tool.StreamableTool{myStreamTool},
+    }
+    
+    // 创建 agent
+    agent, err := react.NewAgent(ctx, &react.AgentConfig{
+        ToolCallingModel: toolableChatModel,
+        ToolsConfig: tools,
+        ...
+    }
+}
+
+```
 
 ## Tools
 
@@ -80,7 +103,7 @@ func main() {
 
 ## Agent in Graph
 
-Agent 作为一个节点
+Agent 整体作为一个节点。输入是string 输出是 message格式
 
 ```Go
 agent, _ := NewAgent(ctx, &AgentConfig{
