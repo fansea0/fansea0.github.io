@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Middleware</title>
+      <link href="/2026/11/13/2026-11-13-feishu-middleware/"/>
+      <url>/2026/11/13/2026-11-13-feishu-middleware/</url>
+      
+        <content type="html"><![CDATA[<p><a href="https://www.cloudwego.io/zh/docs/eino/quick_start/chapter_05_middleware/#%E9%97%AE%E9%A2%98%E4%B8%80tool-%E9%94%99%E8%AF%AF%E4%BC%9A%E4%B8%AD%E6%96%AD%E6%95%B4%E4%B8%AA%E6%B5%81%E7%A8%8B">第五章：Middleware（中间件模式）</a></p><h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p><strong>Middleware 模式</strong>可以扩展 Tool 和 ChatModel 的行为：</p><ul><li><strong>Middleware 是 Agent 的拦截器</strong>：在调用前后插入自定义逻辑</li><li><strong>Middleware 可处理错误</strong>：将错误转换为模型可理解的格式</li><li><strong>Middleware 可实现重试</strong>：自动重试失败的操作</li><li><strong>Middleware 可组合</strong>：多个 Middleware 可以串联使用</li></ul><h2 id="常用的Middleware"><a href="#常用的Middleware" class="headerlink" title="常用的Middleware"></a>常用的Middleware</h2><ul><li><strong>SafeToolMiddleware：</strong> 将 Tool 错误转换为字符串，让模型能够理解并处理</li></ul><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> safeToolMiddleware <span class="keyword">struct</span> &#123;</span><br><span class="line">    *adk.BaseChatModelAgentMiddleware</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *safeToolMiddleware)</span></span> WrapInvokableToolCall(</span><br><span class="line">    _ context.Context,</span><br><span class="line">    endpoint adk.InvokableToolCallEndpoint,</span><br><span class="line">    _ *adk.ToolContext,</span><br><span class="line">) (adk.InvokableToolCallEndpoint, <span class="type">error</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(ctx context.Context, args <span class="type">string</span>, opts ...tool.Option)</span></span> (<span class="type">string</span>, <span class="type">error</span>) &#123;</span><br><span class="line">        result, err := endpoint(ctx, args, opts...) <span class="comment">// 工具调用</span></span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> _, ok := compose.IsInterruptRerunError(err); ok &#123;<span class="comment">// 过滤中断err</span></span><br><span class="line">                <span class="keyword">return</span> <span class="string">&quot;&quot;</span>, err</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 将错误转换为字符串，而不是返回错误</span></span><br><span class="line">            <span class="keyword">return</span> fmt.Sprintf(<span class="string">&quot;[tool error] %v&quot;</span>, err), <span class="literal">nil</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result, <span class="literal">nil</span></span><br><span class="line">    &#125;, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><ul><li><strong>ModelRetryConfig：</strong> 配置 ChatModel 的自动重试</li></ul><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">agent, err := deep.New(ctx, &amp;deep.Config&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    ModelRetryConfig: &amp;adk.ModelRetryConfig&#123;</span><br><span class="line">        MaxRetries: <span class="number">5</span>,</span><br><span class="line">        IsRetryAble: <span class="function"><span class="keyword">func</span><span class="params">(_ context.Context, err <span class="type">error</span>)</span></span> <span class="type">bool</span> &#123; <span class="comment">// 定义哪些err可以进行重试</span></span><br><span class="line">            <span class="comment">// 429 限流错误可重试</span></span><br><span class="line">            <span class="keyword">return</span> strings.Contains(err.Error(), <span class="string">&quot;429&quot;</span>) ||</span><br><span class="line">                strings.Contains(err.Error(), <span class="string">&quot;Too Many Requests&quot;</span>) ||</span><br><span class="line">                strings.Contains(err.Error(), <span class="string">&quot;qpm limit&quot;</span>)</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure><p><sheet sheet-id="2LmGzX" token="RGR9sUSWJhBBsFtLYJKcOEK9n5f"></sheet></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI / Agent开发 / Eino </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 飞书 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Sync接口</title>
       <link href="/2026/11/13/2026-11-13-feishu-sync/"/>
       <url>/2026/11/13/2026-11-13-feishu-sync/</url>
@@ -379,7 +404,7 @@
     
     
     <entry>
-      <title>Eino 图编排</title>
+      <title>Graph编排</title>
       <link href="/2026/10/29/2026-10-29-feishu-eino/"/>
       <url>/2026/10/29/2026-10-29-feishu-eino/</url>
       
@@ -388,7 +413,7 @@
       
       <categories>
           
-          <category> AI / agent开发 </category>
+          <category> AI / Agent开发 / Eino </category>
           
       </categories>
       
