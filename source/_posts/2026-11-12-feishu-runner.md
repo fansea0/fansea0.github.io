@@ -1,15 +1,27 @@
 ---
 title: "Runner"
 date: 2026-11-12 22:40:46
-updated: 2026-11-12 22:48:00
+updated: 2026-11-13 10:19:15
 categories: ["AI / Agent开发 / Eino"]
 tags: ["飞书"]
 ---
 
-为什么有了Agent还要整一个Runner呢？Agent它实现了基础的 react功能。但是像中断恢复它是没有集成的。它相当于游戏引擎；Agent是游戏角色，Runner可以负责加载、暂停、存档、推送实时事件，以及中断和恢复。
+Runner结构
+
+```Go
+type Runner struct {
+    a Agent  // 要执行的 Agent
+    enableStreaming bool
+    store CheckPointStore  // 用于中断恢复的状态存储
+}
+
+```
+
+**为什么需要 Runner？** 
+
+Agent它实现了基础的 react功能。但是像中断恢复它是没有集成的。Runner相当于游戏引擎；Agent是游戏角色，Runner可以负责加载、暂停、存档、推送实时事件，以及中断和恢复。
 
 它主要抽象的4个核心能力包括：
 
 1. **事件流封装：**把思考工具调用、返回文本事件拆成一个个事件吐出来。这个有什么好处呢？我们可以通过SSE拿到Agent执行的真正过程，细节是什么都可以直接看到。
 2. **Checkpoint状态持久化+恢复：**跑一半可以暂停存快照，下一次断点续跑，可以使用在人机审批。有点类似于编程软件向用户申请权限，那个步骤。
-3.
