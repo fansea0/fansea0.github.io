@@ -1,8 +1,8 @@
 ---
-title: "Eino 图编排"
+title: "Graph编排"
 date: 2026-10-29 22:15:20
-updated: 2026-11-09 16:20:05
-categories: ["AI / agent开发"]
+updated: 2026-11-13 17:00:06
+categories: ["AI / Agent开发 / Eino"]
 tags: ["飞书"]
 ---
 
