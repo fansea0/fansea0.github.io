@@ -4,11 +4,36 @@
   
     
     <entry>
+      <title>Sync接口</title>
+      <link href="/2026/11/13/2026-11-13-feishu-sync/"/>
+      <url>/2026/11/13/2026-11-13-feishu-sync/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Cond"><a href="#Cond" class="headerlink" title="Cond"></a>Cond</h2><p>它解决的是”没有数据可取时，让线程睡觉；有数据了再叫醒它”这个问题，而且这个睡觉&#x2F;叫醒过程是原子地配合锁的。</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> GO / GO学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 飞书 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Runner</title>
       <link href="/2026/11/12/2026-11-12-feishu-runner/"/>
       <url>/2026/11/12/2026-11-12-feishu-runner/</url>
       
-        <content type="html"><![CDATA[<p>为什么有了Agent还要整一个Runner呢？Agent它实现了基础的 react功能。但是像中断恢复它是没有集成的。它相当于游戏引擎；Agent是游戏角色，Runner可以负责加载、暂停、存档、推送实时事件，以及中断和恢复。</p><p>它主要抽象的4个核心能力包括：</p><ol><li><strong>事件流封装：</strong> 把思考工具调用、返回文本事件拆成一个个事件吐出来。这个有什么好处呢？我们可以通过SSE拿到Agent执行的真正过程，细节是什么都可以直接看到。</li><li><strong>Checkpoint状态持久化+恢复：</strong> 跑一半可以暂停存快照，下一次断点续跑，可以使用在人机审批。有点类似于编程软件向用户申请权限，那个步骤。</li><li></li></ol>]]></content>
+        <content type="html"><![CDATA[<p>Runner结构</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Runner <span class="keyword">struct</span> &#123;</span><br><span class="line">    a Agent  <span class="comment">// 要执行的 Agent</span></span><br><span class="line">    enableStreaming <span class="type">bool</span></span><br><span class="line">    store CheckPointStore  <span class="comment">// 用于中断恢复的状态存储</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p><strong>为什么需要 Runner？</strong> </p><p>Agent它实现了基础的 react功能。但是像中断恢复它是没有集成的。Runner相当于游戏引擎；Agent是游戏角色，Runner可以负责加载、暂停、存档、推送实时事件，以及中断和恢复。</p><p>它主要抽象的4个核心能力包括：</p><ol><li><strong>事件流封装：</strong> 把思考工具调用、返回文本事件拆成一个个事件吐出来。这个有什么好处呢？我们可以通过SSE拿到Agent执行的真正过程，细节是什么都可以直接看到。</li><li><strong>Checkpoint状态持久化+恢复：</strong> 跑一半可以暂停存快照，下一次断点续跑，可以使用在人机审批。有点类似于编程软件向用户申请权限，那个步骤。</li></ol>]]></content>
       
       
       <categories>
