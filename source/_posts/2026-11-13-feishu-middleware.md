@@ -1,12 +1,14 @@
 ---
 title: "Middleware"
 date: 2026-11-13 16:59:05
-updated: 2026-11-13 17:22:00
+updated: 2026-11-16 20:42:57
 categories: ["AI / Agent开发 / Eino"]
 tags: ["飞书"]
 ---
 
 [第五章：Middleware（中间件模式）](https://www.cloudwego.io/zh/docs/eino/quick_start/chapter_05_middleware/#%E9%97%AE%E9%A2%98%E4%B8%80tool-%E9%94%99%E8%AF%AF%E4%BC%9A%E4%B8%AD%E6%96%AD%E6%95%B4%E4%B8%AA%E6%B5%81%E7%A8%8B)
+
+[v0.8.\*-adk middlewares](https://www.cloudwego.io/zh/docs/eino/release_notes_and_migration/eino_v0.8._-adk_middlewares/)
 
 ## 作用
 
@@ -16,6 +18,42 @@ tags: ["飞书"]
 - **Middleware 可处理错误**：将错误转换为模型可理解的格式
 - **Middleware 可实现重试**：自动重试失败的操作
 - **Middleware 可组合**：多个 Middleware 可以串联使用
+
+```Go
+type ChatModelAgentMiddleware interface {
+    // BeforeAgent is called before each agent run, allowing modification of
+    // the agent's instruction and tools configuration.
+    BeforeAgent(ctx context.Context, runCtx *ChatModelAgentContext) (context.Context, *ChatModelAgentContext, error)
+
+    // BeforeModelRewriteState is called before each model invocation.
+    // The returned state is persisted to the agent's internal state and passed to the model.
+    BeforeModelRewriteState(ctx context.Context, state *ChatModelAgentState, mc *ModelContext) (context.Context, *ChatModelAgentState, error)
+
+    // AfterModelRewriteState is called after each model invocation.
+    // The input state includes the model's response as the last message.
+    AfterModelRewriteState(ctx context.Context, state *ChatModelAgentState, mc *ModelContext) (context.Context, *ChatModelAgentState, error)
+
+    // WrapInvokableToolCall wraps a tool's synchronous execution with custom behavior.
+    // This method is only called for tools that implement InvokableTool.
+    WrapInvokableToolCall(ctx context.Context, endpoint InvokableToolCallEndpoint, tCtx *ToolContext) (InvokableToolCallEndpoint, error)
+
+    // WrapStreamableToolCall wraps a tool's streaming execution with custom behavior.
+    // This method is only called for tools that implement StreamableTool.
+    WrapStreamableToolCall(ctx context.Context, endpoint StreamableToolCallEndpoint, tCtx *ToolContext) (StreamableToolCallEndpoint, error)
+
+    // WrapEnhancedInvokableToolCall wraps an enhanced tool's synchronous execution.
+    // This method is only called for tools that implement EnhancedInvokableTool.
+    WrapEnhancedInvokableToolCall(ctx context.Context, endpoint EnhancedInvokableToolCallEndpoint, tCtx *ToolContext) (EnhancedInvokableToolCallEndpoint, error)
+
+    // WrapEnhancedStreamableToolCall wraps an enhanced tool's streaming execution.
+    // This method is only called for tools that implement EnhancedStreamableTool.
+    WrapEnhancedStreamableToolCall(ctx context.Context, endpoint EnhancedStreamableToolCallEndpoint, tCtx *ToolContext) (EnhancedStreamableToolCallEndpoint, error)
+
+    // WrapModel wraps a chat model with custom behavior.
+    // This method is called at request time when the model is about to be invoked.
+    WrapModel(ctx context.Context, m model.BaseChatModel, mc *ModelContext) (model.BaseChatModel, error)
+}
+```
 
 
 
