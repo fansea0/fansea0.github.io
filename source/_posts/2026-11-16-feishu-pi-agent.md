@@ -1,12 +1,14 @@
 ---
 title: "Pi Agent"
 date: 2026-11-16 14:22:20
-updated: 2026-11-16 14:37:05
+updated: 2026-11-16 15:36:52
 categories: ["AI / Agent开发"]
 tags: ["飞书"]
 ---
 
 ## 上下文管理
+
+[Pi ：上下文工程——Context Assembly、Compaction 与 Memor-CSDN博客](https://blog.csdn.net/2303_77143335/article/details/163772588)
 
 **一句话收束：上下文工程的本质是"在有限的窗口里，决定模型每一轮该看到什么、不该看到什么"。** 它比模型选择更决定 Agent 质量——因为再强的模型，喂错上下文也会胡说。
 
