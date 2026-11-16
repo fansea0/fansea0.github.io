@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Pi Agent</title>
+      <link href="/2026/11/16/2026-11-16-feishu-pi-agent/"/>
+      <url>/2026/11/16/2026-11-16-feishu-pi-agent/</url>
+      
+        <content type="html"><![CDATA[<h2 id="上下文管理"><a href="#上下文管理" class="headerlink" title="上下文管理"></a>上下文管理</h2><p><strong>一句话收束：上下文工程的本质是”在有限的窗口里，决定模型每一轮该看到什么、不该看到什么”。</strong> 它比模型选择更决定 Agent 质量——因为再强的模型，喂错上下文也会胡说。</p><h3 id="一、Context-Assembly：谁有资格进窗口"><a href="#一、Context-Assembly：谁有资格进窗口" class="headerlink" title="一、Context Assembly：谁有资格进窗口"></a>一、Context Assembly：谁有资格进窗口</h3><ul><li>系统提示词</li></ul><h3 id="二、Context-Budget：窗口满了谁被扔"><a href="#二、Context-Budget：窗口满了谁被扔" class="headerlink" title="二、Context Budget：窗口满了谁被扔"></a>二、Context Budget：窗口满了谁被扔</h3><ul><li><strong>上下文只允许尾部增长：</strong> 保证cache利用。compaction 是唯一一次刻意的缓存失效</li><li><strong>预算硬护栏：</strong> 默认16k输出预算，在发请求之前就算好，超过就分类处理</li></ul><h3 id="三、Context-Compaction"><a href="#三、Context-Compaction" class="headerlink" title="三、Context Compaction"></a>三、Context Compaction</h3><p><strong>压缩过程性的普通会话时，保留像SQL代码这种不好压缩的语段，以及一些过程修改的事实。比如一些审计内容，像修改文件有哪些，还要保留用户的约束，这些是不能压缩的。</strong></p><p><strong>可压缩（过程性冗余）普通会话</strong></p><ul><li>寒暄、闲聊、重复确认等无实质信息的过渡性对话</li><li>已被后续结论覆盖的中间试错、草稿思路与反复讨论</li><li>对已固化结论的重复表述，以及可由结果反推的过程细节</li><li>不影响后续执行的口头反馈与阶段性状态汇报</li></ul><p><strong>不可压缩（必须保留）</strong></p><ul><li><strong>代码、SQL、配置等结构化内容。</strong> 这类”语义敏感”内容压了等于改语义。</li><li><strong>工具执行事实与文件修改记录</strong>：修改了哪些文件、增删了什么、产物链接或标识</li><li><strong>用户约束：</strong> 偏好、限制条件、执行边界、明确不可改动项</li><li>关键结论、已确认决策，以及错误修正后定稿的事实</li><li>外部引用、附件、资源标识等可溯源信息</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI / Agent开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 飞书 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Middleware</title>
       <link href="/2026/11/13/2026-11-13-feishu-middleware/"/>
       <url>/2026/11/13/2026-11-13-feishu-middleware/</url>
