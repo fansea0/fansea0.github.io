@@ -1,7 +1,7 @@
 ---
 title: "Call Back"
 date: 2026-11-17 15:46:43
-updated: 2026-11-17 16:20:41
+updated: 2026-11-17 16:56:27
 categories: ["AI / Agent开发 / Eino"]
 tags: ["飞书"]
 ---
@@ -89,3 +89,17 @@ OnEnd: func(ctx context.Context, info *callbacks.RunInfo, output *adk.AgentCallb
 ```
 
 1. 流式组件不触发 OnEnd，而会调用 OnEndWithStreamOutputFn
+
+## 图节点流
+
+![](/images/feishu/Y8BhbZrTxodhXBxRObMcYCgTngb.png)
+
+- **通用问题助手 (Agent)**：表示“这个 Agent 开始/结束运行”。
+- **通用问题助手 (Chain)**：作为 ReAct 图的父容器。
+- **(Lambda)（空名）**：把 AgentInput + Instruction 拼成 messages（system 指令 + 历史 + 用户提问）。
+- **Init (Lambda)**：把输入消息写进图 state（`st.Messages`），后续每轮模型都从 state 取对话历史；顺带做 nil 校验。
+- **ChatModel (ChatModel)**：调用大模型；挂着 `WithStatePreHandler` 做最大迭代次数递减（默认 20 轮，超了报 `ErrExceedMaxIterations`）。
+- **CancelCheck (Lambda)**：`CancelAfterChatModel` 安全点，外部取消/中断可在“模型答完还没跑工具”这个缝隙插入；中断恢复时把 state 里的消息换回来；只在模型输出带 tool call 时执行，没有 tool call 就直接跳 END。
+- **ToolNode (ToolsNode)**：真正执行工具，多个工具默认并行；每个工具自己还有一层 `RunInfo{Name: 工具名, Component: "Tool"}`。
+- **AfterToolCalls (Lambda)**：把工具消息写回 `st.Messages`（并对齐消息 ID），再触发 `afterToolCallsHook`；没有它，下一轮模型看不到工具结果。
+- **AfterToolCallsCancelCheck (Lambda)**：`CancelAfterToolCalls` 安全点；故意和上面的 hook 拆成两个节点：hook 可能很慢/报错，不能让它污染取消语义；之后回边到 ChatModel，开启下一轮 ReAct。
