@@ -927,7 +927,7 @@
             
 
 <span class="post-pubtime">
-  2026-11-17 16:20:41
+  2026-11-17 16:56:27
 </span>
 
 
@@ -969,6 +969,18 @@
 <ol>
 <li>流式组件不触发 OnEnd，而会调用 OnEndWithStreamOutputFn</li>
 </ol>
+<h2 id="图节点流"><a href="#图节点流" class="headerlink" title="图节点流"></a>图节点流</h2><p><img src="/images/feishu/Y8BhbZrTxodhXBxRObMcYCgTngb.png"></p>
+<ul>
+<li><strong>通用问题助手 (Agent)</strong>：表示“这个 Agent 开始&#x2F;结束运行”。</li>
+<li><strong>通用问题助手 (Chain)</strong>：作为 ReAct 图的父容器。</li>
+<li><strong>(Lambda)（空名）</strong>：把 AgentInput + Instruction 拼成 messages（system 指令 + 历史 + 用户提问）。</li>
+<li><strong>Init (Lambda)</strong>：把输入消息写进图 state（<code>st.Messages</code>），后续每轮模型都从 state 取对话历史；顺带做 nil 校验。</li>
+<li><strong>ChatModel (ChatModel)</strong>：调用大模型；挂着 <code>WithStatePreHandler</code> 做最大迭代次数递减（默认 20 轮，超了报 <code>ErrExceedMaxIterations</code>）。</li>
+<li><strong>CancelCheck (Lambda)</strong>：<code>CancelAfterChatModel</code> 安全点，外部取消&#x2F;中断可在“模型答完还没跑工具”这个缝隙插入；中断恢复时把 state 里的消息换回来；只在模型输出带 tool call 时执行，没有 tool call 就直接跳 END。</li>
+<li><strong>ToolNode (ToolsNode)</strong>：真正执行工具，多个工具默认并行；每个工具自己还有一层 <code>RunInfo{Name: 工具名, Component: &quot;Tool&quot;}</code>。</li>
+<li><strong>AfterToolCalls (Lambda)</strong>：把工具消息写回 <code>st.Messages</code>（并对齐消息 ID），再触发 <code>afterToolCallsHook</code>；没有它，下一轮模型看不到工具结果。</li>
+<li><strong>AfterToolCallsCancelCheck (Lambda)</strong>：<code>CancelAfterToolCalls</code> 安全点；故意和上面的 hook 拆成两个节点：hook 可能很慢&#x2F;报错，不能让它污染取消语义；之后回边到 ChatModel，开启下一轮 ReAct。</li>
+</ul>
 
         </div>
 
@@ -1014,7 +1026,7 @@
     </div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="toc-text">快速入门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-text">注意</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="toc-text">快速入门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-text">注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E8%8A%82%E7%82%B9%E6%B5%81"><span class="toc-text">图节点流</span></a></li></ol>
       
     </div>
   </div>
