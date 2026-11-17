@@ -1,0 +1,19 @@
+---
+title: "Coding Agent"
+date: 2026-11-17 20:24:14
+updated: 2026-11-17 20:43:05
+categories: ["AI / Agent开发"]
+tags: ["飞书"]
+---
+
+## 基础工具
+
+- read_file：读取文件，主要关注参数：分页、limit等
+- write_file：创建或覆盖文件，尾部新增内容使用复制原文+append新内容走覆盖全文。需要原子性
+
+  - 方案：新建临时文件，处理完成之后rename。并发场景可以把多任务放在队列中，逐个执行
+- edit_file：精确替换文件内容
+
+  - 方案：pi使用的是精确文字匹配+fuzzy兜底（ai输出内容可能格式漂移，归一化再匹配）
+- Glob
+- Grep

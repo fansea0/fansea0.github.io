@@ -1,7 +1,7 @@
 ---
 title: "Middleware"
 date: 2026-11-13 16:59:05
-updated: 2026-11-16 20:42:57
+updated: 2026-11-17 21:46:55
 categories: ["AI / Agent开发 / Eino"]
 tags: ["飞书"]
 ---
@@ -21,43 +21,52 @@ tags: ["飞书"]
 
 ```Go
 type ChatModelAgentMiddleware interface {
-    // BeforeAgent is called before each agent run, allowing modification of
-    // the agent's instruction and tools configuration.
+    // BeforeAgent 在每次 Agent 运行前调用，允许修改 Agent 的 instruction 和 tools 配置。
+    // 每次 Agent.Run 时执行一次，可以用来创建本次运行的共享记录器
     BeforeAgent(ctx context.Context, runCtx *ChatModelAgentContext) (context.Context, *ChatModelAgentContext, error)
 
-    // BeforeModelRewriteState is called before each model invocation.
-    // The returned state is persisted to the agent's internal state and passed to the model.
+    // BeforeModelRewriteState 在每次模型调用前调用。
+    // 返回的 state 会被持久化到 Agent 内部状态，并传递给模型。
     BeforeModelRewriteState(ctx context.Context, state *ChatModelAgentState, mc *ModelContext) (context.Context, *ChatModelAgentState, error)
 
-    // AfterModelRewriteState is called after each model invocation.
-    // The input state includes the model's response as the last message.
+    // AfterModelRewriteState 在每次模型调用后调用。
+    // 输入的 state 中包含模型响应作为最后一条消息。
     AfterModelRewriteState(ctx context.Context, state *ChatModelAgentState, mc *ModelContext) (context.Context, *ChatModelAgentState, error)
 
-    // WrapInvokableToolCall wraps a tool's synchronous execution with custom behavior.
-    // This method is only called for tools that implement InvokableTool.
+    // WrapInvokableToolCall 用自定义行为包装工具的同步执行。
+    // 此方法仅对实现了 InvokableTool 的工具调用。
     WrapInvokableToolCall(ctx context.Context, endpoint InvokableToolCallEndpoint, tCtx *ToolContext) (InvokableToolCallEndpoint, error)
 
-    // WrapStreamableToolCall wraps a tool's streaming execution with custom behavior.
-    // This method is only called for tools that implement StreamableTool.
+    // WrapStreamableToolCall 用自定义行为包装工具的流式执行。
+    // 此方法仅对实现了 StreamableTool 的工具调用。
     WrapStreamableToolCall(ctx context.Context, endpoint StreamableToolCallEndpoint, tCtx *ToolContext) (StreamableToolCallEndpoint, error)
 
-    // WrapEnhancedInvokableToolCall wraps an enhanced tool's synchronous execution.
-    // This method is only called for tools that implement EnhancedInvokableTool.
+    // WrapEnhancedInvokableToolCall 用自定义行为包装增强工具的同步执行。
+    // 此方法仅对实现了 EnhancedInvokableTool 的工具调用。
     WrapEnhancedInvokableToolCall(ctx context.Context, endpoint EnhancedInvokableToolCallEndpoint, tCtx *ToolContext) (EnhancedInvokableToolCallEndpoint, error)
 
-    // WrapEnhancedStreamableToolCall wraps an enhanced tool's streaming execution.
-    // This method is only called for tools that implement EnhancedStreamableTool.
+    // WrapEnhancedStreamableToolCall 用自定义行为包装增强工具的流式执行。
+    // 此方法仅对实现了 EnhancedStreamableTool 的工具调用。
     WrapEnhancedStreamableToolCall(ctx context.Context, endpoint EnhancedStreamableToolCallEndpoint, tCtx *ToolContext) (EnhancedStreamableToolCallEndpoint, error)
 
-    // WrapModel wraps a chat model with custom behavior.
-    // This method is called at request time when the model is about to be invoked.
+    // WrapModel 用自定义行为包装聊天模型。
+    // 此方法在请求时、模型即将被调用时调用。
     WrapModel(ctx context.Context, m model.BaseChatModel, mc *ModelContext) (model.BaseChatModel, error)
 }
 ```
 
-
+```Go
+agent, err := adk.NewChatModelAgent(context.Background(), &adk.ChatModelAgentConfig{
+    // 注册中间件
+    Handlers: []adk.ChatModelAgentMiddleware{
+       &safeToolMiddleware{}, // 注意顺序
+    },
+})
+```
 
 ## 常用的Middleware
+
+
 
 - **SafeToolMiddleware：**将 Tool 错误转换为字符串，让模型能够理解并处理
 

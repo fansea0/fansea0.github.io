@@ -1,7 +1,7 @@
 ---
 title: "Call Back"
 date: 2026-11-17 15:46:43
-updated: 2026-11-17 16:56:27
+updated: 2026-11-17 17:23:27
 categories: ["AI / Agent开发 / Eino"]
 tags: ["飞书"]
 ---
@@ -103,3 +103,32 @@ OnEnd: func(ctx context.Context, info *callbacks.RunInfo, output *adk.AgentCallb
 - **ToolNode (ToolsNode)**：真正执行工具，多个工具默认并行；每个工具自己还有一层 `RunInfo{Name: 工具名, Component: "Tool"}`。
 - **AfterToolCalls (Lambda)**：把工具消息写回 `st.Messages`（并对齐消息 ID），再触发 `afterToolCallsHook`；没有它，下一轮模型看不到工具结果。
 - **AfterToolCallsCancelCheck (Lambda)**：`CancelAfterToolCalls` 安全点；故意和上面的 hook 拆成两个节点：hook 可能很慢/报错，不能让它污染取消语义；之后回边到 ChatModel，开启下一轮 ReAct。
+
+```SQL
+[callback:start] 通用问题助手 (Agent)
+[callback:end] 通用问题助手 (Agent) 耗时=477.834µs
+[callback:start]  (Lambda)
+[callback:end]  (Lambda) 耗时=2.917µs
+[callback:start] Init (Lambda)
+[callback:end] Init (Lambda) 耗时=2.375µs
+[callback:start] ChatModel (ChatModel)
+[callback:end:stream] ChatModel (ChatModel) 首包耗时=1.455347125s
+[callback:start] CancelCheck (Lambda)
+[callback:end] CancelCheck (Lambda) 耗时=2.917µs
+[callback:start] ToolNode (ToolsNode)
+[callback:start] 工具=add
+  入参={"a":1.87999,"b":2.1188}
+[callback:end] 工具=add 耗时=259.375µs
+  返回=3.9987899999999996
+[callback:end:stream] ToolNode (ToolsNode) 首包耗时=361.958µs
+[callback:start] AfterToolCalls (Lambda)
+[callback:end] AfterToolCalls (Lambda) 耗时=4.5µs
+[callback:start] AfterToolCallsCancelCheck (Lambda)
+[callback:end] AfterToolCallsCancelCheck (Lambda) 耗时=1.125µs
+[callback:start] ChatModel (ChatModel)
+[callback:end:stream] ChatModel (ChatModel) 首包耗时=1.476875042s
+[callback:end:stream] ReAct (Graph) 首包耗时=3.797245667s
+[callback:end:stream] 通用问题助手 (Chain) 首包耗时=3.797267709s
+
+进程 已完成，退出代码为 0
+```
