@@ -12,7 +12,7 @@ Runner结构
 
 ```Go
 type Runner struct {
-    a Agent  // 要执行的 Agent
+    a Agent  // 要执行的 Agent，adk的agent而不是react的agent
     enableStreaming bool
     store CheckPointStore  // 用于中断恢复的状态存储
 }
