@@ -394,7 +394,7 @@
             <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
             <span class="wiki-node-name">AI</span>
           </a>
-          <span class="wiki-node-count">19</span>
+          <span class="wiki-node-count">20</span>
         </div>
         
 
@@ -410,7 +410,7 @@
             <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h4.1c.46 0 .9.18 1.23.51L11.5 7h7.75A1.75 1.75 0 0 1 21 8.75v8.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/></svg></span>
             <span class="wiki-node-name">Agent开发</span>
           </a>
-          <span class="wiki-node-count">12</span>
+          <span class="wiki-node-count">13</span>
         </div>
         
 
@@ -518,6 +518,18 @@
   
 </ul>
 
+      </li>
+    
+  
+    
+      <li class="wiki-node wiki-node-doc" data-doc="2026/11/17/2026-11-17-feishu-coding-agent/">
+        <div class="wiki-node-row">
+          <span class="wiki-node-toggle wiki-node-toggle-blank"></span>
+          <a class="wiki-node-link" href="/2026/11/17/2026-11-17-feishu-coding-agent/" title="Coding Agent">
+            <span class="wiki-node-icon"><svg class="wiki-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M6 3.75A1.75 1.75 0 0 1 7.75 2h5.44c.46 0 .91.19 1.23.52l3.06 3.1c.33.33.52.78.52 1.24v13.64A1.75 1.75 0 0 1 16.25 21h-8.5A1.75 1.75 0 0 1 6 19.25V3.75Z"/><path fill="#fff" d="M14 2.6v3.2c0 .4.3.7.7.7h3.1L14 2.6Z"/></svg></span>
+            <span class="wiki-node-name">Coding Agent</span>
+          </a>
+        </div>
       </li>
     
   
@@ -927,7 +939,7 @@
             
 
 <span class="post-pubtime">
-  2026-11-17 12:48:58
+  2026-11-18 00:36:37
 </span>
 
 
@@ -964,6 +976,48 @@
 <li>显式声明 Schema</li>
 </ol>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ── 写法二：显式声明 Schema ──</span></span><br><span class="line"><span class="comment">// 参数结构动态、或需要精确控制 JSON Schema（如 enum、嵌套对象）时用这种。</span></span><br><span class="line">userInfoTool := utils.NewTool(</span><br><span class="line">    &amp;schema.ToolInfo&#123;</span><br><span class="line">       Name: <span class="string">&quot;user_info&quot;</span>,</span><br><span class="line">       Desc: <span class="string">&quot;根据用户的姓名和邮箱，查询用户的公司、职位、薪酬信息&quot;</span>,</span><br><span class="line">       ParamsOneOf: schema.NewParamsOneOfByParams(<span class="keyword">map</span>[<span class="type">string</span>]*schema.ParameterInfo&#123;</span><br><span class="line">          <span class="string">&quot;name&quot;</span>: &#123;</span><br><span class="line">             Type:     schema.String,</span><br><span class="line">             Desc:     <span class="string">&quot;用户的姓名&quot;</span>,</span><br><span class="line">             Required: <span class="literal">true</span>,</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="string">&quot;email&quot;</span>: &#123;</span><br><span class="line">             Type: schema.String,</span><br><span class="line">             Desc: <span class="string">&quot;用户的邮箱&quot;</span>,</span><br><span class="line">          &#125;,</span><br><span class="line">       &#125;),</span><br><span class="line">    &#125;,</span><br><span class="line">    queryUserInfo,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">queryUserInfo</span><span class="params">(ctx context.Context, req *userInfoRequest)</span></span> (*userInfoResponse, <span class="type">error</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> req == <span class="literal">nil</span> || req.Name == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="literal">nil</span>, fmt.Errorf(<span class="string">&quot;缺少必填参数 name&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &amp;userInfoResponse&#123;</span><br><span class="line">       Name:     req.Name,</span><br><span class="line">       Email:    req.Email,</span><br><span class="line">       Company:  <span class="string">&quot;Cool Company LLC.&quot;</span>,</span><br><span class="line">       Position: <span class="string">&quot;CEO&quot;</span>,</span><br><span class="line">       Salary:   <span class="string">&quot;9999&quot;</span>,</span><br><span class="line">    &#125;, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> userInfoRequest <span class="keyword">struct</span> &#123;</span><br><span class="line">    <span class="comment">// 用户姓名</span></span><br><span class="line">    Name <span class="type">string</span> <span class="string">`json:&quot;name&quot; jsonschema:&quot;description=用户的姓名&quot;`</span></span><br><span class="line">    <span class="comment">// 用户邮箱</span></span><br><span class="line">    Email <span class="type">string</span> <span class="string">`json:&quot;email&quot; jsonschema:&quot;description=用户的邮箱&quot;`</span></span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+<h2 id="长结果截断"><a href="#长结果截断" class="headerlink" title="长结果截断"></a>长结果截断</h2><p>Pi 的核心工具自带硬编码的截断逻辑，规则比较固定：</p>
+<ul>
+<li><p><strong>双重限制，先触者胜</strong>：所有工具输出默认受两个上限约束——<strong>最多 2000 行或最多 50KB</strong>。哪个先达到，就按哪个截断。</p>
+</li>
+<li><p><strong>方向性截断：</strong> 不是简单粗暴地砍掉尾部，而是根据工具类型决定保留哪一头：</p>
+<ul>
+<li><code>read</code> 类工具：通常保留开头（<code>truncateHead</code>），因为文件头部的 import、接口定义等信息密度最高。</li>
+<li><code>bash</code> 类工具：通常保留末尾（<code>truncateTail</code>），因为错误堆栈和最终结果往往出现在最后。</li>
+</ul>
+</li>
+<li><p><strong>兜底逃生通道：</strong> 截断发生时，完整的原始输出通常会被保存到临时文件，并在结果末尾附带类似 <code>[Full output: /tmp/...]</code> 的路径提示，让模型在需要时可以去读取完整内容。</p>
+</li>
+</ul>
+<h2 id="关键问题"><a href="#关键问题" class="headerlink" title="关键问题"></a>关键问题</h2><h3 id="重复调用出现与处理"><a href="#重复调用出现与处理" class="headerlink" title="重复调用出现与处理"></a>重复调用出现与处理</h3><ol>
+<li>工具执行失败，但是模型只能通过这个工具拿想要的内容</li>
+</ol>
+<blockquote>
+<ul>
+<li>重复检测</li>
+</ul>
+</blockquote>
+<h3 id="如何使用好工具？"><a href="#如何使用好工具？" class="headerlink" title="如何使用好工具？"></a>如何使用好工具？</h3><h4 id="工具层"><a href="#工具层" class="headerlink" title="工具层"></a>工具层</h4><p><strong>对「单次调用」负责 —— 输入好不好填、输出能不能被模型消化、错误说不说得清楚。</strong></p>
+<p>就拿读文件来说，读文件其实很简单：你把文件名丢给函数，函数直接返回它的所有内容。但是由此会引发几个问题：</p>
+<ol>
+<li>如果输出内容量特别大，AI无法消化，应该怎么办？</li>
+<li>比如我读了这一块的内容，那么剩下的内容还剩多少？要不要继续读？</li>
+</ol>
+<p>所以，一个读文件的工具其实需要解决上面几个点：</p>
+<ol>
+<li>可以定义分页之类的参数，实现大文件按页读取。</li>
+<li>返回总共的页数，这样AI可以知道还剩下多少内容没读完，从而调整参数。</li>
+</ol>
+<h4 id="中间层"><a href="#中间层" class="headerlink" title="中间层"></a>中间层</h4><p><strong>对「一段任务里的多次调用」负责 —— 选工具、传参数、重试与熔断、循环检测、上下文管理、降级与安全兜底。</strong></p>
+<p>工具执行报错时，AI会持续尝试重新调用工具，导致重复调用，但一直报错。这其实也涉及工具如何很好地使用的问题。我认为需要有以下措施：</p>
+<ol>
+<li>中间层处理事情时，比如在图编排过程中出现报错，需要把这个报错返回给模型去处理，而不是直接抛出error，导致程序中断。</li>
+<li>重复参数的工具调用，需要判别它的报错是值得重试。很多重试无论多少次重试都是同样的报错结果，这种情况需要避免。</li>
+<li>如果是网络抖动错误等其他情况，其实重试能得到机会返回结果，这样的重试是允许的。这一点要分类讨论。</li>
+<li>要兜底设置熔断重试的次数，不能让它一直重试。</li>
+<li>如果是抖动，要单独讨论隔多久再重试。这个也是需要考虑的一点。</li>
+</ol>
 
         </div>
 
@@ -1014,7 +1068,7 @@
     </div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%B7%A5%E5%85%B7"><span class="toc-text">创建工具</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%B7%A5%E5%85%B7"><span class="toc-text">创建工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%95%BF%E7%BB%93%E6%9E%9C%E6%88%AA%E6%96%AD"><span class="toc-text">长结果截断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E9%97%AE%E9%A2%98"><span class="toc-text">关键问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%A4%8D%E8%B0%83%E7%94%A8%E5%87%BA%E7%8E%B0%E4%B8%8E%E5%A4%84%E7%90%86"><span class="toc-text">重复调用出现与处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%A5%BD%E5%B7%A5%E5%85%B7%EF%BC%9F"><span class="toc-text">如何使用好工具？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E5%B1%82"><span class="toc-text">工具层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E5%B1%82"><span class="toc-text">中间层</span></a></li></ol></li></ol></li></ol>
       
     </div>
   </div>
