@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>微信小程序</title>
+      <link href="/2026/11/18/2026-11-18-feishu-post-4b770894/"/>
+      <url>/2026/11/18/2026-11-18-feishu-post-4b770894/</url>
+      
+        <content type="html"><![CDATA[<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><ol><li><strong>前端</strong>获取code，调用wx.login()，code由微信服务器生成</li><li><strong>前端</strong>将code通过接口请求后端</li><li><strong>后端</strong>拿到code，打包appId、appSecret、code获取到openId</li><li><strong>后端</strong>使用openId查询自己的表，注册或查询用户，存在即生成token，返回</li><li><strong>前端</strong>接下来请求都携带token</li></ol><p><img src="/images/feishu/WEipb8h5Eoghl0xAILAcukA0nCh.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 独开经验 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 飞书 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Coding Agent</title>
       <link href="/2026/11/17/2026-11-17-feishu-coding-agent/"/>
       <url>/2026/11/17/2026-11-17-feishu-coding-agent/</url>
