@@ -972,7 +972,7 @@
             
 
 <span class="post-pubtime">
-  2026-11-17 21:46:55
+  2026-11-25 18:02:05
 </span>
 
 
@@ -1023,6 +1023,23 @@
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">agent, err := deep.New(ctx, &amp;deep.Config&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    ModelRetryConfig: &amp;adk.ModelRetryConfig&#123;</span><br><span class="line">        MaxRetries: <span class="number">5</span>,</span><br><span class="line">        IsRetryAble: <span class="function"><span class="keyword">func</span><span class="params">(_ context.Context, err <span class="type">error</span>)</span></span> <span class="type">bool</span> &#123; <span class="comment">// 定义哪些err可以进行重试</span></span><br><span class="line">            <span class="comment">// 429 限流错误可重试</span></span><br><span class="line">            <span class="keyword">return</span> strings.Contains(err.Error(), <span class="string">&quot;429&quot;</span>) ||</span><br><span class="line">                strings.Contains(err.Error(), <span class="string">&quot;Too Many Requests&quot;</span>) ||</span><br><span class="line">                strings.Contains(err.Error(), <span class="string">&quot;qpm limit&quot;</span>)</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p><sheet sheet-id="2LmGzX" token="RGR9sUSWJhBBsFtLYJKcOEK9n5f"></sheet></p>
+<h3 id="工具middleware"><a href="#工具middleware" class="headerlink" title="工具middleware"></a>工具middleware</h3><p>一个工具调用拦截器，包装工具的 endpoint，可以：</p>
+<ul>
+<li>改写工具入参（<code>ToolInput.Arguments</code>）</li>
+<li>改写&#x2F;截断工具结果（<code>ToolOutput.Result</code>）<strong>reduction</strong></li>
+<li>加超时、限流、重试、审计日志、脱敏。ModelRetryConfig</li>
+<li>短路：不执行工具直接返回构造结果</li>
+</ul>
+<p>本质是洋葱模型：<code>Middleware func(Endpoint) Endpoint</code>。</p>
+<h4 id="compose层"><a href="#compose层" class="headerlink" title="compose层"></a>compose层</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ToolMiddleware <span class="keyword">struct</span> &#123;</span><br><span class="line">        Invokable         InvokableToolMiddleware         <span class="comment">// func(Endpoint) Endpoint</span></span><br><span class="line">        Streamable        StreamableToolMiddleware</span><br><span class="line">        EnhancedInvokable EnhancedInvokableToolMiddleware</span><br><span class="line">        EnhancedStreamable EnhancedStreamableToolMiddleware</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">myMiddleware</span><span class="params">(next compose.InvokableToolEndpoint)</span></span> compose.InvokableToolEndpoint &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(ctx context.Context, in *compose.ToolInput)</span></span> (*compose.ToolOutput, <span class="type">error</span>) &#123;</span><br><span class="line">                out, err := next(ctx, in) <span class="comment">// 调下游（可能是下一个中间件或真实工具）</span></span><br><span class="line">                <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">                &#125;</span><br><span class="line">                out.Result = transform(out.Result) <span class="comment">// 改结果</span></span><br><span class="line">                <span class="keyword">return</span> out, <span class="literal">nil</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="TypedChatModelAgentMiddleware"><a href="#TypedChatModelAgentMiddleware" class="headerlink" title="TypedChatModelAgentMiddleware"></a>TypedChatModelAgentMiddleware</h4><ul>
+<li><code>compose.ToolMiddleware</code> &#x3D; 底层机制（函数包装器），eino 所有工具调用最终都过它。</li>
+<li><code>TypedChatModelAgentMiddleware</code> &#x3D; 上层接口，覆盖整个 Agent 生命周期，其中4 个</li>
+</ul>
 
         </div>
 
@@ -1073,7 +1090,7 @@
     </div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8"><span class="toc-text">作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84Middleware"><span class="toc-text">常用的Middleware</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8"><span class="toc-text">作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84Middleware"><span class="toc-text">常用的Middleware</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7middleware"><span class="toc-text">工具middleware</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#compose%E5%B1%82"><span class="toc-text">compose层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TypedChatModelAgentMiddleware"><span class="toc-text">TypedChatModelAgentMiddleware</span></a></li></ol></li></ol></li></ol>
       
     </div>
   </div>

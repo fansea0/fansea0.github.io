@@ -972,7 +972,7 @@
             
 
 <span class="post-pubtime">
-  2026-11-16 15:36:52
+  2026-11-25 17:22:10
 </span>
 
 
@@ -1024,6 +1024,21 @@
 <li>关键结论、已确认决策，以及错误修正后定稿的事实</li>
 <li>外部引用、附件、资源标识等可溯源信息</li>
 </ul>
+<h2 id="工具设计"><a href="#工具设计" class="headerlink" title="工具设计"></a>工具设计</h2><p>read_file</p>
+<ul>
+<li><p>函数：truncateHead</p>
+</li>
+<li><p>参数：2000行和50KB</p>
+</li>
+<li><p>方案：</p>
+<ul>
+<li>不超限制，直接返回</li>
+<li>一行一行去append，每当超过阈值则返回</li>
+<li>第一行直接达到50Kb，返回报错：<code>[Line N is 2.0MB, exceeds 50.0KB limit. Use bash: sed -n &#39;Np&#39; file | head -c 51200]</code></li>
+<li>对于json：按照offset补齐缺少的括号</li>
+</ul>
+</li>
+</ul>
 
         </div>
 
@@ -1074,7 +1089,7 @@
     </div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86"><span class="toc-text">上下文管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81Context-Assembly%EF%BC%9A%E8%B0%81%E6%9C%89%E8%B5%84%E6%A0%BC%E8%BF%9B%E7%AA%97%E5%8F%A3"><span class="toc-text">一、Context Assembly：谁有资格进窗口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Context-Budget%EF%BC%9A%E7%AA%97%E5%8F%A3%E6%BB%A1%E4%BA%86%E8%B0%81%E8%A2%AB%E6%89%94"><span class="toc-text">二、Context Budget：窗口满了谁被扔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81Context-Compaction"><span class="toc-text">三、Context Compaction</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86"><span class="toc-text">上下文管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81Context-Assembly%EF%BC%9A%E8%B0%81%E6%9C%89%E8%B5%84%E6%A0%BC%E8%BF%9B%E7%AA%97%E5%8F%A3"><span class="toc-text">一、Context Assembly：谁有资格进窗口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Context-Budget%EF%BC%9A%E7%AA%97%E5%8F%A3%E6%BB%A1%E4%BA%86%E8%B0%81%E8%A2%AB%E6%89%94"><span class="toc-text">二、Context Budget：窗口满了谁被扔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81Context-Compaction"><span class="toc-text">三、Context Compaction</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E8%AE%BE%E8%AE%A1"><span class="toc-text">工具设计</span></a></li></ol>
       
     </div>
   </div>
