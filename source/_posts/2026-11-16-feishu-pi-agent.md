@@ -1,7 +1,7 @@
 ---
 title: "Pi Agent"
 date: 2026-11-16 14:22:20
-updated: 2026-11-16 15:36:52
+updated: 2026-11-25 17:22:10
 categories: ["AI / Agent开发"]
 tags: ["飞书"]
 ---
@@ -45,3 +45,18 @@ tags: ["飞书"]
 - **用户约束：**偏好、限制条件、执行边界、明确不可改动项
 - 关键结论、已确认决策，以及错误修正后定稿的事实
 - 外部引用、附件、资源标识等可溯源信息
+
+
+
+## 工具设计
+
+read_file
+
+- 函数：truncateHead
+- 参数：2000行和50KB
+- 方案：
+
+  - 不超限制，直接返回
+  - 一行一行去append，每当超过阈值则返回
+  - 第一行直接达到50Kb，返回报错：`[Line N is 2.0MB, exceeds 50.0KB limit. Use bash: sed -n 'Np' file | head -c 51200]`
+  - 对于json：按照offset补齐缺少的括号

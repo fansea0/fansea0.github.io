@@ -1,7 +1,7 @@
 ---
 title: "Middleware"
 date: 2026-11-13 16:59:05
-updated: 2026-11-17 21:46:55
+updated: 2026-11-25 18:02:05
 categories: ["AI / Agent开发 / Eino"]
 tags: ["飞书"]
 ---
@@ -114,3 +114,47 @@ agent, err := deep.New(ctx, &deep.Config{
 ```
 
 <sheet sheet-id="2LmGzX" token="RGR9sUSWJhBBsFtLYJKcOEK9n5f"></sheet>
+
+
+
+### 工具middleware
+
+一个工具调用拦截器，包装工具的 endpoint，可以：
+
+- 改写工具入参（`ToolInput.Arguments`）
+- 改写/截断工具结果（`ToolOutput.Result`）**reduction**
+- 加超时、限流、重试、审计日志、脱敏。ModelRetryConfig
+- 短路：不执行工具直接返回构造结果
+
+本质是洋葱模型：`Middleware func(Endpoint) Endpoint`。
+
+#### compose层
+
+```Go
+type ToolMiddleware struct {
+        Invokable         InvokableToolMiddleware         // func(Endpoint) Endpoint
+        Streamable        StreamableToolMiddleware
+        EnhancedInvokable EnhancedInvokableToolMiddleware
+        EnhancedStreamable EnhancedStreamableToolMiddleware
+}
+```
+
+使用：
+
+```Go
+func myMiddleware(next compose.InvokableToolEndpoint) compose.InvokableToolEndpoint {
+        return func(ctx context.Context, in *compose.ToolInput) (*compose.ToolOutput, error) {
+                out, err := next(ctx, in) // 调下游（可能是下一个中间件或真实工具）
+                if err != nil {
+                        return nil, err
+                }
+                out.Result = transform(out.Result) // 改结果
+                return out, nil
+        }
+}
+```
+
+#### TypedChatModelAgentMiddleware
+
+- `compose.ToolMiddleware` = 底层机制（函数包装器），eino 所有工具调用最终都过它。
+- `TypedChatModelAgentMiddleware` = 上层接口，覆盖整个 Agent 生命周期，其中4 个
