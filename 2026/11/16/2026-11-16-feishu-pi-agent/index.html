@@ -972,7 +972,7 @@
             
 
 <span class="post-pubtime">
-  2026-11-25 17:22:10
+  2026-11-25 20:36:09
 </span>
 
 
@@ -1028,12 +1028,12 @@
 <ul>
 <li><p>函数：truncateHead</p>
 </li>
-<li><p>参数：2000行和50KB</p>
+<li><p>标准：2000行和50KB</p>
 </li>
 <li><p>方案：</p>
 <ul>
-<li>不超限制，直接返回</li>
-<li>一行一行去append，每当超过阈值则返回</li>
+<li>不超限制，直接返回，截断标识为false</li>
+<li>一行一行去append，每当超过阈值则返回，超过阈值截断标识为true</li>
 <li>第一行直接达到50Kb，返回报错：<code>[Line N is 2.0MB, exceeds 50.0KB limit. Use bash: sed -n &#39;Np&#39; file | head -c 51200]</code></li>
 <li>对于json：按照offset补齐缺少的括号</li>
 </ul>
