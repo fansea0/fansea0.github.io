@@ -1,7 +1,7 @@
 ---
 title: "Pi Agent"
 date: 2026-11-16 14:22:20
-updated: 2026-11-25 17:22:10
+updated: 2026-11-25 20:36:09
 categories: ["AI / Agent开发"]
 tags: ["飞书"]
 ---
@@ -53,10 +53,10 @@ tags: ["飞书"]
 read_file
 
 - 函数：truncateHead
-- 参数：2000行和50KB
+- 标准：2000行和50KB
 - 方案：
 
-  - 不超限制，直接返回
-  - 一行一行去append，每当超过阈值则返回
+  - 不超限制，直接返回，截断标识为false
+  - 一行一行去append，每当超过阈值则返回，超过阈值截断标识为true
   - 第一行直接达到50Kb，返回报错：`[Line N is 2.0MB, exceeds 50.0KB limit. Use bash: sed -n 'Np' file | head -c 51200]`
   - 对于json：按照offset补齐缺少的括号
