@@ -33,7 +33,7 @@
       <link href="/2026/11/17/2026-11-17-feishu-coding-agent/"/>
       <url>/2026/11/17/2026-11-17-feishu-coding-agent/</url>
       
-        <content type="html"><![CDATA[<h2 id="基础工具"><a href="#基础工具" class="headerlink" title="基础工具"></a>基础工具</h2><ul><li><p>read_file：读取文件，主要关注参数：分页、limit等</p></li><li><p>write_file：创建或覆盖文件，尾部新增内容使用复制原文+append新内容走覆盖全文。需要原子性</p><ul><li>方案：新建临时文件，处理完成之后rename。并发场景可以把多任务放在队列中，逐个执行</li></ul></li><li><p>edit_file：精确替换文件内容</p><ul><li>方案：pi使用的是精确文字匹配+fuzzy兜底（ai输出内容可能格式漂移，归一化再匹配）</li></ul></li><li><p>Glob</p></li><li><p>Grep</p></li></ul>]]></content>
+        <content type="html"><![CDATA[<h2 id="基础工具"><a href="#基础工具" class="headerlink" title="基础工具"></a>基础工具</h2><ul><li><p>read_file：读取文件，主要关注参数：分页、limit等</p></li><li><p>write_file：创建或覆盖文件，尾部新增内容使用复制原文+append新内容走覆盖全文。需要原子性</p><ul><li>方案：新建临时文件，处理完成之后rename。并发场景可以把多任务放在队列中，逐个执行</li></ul></li><li><p>edit_file：精确替换文件内容</p><ul><li>方案：pi使用的是精确文字匹配+fuzzy兜底（ai输出内容可能格式漂移，归一化再匹配）</li></ul></li><li><p>Glob</p></li><li><p>Grep</p></li></ul><h2 id="工具定义"><a href="#工具定义" class="headerlink" title="工具定义"></a>工具定义</h2><ol><li>基础实现功能</li><li>长内容截断</li><li>响应是否让AI能清晰</li><li>是否灵活可靠可用</li></ol>]]></content>
       
       
       <categories>
@@ -383,7 +383,7 @@
       <link href="/2026/11/05/2026-11-05-feishu-post-946aaa15/"/>
       <url>/2026/11/05/2026-11-05-feishu-post-946aaa15/</url>
       
-        <content type="html"><![CDATA[<ol><li>即使是AI生成，你也要对核心的步骤有所把握。比如说：整个前后端交互的链路、图编排有哪些节点。这决定了你是否在后续能有自主的能力去解决系统出现的bug</li><li>当你把核心逻辑全权交给AI去实现，之后的迭代你也就只能放权给AI，AI写的代码就会像脱缰的野马，你无法管制，同样你将失去对项目的把控能力</li><li>方案设计使用强模型，执行用优质的flash模型，不用falsh太慢了，有执行计划了，模型能力可以稍微淡化一些，但是还是建议开启中高的思考模式</li></ol><p><strong>方案设计：</strong></p><ol><li>照顾我是后端开发的感受，前端内容可以写简单些</li><li>需要明确数据库表的设计</li><li>文件树的改动、作用</li><li>给出接口文档，关键的接口要写详细</li></ol><p>执行要求：</p><ol><li>前后端在约定好接口文档之后并行跑</li><li>复核请不要每个task都复核，走批量审核（为了快可以加上这句话）</li></ol>]]></content>
+        <content type="html"><![CDATA[<p><strong>基本经验</strong></p><ol><li>即使是AI生成，你也要对核心的步骤有所把握。比如说：整个前后端交互的链路、图编排有哪些节点。这决定了你是否在后续能有自主的能力去解决系统出现的bug</li><li>当你把核心逻辑全权交给AI去实现，之后的迭代你也就只能放权给AI，AI写的代码就会像脱缰的野马，你无法管制，同样你将失去对项目的把控能力</li><li>方案设计使用强模型，执行用优质的flash模型，不用falsh太慢了，有执行计划了，模型能力可以稍微淡化一些，但是还是建议开启中高的思考模式</li><li></li></ol><p><strong>方案设计：</strong></p><ol><li>照顾我是后端开发的感受，前端内容可以写简单些</li><li>需要明确数据库表的设计</li><li>文件树的改动、作用</li><li>给出接口文档，关键的接口要写详细</li></ol><p><strong>执行要求：</strong></p><ol><li>前后端在约定好接口文档之后并行跑</li><li>复核请不要每个task都复核，走批量审核（为了快可以加上这句话）</li></ol>]]></content>
       
       
       <categories>
@@ -508,7 +508,7 @@
       <link href="/2026/10/30/2026-10-30-feishu-post-0547dab5/"/>
       <url>/2026/10/30/2026-10-30-feishu-post-0547dab5/</url>
       
-        <content type="html"><![CDATA[<h2 id="选股标准"><a href="#选股标准" class="headerlink" title="选股标准"></a>选股标准</h2><p><sheet sheet-id="0kwBdb" token="DgAosIx5rhrZwVtbscZcnTF6nOd"></sheet></p><h2 id="K线图"><a href="#K线图" class="headerlink" title="K线图"></a>K线图</h2><p><strong>图上每一根 “柱子” 叫一根 K 线（蜡烛线），你这张是 “周 K”，所以一根柱子 &#x3D; 一周的价格表现。</strong> 它把这一周的 4 个关键价格 —— 开盘价、收盘价、最高价、最低价 —— 压缩成了一个图形</p><p><strong>怎么看一根柱子</strong>：实体的上下边是开盘价和收盘价；实体越长，说明这周涨 &#x2F; 跌得越猛。两头伸出来的细线（影线）是这周曾经摸到过的最高价、最低价。</p><p><img src="/images/feishu/HeNfbWxZaow3YtxLkJ9cBBljnPM.png"></p><p><strong>MAn是啥？</strong></p><p>在你这张<strong>周 K</strong>图上，它的算法是：把<strong>最近 5 周的收盘价加起来除以 5</strong>，得到一个点；每周往后滚一周再算一个点，把这些点连起来就是那条橙色的 MA5 线</p><figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MA5 = (100 + 102 + 101 + 105 + 107) ÷ 5 = 103</span><br></pre></td></tr></table></figure><blockquote><p>n越大，形容的走势越长远，越短越能展示短期的走向</p></blockquote><p><img src="/images/feishu/ARSdb5Yeko7ETPxotDMczFoBntd.png"></p>]]></content>
+        <content type="html"><![CDATA[<h2 id="选股标准"><a href="#选股标准" class="headerlink" title="选股标准"></a>选股标准</h2><p><sheet sheet-id="0kwBdb" token="DgAosIx5rhrZwVtbscZcnTF6nOd"></sheet></p><h2 id="K线图"><a href="#K线图" class="headerlink" title="K线图"></a>K线图</h2><p><strong>图上每一根 “柱子” 叫一根 K 线（蜡烛线），你这张是 “周 K”，所以一根柱子 &#x3D; 一周的价格表现。</strong> 它把这一周的 4 个关键价格 —— 开盘价、收盘价、最高价、最低价 —— 压缩成了一个图形</p><p><strong>怎么看一根柱子</strong>：实体的上下边是开盘价和收盘价；实体越长，说明这周涨 &#x2F; 跌得越猛。两头伸出来的细线（影线）是这周曾经摸到过的最高价、最低价。</p><p><img src="/images/feishu/HeNfbWxZaow3YtxLkJ9cBBljnPM.png"></p><p><strong>MAn是啥？</strong></p><p>在你这张<strong>周 K</strong>图上，它的算法是：把<strong>最近 5 周的收盘价加起来除以 5</strong>，得到一个点；每周往后滚一周再算一个点，把这些点连起来就是那条橙色的 MA5 线</p><figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MA5 = (100 + 102 + 101 + 105 + 107) ÷ 5 = 103</span><br></pre></td></tr></table></figure><blockquote><p>n越大，形容的走势越长远，越短越能展示短期的走向</p></blockquote><p><img src="/images/feishu/ARSdb5Yeko7ETPxotDMczFoBntd.png"></p><h2 id="A类和C类"><a href="#A类和C类" class="headerlink" title="A类和C类"></a>A类和C类</h2><p><sheet sheet-id="MQxKg2" token="DgAosIx5rhrZwVtbscZcnTF6nOd"></sheet></p><p>假设申购费打折后0.15%，C类销售服务费0.4%&#x2F;年：</p><ul><li>0.15% ÷ 0.4% ≈ 0.375年，约4.5个月</li><li>持有少于约4~5个月，C类通常更划算</li><li>持有超过约4~5个月，A类通常更划算</li></ul>]]></content>
       
       
       <categories>
