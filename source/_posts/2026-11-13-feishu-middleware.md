@@ -1,7 +1,7 @@
 ---
 title: "Middleware"
 date: 2026-11-13 16:59:05
-updated: 2026-11-25 18:02:05
+updated: 2026-11-25 18:07:34
 categories: ["AI / Agent开发 / Eino"]
 tags: ["飞书"]
 ---
@@ -137,9 +137,16 @@ type ToolMiddleware struct {
         EnhancedInvokable EnhancedInvokableToolMiddleware
         EnhancedStreamable EnhancedStreamableToolMiddleware
 }
+
+type InvokableToolMiddleware func(InvokableToolEndpoint) InvokableToolEndpoint
+
+type InvokableToolEndpoint func(ctx context.Context, input *ToolInput) (*ToolOutput, error)
+type ToolOutput struct{ Result string }
 ```
 
 使用：
+
+Todo: 理解endpoint的实现
 
 ```Go
 func myMiddleware(next compose.InvokableToolEndpoint) compose.InvokableToolEndpoint {
@@ -156,5 +163,73 @@ func myMiddleware(next compose.InvokableToolEndpoint) compose.InvokableToolEndpo
 
 #### TypedChatModelAgentMiddleware
 
+这是ADK封装的上层，针对Agent的单独全生态中间件包装。底层是基于Compose的实现，万变不离其宗。在真正执行的时候，它会被翻译为Compose的基础接口。
+
+```Go
+// TypedChatModelAgentMiddleware：Agent 中间件接口，在 Agent 运行各关键节点插入自定义逻辑。
+type TypedChatModelAgentMiddleware[M MessageType] interface {
+        // BeforeAgent：Agent 开始前执行。可修改上下文、初始化资源，返回 error 则中止。
+        BeforeAgent(ctx, *ChatModelAgentContext) (context.Context, *ChatModelAgentContext, error)
+
+        // AfterAgent：Agent 结束后执行。用于收尾，如释放资源、记录最终状态。
+        AfterAgent(ctx, *TypedChatModelAgentState[M]) (context.Context, error)
+
+        // BeforeModelRewriteState：每次调模型前执行。可裁剪/改写消息历史，返回 error 则中止本次调用。
+        BeforeModelRewriteState(ctx, state, mc) (context.Context, *state, error)
+
+        // AfterModelRewriteState：模型返回后执行。可对结果做后处理、记录耗时与 token。
+        AfterModelRewriteState(ctx, state, mc) (context.Context, *state, error)
+
+        // WrapInvokableToolCall：包装一次性工具调用。可加日志、重试、鉴权等。
+        WrapInvokableToolCall(ctx, endpoint, *ToolContext) (InvokableToolCallEndpoint, error)
+
+        // WrapStreamableToolCall：包装流式工具调用。可加日志、重试、鉴权等。
+        WrapStreamableToolCall(ctx, endpoint, *ToolContext) (StreamableToolCallEndpoint, error)
+
+        // WrapEnhancedInvokableToolCall：包装增强版一次性工具调用。功能同上。
+        WrapEnhancedInvokableToolCall(...)
+
+        // WrapEnhancedStreamableToolCall：包装增强版流式工具调用。功能同上。
+        WrapEnhancedStreamableToolCall(...)
+
+        // WrapModel：包装底层模型。可加缓存、tracing 或替换实现。
+        WrapModel(ctx, model.BaseModel[M], mc) (model.BaseModel[M], error)
+}
+
+// TypedBaseChatModelAgentMiddleware：中间件基类，所有方法均为 no-op 默认实现，嵌入后按需覆盖。
+type TypedBaseChatModelAgentMiddleware[M MessageType] struct{}
+
+// BaseChatModelAgentMiddleware：常用别名，消息类型固定为 *schema.Message。
+type BaseChatModelAgentMiddleware = TypedBaseChatModelAgentMiddleware[*schema.Message]
+
+// ChatModelAgentMiddleware：常用别名，消息类型固定为 *schema.Message。
+type ChatModelAgentMiddleware = TypedChatModelAgentMiddleware[*schema.Message]
+```
+
 - `compose.ToolMiddleware` = 底层机制（函数包装器），eino 所有工具调用最终都过它。
-- `TypedChatModelAgentMiddleware` = 上层接口，覆盖整个 Agent 生命周期，其中4 个
+- `TypedChatModelAgentMiddleware` = 上层接口，覆盖整个 Agent 生命周期，其中4 个`Wrap*ToolCall` 方法会被自动适配成 `compose.ToolMiddleware` 塞进底层链路。
+- `TypedBaseChatModelAgentMiddleware` = 这个上层接口的默认空实现，纯辅助，让你少写样板代码；它本身不注册、不生效，只有被内嵌进你的结构体才有意义。
+
+```Go
+type safeToolMiddleware struct {
+    *adk.BaseChatModelAgentMiddleware
+}
+
+func (m *safeToolMiddleware) WrapInvokableToolCall(
+    _ context.Context,
+    endpoint adk.InvokableToolCallEndpoint,
+    _ *adk.ToolContext,
+) (adk.InvokableToolCallEndpoint, error) {
+    return func(ctx context.Context, args string, opts ...tool.Option) (string, error) {
+       result, err := endpoint(ctx, args, opts...) // 工具调用
+       if err != nil {
+          if _, ok := compose.IsInterruptRerunError(err); ok { // 过滤中断err
+             return "", err
+          }
+          // 将错误转换为字符串，而不是返回错误
+          return fmt.Sprintf("[tool error] %v", err), nil
+       }
+       return result, nil
+    }, nil
+}
+```
